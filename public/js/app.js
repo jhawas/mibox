@@ -2135,9 +2135,9 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       form: {
-        first_name: null,
-        middle_name: null,
-        last_name: null
+        first_name: '',
+        middle_name: '',
+        last_name: ''
       }
     };
   },
@@ -2158,7 +2158,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('/api/users', formData, config).then(function (response) {
         console.log('success', response); // this.$router.push({ name: 'users' });
       })["catch"](function (error) {
-        console.log('error', error.response.data.errors);
+        console.log('error', error.response.data.errors.hasOwnProperty('first_name')); // alert(error.response.data.message);
       });
     },
     cancel: function cancel() {

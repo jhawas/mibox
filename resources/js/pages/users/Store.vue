@@ -86,7 +86,7 @@
 </template>
 
 <script>
-
+    
     export default {
         components: {
 
@@ -99,9 +99,9 @@
         data() {
             return {
                 form: {
-                    first_name: null,
-                    middle_name: null,
-                    last_name: null
+                    first_name: '',
+                    middle_name: '',
+                    last_name: ''
                 },
             }
         },
@@ -136,7 +136,9 @@
 
               })
               .catch (error => {
-                  console.log('error', error.response.data.errors);
+                
+                  console.log('error', error.response.data.errors.hasOwnProperty('first_name'));
+                  // alert(error.response.data.message);
               });
 
           },
