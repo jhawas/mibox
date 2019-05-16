@@ -34,7 +34,7 @@ axios.interceptors.request.use(function (config) {
   
   }, function (error) {
   	
-  	toastr.error(error, 'Request Error');
+  	toastr.error(error, 'Request');
     // Do something with request error
     
     return Promise.reject(error);
@@ -44,7 +44,6 @@ axios.interceptors.request.use(function (config) {
 // Add a response interceptor
 axios.interceptors.response.use(function (response) {
     // Do something with response data
-
     return response;
 
   }, function (error) {

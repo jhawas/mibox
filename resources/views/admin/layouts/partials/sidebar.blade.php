@@ -27,6 +27,11 @@
         </a>
         <ul class="treeview-menu">
           <li>
+            <router-link :to="{ name: 'patients' }" class="treeview-item">
+              <i class="icon fa fa-circle-o"></i> Patient Information
+            </router-link>
+          </li>
+          <li>
             <a class="treeview-item" href="#">
               <i class="icon fa fa-circle-o"></i> In & Out Patient
             </a>
