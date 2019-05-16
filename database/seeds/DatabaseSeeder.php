@@ -15,9 +15,9 @@ class DatabaseSeeder extends Seeder
         
         factory(App\User::class)
 	        ->create([
-	            'first_name' => 'Admin',
-	            'middle_name' => 'Admin',
-	            'last_name' => 'Admin',
+	            'first_name' => 'admin',
+	            'middle_name' => 'admin',
+	            'last_name' => 'admin',
 	            'username' => 'admin',
 	            'email' => 'admin@admin.com',
 	            'email_verified_at' => now(),

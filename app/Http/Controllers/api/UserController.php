@@ -38,7 +38,21 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
-        return $request;
+        $user = new User;
+        $user->first_name = $request->first_name;
+        $user->middle_name = $request->middle_name;
+        $user->last_name = $request->last_name;
+        $user->suffix = 'admin';
+        $user->email = 'araneznorman12@gmail.com';
+        $user->username = 'admin';
+        $user->password = bcrypt($request->password);
+        // $user->birthdate = '03/12/1994';
+        $user->sex = 'male';
+        $user->specialty = 'test';
+        $user->contact_no ='test';
+        $user->save();
+
+        return 'success';
     }
 
     /**

@@ -126,18 +126,17 @@
             formData.append('middle_name', this.form.middle_name);
             formData.append('last_name', this.form.last_name);
             
-            const config = { headers: { 'Content-Type': 'multipart/form-data' } };
-            axios.post('/api/users', formData, config)
+            axios.post('/api/users', formData)
               .then(response => {
                   
-                  console.log('success', response); 
+                  // console.log('success', response); 
                   
                   // this.$router.push({ name: 'users' });
 
               })
               .catch (error => {
                 
-                  console.log('error', error.response.data.errors.hasOwnProperty('first_name'));
+                  // console.log('error', error.response.data.errors.hasOwnProperty('first_name'));
                   // alert(error.response.data.message);
               });
 

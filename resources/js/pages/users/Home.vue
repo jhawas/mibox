@@ -185,6 +185,7 @@
           getData() {
               axios.get('/api/users')
               .then(response => {
+                console.log(response);
                   this.items = response.data;
               });
           },
