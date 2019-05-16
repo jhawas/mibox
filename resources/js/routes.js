@@ -1,6 +1,7 @@
 import Home from './pages/Home';
 
 import User from './pages/users/Home';
+import NotFound from './pages/NotFound';
 import StoreUser from './pages/users/Store';
 
 import Patient from './pages/patients/Home';
@@ -13,6 +14,10 @@ export default {
 
     routes: [
         {
+            path: '*',
+            component: NotFound
+        },
+        {
             path: '/',
             name: 'home',
             component: Home
@@ -20,27 +25,27 @@ export default {
         {
             path: '/users',
             name: 'users',
-            component: User
+            component: User,
         },
         {
             path: '/user/:userId?',
             name: 'user-create',
-            component: StoreUser
+            component: StoreUser,
         },
         {
             path: '/patients',
             name: 'patients',
-            component: Patient
+            component: Patient,
         },
         {
             path: '/patient/:id?',
             name: 'patient-create',
-            component: StorePatient
+            component: StorePatient,
         },
         {
             path: '/patient/:id/show',
             name: 'patient-show',
-            component: ShowPatient
+            component: ShowPatient,
         },
     ],
     

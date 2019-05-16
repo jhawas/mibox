@@ -8,6 +8,8 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+import Vuex from 'vuex';
+
 import VueRouter from 'vue-router';
 
 import BootstrapVue from 'bootstrap-vue';
@@ -15,6 +17,8 @@ import BootstrapVue from 'bootstrap-vue';
 import Viewer from 'v-viewer';
 
 import routes from './routes';
+
+Vue.use(Vuex);
 
 Vue.use(VueRouter);
 
@@ -35,17 +39,52 @@ Vue.use(Viewer);
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
+Vue.component(
+    'passport-clients',
+    require('./components/passport/Clients.vue').default
+);
+
+Vue.component(
+    'passport-authorized-clients',
+    require('./components/passport/AuthorizedClients.vue').default
+);
+
+Vue.component(
+    'passport-personal-access-tokens',
+    require('./components/passport/PersonalAccessTokens.vue').default
+);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+
+const router = new VueRouter(routes);
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    // this route requires auth, check if logged in
+    // if not, redirect to login page.
+    if (!auth.loggedIn()) {
+      next({
+        path: '/login',
+        query: { redirect: to.fullPath }
+      })
+    } else {
+      next()
+    }
+  } else {
+    next() // make sure to always call next()!
+  }
+})
+
 const app = new Vue({
 
     el: '#app',
 
-    router: new VueRouter(routes)
+    router: router
 
 });
 

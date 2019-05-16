@@ -29,13 +29,12 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 // Add a request interceptor
 axios.interceptors.request.use(function (config) {
     // Do something before request is sent
-    
     return config;
   
   }, function (error) {
   	
   	toastr.error(error, 'Request');
-    // Do something with request error
+    // Do something with request errors
     
     return Promise.reject(error);
   
