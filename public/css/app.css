@@ -20259,3 +20259,19 @@ be a descendant of the grid when it is being dragged.
   color: #666;
 }
 
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+body #app {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+body #app .page-error {
+  flex: 1;
+}
+

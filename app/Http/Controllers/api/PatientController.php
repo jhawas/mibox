@@ -45,7 +45,9 @@ class PatientController extends Controller
         $patient->last_name = $request->last_name;
         $patient->save();
 
-        return 'success';
+        return response()->json([
+            'message' => 'success',
+        ]);
     }
 
     /**
@@ -85,7 +87,10 @@ class PatientController extends Controller
         $patient->last_name = $request->last_name;
         $patient->save();
 
-        return 'success';
+        return response()->json([
+            'message' => 'success',
+            'patient' => $patient
+        ]);
     }
 
     /**
@@ -98,6 +103,8 @@ class PatientController extends Controller
     {
         $patient->delete();
 
-        return 'success';
+        return response()->json([
+            'message' => 'success',
+        ]);
     }
 }

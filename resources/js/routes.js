@@ -1,7 +1,8 @@
 import Home from './pages/Home';
+import NotFound from './pages/NotFound';
+import Login from './pages/Login';
 
 import User from './pages/users/Home';
-import NotFound from './pages/NotFound';
 import StoreUser from './pages/users/Store';
 
 import Patient from './pages/patients/Home';
@@ -18,34 +19,57 @@ export default {
             component: NotFound
         },
         {
+            path: '/login',
+            name: 'login',
+            component: Login
+        },
+        {
             path: '/',
             name: 'home',
-            component: Home
+            component: Home,
+            meta: {
+                requiresAuth: true,
+            }
         },
         {
             path: '/users',
             name: 'users',
             component: User,
+            meta: {
+                requiresAuth: true,
+            }
         },
         {
             path: '/user/:userId?',
             name: 'user-create',
             component: StoreUser,
+            meta: {
+                requiresAuth: true,
+            }
         },
         {
             path: '/patients',
             name: 'patients',
             component: Patient,
+            meta: {
+                requiresAuth: true,
+            }
         },
         {
             path: '/patient/:id?',
             name: 'patient-create',
             component: StorePatient,
+            meta: {
+                requiresAuth: true,
+            }
         },
         {
             path: '/patient/:id/show',
             name: 'patient-show',
             component: ShowPatient,
+            meta: {
+                requiresAuth: true,
+            }
         },
     ],
     

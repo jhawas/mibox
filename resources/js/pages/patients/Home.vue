@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <Layout>
         <div class="app-title">
             <div>
                 <h1><i class="fa fa-dashboard"></i> Patient Page</h1>
@@ -58,7 +58,7 @@
                       <b-table
                         show-empty
                         stacked="md"
-                        :items="items"
+                        :items="allPatients"
                         :fields="fields"
                         :current-page="currentPage"
                         :per-page="perPage"
@@ -122,7 +122,7 @@
               </div>
            </div>
         </div>
-    </div>
+    </Layout>
 </template>
 
 <script>
@@ -131,9 +131,13 @@
 
     import swal from 'sweetalert';
 
+    import Layout from '../../components/Layout';
+
+    import { mapGetters, mapActions } from 'vuex';
+
     export default {
         components: {
-            
+            Layout
         },
 
         props: {
@@ -142,7 +146,7 @@
 
         data() {
             return {
-              items: [{}],
+              // items: [{}],
               fields: [
                 { key: 'name', label: 'Name', sortable: true, sortDirection: 'desc' },
                 // { key: 'birthdate', label: 'Birthdate', sortable: true, class: 'text-center' },
@@ -161,13 +165,14 @@
 
         mounted() {
 
-            this.getData();
             // Set the initial number of items
-            this.totalRows = this.items.length;
+            this.totalRows = this.allPatients.length;
 
         },
 
         computed: {
+
+          ...mapGetters(['allPatients']),
 
           sortOptions() {
             // Create an options list from our fields
@@ -180,7 +185,15 @@
 
         },
 
+        created() {
+
+            this.fetchPatients();
+
+        },
+
         methods: {
+
+          ...mapActions(['fetchPatients', 'deletePatient']),
 
           onFiltered(filteredItems) {
             // Trigger pagination to update the number of buttons/pages due to filtering
@@ -188,13 +201,6 @@
             this.currentPage = 1
           },
 
-          getData() {
-              axios.get('/api/patients')
-              .then(response => {
-                console.log(response);
-                  this.items = response.data;
-              });
-          },
           create() {
 
             this.$router.push({ name: 'patient-create' });
@@ -223,16 +229,24 @@
               dangerMode: true,
             })
             .then((willDelete) => {
+
               if (willDelete) {
-                  console.log(item);
-                  axios.delete('/api/patients/'+ item.id)
-                  .then(response => {
-                      console.log(response);
-                      toastr.success('Patient successfully saved.', 'Message');
-                      this.getData();
+
+                  const response = this.deletePatient(item.id);
+
+                  response.then( response => {
+                      if(response.data.message === 'success') {
+
+                          toastr.success('Patient successfully deleted.', 'Message');
+                          
+                          this.$router.push({ name: 'patients' });
+                      }
                   });
+
               }
+
             });
+
           },
 
         },

@@ -8,8 +8,6 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
-import Vuex from 'vuex';
-
 import VueRouter from 'vue-router';
 
 import BootstrapVue from 'bootstrap-vue';
@@ -18,7 +16,7 @@ import Viewer from 'v-viewer';
 
 import routes from './routes';
 
-Vue.use(Vuex);
+import store from './store';
 
 Vue.use(VueRouter);
 
@@ -37,22 +35,7 @@ Vue.use(Viewer);
 // const files = require.context('./', true, /\.vue$/i);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-
-Vue.component(
-    'passport-clients',
-    require('./components/passport/Clients.vue').default
-);
-
-Vue.component(
-    'passport-authorized-clients',
-    require('./components/passport/AuthorizedClients.vue').default
-);
-
-Vue.component(
-    'passport-personal-access-tokens',
-    require('./components/passport/PersonalAccessTokens.vue').default
-);
+// Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -67,10 +50,10 @@ router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     // this route requires auth, check if logged in
     // if not, redirect to login page.
-    if (!auth.loggedIn()) {
+    let auth = store.getters;
+    if (!auth.isLogin) {
       next({
         path: '/login',
-        query: { redirect: to.fullPath }
       })
     } else {
       next()
@@ -78,14 +61,10 @@ router.beforeEach((to, from, next) => {
   } else {
     next() // make sure to always call next()!
   }
-})
-
-const app = new Vue({
-
-    el: '#app',
-
-    router: router
-
 });
 
-require('./sidebarToggle');
+const app = new Vue({
+    store,
+    // el: '#app',
+    router: router
+}).$mount('#app');

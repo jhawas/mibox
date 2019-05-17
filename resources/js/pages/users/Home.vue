@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <Layout>
         <div class="app-title">
             <div>
                 <h1><i class="fa fa-dashboard"></i> User Page</h1>
@@ -120,14 +120,16 @@
               </div>
            </div>
         </div>
-    </div>
+    </Layout>
 </template>
 
 <script>
 
+    import Layout from '../../components/Layout';
+
     export default {
         components: {
-            
+            Layout
         },
 
         props: {

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -58,23 +59,26 @@ class AuthController extends Controller
      */
 	public function login (Request $request) {
 
-	    $user = User::where('email', $request->email)->first();
+		$request->validate([
+            'username' => 'required|string',
+            'password' => 'required|string',
+        ]);
 
-	    if ($user) {
-
-	        if (Hash::check($request->password, $user->password)) {
-	            $token = $user->createToken('Laravel Password Grant Client')->accessToken;
-	            $response = ['token' => $token];
-	            return response($response, 200);
-	        } else {
-	            $response = "Password missmatch";
-	            return response($response, 422);
-	        }
-
-	    } else {
-	        $response = 'User does not exist';
-	        return response($response, 422);
-	    }
+	    if(Auth::attempt(['username' => $request->username, 'password' => $request->password])){
+            $user = Auth::user();
+            $token = $user->createToken($request->username)->accessToken;
+            return response()->json([
+            	'user' => $user,
+            	'token' => $token,
+            	'message' => 'Successfully login'
+            ], 200);
+        }
+        else{
+            return response()->json([
+            	'error' => 'Unauthorised',
+            	'message' => 'Invalid Username or Password',
+            ], 401);
+        }
 
 	}
 
@@ -86,12 +90,13 @@ class AuthController extends Controller
      */
 	public function logout (Request $request) {
 
-	    $token = $request->user()->token();
-	    $token->revoke();
+	    $request->user()->token()->revoke();
 
-	    $response = 'You have been succesfully logged out!';
-	    
-	    return response($response, 200);
+        return response()->json([
+            'token' => null,
+            'user' => null,
+            'message' => 'You are Logged out.'
+        ], 200);
 
 	}
 }

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <Layout>
         <div class="app-title">
             <div>
                 <h1><i class="fa fa-dashboard"></i> Patient Page</h1>
@@ -82,16 +82,19 @@
               </div>
            </div>
         </div>
-    </div>
+    </Layout>
 </template>
 
 <script>
 
     import toastr from 'toastr';
+    import Layout from '../../components/Layout';
+
+    import { mapActions } from 'vuex';
     
     export default {
         components: {
-
+            Layout
         },
 
         props: {
@@ -110,7 +113,10 @@
 
         mounted() {
             if(this.$route.params.id) {
-                this.getDataByID(this.$route.params.id);
+                const patient = this.showPatientById(this.$route.params.id);
+                patient.then(response => {
+                      this.form = response.data;
+                });
             }
         },
 
@@ -120,13 +126,7 @@
 
         methods: {
 
-          getDataByID(id) {
-            axios.get('/api/patients/' + id)
-            .then(response => {
-                  console.log(response);
-                  this.form = response.data;
-            });
-          },
+          ...mapActions(['addPatient', 'updatePatient', 'showPatientById']),
 
           onSubmit(event) {
 
@@ -143,37 +143,30 @@
 
               formData.append('_method', 'PUT');
 
-              axios.post('/api/patients/' + this.$route.params.id, formData)
-              
-              .then(response => {
+              const response = this.updatePatient({id: this.$route.params.id, formData: formData});
 
-                  console.log(response);
+              response.then( response => {
+                  if(response.data.message === 'success') {
 
-                  toastr.success('Patient successfully updated.', 'Message');
-                  
-                  this.$router.push({ name: 'patients' });
-
-              })
-              .catch (error => {
-                  // console.log('error', error.response.data.errors.hasOwnProperty('first_name'));
-                  // alert(error.response.data.message);
+                      toastr.success('Patient successfully saved.', 'Message');
+                      
+                      this.$router.push({ name: 'patients' });
+                  }
               });
 
             } else {
              
-              axios.post('/api/patients', formData)
+              const response = this.addPatient(formData);
+              
+              response.then( response => {
+                  if(response.data.message === 'success') {
 
-              .then(response => {
-
-                  toastr.success('Patient successfully saved.', 'Message');
-                  
-                  this.$router.push({ name: 'patients' });
-
-              })
-              .catch (error => {
-                  // console.log('error', error.response.data.errors.hasOwnProperty('first_name'));
-                  // alert(error.response.data.message);
+                      toastr.success('Patient successfully saved.', 'Message');
+                      
+                      this.$router.push({ name: 'patients' });
+                  }
               });
+              
             }
 
           },
