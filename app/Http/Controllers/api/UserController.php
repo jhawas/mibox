@@ -42,17 +42,19 @@ class UserController extends Controller
         $user->first_name = $request->first_name;
         $user->middle_name = $request->middle_name;
         $user->last_name = $request->last_name;
-        $user->suffix = 'admin';
-        $user->email = 'araneznorman12@gmail.com';
-        $user->username = 'admin';
+        $user->username = $request->username;
+        $user->suffix = $request->suffix;
+        $user->email = $request->email;
         $user->password = bcrypt($request->password);
-        // $user->birthdate = '03/12/1994';
-        $user->sex = 'male';
-        $user->specialty = 'test';
-        $user->contact_no ='test';
+        $user->birthdate = $request->birthdate;
+        $user->sex = $request->sex;
+        $user->specialty = $request->specialty;
+        $user->contact_no = $request->contact_no;
         $user->save();
 
-        return 'success';
+        return response()->json([
+            'message' => 'success',
+        ]);
     }
 
     /**
@@ -63,7 +65,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        return $user;
     }
 
     /**
@@ -74,7 +76,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return $user;
     }
 
     /**
@@ -84,9 +86,25 @@ class UserController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(UserRequest $request, User $user)
     {
-        //
+        $user->first_name = $request->first_name;
+        $user->middle_name = $request->middle_name;
+        $user->last_name = $request->last_name;
+        $user->username = $request->username;
+        $user->suffix = $request->suffix;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->birthdate = $request->birthdate;
+        $user->sex = $request->sex;
+        $user->specialty = $request->specialty;
+        $user->contact_no = $request->contact_no;
+        $user->save();
+
+        return response()->json([
+            'message' => 'success',
+            'user' => $user
+        ]);
     }
 
     /**
@@ -97,6 +115,10 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+
+        return response()->json([
+            'message' => 'success',
+        ]);
     }
 }

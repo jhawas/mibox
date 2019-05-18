@@ -14,6 +14,17 @@
             <div class="col-md-12">
               <div class="tile">
                 <div class="tile-body">
+
+                    <div class="bs-component" v-if="errors.length > 0">
+                      <div class="alert alert-dismissible alert-danger">
+                        
+                        <button class="close" type="button" data-dismiss="alert">×</button>
+                        
+                        <div v-for="error in errors">{{ error }}</div>
+
+                      </div>
+                    </div>
+
                     <b-form @submit="onSubmit">
                       <b-row>
                          <b-col col lg="6">
@@ -26,7 +37,6 @@
                                 id="first_name"
                                 v-model="form.first_name"
                                 type="text"
-                                
                                 placeholder="Enter First Name"
                               />
                             </b-form-group>
@@ -39,7 +49,6 @@
                                 id="middle_name"
                                 v-model="form.middle_name"
                                 type="text"
-                                required
                                 placeholder="Enter Middle Name"
                               />
                             </b-form-group>
@@ -52,24 +61,9 @@
                                 id="last_name"
                                 v-model="form.last_name"
                                 type="text"
-                                required
                                 placeholder="Enter Last Name"
                               />
                             </b-form-group>
-                            <!-- <b-form-group
-                              id="input-group-1"
-                              label="Email address:"
-                              label-for="input-1"
-                              description="We'll never share your email with anyone else."
-                            >
-                              <b-form-input
-                                id="input-1"
-                                v-model="form.email"
-                                type="email"
-                                required
-                                placeholder="Enter email"
-                              />
-                            </b-form-group> -->
                          </b-col>
                          <b-col col lg="6">
                             
@@ -104,20 +98,23 @@
         data() {
             return {
                 form: {
-                    first_name: '',
-                    middle_name: '',
-                    last_name: ''
+                  first_name: '',
+                  middle_name: '',
+                  last_name: '',
                 },
+                errors: [],
             }
         },
 
         mounted() {
+
             if(this.$route.params.id) {
                 const patient = this.showPatientById(this.$route.params.id);
                 patient.then(response => {
                       this.form = response.data;
                 });
             }
+            
         },
 
         computed: {
@@ -148,7 +145,7 @@
               response.then( response => {
                   if(response.data.message === 'success') {
 
-                      toastr.success('Patient successfully saved.', 'Message');
+                      toastr.success('Patient successfully updated.', 'Message');
                       
                       this.$router.push({ name: 'patients' });
                   }
@@ -158,13 +155,19 @@
              
               const response = this.addPatient(formData);
               
-              response.then( response => {
+              response.then(response => {
+
                   if(response.data.message === 'success') {
 
                       toastr.success('Patient successfully saved.', 'Message');
                       
                       this.$router.push({ name: 'patients' });
                   }
+
+              }).catch(error => {
+
+                  this.errors = Object.values(error.response.data.errors).flat();
+
               });
               
             }

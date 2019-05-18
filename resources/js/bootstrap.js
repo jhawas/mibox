@@ -1,5 +1,3 @@
-import toastr from 'toastr';
-
 window._ = require('lodash');
 
 /**
@@ -25,35 +23,6 @@ try {
 window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-
-// Add a request interceptor
-axios.interceptors.request.use(function (config) {
-    // Do something before request is sent
-    return config;
-  
-  }, function (error) {
-  	
-  	toastr.error(error, 'Request');
-    // Do something with request errors
-    
-    return Promise.reject(error);
-  
-  });
-
-// Add a response interceptor
-axios.interceptors.response.use(function (response) {
-    // Do something with response data
-    return response;
-
-  }, function (error) {
-  	
-  	// toastr.error(error, 'Response Error');
-
-    toastr.error(error.response.data.message, error);
-
-    // Do something with response error
-    return Promise.reject(error);
-  });
 
 /**
  * Next we will register the CSRF Token as a common header with Axios so that

@@ -1,9 +1,10 @@
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
-import Login from './pages/Login';
+import Login from './components/auth/Login';
 
 import User from './pages/users/Home';
 import StoreUser from './pages/users/Store';
+import ShowUser from './pages/users/Show';
 
 import Patient from './pages/patients/Home';
 import StorePatient from './pages/patients/Store';
@@ -40,9 +41,17 @@ export default {
             }
         },
         {
-            path: '/user/:userId?',
+            path: '/user/:id?',
             name: 'user-create',
             component: StoreUser,
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        {
+            path: '/user/:id/show',
+            name: 'user-show',
+            component: ShowUser,
             meta: {
                 requiresAuth: true,
             }

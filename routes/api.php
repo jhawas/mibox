@@ -26,8 +26,8 @@ Route::group(['middleware' => 'auth:api'], function(){
 
 	Route::post('logout', 'api\AuthController@logout');
 
+	Route::apiResource('users', 'api\UserController');
+
+	Route::apiResource('patients', 'api\PatientController');
+
 });
-
-Route::apiResource('users', 'api\UserController');
-
-Route::apiResource('patients', 'api\PatientController');

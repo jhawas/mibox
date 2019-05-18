@@ -1,25 +1,17 @@
 import Vuex from 'vuex';
 import Vue from 'vue';
-import createPersistedState from 'vuex-persistedstate';
-import * as Cookies from 'js-cookie';
 
 import auth from './modules/auth';
 import patients from './modules/patients';
+import users from './modules/users';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   	modules: {
   		auth,
-  		patients
+  		users,
+  		patients,
   	},
-  	plugins: [createPersistedState({
-	      	storage: {
-		      	getItem: key => Cookies.get(key),
-		      	setItem: (key, value) => Cookies.set(key, value, { expires: 3, secure: true }),
-		      	removeItem: key => Cookies.remove(key)
-		    }
-	    })
-  	]
 });
 

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+
 	/**
      * Get a validator for an incoming registration request.
      *
@@ -89,13 +90,13 @@ class AuthController extends Controller
      * @return \Illuminate\Http\Response
      */
 	public function logout (Request $request) {
-
+        
 	    $request->user()->token()->revoke();
 
         return response()->json([
             'token' => null,
             'user' => null,
-            'message' => 'You are Logged out.'
+            'message' => 'Logout Success'
         ], 200);
 
 	}

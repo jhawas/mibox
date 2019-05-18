@@ -9,11 +9,9 @@
             <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"></i></a>
               <ul class="dropdown-menu settings-menu dropdown-menu-right">
                 <li>
-                    <a class="dropdown-item" href="">
+                    <a class="dropdown-item" href="#!" @click.prevent="logoutUser">
                         <i class="fa fa-sign-out fa-lg"></i> Logout
                     </a>
-                    <form id="logout-form" action="" method="POST" style="display: none;">
-                    </form>
                 </li>
               </ul>
             </li>
@@ -102,30 +100,84 @@
 </template>
 
 <script>
+
+    import { mapActions } from 'vuex';
+
     export default {
+
+        components: {
+        },
+
+        props: {},
+
+        data() {
+            return {
+                
+            }
+        },
+
         mounted() {
-            var treeviewMenu = $('.app-menu');
+            this.sidebarToggle();
+        },
 
-            // Toggle Sidebar
-            $('[data-toggle="sidebar"]').click(function(event) {
-              event.preventDefault();
-              $('.app').toggleClass('sidenav-toggled');
-            });
+        computed: {
 
-            // Activate sidebar treeview toggle
-            $("[data-toggle='treeview']").click(function(event) {
-              event.preventDefault();
-              if(!$(this).parent().hasClass('is-expanded')) {
-                treeviewMenu.find("[data-toggle='treeview']").parent().removeClass('is-expanded');
-              }
-              $(this).parent().toggleClass('is-expanded');
-            });
+        },
 
-            // Set initial active toggle
-            $("[data-toggle='treeview.'].is-expanded").parent().toggleClass('is-expanded');
+        methods: {
 
-            //Activate bootstrip tooltips
-            $("[data-toggle='tooltip']").tooltip();
-        }
+            ...mapActions(['logout']),
+
+            logoutUser() {
+                
+                const response = this.logout();
+
+                // this.$store.commit('logout');
+
+                response.then(res => {
+
+                    this.$store.commit('logout');
+
+                    this.$router.push({ name: 'login' });
+
+                }).catch(error => {
+
+                    if(error.response.status === 401) {
+
+                      this.$store.commit('logout');
+
+                      this.$router.push({ name: 'login' });
+
+                    }
+
+                });
+
+            },
+
+            sidebarToggle() {
+              var treeviewMenu = $('.app-menu');
+
+              // Toggle Sidebar
+              $('[data-toggle="sidebar"]').click(function(event) {
+                event.preventDefault();
+                $('.app').toggleClass('sidenav-toggled');
+              });
+
+              // Activate sidebar treeview toggle
+              $("[data-toggle='treeview']").click(function(event) {
+                event.preventDefault();
+                if(!$(this).parent().hasClass('is-expanded')) {
+                  treeviewMenu.find("[data-toggle='treeview']").parent().removeClass('is-expanded');
+                }
+                $(this).parent().toggleClass('is-expanded');
+              });
+
+              // Set initial active toggle
+              $("[data-toggle='treeview.'].is-expanded").parent().toggleClass('is-expanded');
+
+              //Activate bootstrip tooltips
+              $("[data-toggle='tooltip']").tooltip();
+            }
+        },
     }
 </script>

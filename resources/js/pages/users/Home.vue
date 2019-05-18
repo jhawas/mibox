@@ -58,7 +58,7 @@
                       <b-table
                         show-empty
                         stacked="md"
-                        :items="items"
+                        :items="allUsers"
                         :fields="fields"
                         :current-page="currentPage"
                         :per-page="perPage"
@@ -77,19 +77,18 @@
                         </template>
 
                         <template slot="actions" slot-scope="row" right>
-                            <b-button size="sm" @click="row.toggleDetails">
-                              {{ row.detailsShowing ? 'Hide' : 'Show' }} Details
-                            </b-button>
                             
                             <b-button size="sm">
-                                <i class="fa fa-eye" aria-hidden="true"></i>
+                                <i class="fa fa-eye" @click="show(row.item)" aria-hidden="true"></i>
                             </b-button>
-                            <b-button size="sm">
+
+                            <b-button size="sm" @click="update(row.item)">
                                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                             </b-button>
-                            <b-button size="sm">
+                            <b-button size="sm" @click="destroy(row.item)">
                                 <i class="fa fa-eraser" aria-hidden="true"></i>
                             </b-button>
+                            
                         </template>
 
                         <template slot="name" slot-scope="row" right>
@@ -125,7 +124,13 @@
 
 <script>
 
+    import toastr from 'toastr';
+
+    import swal from 'sweetalert';
+
     import Layout from '../../components/Layout';
+
+    import { mapGetters, mapActions } from 'vuex';
 
     export default {
         components: {
@@ -138,7 +143,6 @@
 
         data() {
             return {
-              items: [],
               fields: [
                 { key: 'name', label: 'Name', sortable: true, sortDirection: 'desc' },
                 { key: 'birthdate', label: 'Birthdate', sortable: true, class: 'text-center' },
@@ -157,13 +161,14 @@
 
         mounted() {
 
-            this.getData();
             // Set the initial number of items
-            this.totalRows = this.items.length;
+            this.totalRows = this.allUsers.length;
 
         },
 
         computed: {
+
+          ...mapGetters(['allUsers']),
 
           sortOptions() {
             // Create an options list from our fields
@@ -176,7 +181,15 @@
 
         },
 
+        created() {
+
+            this.fetchUsers();
+
+        },
+
         methods: {
+
+          ...mapActions(['fetchUsers', 'deleteUser']),
 
           onFiltered(filteredItems) {
             // Trigger pagination to update the number of buttons/pages due to filtering
@@ -184,16 +197,53 @@
             this.currentPage = 1
           },
 
-          getData() {
-              axios.get('/api/users')
-              .then(response => {
-                console.log(response);
-                  this.items = response.data;
-              });
-          },
           create() {
-              this.$router.push({ name: 'user-create' });
-          }
+
+            this.$router.push({ name: 'user-create' });
+
+          },
+
+          update(item) {
+
+            this.$router.push({ name: 'user-create', params: { id: item.id } });
+
+          },
+
+          show(item) {
+
+            this.$router.push({ name: 'user-show', params: { id: item.id } });
+
+          },
+
+          destroy(item) {
+
+            swal({
+              title: "Are you sure?",
+              text: "Once deleted, you will not be able to recover this imaginary file!",
+              icon: "warning",
+              buttons: true,
+              dangerMode: true,
+            })
+            .then((willDelete) => {
+
+              if (willDelete) {
+
+                  const response = this.deleteUser(item.id);
+
+                  response.then( response => {
+                      if(response.data.message === 'success') {
+
+                          toastr.success('User successfully deleted.', 'Message');
+                          
+                          this.$router.push({ name: 'users' });
+                      }
+                  });
+
+              }
+
+            });
+
+          },
         },
     }
 </script>

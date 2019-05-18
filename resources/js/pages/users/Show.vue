@@ -14,28 +14,37 @@
             <div class="col-md-12">
               <div class="tile">
                 <div class="tile-body">
-                    <b-card title="Patient Information">
+                    <b-card title="User Information">
                       <b-row>
                         <b-col col md="6">
-                            <b-form-group label-cols="4" label-cols-lg="2" label="Default" label-for="input-default">
+                            <b-form-group label-cols="4" label-cols-lg="2" label="First Name" label-for="input-default">
                               <div class="form-control form-group-value">{{ user.first_name }}</div>
                             </b-form-group>
-                            <b-form-group label-cols="4" label-cols-lg="2" label="Default" label-for="input-default">
+                            <b-form-group label-cols="4" label-cols-lg="2" label="Middle Name" label-for="input-default">
                               <div class="form-control form-group-value">{{ user.middle_name }}</div>
                             </b-form-group>
-                            <b-form-group label-cols="4" label-cols-lg="2" label="Default" label-for="input-default">
+                            <b-form-group label-cols="4" label-cols-lg="2" label="Last Name" label-for="input-default">
                               <div class="form-control form-group-value">{{ user.last_name }}</div>
+                            </b-form-group>
+                            <b-form-group label-cols="4" label-cols-lg="2" label="Suffix" label-for="input-default">
+                              <div class="form-control form-group-value">{{ user.suffix }}</div>
+                            </b-form-group>
+                            <b-form-group label-cols="4" label-cols-lg="2" label="Sex" label-for="input-default">
+                              <div class="form-control form-group-value">{{ user.sex }}</div>
+                            </b-form-group>
+                            <b-form-group label-cols="4" label-cols-lg="2" label="Specialty" label-for="input-default">
+                              <div class="form-control form-group-value">{{ user.specialty }}</div>
+                            </b-form-group>
+                            <b-form-group label-cols="4" label-cols-lg="2" label="Contact No." label-for="input-default">
+                              <div class="form-control form-group-value">{{ user.contact_no }}</div>
                             </b-form-group>
                         </b-col>
                         <b-col col md="6">
-                            <b-form-group label-cols="4" label-cols-lg="2" label="Default" label-for="input-default">
-                              <div class="form-control form-group-value">{{ user.first_name }}</div>
+                            <b-form-group label-cols="4" label-cols-lg="2" label="Email" label-for="input-default">
+                              <div class="form-control form-group-value">{{ user.email }}</div>
                             </b-form-group>
-                            <b-form-group label-cols="4" label-cols-lg="2" label="Default" label-for="input-default">
-                              <div class="form-control form-group-value">{{ user.first_name }}</div>
-                            </b-form-group>
-                            <b-form-group label-cols="4" label-cols-lg="2" label="Default" label-for="input-default">
-                              <div class="form-control form-group-value">{{ user.first_name }}</div>
+                            <b-form-group label-cols="4" label-cols-lg="2" label="Username" label-for="input-default">
+                              <div class="form-control form-group-value">{{ user.username }}</div>
                             </b-form-group>
                         </b-col>
                       </b-row>
@@ -79,9 +88,9 @@
         created() {
 
             if(this.$route.params.id) {
-                const patient = this.showPatientById(this.$route.params.id);
+                const patient = this.showUserById(this.$route.params.id);
                 patient.then(response => {
-                    this.user = response.data;
+                      this.user = response.data;
                 });
             }
 
@@ -89,11 +98,11 @@
 
         methods: {
 
-          ...mapActions(['showPatientById']),
+          ...mapActions(['showUserById']),
 
           cancel() {
 
-            this.$router.push({ name: 'patients' });
+            this.$router.push({ name: 'users' });
 
           }
 

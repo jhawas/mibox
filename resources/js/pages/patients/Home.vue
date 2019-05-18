@@ -78,18 +78,18 @@
 
                         <template slot="actions" slot-scope="row" right>
                             
-                            <b-button size="sm" @click="row.toggleDetails">
+                            <!-- <b-button size="sm" @click="row.toggleDetails">
                               {{ row.detailsShowing ? 'Hide' : 'Show' }} Details
-                            </b-button>
-                            
-                            <!-- <b-button size="sm">
-                                <i class="fa fa-eye" @click="show(row.item)" aria-hidden="true"></i>
                             </b-button> -->
                             
-                            <b-button size="sm" @click="update(row.item)">
+                            <b-button>
+                                <i class="fa fa-eye" @click="show(row.item)" aria-hidden="true"></i>
+                            </b-button>
+                            
+                            <b-button @click="update(row.item)">
                                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                             </b-button>
-                            <b-button size="sm" @click="destroy(row.item)">
+                            <b-button @click="destroy(row.item)">
                                 <i class="fa fa-eraser" aria-hidden="true"></i>
                             </b-button>
                         </template>

@@ -20275,3 +20275,7 @@ body #app .page-error {
   flex: 1;
 }
 
+.form-group-value {
+  border: 0;
+}
+

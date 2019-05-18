@@ -44,7 +44,7 @@ const actions= {
 
 		const response = await axios.post(`/api/patients/${patient.id}`, patient.formData);
 
-		commit('viewPatient', response.patients);
+		commit('editPatient', response.data);
 
 		return response;
 

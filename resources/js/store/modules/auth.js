@@ -1,19 +1,29 @@
+import { getLocalUser } from "../../helpers/auth";
+import { setAuthorization } from "../../helpers/default";
+
+const user = getLocalUser();
+
 const state = {
 
-	auth: {},
+	currentUser: user,
+
+	isLoggedIn: !!user,
 
 };
 
 const getters= {
 	
-	authUser: (state) => state.auth,
+	isLoggedIn(state) {
 
-	isLogin: (state) => {
-		if(state.auth.token) {
-			return true;
-		}
-		return false;
-	}
+		return state.isLoggedIn;
+	
+	},
+
+	currentUser(state) {
+
+		return state.currentUser;
+
+	},
 
 };
 
@@ -23,7 +33,7 @@ const actions= {
 
 		const response = await axios.post(`/api/login`, formData);
 
-		commit('setUser', response.data);
+		commit('login', response.data);
 
 		return response;
 	},
@@ -31,8 +41,6 @@ const actions= {
 	async logout({ commit }) {
 
 		const response = await axios.post(`/api/logout`);
-
-		commit('removeUser');
 
 		return response;
 
@@ -42,9 +50,27 @@ const actions= {
 
 const mutations= {
 
-	setUser: (state, user) => state.auth = user,
+	login(state, payload) {
+		
+		state.isLoggedIn = true;
 
-	removeUser: (state) => state.auth = {}
+		state.currentUser = Object.assign({}, payload.user, { token: payload.token });
+
+		localStorage.setItem("user", JSON.stringify(state.currentUser));
+
+		setAuthorization(payload.token);
+
+	},
+
+	logout(state) {
+
+		localStorage.removeItem("user");
+
+		state.isLoggedIn = false;
+
+		state.currentUser = null;
+
+	}
 
 };
 

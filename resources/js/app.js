@@ -18,6 +18,10 @@ import routes from './routes';
 
 import store from './store';
 
+import MainApp from './components/MainApp.vue';
+
+import { initialize } from './helpers/default';
+
 Vue.use(VueRouter);
 
 Vue.use(BootstrapVue);
@@ -46,25 +50,13 @@ Vue.use(Viewer);
 
 const router = new VueRouter(routes);
 
-router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.requiresAuth)) {
-    // this route requires auth, check if logged in
-    // if not, redirect to login page.
-    let auth = store.getters;
-    if (!auth.isLogin) {
-      next({
-        path: '/login',
-      })
-    } else {
-      next()
-    }
-  } else {
-    next() // make sure to always call next()!
-  }
-});
+initialize(store, router);
+
 
 const app = new Vue({
     store,
-    // el: '#app',
-    router: router
+    router: router,
+    components: {
+        MainApp
+    }
 }).$mount('#app');
