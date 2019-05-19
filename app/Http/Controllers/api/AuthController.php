@@ -69,7 +69,7 @@ class AuthController extends Controller
             $user = Auth::user();
             $token = $user->createToken($request->username)->accessToken;
             return response()->json([
-            	'user' => $user,
+            	'user' => $user->load('roles'),
             	'token' => $token,
             	'message' => 'Successfully login'
             ], 200);

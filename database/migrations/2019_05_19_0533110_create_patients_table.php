@@ -39,6 +39,9 @@ class CreatePatientsTable extends Migration
 
             $table->unique(array('first_name', 'middle_name', 'last_name', 'suffix'));
             $table->timestamps();
+
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

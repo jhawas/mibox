@@ -166,6 +166,18 @@
                               </b-form-group>
 
                               <b-form-group
+                                id="input-group-roles"
+                                label="Roles:"
+                                label-for="roles"
+                              >
+                                <v-select 
+                                  :options="rolesInSelectorFormat"
+                                  @input="roleSelected"
+                                ></v-select>
+
+                              </b-form-group>
+
+                              <b-form-group
                                 id="input-group-password"
                                 label="Password:"
                                 label-for="password"
@@ -210,12 +222,14 @@
 
     import Layout from '../../components/Layout';
     import toastr from 'toastr';
+    import vSelect from 'vue-select';
 
-    import { mapActions } from 'vuex';
+    import { mapActions, mapGetters } from 'vuex';
     
     export default {
         components: {
-            Layout
+            Layout,
+            vSelect
         },
 
         props: {
@@ -237,12 +251,15 @@
                     username: '',
                     password: '',
                     password_confirmation: '',
+                    role: 0,
                 },
                 errors: [],
             }
         },
 
         mounted() {
+
+            console.log(this.rolesInSelectorFormat);
 
             if(this.$route.params.id) {
                 const user = this.showUserById(this.$route.params.id);
@@ -254,12 +271,22 @@
         },
 
         computed: {
-          
+            
+            ...mapGetters(['rolesInSelectorFormat']),
+
         },
 
         methods: {
 
           ...mapActions(['addUser', 'updateUser', 'showUserById']),
+
+          roleSelected(value) {
+              if(value) {
+                  this.form.role = value;
+              } else {
+                this.form.role = 0;
+              }
+          },
 
           onSubmit(event) {
 
@@ -279,6 +306,7 @@
               formData.append('username', this.form.username);
               formData.append('password', this.form.password);
               formData.append('password_confirmation', this.form.password_confirmation);
+              formData.append('role', this.form.role ? this.form.role.value : 0);
               
               
               if(this.$route.params.id > 0) {
@@ -288,6 +316,7 @@
                 const response = this.updateUser({id: this.$route.params.id, formData: formData});
 
                 response.then( response => {
+
                     if(response.data.message === 'success') {
 
                         toastr.success('User successfully updated.', 'Message');

@@ -2,6 +2,9 @@ import toastr from 'toastr';
 
 export function initialize(store, router) {
 
+    // get all data need by default;    
+    store.dispatch('fetchRoles');
+
     router.beforeEach((to, from, next) => {
         
         const requiresAuth = to.matched.some(record => record.meta.requiresAuth);

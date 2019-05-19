@@ -9,6 +9,7 @@ const state = {
 
 	isLoggedIn: !!user,
 
+
 };
 
 const getters= {
@@ -23,6 +24,26 @@ const getters= {
 
 		return state.currentUser;
 
+	},
+
+	currentUserDisplayName(state) {
+
+		let displayName = state.currentUser ? state.currentUser.first_name + ' ' + state.currentUser.last_name : '';
+
+		return displayName;
+
+	},
+
+	displayUserRoles(state) {
+
+		if(state.currentUser && state.currentUser.roles) {
+			let concatRoles = state.currentUser.roles.map((role, index) => {
+	              return role.name;
+	        });
+	        
+	      	return concatRoles.join(',');
+		}
+		return '';
 	},
 
 };

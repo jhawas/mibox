@@ -21,8 +21,8 @@
         <aside class="app-sidebar">
           <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/48.jpg" alt="User Image">
             <div>
-              <p class="app-sidebar__user-name">Admin A Admin</p>
-              <p class="app-sidebar__user-designation">Admin</p>
+              <p class="app-sidebar__user-name">{{ currentUserDisplayName }}</p>
+              <p class="app-sidebar__user-designation">{{ displayUserRoles }}</p>
             </div>
           </div>
           <ul class="app-menu">
@@ -101,7 +101,7 @@
 
 <script>
 
-    import { mapActions } from 'vuex';
+    import { mapActions, mapGetters } from 'vuex';
 
     export default {
 
@@ -121,6 +121,8 @@
         },
 
         computed: {
+
+            ...mapGetters(['currentUserDisplayName', 'displayUserRoles']),
 
         },
 

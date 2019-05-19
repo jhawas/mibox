@@ -52,6 +52,8 @@ class UserController extends Controller
         $user->contact_no = $request->contact_no;
         $user->save();
 
+        $user->roles()->attach($request->role);
+
         return response()->json([
             'message' => 'success',
         ]);
