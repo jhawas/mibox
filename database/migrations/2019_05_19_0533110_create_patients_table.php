@@ -37,7 +37,7 @@ class CreatePatientsTable extends Migration
             $table->string('e_contact')->nullable();
             $table->string('e_address')->nullable();
 
-            $table->unique(array('first_name', 'middle_name', 'last_name', 'suffix'));
+            $table->unique(array('first_name', 'middle_name', 'last_name'));
             $table->timestamps();
 
             $table->integer('user_id')->unsigned();

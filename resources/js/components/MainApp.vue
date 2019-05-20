@@ -10,7 +10,9 @@
         components: {
         },
 
-        props: {},
+        props: {
+            
+        },
 
         data() {
             return {
