@@ -51,7 +51,7 @@
 <script>
     
     import Layout from '../../components/Layout';
-    import { mapActions } from 'vuex';
+    import { mapActions, mapGetters } from 'vuex';
 
     export default {
         components: {
@@ -73,12 +73,13 @@
         },
 
         computed: {
-          
+            ...mapGetters(['allPatients']),
         },
 
         created() {
-
             if(this.$route.params.id) {
+                
+                // const patient = this.allPatients.filter(patient => patient.id === this.$route.params.id);
                 const patient = this.showPatientById(this.$route.params.id);
                 patient.then(response => {
                     this.user = response.data;

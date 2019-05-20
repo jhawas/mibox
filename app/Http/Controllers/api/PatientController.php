@@ -43,6 +43,7 @@ class PatientController extends Controller
         $patient->first_name = $request->first_name;
         $patient->middle_name = $request->middle_name;
         $patient->last_name = $request->last_name;
+        $patient->user_id = 1;
         $patient->save();
 
         return response()->json([
@@ -85,6 +86,7 @@ class PatientController extends Controller
         $patient->first_name = $request->first_name;
         $patient->middle_name = $request->middle_name;
         $patient->last_name = $request->last_name;
+        $patient->user_id = 1;
         $patient->save();
 
         return response()->json([
