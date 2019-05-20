@@ -73186,15 +73186,22 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "form-group btn-container" }, [
-              _c("button", { staticClass: "btn btn-primary btn-block" }, [
-                _c("i", {
-                  class: {
-                    "fa fa-lg fa-fw fa-spinner": _vm.loading,
-                    "fa fa-lg fa-fw fa-sign-in": !_vm.loading
-                  }
-                }),
-                _vm._v("SIGN IN\n              ")
-              ])
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary btn-block",
+                  attrs: { disabled: _vm.loading }
+                },
+                [
+                  _c("i", {
+                    class: {
+                      "fa fa-lg fa-fw fa-spinner": _vm.loading,
+                      "fa fa-lg fa-fw fa-sign-in": !_vm.loading
+                    }
+                  }),
+                  _vm._v("SIGN IN\n              ")
+                ]
+              )
             ])
           ]
         )

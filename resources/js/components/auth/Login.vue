@@ -44,7 +44,7 @@
                   </div>
                </div> -->
               <div class="form-group btn-container">
-                  <button class="btn btn-primary btn-block">
+                  <button class="btn btn-primary btn-block" :disabled="loading">
                     <i :class="{ 'fa fa-lg fa-fw fa-spinner': loading, 'fa fa-lg fa-fw fa-sign-in': !loading }"></i>SIGN IN
                   </button>
               </div>
