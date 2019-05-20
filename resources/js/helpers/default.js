@@ -10,8 +10,6 @@ export function initialize(store, router) {
         const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
         
         const currentUser = store.state.auth.currentUser;
-
-        console.log(store.state.auth);
     
         if(requiresAuth && !currentUser) {
 

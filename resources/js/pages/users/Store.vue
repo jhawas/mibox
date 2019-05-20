@@ -164,15 +164,17 @@
                                   placeholder="Enter username"
                                 />
                               </b-form-group>
-
+              
                               <b-form-group
                                 id="input-group-roles"
                                 label="Roles:"
                                 label-for="roles"
                               >
                                 <v-select 
-                                  :options="rolesInSelectorFormat"
-                                  @input="roleSelected"
+                                  :options="allRoles"
+                                  v-model="form.roles"
+                                  :reduce="allRoles => allRoles.id"
+                                  label="name"
                                 ></v-select>
 
                               </b-form-group>
@@ -251,15 +253,13 @@
                     username: '',
                     password: '',
                     password_confirmation: '',
-                    role: 0,
+                    roles: 0,
                 },
                 errors: [],
             }
         },
 
         mounted() {
-
-            console.log(this.rolesInSelectorFormat);
 
             if(this.$route.params.id) {
                 const user = this.showUserById(this.$route.params.id);
@@ -272,7 +272,7 @@
 
         computed: {
             
-            ...mapGetters(['rolesInSelectorFormat']),
+            ...mapGetters(['allRoles']),
 
         },
 
@@ -280,13 +280,13 @@
 
           ...mapActions(['addUser', 'updateUser', 'showUserById']),
 
-          roleSelected(value) {
-              if(value) {
-                  this.form.role = value;
-              } else {
-                this.form.role = 0;
-              }
-          },
+          // roleSelected(value) {
+          //     if(value) {
+          //       this.form.roles = value;
+          //     } else {
+          //       this.form.roles = [];
+          //     }
+          // },
 
           onSubmit(event) {
 

@@ -67,7 +67,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return $user;
+        return $user->load('roles');
     }
 
     /**
@@ -102,6 +102,8 @@ class UserController extends Controller
         $user->specialty = $request->specialty;
         $user->contact_no = $request->contact_no;
         $user->save();
+
+        $user->roles()->sync($request->role);
 
         return response()->json([
             'message' => 'success',

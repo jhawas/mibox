@@ -3312,6 +3312,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 
 
@@ -3337,15 +3339,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         username: '',
         password: '',
         password_confirmation: '',
-        role: 0
+        roles: 0
       },
       errors: []
     };
   },
   mounted: function mounted() {
     var _this = this;
-
-    console.log(this.rolesInSelectorFormat);
 
     if (this.$route.params.id) {
       var user = this.showUserById(this.$route.params.id);
@@ -3354,15 +3354,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     }
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapGetters"])(['rolesInSelectorFormat'])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapGetters"])(['allRoles'])),
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapActions"])(['addUser', 'updateUser', 'showUserById']), {
-    roleSelected: function roleSelected(value) {
-      if (value) {
-        this.form.role = value;
-      } else {
-        this.form.role = 0;
-      }
-    },
+    // roleSelected(value) {
+    //     if(value) {
+    //       this.form.roles = value;
+    //     } else {
+    //       this.form.roles = [];
+    //     }
+    // },
     onSubmit: function onSubmit(event) {
       var _this2 = this;
 
@@ -27613,7 +27613,7 @@ exports.hasPointerEventSupport = hasPointerEventSupport;
 
 var getEnv = function getEnv(key) {
   var fallback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-  var env = typeof process !== 'undefined' && process ? Object({"MIX_PUSHER_APP_CLUSTER":"mt1","MIX_PUSHER_APP_KEY":"","NODE_ENV":"development"}) || false : {};
+  var env = typeof process !== 'undefined' && process ? Object({"MIX_PUSHER_APP_KEY":"","MIX_PUSHER_APP_CLUSTER":"mt1","NODE_ENV":"development"}) || false : {};
 
   if (!key) {
     /* istanbul ignore next */
@@ -73195,7 +73195,7 @@ var render = function() {
                 [
                   _c("i", {
                     class: {
-                      "fa fa-lg fa-fw fa-spinner": _vm.loading,
+                      "fas fa-circle-notch fa-spin": _vm.loading,
                       "fa fa-lg fa-fw fa-sign-in": !_vm.loading
                     }
                   }),
@@ -75250,8 +75250,20 @@ var render = function() {
                             },
                             [
                               _c("v-select", {
-                                attrs: { options: _vm.rolesInSelectorFormat },
-                                on: { input: _vm.roleSelected }
+                                attrs: {
+                                  options: _vm.allRoles,
+                                  reduce: function(allRoles) {
+                                    return allRoles.id
+                                  },
+                                  label: "name"
+                                },
+                                model: {
+                                  value: _vm.form.roles,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.form, "roles", $$v)
+                                  },
+                                  expression: "form.roles"
+                                }
                               })
                             ],
                             1
@@ -91606,7 +91618,6 @@ function initialize(store, router) {
       return record.meta.requiresAuth;
     });
     var currentUser = store.state.auth.currentUser;
-    console.log(store.state.auth);
 
     if (requiresAuth && !currentUser) {
       next('/login');
@@ -93008,8 +93019,8 @@ var mutations = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Norman\Practice\laravelSPA\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Norman\Practice\laravelSPA\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/norman/Documents/development/ibox/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/norman/Documents/development/ibox/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
