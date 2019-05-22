@@ -5,7 +5,6 @@ namespace App\Http\Controllers\api;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UserRequest;
 
 class UserController extends Controller
 {
@@ -36,8 +35,24 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserRequest $request)
+    public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'roles' => 'required|not_in:[]',
+            'first_name' => 'required|max:191',
+            'middle_name' => 'required|max:191',
+            'last_name' => 'required|max:191',
+            'username' => 'required|max:191|unique:users',
+            'email' => 'required|email|max:191|unique:users',
+            'password' => 'required|min:6|confirmed',
+            'birthdate' => 'required|max:191',
+            'sex' => 'required|max:191',
+            'specialty' => 'required|max:191',
+            'contact_no' => 'required|max:191',
+        ]);
+
+        $roles = $this->extractArrayByColumn($request->roles, 'id');
+
         $user = new User;
         $user->first_name = $request->first_name;
         $user->middle_name = $request->middle_name;
@@ -52,7 +67,7 @@ class UserController extends Controller
         $user->contact_no = $request->contact_no;
         $user->save();
 
-        $user->roles()->attach($request->role);
+        $user->roles()->attach($roles);
 
         return response()->json([
             'message' => 'success',
@@ -88,8 +103,24 @@ class UserController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(UserRequest $request, User $user)
+    public function update(Request $request, User $user)
     {
+        $validatedData = $request->validate([
+            'roles' => 'required|not_in:[]',
+            'first_name' => 'required|max:191',
+            'middle_name' => 'required|max:191',
+            'last_name' => 'required|max:191',
+            'password' => 'required|min:6|confirmed',
+            'birthdate' => 'required|max:191',
+            'sex' => 'required|max:191',
+            'specialty' => 'required|max:191',
+            'contact_no' => 'required|max:191',
+            'username' => 'required|max:191|unique:users,username,'.$user->id,
+            'email' => 'required|email|max:191|unique:users,email,'.$user->id,
+        ]);
+
+        $roles = $this->extractArrayByColumn($request->roles, 'id');
+
         $user->first_name = $request->first_name;
         $user->middle_name = $request->middle_name;
         $user->last_name = $request->last_name;
@@ -103,7 +134,7 @@ class UserController extends Controller
         $user->contact_no = $request->contact_no;
         $user->save();
 
-        $user->roles()->sync($request->role);
+        $user->roles()->sync($roles);
 
         return response()->json([
             'message' => 'success',
@@ -125,4 +156,18 @@ class UserController extends Controller
             'message' => 'success',
         ]);
     }
+
+    /**
+     * extact array by column
+     *
+     * @param  $content, column to return in array format
+     */
+    protected function extractArrayByColumn($content_array, $column) 
+    {
+        $roles_decode = json_decode($content_array);
+        
+        return array_column($roles_decode, 'id');
+
+    }
+
 }

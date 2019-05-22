@@ -170,12 +170,14 @@
                                 label="Roles:"
                                 label-for="roles"
                               >
-                                <v-select 
-                                  :options="allRoles"
-                                  v-model="form.roles"
-                                  :reduce="allRoles => allRoles.id"
-                                  label="name"
-                                ></v-select>
+                                <multiselect 
+                                  v-model="form.roles" 
+                                  placeholder="Select Roles" 
+                                  label="name" 
+                                  track-by="id" 
+                                  :options="allRoles" 
+                                  :multiple="true" 
+                                  ></multiselect>
 
                               </b-form-group>
 
@@ -224,14 +226,14 @@
 
     import Layout from '../../components/Layout';
     import toastr from 'toastr';
-    import vSelect from 'vue-select';
+    import Multiselect from 'vue-multiselect'
 
     import { mapActions, mapGetters } from 'vuex';
     
     export default {
         components: {
             Layout,
-            vSelect
+            Multiselect
         },
 
         props: {
@@ -253,14 +255,13 @@
                     username: '',
                     password: '',
                     password_confirmation: '',
-                    roles: 0,
+                    roles: [],
                 },
                 errors: [],
             }
         },
 
         mounted() {
-
             if(this.$route.params.id) {
                 const user = this.showUserById(this.$route.params.id);
                 user.then(response => {
@@ -279,15 +280,7 @@
         methods: {
 
           ...mapActions(['addUser', 'updateUser', 'showUserById']),
-
-          // roleSelected(value) {
-          //     if(value) {
-          //       this.form.roles = value;
-          //     } else {
-          //       this.form.roles = [];
-          //     }
-          // },
-
+          
           onSubmit(event) {
 
               event.preventDefault();
@@ -306,7 +299,7 @@
               formData.append('username', this.form.username);
               formData.append('password', this.form.password);
               formData.append('password_confirmation', this.form.password_confirmation);
-              formData.append('role', this.form.role ? this.form.role.value : 0);
+              formData.append('roles', JSON.stringify(this.form.roles));
               
               
               if(this.$route.params.id > 0) {
@@ -323,6 +316,10 @@
                         
                         this.$router.push({ name: 'users' });
                     }
+                }).catch(error => {
+
+                    this.errors = Object.values(error.response.data.errors).flat();
+                    
                 });
 
               } else {

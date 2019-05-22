@@ -81,7 +81,7 @@
 @import '~vali-admin/src/sass/4-pages/user-profile';
 
 @import '~viewerjs/dist/viewer.css';
-@import '~vue-select/dist/vue-select.css';
+@import '~vue-multiselect/dist/vue-multiselect.min.css';
 
 // @import 'print';
 
@@ -101,4 +101,13 @@ body {
 
 .form-group-value {
 	border: 0;
+}
+
+.multiselect__tag {
+	margin-bottom: 0
+}
+
+.multiselect__placeholder {
+	margin-bottom: 0;
+	padding-top: 0;
 }
