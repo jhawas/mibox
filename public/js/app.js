@@ -1883,6 +1883,11 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -1964,6 +1969,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
   props: {},
@@ -1973,7 +1979,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     this.sidebarToggle();
   },
-  computed: {},
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['currentUserDisplayName', 'displayUserRoles', 'hasAccess'])),
   methods: {
     sidebarToggle: function sidebarToggle() {
       var treeviewMenu = $('.app-menu'); // Toggle Sidebar
@@ -2093,22 +2099,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   computed: {},
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['login']), {
     onSubmit: function onSubmit(event) {
-      var _this = this;
-
       var formData = new FormData();
+      var vm = this;
       formData.append('username', this.form.username);
       formData.append('password', this.form.password);
       this.loading = true;
       this.login(formData).then(function (response) {
-        _this.loading = false;
+        vm.loading = false;
         toastr__WEBPACK_IMPORTED_MODULE_1___default.a.success(response.data.message, 'Message');
-
-        _this.$router.push({
+        vm.$router.push({
           name: 'home'
         });
       })["catch"](function (error) {
-        _this.loading = false;
-        _this.errors = error.response.data.errors;
+        vm.loading = false;
+        vm.errors = error.response.data.errors;
+      })["finally"](function () {
+        vm.loading = false;
       });
     }
   })
@@ -2388,8 +2394,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   mounted: function mounted() {
     // Set the initial number of items
     this.totalRows = this.allPatients.length;
+    console.log(this.hasAccess('create-user'));
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapGetters"])(['allPatients']), {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapGetters"])(['allPatients', 'hasAccess']), {
     sortOptions: function sortOptions() {
       // Create an options list from our fields
       return this.fields.filter(function (f) {
@@ -27645,7 +27652,7 @@ exports.hasPointerEventSupport = hasPointerEventSupport;
 
 var getEnv = function getEnv(key) {
   var fallback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-  var env = typeof process !== 'undefined' && process ? Object({"MIX_PUSHER_APP_CLUSTER":"mt1","MIX_PUSHER_APP_KEY":"","NODE_ENV":"development"}) || false : {};
+  var env = typeof process !== 'undefined' && process ? Object({"MIX_PUSHER_APP_KEY":"","MIX_PUSHER_APP_CLUSTER":"mt1","NODE_ENV":"development"}) || false : {};
 
   if (!key) {
     /* istanbul ignore next */
@@ -72971,26 +72978,28 @@ var render = function() {
           1
         ),
         _vm._v(" "),
-        _c(
-          "li",
-          [
-            _c(
-              "router-link",
-              {
-                staticClass: "app-menu__item",
-                attrs: { to: { name: "users" } }
-              },
+        _vm.hasAccess("create-user")
+          ? _c(
+              "li",
               [
-                _c("i", { staticClass: "app-menu__icon fa fa-pie-chart" }),
-                _vm._v(" "),
-                _c("span", { staticClass: "app-menu__label" }, [
-                  _vm._v("Users")
-                ])
-              ]
+                _c(
+                  "router-link",
+                  {
+                    staticClass: "app-menu__item",
+                    attrs: { to: { name: "users" } }
+                  },
+                  [
+                    _c("i", { staticClass: "app-menu__icon fa fa-pie-chart" }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "app-menu__label" }, [
+                      _vm._v("Users")
+                    ])
+                  ]
+                )
+              ],
+              1
             )
-          ],
-          1
-        ),
+          : _vm._e(),
         _vm._v(" "),
         _c("li", { staticClass: "treeview" }, [
           _vm._m(0),
@@ -91743,6 +91752,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var toastr__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! toastr */ "./node_modules/toastr/toastr.js");
 /* harmony import */ var toastr__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(toastr__WEBPACK_IMPORTED_MODULE_0__);
 
+toastr__WEBPACK_IMPORTED_MODULE_0___default.a.options.closeButton = true;
 function initialize(store, router) {
   // get all data need by default;    
   store.dispatch('fetchRoles');
@@ -91774,14 +91784,16 @@ function initialize(store, router) {
     // Do something with response data
     return response;
   }, function (error) {
+    toastr__WEBPACK_IMPORTED_MODULE_0___default.a.error(error.response.data.message, error);
+
     if (error.response.status === 401) {
       store.commit('logout');
       router.push({
         name: 'login'
       });
-    }
+      return Promise;
+    } // Do something with response error
 
-    toastr__WEBPACK_IMPORTED_MODULE_0___default.a.error(error.response.data.message, error); // Do something with response error
 
     return Promise.reject(error);
   });
@@ -92519,6 +92531,19 @@ var getters = {
     }
 
     return '';
+  },
+  hasAccess: function hasAccess(state) {
+    return function (permission) {
+      var access = state.currentUser.roles.map(function (role) {
+        return role.permissions[permission];
+      })[0];
+
+      if (access) {
+        return true;
+      }
+
+      return false;
+    };
   }
 };
 var actions = {
@@ -93152,8 +93177,8 @@ var mutations = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Norman\Practice\laravelSPA\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Norman\Practice\laravelSPA\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/norman/Documents/development/ibox/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/norman/Documents/development/ibox/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

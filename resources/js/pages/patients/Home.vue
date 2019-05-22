@@ -168,11 +168,13 @@
             // Set the initial number of items
             this.totalRows = this.allPatients.length;
 
+            console.log(this.hasAccess('create-user'));
+
         },
 
         computed: {
 
-          ...mapGetters(['allPatients']),
+          ...mapGetters(['allPatients', 'hasAccess']),
 
           sortOptions() {
             // Create an options list from our fields

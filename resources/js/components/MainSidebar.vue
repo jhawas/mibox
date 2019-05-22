@@ -15,7 +15,7 @@
                   <span class="app-menu__label">Dashboard</span>
                 </router-link>
               </li>
-              <li>
+              <li v-if="hasAccess('create-user')">
                 <router-link :to="{ name: 'users' }" class="app-menu__item">
                     <i class="app-menu__icon fa fa-pie-chart"></i>
                     <span class="app-menu__label">Users</span>
@@ -81,6 +81,8 @@
 
 <script>
 
+    import { mapActions, mapGetters } from 'vuex';
+
     export default {
         components: {
         },
@@ -100,34 +102,35 @@
         },
 
         computed: {
-
+          ...mapGetters(['currentUserDisplayName', 'displayUserRoles', 'hasAccess']),
         },
 
         methods: {
-            sidebarToggle() {
-              var treeviewMenu = $('.app-menu');
 
-              // Toggle Sidebar
-              $('[data-toggle="sidebar"]').click(function(event) {
-                event.preventDefault();
-                $('.app').toggleClass('sidenav-toggled');
-              });
+          sidebarToggle() {
+            var treeviewMenu = $('.app-menu');
 
-              // Activate sidebar treeview toggle
-              $("[data-toggle='treeview']").click(function(event) {
-                event.preventDefault();
-                if(!$(this).parent().hasClass('is-expanded')) {
-                  treeviewMenu.find("[data-toggle='treeview']").parent().removeClass('is-expanded');
-                }
-                $(this).parent().toggleClass('is-expanded');
-              });
+            // Toggle Sidebar
+            $('[data-toggle="sidebar"]').click(function(event) {
+              event.preventDefault();
+              $('.app').toggleClass('sidenav-toggled');
+            });
 
-              // Set initial active toggle
-              $("[data-toggle='treeview.'].is-expanded").parent().toggleClass('is-expanded');
+            // Activate sidebar treeview toggle
+            $("[data-toggle='treeview']").click(function(event) {
+              event.preventDefault();
+              if(!$(this).parent().hasClass('is-expanded')) {
+                treeviewMenu.find("[data-toggle='treeview']").parent().removeClass('is-expanded');
+              }
+              $(this).parent().toggleClass('is-expanded');
+            });
 
-              //Activate bootstrip tooltips
-              $("[data-toggle='tooltip']").tooltip();
-            }
+            // Set initial active toggle
+            $("[data-toggle='treeview.'].is-expanded").parent().toggleClass('is-expanded');
+
+            //Activate bootstrip tooltips
+            $("[data-toggle='tooltip']").tooltip();
+          }
         },
     }
 </script>

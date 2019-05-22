@@ -30,14 +30,13 @@
     "font-awesome": "^4.7.0",
     "moment": "^2.24.0",
     "popper": "^1.0.1",
-    "select2": "^4.0.7-rc.0",
     "sweetalert": "^2.1.2",
     "sweetalert2": "^8.10.7",
     "toastr": "^2.1.4",
     "v-viewer": "^1.4.0",
     "vali-admin": "^2.4.1",
     "vue-multiselect": "^2.1.6",
-    "vue-select": "^3.1.0",
+    "vue-toastr": "^2.0.16",
     "vuex": "^3.1.1"
   }
 }

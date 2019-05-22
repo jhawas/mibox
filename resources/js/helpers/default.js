@@ -1,4 +1,5 @@
 import toastr from 'toastr';
+toastr.options.closeButton = true;
 
 export function initialize(store, router) {
 
@@ -47,15 +48,18 @@ export function initialize(store, router) {
 
     }, function (error) {
 
+        toastr.error(error.response.data.message, error);
+        
         if(error.response.status === 401) {
 
           store.commit('logout');
 
           router.push({ name: 'login' });
 
-        }
+          return Promise;
+        
+        } 
     
-        toastr.error(error.response.data.message, error);
 
         // Do something with response error
         return Promise.reject(error);

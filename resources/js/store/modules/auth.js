@@ -46,6 +46,20 @@ const getters= {
 		return '';
 	},
 
+	hasAccess: (state) => (permission) => {
+
+		let access = state.currentUser.roles.map(role => {
+			return role.permissions[permission];
+		})[0];
+
+		if(access) {
+			return true;
+		}
+
+		return false;
+
+	},
+
 };
 
 const actions= {
@@ -65,7 +79,7 @@ const actions= {
 
 		return response;
 
-	}
+	},
 
 };
 

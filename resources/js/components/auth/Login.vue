@@ -90,6 +90,8 @@
 
             let formData = new FormData();
 
+            let vm = this;
+
             formData.append('username', this.form.username);
             formData.append('password', this.form.password);
 
@@ -97,17 +99,21 @@
 
             this.login(formData).then( response => {
               
-              this.loading = false;
+              vm.loading = false;
 
               toastr.success(response.data.message, 'Message');
 
-              this.$router.push({ name: 'home' });
+              vm.$router.push({ name: 'home' });
 
             }).catch( error => {
 
-              this.loading = false;
+              vm.loading = false;
 
-              this.errors = error.response.data.errors;
+              vm.errors = error.response.data.errors;
+
+            }).finally(function () {
+                
+                vm.loading = false;
 
             });
 
