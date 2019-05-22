@@ -150,7 +150,7 @@
               fields: [
                 { key: 'name', label: 'Name', sortable: true, sortDirection: 'desc' },
                 // { key: 'birthdate', label: 'Birthdate', sortable: true, class: 'text-center' },
-                { key: 'actions', label: 'Actions' }
+                { key: 'actions', label: 'Actions', class: 'text-right' }
               ],
               totalRows: 1,
               currentPage: 1,

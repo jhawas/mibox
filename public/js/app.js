@@ -2372,7 +2372,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }, // { key: 'birthdate', label: 'Birthdate', sortable: true, class: 'text-center' },
       {
         key: 'actions',
-        label: 'Actions'
+        label: 'Actions',
+        "class": 'text-right'
       }],
       totalRows: 1,
       currentPage: 1,
@@ -2908,7 +2909,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         "class": 'text-center'
       }, {
         key: 'actions',
-        label: 'Actions'
+        label: 'Actions',
+        "class": 'text-right'
       }],
       totalRows: 1,
       currentPage: 1,
