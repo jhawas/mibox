@@ -27652,7 +27652,7 @@ exports.hasPointerEventSupport = hasPointerEventSupport;
 
 var getEnv = function getEnv(key) {
   var fallback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-  var env = typeof process !== 'undefined' && process ? Object({"MIX_PUSHER_APP_KEY":"","MIX_PUSHER_APP_CLUSTER":"mt1","NODE_ENV":"development"}) || false : {};
+  var env = typeof process !== 'undefined' && process ? Object({"MIX_PUSHER_APP_CLUSTER":"mt1","MIX_PUSHER_APP_KEY":"","NODE_ENV":"development"}) || false : {};
 
   if (!key) {
     /* istanbul ignore next */
@@ -93177,8 +93177,8 @@ var mutations = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/norman/Documents/development/ibox/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/norman/Documents/development/ibox/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Norman\Practice\laravelSPA\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Norman\Practice\laravelSPA\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
