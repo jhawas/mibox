@@ -78,6 +78,10 @@
                           {{ row.value.first }} {{ row.value.last }}
                         </template>
 
+                        <template slot="roles" slot-scope="row">
+                            <span v-for="(role, index) in row.value">{{ role.name + ', ' }}</span>
+                        </template>
+
                         <template slot="isActive" slot-scope="row">
                           {{ row.value ? 'Yes :)' : 'No :(' }}
                         </template>
@@ -151,7 +155,11 @@
             return {
               fields: [
                 { key: 'name', label: 'Name', sortable: true, sortDirection: 'desc' },
-                { key: 'birthdate', label: 'Birthdate', sortable: true, class: 'text-center' },
+                { key: 'username', label: 'Username', sortable: true, sortDirection: 'desc', class: 'text-center' },
+                { key: 'roles', label: 'Roles', sortable: true, sortDirection: 'desc', class: 'text-center' },
+                { key: 'specialty', label: 'Specialty', sortable: true, sortDirection: 'desc', class: 'text-center' },
+                { key: 'birthdate', label: 'Birthdate', sortable: true, sortDirection: 'desc', class: 'text-center' },
+
                 { key: 'actions', label: 'Actions', class: 'text-right' }
               ],
               totalRows: 1,

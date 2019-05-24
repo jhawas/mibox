@@ -5,7 +5,6 @@ namespace App\Http\Controllers\api;
 use App\Patient;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\PatientRequest;
 
 class PatientController extends Controller
 {
@@ -36,14 +35,47 @@ class PatientController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PatientRequest $request)
+    public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'first_name' => 'required|max:191',
+            'middle_name' => 'required|max:191',
+            'last_name' => 'required|max:191',
+            'suffix' => 'required|max:191',
+            'birthdate' => 'required|max:191',
+            'religion' => 'required|max:191',
+            'sex' => 'required|max:191',
+            'address' => 'required|max:191',
+            'civil_status' => 'required|max:191',
+            'father' => 'required|max:191',
+            'mother' => 'required|max:191',
+            'spouse' => 'required|max:191',
+            'spouse_address' => 'required|max:191',
+            'contact_no' => 'required|max:191',
+            'e_name' => 'required|max:191',
+            'e_contact' => 'required|max:191',
+            'e_address' => 'required|max:191',
+        ]);
+
         $patient = new Patient;
-        
         $patient->first_name = $request->first_name;
         $patient->middle_name = $request->middle_name;
         $patient->last_name = $request->last_name;
-        $patient->user_id = 1;
+        $patient->suffix = $request->suffix;
+        $patient->birthdate = $request->birthdate;
+        $patient->religion = $request->religion;
+        $patient->sex = $request->sex;
+        $patient->address = $request->address;
+        $patient->civil_status = $request->civil_status;
+        $patient->father = $request->father;
+        $patient->mother = $request->mother;
+        $patient->spouse = $request->spouse;
+        $patient->spouse_address = $request->spouse_address;
+        $patient->contact_no = $request->contact_no;
+        $patient->e_name = $request->e_name;
+        $patient->e_contact = $request->e_contact;
+        $patient->e_address = $request->e_address;
+        $patient->user_id = \Auth::user()->id;
         $patient->save();
 
         return response()->json([
@@ -80,13 +112,46 @@ class PatientController extends Controller
      * @param  \App\Patient  $patient
      * @return \Illuminate\Http\Response
      */
-    public function update(PatientRequest $request, Patient $patient)
+    public function update(Request $request, Patient $patient)
     {
+        $validatedData = $request->validate([
+            'first_name' => 'required|max:191',
+            'middle_name' => 'required|max:191',
+            'last_name' => 'required|max:191',
+            'suffix' => 'required|max:191',
+            'birthdate' => 'required|max:191',
+            'religion' => 'required|max:191',
+            'sex' => 'required|max:191',
+            'address' => 'required|max:191',
+            'civil_status' => 'required|max:191',
+            'father' => 'required|max:191',
+            'mother' => 'required|max:191',
+            'spouse' => 'required|max:191',
+            'spouse_address' => 'required|max:191',
+            'contact_no' => 'required|max:191',
+            'e_name' => 'required|max:191',
+            'e_contact' => 'required|max:191',
+            'e_address' => 'required|max:191',
+        ]);
         
         $patient->first_name = $request->first_name;
         $patient->middle_name = $request->middle_name;
         $patient->last_name = $request->last_name;
-        $patient->user_id = 1;
+        $patient->suffix = $request->suffix;
+        $patient->birthdate = $request->birthdate;
+        $patient->religion = $request->religion;
+        $patient->sex = $request->sex;
+        $patient->address = $request->address;
+        $patient->civil_status = $request->civil_status;
+        $patient->father = $request->father;
+        $patient->mother = $request->mother;
+        $patient->spouse = $request->spouse;
+        $patient->spouse_address = $request->spouse_address;
+        $patient->contact_no = $request->contact_no;
+        $patient->e_name = $request->e_name;
+        $patient->e_contact = $request->e_contact;
+        $patient->e_address = $request->e_address;
+        $patient->user_id = \Auth::user()->id;
         $patient->save();
 
         return response()->json([

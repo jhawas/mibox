@@ -107,11 +107,9 @@
                               label="Sex:"
                               label-for="sex"
                             >
-                              <b-form-input
-                                id="sex"
-                                v-model="form.sex"
-                                type="text"
-                                placeholder="Enter sex"
+                              <b-form-select 
+                                v-model="form.sex" 
+                                :options="sex"
                               />
                             </b-form-group>
 
@@ -250,6 +248,11 @@
 
         data() {
             return {
+                sex: [
+                    { value: '', text: 'Please select an option' },
+                    { value: 'male', text: 'Male' },
+                    { value: 'female', text: 'Female' },
+                ],
                 form: {
                     first_name: '',
                     middle_name: '',

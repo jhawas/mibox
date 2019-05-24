@@ -77,6 +77,10 @@
                           {{ row.value.first }} {{ row.value.last }}
                         </template>
 
+                        <template slot="birthdate" slot-scope="row">
+                          {{ getAge(row.value) }}
+                        </template>
+
                         <template slot="isActive" slot-scope="row">
                           {{ row.value ? 'Yes :)' : 'No :(' }}
                         </template>
@@ -138,9 +142,12 @@
 
     import Layout from '../../components/Layout';
 
+    import moment from 'moment';
+
     import { mapGetters, mapActions } from 'vuex';
 
     export default {
+
         components: {
             Layout
         },
@@ -154,7 +161,10 @@
               // items: [{}],
               fields: [
                 { key: 'name', label: 'Name', sortable: true, sortDirection: 'desc' },
-                // { key: 'birthdate', label: 'Birthdate', sortable: true, class: 'text-center' },
+                { key: 'birthdate', label: 'Age', sortable: true, sortDirection: 'desc', class: 'text-center' },
+                { key: 'sex', label: 'Sex', sortable: true, sortDirection: 'desc', class: 'text-center' },
+                { key: 'religion', label: 'Religion', sortable: true, sortDirection: 'desc', class: 'text-center' },
+                { key: 'civil_status', label: 'Civil Status', sortable: true, sortDirection: 'desc', class: 'text-center' },
                 { key: 'actions', label: 'Actions', class: 'text-right' }
               ],
               totalRows: 1,
@@ -206,6 +216,10 @@
             // Trigger pagination to update the number of buttons/pages due to filtering
             this.totalRows = filteredItems.length
             this.currentPage = 1
+          },
+
+          getAge(date) {
+              return moment().diff(date, 'years');
           },
 
           create() {

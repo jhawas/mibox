@@ -34,6 +34,7 @@
                     <b-form @submit="onSubmit" v-if="!loading">
                       <b-row>
                          <b-col col lg="6">
+
                             <b-form-group
                               id="input-group-first-name"
                               label="First Name:"
@@ -46,6 +47,7 @@
                                 placeholder="Enter First Name"
                               />
                             </b-form-group>
+
                             <b-form-group
                               id="input-group-middle-name"
                               label="Middle Name:"
@@ -58,6 +60,7 @@
                                 placeholder="Enter Middle Name"
                               />
                             </b-form-group>
+
                             <b-form-group
                               id="input-group-last-name"
                               label="Last Name:"
@@ -70,13 +73,199 @@
                                 placeholder="Enter Last Name"
                               />
                             </b-form-group>
+
+                            <b-form-group
+                              id="input-group-suffix"
+                              label="suffix:"
+                              label-for="suffix"
+                            >
+                              <b-form-input
+                                id="suffix"
+                                v-model="form.suffix"
+                                type="text"
+                                placeholder="Enter suffix"
+                              />
+                            </b-form-group>
+
+                            <b-form-group
+                              id="input-group-birthdate"
+                              label="Birthdate:"
+                              label-for="birthdate"
+                            >
+                              <b-form-input
+                                id="birthdate"
+                                v-model="form.birthdate"
+                                type="date"
+                                placeholder="Enter birthdate"
+                              />
+                            </b-form-group>
+
+                            <b-form-group
+                              id="input-group-sex"
+                              label="Sex:"
+                              label-for="sex"
+                            >
+                              <b-form-select 
+                                v-model="form.sex" 
+                                :options="sex"
+                              />
+                            </b-form-group>
+
+                            <b-form-group
+                              id="input-group-religion"
+                              label="Religion:"
+                              label-for="religion"
+                            >
+                              <b-form-input
+                                id="religion"
+                                v-model="form.religion"
+                                type="text"
+                                placeholder="Enter religion"
+                              />
+                            </b-form-group>
+
+                            <b-form-group
+                              id="input-group-address"
+                              label="Address:"
+                              label-for="address"
+                            >
+                              <b-form-input
+                                id="address"
+                                v-model="form.address"
+                                type="text"
+                                placeholder="Enter address"
+                              />
+                            </b-form-group>
+
+                            <b-form-group
+                              id="input-group-civil_status"
+                              label="Civil Status:"
+                              label-for="civil_status"
+                            >
+                              <b-form-select 
+                                v-model="form.civil_status" 
+                                :options="civil_status"
+                              />
+                            </b-form-group>
+
                          </b-col>
                          <b-col col lg="6">
-                            
+
+                            <b-form-group
+                              id="input-group-father"
+                              label="Father:"
+                              label-for="father"
+                            >
+                              <b-form-input
+                                id="father"
+                                v-model="form.father"
+                                type="text"
+                                placeholder="Enter father"
+                              />
+                            </b-form-group>
+
+                            <b-form-group
+                              id="input-group-mother"
+                              label="Mother:"
+                              label-for="mother"
+                            >
+                              <b-form-input
+                                id="mother"
+                                v-model="form.mother"
+                                type="text"
+                                placeholder="Enter mother"
+                              />
+                            </b-form-group>
+
+                            <b-form-group
+                              id="input-group-spouse"
+                              label="Spouse:"
+                              label-for="spouse"
+                            >
+                              <b-form-input
+                                v-if="form.civil_status === 'married'"
+                                id="spouse"
+                                v-model="form.spouse"
+                                type="text"
+                                placeholder="Enter spouse"
+                              />
+                            </b-form-group>
+
+                            <b-form-group
+                              v-if="form.civil_status === 'married'"
+                              id="input-group-spouse_address"
+                              label="Spouse address:"
+                              label-for="spouse_address"
+                            >
+                              <b-form-input
+                                id="spouse_address"
+                                v-model="form.spouse_address"
+                                type="text"
+                                placeholder="Enter spouse address"
+                              />
+                            </b-form-group>
+
+                            <b-form-group
+                              id="input-group-contact_no"
+                              label="Contact No.:"
+                              label-for="contact_no"
+                            >
+                              <b-form-input
+                                id="Contact No."
+                                v-model="form.contact_no"
+                                type="text"
+                                placeholder="Enter contact no"
+                              />
+                            </b-form-group>
+
+                            <legend>Emegency Contact</legend>
+
+                            <b-form-group
+                              id="input-group-e_name"
+                              label="Name:"
+                              label-for="e_name"
+                            >
+                              <b-form-input
+                                id="e_name"
+                                v-model="form.e_name"
+                                type="text"
+                                placeholder="Enter name"
+                              />
+                            </b-form-group>
+
+                            <b-form-group
+                              id="input-group-e_contact"
+                              label="Contact:"
+                              label-for="e_contact"
+                            >
+                              <b-form-input
+                                id="e_contact"
+                                v-model="form.e_contact"
+                                type="text"
+                                placeholder="Enter contact"
+                              />
+                            </b-form-group>
+
+                            <b-form-group
+                              id="input-group-e_address"
+                              label="Address:"
+                              label-for="e_address"
+                            >
+                              <b-form-input
+                                id="e_address"
+                                v-model="form.e_address"
+                                type="text"
+                                placeholder="Enter address"
+                              />
+                            </b-form-group>
+
                          </b-col>
                       </b-row>
-                      <b-button type="submit" variant="primary">Save</b-button>
-                      <b-button type="button" variant="primary" @click="cancel">Cancel</b-button>
+                      <b-button type="submit" variant="primary" :disabled="loadSubmit">
+                          <b-spinner small label="Small Spinner" v-if="loadSubmit"></b-spinner>
+                          Save
+                      </b-button>
+                      <b-button type="button" variant="secondary" @click="cancel">Cancel</b-button>
                     </b-form>
                 </div>
               </div>
@@ -105,14 +294,41 @@
 
         data() {
             return {
+                civil_status: [
+                  { value: '', text: 'Please select an option' },
+                  { value: 'single', text: 'Single' },
+                  { value: 'married', text: 'Married' },
+                  { value: 'widowed', text: 'Widowed' },
+                  { value: 'separated', text: 'Separated' },
+                ],
+                sex: [
+                    { value: '', text: 'Please select an option' },
+                    { value: 'male', text: 'Male' },
+                    { value: 'female', text: 'Female' },
+                ],
                 form: {
                   first_name: '',
                   middle_name: '',
                   last_name: '',
+                  suffix: '',
+                  birthdate: '',
+                  sex: '',
+                  religion: '',
+                  address: '',
+                  civil_status: '',
+                  father: '',
+                  mother: '',
+                  spouse: '',
+                  spouse_address: '',
+                  contact_no: '',
+                  e_name: '',
+                  e_contact: '',
+                  e_address: '',
                 },
                 errors: [],
                 loading: false,
                 showAlert: false,
+                loadSubmit: false,
             }
         },
 
@@ -139,6 +355,7 @@
 
           onSubmit(event) {
 
+            this.loadSubmit = true;
 
             event.preventDefault();
 
@@ -147,6 +364,20 @@
             formData.append('first_name', this.form.first_name);
             formData.append('middle_name', this.form.middle_name);
             formData.append('last_name', this.form.last_name);
+            formData.append('suffix', this.form.last_name);
+            formData.append('birthdate', this.form.birthdate);
+            formData.append('sex', this.form.sex);
+            formData.append('religion', this.form.religion);
+            formData.append('address', this.form.address);
+            formData.append('civil_status', this.form.civil_status);
+            formData.append('father', this.form.father);
+            formData.append('mother', this.form.mother);
+            formData.append('spouse', this.form.spouse);
+            formData.append('spouse_address', this.form.spouse_address);
+            formData.append('contact_no', this.form.contact_no);
+            formData.append('e_name', this.form.e_name);
+            formData.append('e_contact', this.form.e_contact);
+            formData.append('e_address', this.form.e_address);
 
             if(this.$route.params.id > 0) {
 
@@ -159,6 +390,8 @@
 
                       this.showAlert = false;
 
+                      this.loadSubmit = false;
+
                       toastr.success('Patient successfully updated.', 'Message');
                       
                       this.$router.push({ name: 'patients' });
@@ -166,6 +399,8 @@
               }).catch(error => {
 
                     this.showAlert = true;
+
+                    this.loadSubmit = false;
 
                     this.errors = Object.values(error.response.data.errors).flat();
                     
@@ -181,6 +416,8 @@
 
                       this.showAlert = false;
 
+                      this.loadSubmit = false;
+
                       toastr.success('Patient successfully saved.', 'Message');
                       
                       this.$router.push({ name: 'patients' });
@@ -189,6 +426,8 @@
               }).catch(error => {
 
                   this.showAlert = true;
+
+                  this.loadSubmit = false;
 
                   this.errors = Object.values(error.response.data.errors).flat();
 
