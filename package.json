@@ -27,6 +27,7 @@
   "dependencies": {
     "bootstrap-vue": "^2.0.0-rc.20",
     "datatables.net-bs": "^1.10.19",
+    "epic-spinners": "^1.1.0",
     "font-awesome": "^4.7.0",
     "moment": "^2.24.0",
     "popper": "^1.0.1",

@@ -14,7 +14,14 @@
             <div class="col-md-12">
               <div class="tile">
                 <div class="tile-body">
-                    <b-card title="User Information">
+                    <fulfilling-bouncing-circle-spinner
+                      :animation-duration="4000"
+                      :size="60"
+                      color="#009688"
+                      v-if="loading"
+                      class="ibox-spinner"
+                    />
+                    <b-card title="User Information" v-if="!loading">
                       <b-row>
                         <b-col col md="6">
                             <b-form-group label-cols="4" label-cols-lg="2" label="First Name" label-for="input-default">
@@ -61,10 +68,12 @@
     
     import Layout from '../../components/Layout';
     import { mapActions } from 'vuex';
+    import { FulfillingBouncingCircleSpinner } from 'epic-spinners';
 
     export default {
         components: {
-            Layout
+            Layout,
+            FulfillingBouncingCircleSpinner
         },
 
         props: {
@@ -74,6 +83,7 @@
         data() {
             return {
                 user: {},
+                loading: false,
             }
         },
 
@@ -88,9 +98,13 @@
         created() {
 
             if(this.$route.params.id) {
+
+                this.loading = true;
+
                 const patient = this.showUserById(this.$route.params.id);
                 patient.then(response => {
                       this.user = response.data;
+                      this.loading = false;
                 });
             }
 

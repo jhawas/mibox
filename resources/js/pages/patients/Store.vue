@@ -15,17 +15,23 @@
               <div class="tile">
                 <div class="tile-body">
 
-                    <div class="bs-component" v-if="errors.length > 0">
-                      <div class="alert alert-dismissible alert-danger">
-                        
-                        <button class="close" type="button" data-dismiss="alert">×</button>
-                        
+                    <fulfilling-bouncing-circle-spinner
+                      :animation-duration="4000"
+                      :size="60"
+                      color="#009688"
+                      v-if="loading"
+                      class="ibox-spinner"
+                    />
+
+                    <b-alert 
+                      v-model="showAlert" 
+                      variant="danger" 
+                      dismissible
+                    >
                         <div v-for="error in errors">{{ error }}</div>
+                    </b-alert>
 
-                      </div>
-                    </div>
-
-                    <b-form @submit="onSubmit">
+                    <b-form @submit="onSubmit" v-if="!loading">
                       <b-row>
                          <b-col col lg="6">
                             <b-form-group
@@ -83,12 +89,14 @@
 
     import toastr from 'toastr';
     import Layout from '../../components/Layout';
+    import { FulfillingBouncingCircleSpinner } from 'epic-spinners';
 
     import { mapActions } from 'vuex';
     
     export default {
         components: {
-            Layout
+            Layout,
+            FulfillingBouncingCircleSpinner
         },
 
         props: {
@@ -103,15 +111,19 @@
                   last_name: '',
                 },
                 errors: [],
+                loading: false,
+                showAlert: false,
             }
         },
 
         mounted() {
 
             if(this.$route.params.id) {
+                this.loading = true;
                 const patient = this.showPatientById(this.$route.params.id);
                 patient.then(response => {
                       this.form = response.data;
+                      this.loading = false;
                 });
             }
             
@@ -145,10 +157,18 @@
               response.then( response => {
                   if(response.data.message === 'success') {
 
+                      this.showAlert = false;
+
                       toastr.success('Patient successfully updated.', 'Message');
                       
                       this.$router.push({ name: 'patients' });
                   }
+              }).catch(error => {
+
+                    this.showAlert = true;
+
+                    this.errors = Object.values(error.response.data.errors).flat();
+                    
               });
 
             } else {
@@ -159,12 +179,16 @@
 
                   if(response.data.message === 'success') {
 
+                      this.showAlert = false;
+
                       toastr.success('Patient successfully saved.', 'Message');
                       
                       this.$router.push({ name: 'patients' });
                   }
 
               }).catch(error => {
+
+                  this.showAlert = true;
 
                   this.errors = Object.values(error.response.data.errors).flat();
 

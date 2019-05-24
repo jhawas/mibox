@@ -19,13 +19,7 @@
   </head>
   <body class="app sidebar-mini rtl">
       <div id="app">
-        <!-- Navbar-->
-        @include('admin.layouts.partials.header')
-        <!-- Sidebar menu-->
-        @include('admin.layouts.partials.sidebar')
-        <main class="app-content">
-            @yield('content')
-        </main>
+          @yield('content')
       </div>
   </body>
 </html>

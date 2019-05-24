@@ -67,7 +67,13 @@
                         :sort-desc.sync="sortDesc"
                         :sort-direction="sortDirection"
                         @filtered="onFiltered"
+                        :busy="allUsers <= 0"
                       >
+                        <div slot="table-busy" class="text-center">
+                          <b-spinner class="align-middle"></b-spinner>
+                          <strong>Loading...</strong>
+                        </div>
+                        
                         <template slot="name" slot-scope="row">
                           {{ row.value.first }} {{ row.value.last }}
                         </template>

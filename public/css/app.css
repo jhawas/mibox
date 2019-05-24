@@ -20288,3 +20288,7 @@ body #app .page-error {
   padding-top: 0;
 }
 
+.ibox-spinner {
+  margin: 0 auto;
+}
+

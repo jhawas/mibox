@@ -45,7 +45,15 @@
                </div> -->
               <div class="form-group btn-container">
                   <button class="btn btn-primary btn-block" :disabled="loading">
-                    <i :class="{ 'fas fa-circle-notch fa-spin': loading, 'fa fa-lg fa-fw fa-sign-in': !loading }"></i>SIGN IN
+                      <div v-if="loading">
+                        <semipolar-spinner
+                          :animation-duration="2000"
+                          :size="24"
+                          color="#fff"
+                          class="ibox-spinner"
+                        />
+                      </div>
+                      <div v-if="!loading"><i class="fa fa-lg fa-fw fa-sign-in"></i>SIGN IN</div>
                   </button>
               </div>
             </form>
@@ -58,11 +66,12 @@
   
   import { mapActions } from 'vuex';
   import toastr from 'toastr';
+  import { SemipolarSpinner  } from 'epic-spinners';
 
     export default {
 
         components: {
-
+            SemipolarSpinner,
         },
 
         props: {},
