@@ -62,4 +62,9 @@ class PatientRecord extends Model
     	return $this->belongsTo(User::class, 'chart_completed_by');
     }
 
+    public function patientRooms()
+    {
+    	return $this->belongsTo(PatientRoom::class, 'patient_record_id');
+    }
+
 }

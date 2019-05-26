@@ -23,9 +23,6 @@ class CreatePatientRecordsTable extends Migration
             $table->integer('type_of_record_id')->unsigned()->nullable();
             $table->foreign('type_of_record_id')->references('id')->on('type_of_records')->onDelete('cascade');
 
-            $table->integer('room_id')->unsigned()->nullable();
-            $table->foreign('room_id')->references('id')->on('rooms')->onDelete('cascade');
-
             $table->integer('admit_and_check_by')->unsigned()->nullable();
             $table->foreign('admit_and_check_by')->references('id')->on('users')->onDelete('cascade');
             

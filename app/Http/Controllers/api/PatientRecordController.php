@@ -25,7 +25,8 @@ class PatientRecordController extends Controller
             'admitAndCheckBy',
             'dischargedBy',
             'physician',
-            'chartCompletedBy'
+            'chartCompletedBy',
+            'patientRooms'
         ])->get();
         return $patientRecords;
     }
@@ -51,21 +52,20 @@ class PatientRecordController extends Controller
 
         $patientRecord = new PatientRecord;
         $patientRecord->patient_id = $request->patient_id;
-        $patientRecord->type_of_record_id = $request->type_of_record_id;
-        $patientRecord->room_id = $request->has('room_id') ? $request->room_id : null;
-        $patientRecord->disposition_id = $request->disposition_id;
-        $patientRecord->result_id = $request->result_id;
-        $patientRecord->philhealth_membership_id = $request->philhealth_membership_id;
+        $patientRecord->type_of_record_id = $this->isDataEmpty($request->type_of_record_id);
+        $patientRecord->disposition_id = $this->isDataEmpty($request->disposition_id);
+        $patientRecord->result_id = $this->isDataEmpty($request->result_id);
+        $patientRecord->philhealth_membership_id = $this->isDataEmpty($request->philhealth_membership_id);
         $patientRecord->chief_complaints = $request->chief_complaints;
         $patientRecord->brief_history = $request->brief_history;
-        $patientRecord->admit_and_check_by = $request->admit_and_check_by;
+        $patientRecord->admit_and_check_by = $this->isDataEmpty($request->admit_and_check_by);
         $patientRecord->admit_and_check_date = $request->admit_and_check_date;
         $patientRecord->admit_and_check_time = $request->admit_and_check_time;
-        $patientRecord->discharged_by = $request->discharged_by;
+        $patientRecord->discharged_by = $this->isDataEmpty($request->discharged_by);
         $patientRecord->discharged_date = $request->discharged_date;
         $patientRecord->discharged_time = $request->discharged_time;
-        $patientRecord->physician_id = $request->physician_id;
-        $patientRecord->chart_completed_by = $request->chart_completed_by;
+        $patientRecord->physician_id = $this->isDataEmpty($request->physician_id);
+        $patientRecord->chart_completed_by = $this->isDataEmpty($request->chart_completed_by);
         $patientRecord->user_id = \Auth::user()->id;
         $patientRecord->save();
 
@@ -130,7 +130,6 @@ class PatientRecordController extends Controller
 
         $patientRecord->patient_id = $request->patient_id;
         $patientRecord->type_of_record_id = $this->isDataEmpty($request->type_of_record_id);
-        $patientRecord->room_id = $this->isDataEmpty($request->room_id);
         $patientRecord->disposition_id = $this->isDataEmpty($request->disposition_id);
         $patientRecord->result_id = $this->isDataEmpty($request->result_id);
         $patientRecord->philhealth_membership_id = $this->isDataEmpty($request->philhealth_membership_id);
