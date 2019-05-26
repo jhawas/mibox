@@ -34,9 +34,9 @@
                     </router-link>
                   </li>
                   <li>
-                    <a class="treeview-item" href="#">
+                    <router-link :to="{ name: 'patientRecords' }" class="treeview-item">
                       <i class="icon fa fa-circle-o"></i> In & Out Patient
-                    </a>
+                    </router-link>
                   </li>
                   <li>
                     <a class="treeview-item" href="#">

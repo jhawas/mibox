@@ -42,4 +42,14 @@ Route::group(['middleware' => 'auth:api'], function(){
 
 	Route::apiResource('rooms', 'api\RoomController');
 
+	Route::apiResource('patientRecords', 'api\PatientRecordController');
+
+	Route::apiResource('dispositions', 'api\DispositionController');
+
+	Route::apiResource('results', 'api\ResultController');
+
+	Route::apiResource('typeOfRecords', 'api\TypeOfRecordController');
+
+	Route::apiResource('philhealthMemberships', 'api\PhilhealthMembershipController');
+
 });

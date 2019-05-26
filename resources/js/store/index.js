@@ -8,6 +8,11 @@ import users from './modules/users';
 import typeOfRooms from './modules/typeOfRooms';
 import floors from './modules/floors';
 import rooms from './modules/rooms';
+import patientRecords from './modules/patientRecords';
+import dispositions from './modules/dispositions';
+import results from './modules/results';
+import typeOfRecords from './modules/typeOfRecords';
+import philhealthMemberships from './modules/philhealthMemberships';
 
 Vue.use(Vuex);
 
@@ -20,6 +25,11 @@ export default new Vuex.Store({
   		typeOfRooms,
   		floors,
   		rooms,
+  		patientRecords,
+      dispositions,
+      results,
+      typeOfRecords,
+      philhealthMemberships
   	},
 });
 

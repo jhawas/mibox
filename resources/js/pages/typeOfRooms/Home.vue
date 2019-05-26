@@ -149,7 +149,6 @@
               // items: [{}],
               fields: [
                 { key: 'name', label: 'Name', sortable: true, sortDirection: 'desc' },
-                { key: 'parent', label: 'Parent', sortable: true, sortDirection: 'desc', class: 'text-center' },
                 { key: 'price', label: 'Price', sortable: true, sortDirection: 'desc', class: 'text-center' },
                 { key: 'actions', label: 'Actions', class: 'text-right' }
               ],

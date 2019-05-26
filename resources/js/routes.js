@@ -22,6 +22,10 @@ import Room from './pages/rooms/Home';
 import StoreRoom from './pages/rooms/Store';
 import ShowRoom from './pages/rooms/Show';
 
+import PatientRecord from './pages/patientRecords/Home';
+import StorePatientRecord from './pages/patientRecords/Store';
+import ShowPatientRecord from './pages/patientRecords/Show';
+
 export default {
 
     mode: 'history',
@@ -167,6 +171,31 @@ export default {
             path: '/room/:id/show',
             name: 'room-show',
             component: ShowRoom,
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        // patient record
+        {
+            path: '/patientRecords',
+            name: 'patientRecords',
+            component: PatientRecord,
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        {
+            path: '/patientRecord/:id?',
+            name: 'patientRecord-create',
+            component: StorePatientRecord,
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        {
+            path: '/patientRecord/:id/show',
+            name: 'patientRecord-show',
+            component: ShowPatientRecord,
             meta: {
                 requiresAuth: true,
             }

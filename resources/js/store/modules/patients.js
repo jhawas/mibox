@@ -23,7 +23,6 @@ const actions= {
 	async addPatient( { commit }, formData ) {
 
 		const response = await axios.post(`/api/patients`, formData);
-
 		commit('newPatient', response.data);
 
 		return response;
