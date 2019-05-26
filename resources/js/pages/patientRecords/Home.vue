@@ -74,6 +74,14 @@
                           <strong>Loading...</strong>
                         </div>
 
+                        <template slot="patient" slot-scope="row" right>
+                            {{row.item.patient.full_name}}
+                        </template>
+
+                        <template slot="type_of_record" slot-scope="row" right>
+                            {{row.item.type_of_record.name}}
+                        </template>
+
                         <template slot="actions" slot-scope="row" right>
                             <b-button>
                                 <i class="fa fa-eye" @click="show(row.item)" aria-hidden="true"></i>
@@ -140,7 +148,10 @@
             return {
               // items: [{}],
               fields: [
-                { key: 'patient_id', label: 'Patient', sortable: true, sortDirection: 'desc' },
+                { key: 'patient', label: 'Patient', sortable: true, sortDirection: 'desc' },
+                { key: 'type_of_record', label: 'Type of Record', sortable: true, sortDirection: 'desc' },
+                { key: 'admit_and_check_date', label: 'Admitted/Checkup Date', sortable: true, sortDirection: 'desc' },
+                { key: 'admit_and_check_time', label: 'Admitted/Checkup Time', sortable: true, sortDirection: 'desc' },
                 { key: 'actions', label: 'Actions', class: 'text-right' }
               ],
               totalRows: 1,

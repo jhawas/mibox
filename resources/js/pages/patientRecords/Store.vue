@@ -199,7 +199,7 @@
                               />
                             </b-form-group>
 
-                            <div class="admitted-section">
+                            <div class="admitted-section" v-if="form.type_of_record ? form.type_of_record.id == 2 : false">
                                 <legend>Discharged Details</legend>
 
                                 <b-form-group
