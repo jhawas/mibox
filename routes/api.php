@@ -32,4 +32,14 @@ Route::group(['middleware' => 'auth:api'], function(){
 
 	Route::apiResource('patients', 'api\PatientController');
 
+	Route::get('typeOfRooms', 'api\TypeOfRoomController@index');
+	Route::post('typeOfRooms', 'api\TypeOfRoomController@store');
+	Route::get('typeOfRooms/{typeOfCharge}', 'api\TypeOfRoomController@show');
+	Route::put('typeOfRooms/{typeOfCharge}', 'api\TypeOfRoomController@update');
+	Route::delete('typeOfRooms/{typeOfCharge}', 'api\TypeOfRoomController@destroy');
+
+	Route::apiResource('floors', 'api\FloorController');
+
+	Route::apiResource('rooms', 'api\RoomController');
+
 });

@@ -58,19 +58,19 @@
                 </a>
                 <ul class="treeview-menu">
                   <li>
-                    <a class="treeview-item" href="#">
+                    <router-link :to="{ name: 'rooms' }" class="treeview-item">
                       <i class="icon fa fa-circle-o"></i> Rooms
-                    </a>
+                    </router-link>
                   </li>
                   <li>
-                    <a class="treeview-item" href="#">
+                    <router-link :to="{ name: 'floors' }" class="treeview-item">
                       <i class="icon fa fa-circle-o"></i> Floors
-                    </a>
+                    </router-link>
                   </li>
                   <li>
-                    <a class="treeview-item" href="#">
-                      <i class="icon fa fa-circle-o"></i> Room Types
-                    </a>
+                    <router-link :to="{ name: 'typeOfRooms' }" class="treeview-item">
+                      <i class="icon fa fa-circle-o"></i> Type Of Rooms
+                    </router-link>
                   </li>
                 </ul>
               </li>

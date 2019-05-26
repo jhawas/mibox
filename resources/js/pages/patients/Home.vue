@@ -73,9 +73,6 @@
                           <b-spinner class="align-middle"></b-spinner>
                           <strong>Loading...</strong>
                         </div>
-                        <template slot="name" slot-scope="row">
-                          {{ row.value.first }} {{ row.value.last }}
-                        </template>
 
                         <template slot="birthdate" slot-scope="row">
                           {{ getAge(row.value) }}
@@ -183,13 +180,11 @@
             // Set the initial number of items
             this.totalRows = this.allPatients.length;
 
-            console.log(this.hasAccess('create-user'));
-
         },
 
         computed: {
 
-          ...mapGetters(['allPatients', 'hasAccess']),
+          ...mapGetters(['allPatients']),
 
           sortOptions() {
             // Create an options list from our fields
