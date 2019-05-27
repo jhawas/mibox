@@ -12,6 +12,7 @@ use App\PhilhealthMembership;
 
 class PatientRecord extends Model
 {
+
     public function user()
     {
     	return $this->belongsTo(User::class);
@@ -64,7 +65,13 @@ class PatientRecord extends Model
 
     public function patientRooms()
     {
-    	return $this->belongsTo(PatientRoom::class, 'patient_record_id');
+    	return $this->hasMany(PatientRoom::class);
+    }
+
+    public function currentRoom()
+    {
+        // return $this->patientRooms()->latest();
+        return $this->hasOne(PatientRoom::class)->latest();
     }
 
 }

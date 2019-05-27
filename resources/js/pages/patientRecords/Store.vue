@@ -71,12 +71,20 @@
                                 label-for="room"
                             >
                                 <multiselect 
-                                  v-model="form.room" 
-                                  placeholder="Select Room" 
-                                  label="name" 
-                                  track-by="id" 
-                                  :options="allRooms" 
-                                ></multiselect>
+                                    v-model="form.current_room" 
+                                    :options="allFloors" 
+                                    :multiple="false" 
+                                    group-values="rooms" 
+                                    group-label="name" 
+                                    :group-select="false" 
+                                    placeholder="Type to search" 
+                                    track-by="id" 
+                                    label="room_with_type"
+                                >
+                                <span slot="noResult">Oops! No elements found. Consider changing the search query.</span>
+                              </multiselect>
+
+                              <pre class="language-json"><code>{{ form.room  }}</code></pre>
 
                             </b-form-group>
                             
@@ -264,7 +272,7 @@
 
                             <b-form-group
                                 id="input-group-chart_completed_by"
-                                label="Staff:"
+                                label="Completed By:"
                                 label-for="staff"
                             >
                                 <multiselect 
@@ -318,7 +326,7 @@
                 form: {
                   patient: null,
                   type_of_record: null,
-                  room: null,
+                  current_room: null,
                   disposition: null,
                   result: null,
                   philhealth_membership: null,
@@ -343,7 +351,7 @@
         mounted() {
 
             this.fetchPatients();
-            this.fetchRooms();
+            this.fetchFloors();
             this.fetchDispositions();
             this.fetchResults();
             this.fetchTypeOfRecords();
@@ -366,7 +374,7 @@
             ...mapGetters([
                 'allPatientRecords', 
                 'allPatients', 
-                'allRooms',
+                'allFloors',
                 'allDispositions',
                 'allResults',
                 'allTypeOfRecords',
@@ -383,7 +391,7 @@
               'updatePatientRecord', 
               'showPatientRecordById', 
               'fetchPatients',
-              'fetchRooms',
+              'fetchFloors',
               'fetchDispositions',
               'fetchResults',
               'fetchTypeOfRecords',
@@ -401,7 +409,7 @@
 
             formData.append('patient_id', this.form.patient ? this.form.patient.id : null);
             formData.append('type_of_record_id', this.form.type_of_record ? this.form.type_of_record.id : null);
-            formData.append('room_id', this.form.room ? this.form.room.id : null);
+            formData.append('room_id', this.form.current_room ? this.form.current_room.id : null);
             formData.append('disposition_id', this.form.disposition ? this.form.disposition.id : null);
             formData.append('result_id', this.form.result ? this.form.result.id : null);
             formData.append('philhealth_membership_id', this.form.philhealth_membership ? this.form.philhealth_membership.id : null);

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\PatientRecord;
+use App\PatientRoom;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -26,7 +27,8 @@ class PatientRecordController extends Controller
             'dischargedBy',
             'physician',
             'chartCompletedBy',
-            'patientRooms'
+            'patientRooms',
+            'currentRoom'
         ])->get();
         return $patientRecords;
     }
@@ -69,6 +71,15 @@ class PatientRecordController extends Controller
         $patientRecord->user_id = \Auth::user()->id;
         $patientRecord->save();
 
+        $patientRoom = new PatientRoom;
+        $patientRoom->room_id = $request->room_id;
+        $patientRoom->date_started = $request->admit_and_check_date;
+        $patientRoom->time_start = $request->admit_and_check_time;
+
+        if($request->type_of_record_id == 1) {
+            $patientRecord->patientRooms()->save($patientRoom);
+        }
+        
         return response()->json([
             'message' => 'success',
         ]);
@@ -92,7 +103,8 @@ class PatientRecordController extends Controller
             'admitAndCheckBy',
             'dischargedBy',
             'physician',
-            'chartCompletedBy'
+            'chartCompletedBy',
+            'currentRoom'
         ]);
     }
 
@@ -114,7 +126,8 @@ class PatientRecordController extends Controller
             'admitAndCheckBy',
             'dischargedBy',
             'physician',
-            'chartCompletedBy'
+            'chartCompletedBy',
+            'currentRoom'
         ]);
     }
 

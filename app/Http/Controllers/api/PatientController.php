@@ -61,7 +61,6 @@ class PatientController extends Controller
         $patient->first_name = $request->first_name;
         $patient->middle_name = $request->middle_name;
         $patient->last_name = $request->last_name;
-        $patient->full_name = $request->first_name . ' ' . $request->middle_name . ' ' . $request->last_name;
         $patient->suffix = $request->suffix;
         $patient->birthdate = $request->birthdate;
         $patient->religion = $request->religion;
@@ -138,7 +137,6 @@ class PatientController extends Controller
         $patient->first_name = $request->first_name;
         $patient->middle_name = $request->middle_name;
         $patient->last_name = $request->last_name;
-        $patient->full_name = $request->first_name . ' ' . $request->middle_name . ' ' . $request->last_name;
         $patient->suffix = $request->suffix;
         $patient->birthdate = $request->birthdate;
         $patient->religion = $request->religion;

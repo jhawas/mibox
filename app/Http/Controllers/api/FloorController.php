@@ -15,7 +15,14 @@ class FloorController extends Controller
      */
     public function index()
     {
-        $floors = Floor::all();
+        $floors = Floor::with([
+            'user',
+            'rooms' => function($query) {
+                $query->with([
+                    'typeOfRoom'
+                ]);
+            },
+        ])->get();
 
         return $floors;
     }
