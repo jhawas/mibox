@@ -56,4 +56,6 @@ Route::group(['middleware' => 'auth:api'], function(){
 
 	Route::apiResource('medicationAndTreatments', 'api\MedicationAndTreatmentController');
 
+	Route::apiResource('vitalSigns', 'api\VitalSignController');
+
 });

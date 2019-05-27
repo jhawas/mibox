@@ -34,6 +34,10 @@ import MedicationAndTreatment from './pages/medicationAndTreatments/Home';
 import StoreMedicationAndTreatment from './pages/medicationAndTreatments/Store';
 import ShowMedicationAndTreatment from './pages/medicationAndTreatments/Show';
 
+import VitalSign from './pages/vitalSigns/Home';
+import StoreVitalSign from './pages/vitalSigns/Store';
+import ShowVitalSign from './pages/vitalSigns/Show';
+
 export default {
 
     mode: 'history',
@@ -254,6 +258,31 @@ export default {
             path: '/medicationAndTreatment/:id/show',
             name: 'medicationAndTreatment-show',
             component: ShowMedicationAndTreatment,
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        // vital signs
+        {
+            path: '/vitalSigns',
+            name: 'vitalSigns',
+            component: VitalSign,
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        {
+            path: '/vitalSign/:id?',
+            name: 'vitalSign-create',
+            component: StoreVitalSign,
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        {
+            path: '/vitalSign/:id/show',
+            name: 'vitalSign-show',
+            component: ShowVitalSign,
             meta: {
                 requiresAuth: true,
             }

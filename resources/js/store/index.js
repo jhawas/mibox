@@ -15,6 +15,7 @@ import typeOfRecords from './modules/typeOfRecords';
 import philhealthMemberships from './modules/philhealthMemberships';
 import nurseNotes from './modules/nurseNotes';
 import medicationAndTreatments from './modules/medicationAndTreatments';
+import vitalSigns from './modules/vitalSigns';
 
 Vue.use(Vuex);
 
@@ -33,7 +34,8 @@ export default new Vuex.Store({
       typeOfRecords,
       philhealthMemberships,
       nurseNotes,
-      medicationAndTreatments
+      medicationAndTreatments,
+      vitalSigns
   	},
 });
 

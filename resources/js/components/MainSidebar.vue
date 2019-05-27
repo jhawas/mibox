@@ -49,7 +49,7 @@
                     </router-link>
                   </li>
                   <li>
-                    <router-link :to="{ name: 'patientRecords' }" class="treeview-item">
+                    <router-link :to="{ name: 'vitalSigns' }" class="treeview-item">
                       <i class="icon fa fa-circle-o"></i> Vital Signs
                     </router-link>
                   </li><li>
