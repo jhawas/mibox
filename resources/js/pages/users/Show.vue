@@ -47,6 +47,11 @@
                             </b-form-group>
                         </b-col>
                         <b-col col md="6">
+                            <b-form-group label-cols="4" label-cols-lg="2" label="Roles" label-for="input-default">
+                              <div class="form-control form-group-value">
+                                <span v-for="role in user.roles">{{ role.name + ', ' }}</span>
+                              </div>
+                            </b-form-group>
                             <b-form-group label-cols="4" label-cols-lg="2" label="Email" label-for="input-default">
                               <div class="form-control form-group-value">{{ user.email }}</div>
                             </b-form-group>

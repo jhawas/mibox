@@ -15,7 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::with(['roles'])->get();
+        $users = User::all();
         return $users;
     }
 
@@ -83,7 +83,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return $user->load('roles');
+        return $user;
     }
 
     /**

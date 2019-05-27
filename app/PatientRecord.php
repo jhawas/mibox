@@ -13,6 +13,14 @@ use App\PhilhealthMembership;
 class PatientRecord extends Model
 {
 
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = ['full_name'];
+
+
     public function user()
     {
     	return $this->belongsTo(User::class);
@@ -72,6 +80,16 @@ class PatientRecord extends Model
     {
         // return $this->patientRooms()->latest();
         return $this->hasOne(PatientRoom::class)->latest();
+    }
+
+    /**
+     * Get the administrator flag for the user.
+     *
+     * @return bool
+     */
+    public function getFullNameAttribute()
+    {
+        return "{$this->patient->full_name}";
     }
 
 }

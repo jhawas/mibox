@@ -4,7 +4,7 @@ toastr.options.closeButton = true;
 export function initialize(store, router) {
 
     // get all data need by default;    
-    store.dispatch('fetchRoles');
+    // store.dispatch('fetchRoles');
 
     router.beforeEach((to, from, next) => {
         

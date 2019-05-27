@@ -57,6 +57,15 @@ class User extends Authenticatable
      */
     protected $appends = ['full_name'];
 
+
+    /**
+     * The relationships that should always be loaded.
+     *
+     * @var array
+     */
+    protected $with = ['roles'];
+    
+
     /**
      * Get the user's first name.
      *

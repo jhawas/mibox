@@ -13,6 +13,8 @@ import dispositions from './modules/dispositions';
 import results from './modules/results';
 import typeOfRecords from './modules/typeOfRecords';
 import philhealthMemberships from './modules/philhealthMemberships';
+import nurseNotes from './modules/nurseNotes';
+import medicationAndTreatments from './modules/medicationAndTreatments';
 
 Vue.use(Vuex);
 
@@ -29,7 +31,9 @@ export default new Vuex.Store({
       dispositions,
       results,
       typeOfRecords,
-      philhealthMemberships
+      philhealthMemberships,
+      nurseNotes,
+      medicationAndTreatments
   	},
 });
 

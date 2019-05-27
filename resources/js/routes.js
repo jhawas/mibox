@@ -26,6 +26,14 @@ import PatientRecord from './pages/patientRecords/Home';
 import StorePatientRecord from './pages/patientRecords/Store';
 import ShowPatientRecord from './pages/patientRecords/Show';
 
+import NurseNote from './pages/nurseNotes/Home';
+import StoreNurseNote from './pages/nurseNotes/Store';
+import ShowNurseNote from './pages/nurseNotes/Show';
+
+import MedicationAndTreatment from './pages/medicationAndTreatments/Home';
+import StoreMedicationAndTreatment from './pages/medicationAndTreatments/Store';
+import ShowMedicationAndTreatment from './pages/medicationAndTreatments/Show';
+
 export default {
 
     mode: 'history',
@@ -196,6 +204,56 @@ export default {
             path: '/patientRecord/:id/show',
             name: 'patientRecord-show',
             component: ShowPatientRecord,
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        // nurse note
+        {
+            path: '/nurseNotes',
+            name: 'nurseNotes',
+            component: NurseNote,
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        {
+            path: '/nurseNote/:id?',
+            name: 'nurseNote-create',
+            component: StoreNurseNote,
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        {
+            path: '/nurseNote/:id/show',
+            name: 'nurseNote-show',
+            component: ShowNurseNote,
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        // medication and treatment
+        {
+            path: '/medicationAndTreatments',
+            name: 'medicationAndTreatments',
+            component: MedicationAndTreatment,
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        {
+            path: '/medicationAndTreatment/:id?',
+            name: 'medicationAndTreatment-create',
+            component: StoreMedicationAndTreatment,
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        {
+            path: '/medicationAndTreatment/:id/show',
+            name: 'medicationAndTreatment-show',
+            component: ShowMedicationAndTreatment,
             meta: {
                 requiresAuth: true,
             }

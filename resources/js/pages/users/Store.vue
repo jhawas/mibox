@@ -275,6 +275,9 @@
         },
 
         mounted() {
+
+            this.fetchRoles();
+            
             if(this.$route.params.id) {
                 this.loading = true;
                 const user = this.showUserById(this.$route.params.id);
@@ -294,7 +297,7 @@
 
         methods: {
 
-          ...mapActions(['addUser', 'updateUser', 'showUserById']),
+          ...mapActions(['addUser', 'updateUser', 'showUserById', 'fetchRoles']),
           
           onSubmit(event) {
 

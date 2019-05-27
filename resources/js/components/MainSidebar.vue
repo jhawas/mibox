@@ -39,14 +39,38 @@
                     </router-link>
                   </li>
                   <li>
-                    <a class="treeview-item" href="#">
-                      <i class="icon fa fa-circle-o"></i> Diagnoses
-                    </a>
+                    <router-link :to="{ name: 'nurseNotes' }" class="treeview-item">
+                      <i class="icon fa fa-circle-o"></i> Nurses Notes
+                    </router-link>
                   </li>
                   <li>
-                    <a class="treeview-item" href="#">
+                    <router-link :to="{ name: 'medicationAndTreatments' }" class="treeview-item">
+                      <i class="icon fa fa-circle-o"></i> Medication and Treatments
+                    </router-link>
+                  </li>
+                  <li>
+                    <router-link :to="{ name: 'patientRecords' }" class="treeview-item">
+                      <i class="icon fa fa-circle-o"></i> Vital Signs
+                    </router-link>
+                  </li><li>
+                    <router-link :to="{ name: 'patientRecords' }" class="treeview-item">
+                      <i class="icon fa fa-circle-o"></i> Intravenouse Fluids
+                    </router-link>
+                  </li>
+                  <li>
+                    <router-link :to="{ name: 'patientRecords' }" class="treeview-item">
+                      <i class="icon fa fa-circle-o"></i> Doctors Order
+                    </router-link>
+                  </li>
+                  <li>
+                    <router-link :to="{ name: 'patientRecords' }" class="treeview-item">
                       <i class="icon fa fa-circle-o"></i> Laboratory
-                    </a>
+                    </router-link>
+                  </li>
+                  <li>
+                    <router-link :to="{ name: 'patientRecords' }" class="treeview-item">
+                      <i class="icon fa fa-circle-o"></i> Diagnoses
+                    </router-link>
                   </li>
                 </ul>
               </li>

@@ -24,25 +24,59 @@
                     <b-card title="Patient Information" v-if="!loading">
                       <b-row>
                         <b-col col md="6">
-                            <b-form-group label-cols="4" label-cols-lg="2" label="Default" label-for="input-default">
-                              <div class="form-control form-group-value">{{ user.first_name }}</div>
+                            <b-form-group label-cols="4" label-cols-lg="2" label="First Name" label-for="input-default">
+                              <div class="form-control form-group-value">{{ patient.first_name }}</div>
                             </b-form-group>
-                            <b-form-group label-cols="4" label-cols-lg="2" label="Default" label-for="input-default">
-                              <div class="form-control form-group-value">{{ user.middle_name }}</div>
+                            <b-form-group label-cols="4" label-cols-lg="2" label="Middle Name" label-for="input-default">
+                              <div class="form-control form-group-value">{{ patient.middle_name }}</div>
                             </b-form-group>
-                            <b-form-group label-cols="4" label-cols-lg="2" label="Default" label-for="input-default">
-                              <div class="form-control form-group-value">{{ user.last_name }}</div>
+                            <b-form-group label-cols="4" label-cols-lg="2" label="Last Name" label-for="input-default">
+                              <div class="form-control form-group-value">{{ patient.last_name }}</div>
+                            </b-form-group>
+                            <b-form-group label-cols="4" label-cols-lg="2" label="Suffix" label-for="input-default">
+                              <div class="form-control form-group-value">{{ patient.suffix }}</div>
+                            </b-form-group>
+                            <b-form-group label-cols="4" label-cols-lg="2" label="Birthdate" label-for="input-default">
+                              <div class="form-control form-group-value">{{ patient.birthdate }}</div>
+                            </b-form-group>
+                            <b-form-group label-cols="4" label-cols-lg="2" label="Sex" label-for="input-default">
+                              <div class="form-control form-group-value">{{ patient.sex }}</div>
+                            </b-form-group>
+                            <b-form-group label-cols="4" label-cols-lg="2" label="Religion" label-for="input-default">
+                              <div class="form-control form-group-value">{{ patient.religion }}</div>
+                            </b-form-group>
+                            <b-form-group label-cols="4" label-cols-lg="2" label="Address" label-for="input-default">
+                              <div class="form-control form-group-value">{{ patient.address }}</div>
+                            </b-form-group>
+                            <b-form-group label-cols="4" label-cols-lg="2" label="Civil Status" label-for="input-default">
+                              <div class="form-control form-group-value">{{ patient.civil_status }}</div>
                             </b-form-group>
                         </b-col>
                         <b-col col md="6">
-                            <b-form-group label-cols="4" label-cols-lg="2" label="Default" label-for="input-default">
-                              <div class="form-control form-group-value">{{ user.first_name }}</div>
+                            <b-form-group label-cols="4" label-cols-lg="2" label="Father" label-for="input-default">
+                              <div class="form-control form-group-value">{{ patient.father }}</div>
                             </b-form-group>
-                            <b-form-group label-cols="4" label-cols-lg="2" label="Default" label-for="input-default">
-                              <div class="form-control form-group-value">{{ user.first_name }}</div>
+                            <b-form-group label-cols="4" label-cols-lg="2" label="Mother" label-for="input-default">
+                              <div class="form-control form-group-value">{{ patient.mother }}</div>
                             </b-form-group>
-                            <b-form-group label-cols="4" label-cols-lg="2" label="Default" label-for="input-default">
-                              <div class="form-control form-group-value">{{ user.first_name }}</div>
+                            <b-form-group label-cols="4" label-cols-lg="2" label="Spouse" label-for="input-default">
+                              <div class="form-control form-group-value">{{ patient.spouse }}</div>
+                            </b-form-group>
+                            <b-form-group label-cols="4" label-cols-lg="2" label="Spouse Adress" label-for="input-default">
+                              <div class="form-control form-group-value">{{ patient.spouse_address }}</div>
+                            </b-form-group>
+                            <b-form-group label-cols="4" label-cols-lg="2" label="Contact No." label-for="input-default">
+                              <div class="form-control form-group-value">{{ patient.contact_no }}</div>
+                            </b-form-group>
+                            <legend>Emergency Contact</legend>
+                            <b-form-group label-cols="4" label-cols-lg="2" label="Name" label-for="input-default">
+                              <div class="form-control form-group-value">{{ patient.e_name }}</div>
+                            </b-form-group>
+                            <b-form-group label-cols="4" label-cols-lg="2" label="Contact" label-for="input-default">
+                              <div class="form-control form-group-value">{{ patient.e_contact }}</div>
+                            </b-form-group>
+                            <b-form-group label-cols="4" label-cols-lg="2" label="Address" label-for="input-default">
+                              <div class="form-control form-group-value">{{ patient.e_address }}</div>
                             </b-form-group>
                         </b-col>
                       </b-row>
@@ -73,7 +107,7 @@
 
         data() {
             return {
-                user: {},
+                patient: {},
                 loading: false,
             }
         },
@@ -97,7 +131,7 @@
 
                     this.loading = false;
 
-                    this.user = response.data;
+                    this.patient = response.data;
 
                 });
             }
