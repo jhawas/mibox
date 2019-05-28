@@ -66,4 +66,10 @@ Route::group(['middleware' => 'auth:api'], function(){
 	Route::put('diagnoses/{diagnose}', 'api\DiagnoseController@update');
 	Route::delete('diagnoses/{diagnose}', 'api\DiagnoseController@destroy');
 
+	Route::get('patientDiagnoses', 'api\PatientDiagnoseController@index');
+	Route::post('patientDiagnoses', 'api\PatientDiagnoseController@store');
+	Route::get('patientDiagnoses/{patientDiagnose}', 'api\PatientDiagnoseController@show');
+	Route::put('patientDiagnoses/{patientDiagnose}', 'api\PatientDiagnoseController@update');
+	Route::delete('patientDiagnoses/{patientDiagnose}', 'api\PatientDiagnoseController@destroy');
+
 });

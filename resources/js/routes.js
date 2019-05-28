@@ -46,6 +46,10 @@ import Diagnose from './pages/diagnoses/Home';
 import StoreDiagnose from './pages/diagnoses/Store';
 import ShowDiagnose from './pages/diagnoses/Show';
 
+import PatientDiagnose from './pages/patientDiagnoses/Home';
+import StorePatientDiagnose from './pages/patientDiagnoses/Store';
+import ShowPatientDiagnose from './pages/patientDiagnoses/Show';
+
 export default {
 
     mode: 'history',
@@ -341,6 +345,31 @@ export default {
             path: '/diagnose/:id/show',
             name: 'diagnose-show',
             component: ShowDiagnose,
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        // patient diganoses
+        {
+            path: '/patientDiagnoses',
+            name: 'patientDiagnoses',
+            component: PatientDiagnose,
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        {
+            path: '/patientDiagnose/:id?',
+            name: 'patientDiagnose-create',
+            component: StorePatientDiagnose,
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        {
+            path: '/patientDiagnose/:id/show',
+            name: 'patientDiagnose-show',
+            component: ShowPatientDiagnose,
             meta: {
                 requiresAuth: true,
             }
