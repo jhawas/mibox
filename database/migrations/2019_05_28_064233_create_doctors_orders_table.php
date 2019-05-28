@@ -27,6 +27,8 @@ class CreateDoctorsOrdersTable extends Migration
 
             $table->string('orders')->nullable();
 
+            $table->boolean('is_laboratory')->default(0)->nullable();
+
             $table->jsonb('laboratories')->nullable();
 
             $table->integer('user_id')->unsigned()->nullable();

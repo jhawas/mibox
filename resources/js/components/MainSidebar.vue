@@ -58,7 +58,7 @@
                     </router-link>
                   </li>
                   <li>
-                    <router-link :to="{ name: 'patientRecords' }" class="treeview-item">
+                    <router-link :to="{ name: 'doctorsOrders' }" class="treeview-item">
                       <i class="icon fa fa-circle-o"></i> Doctors Order
                     </router-link>
                   </li>
@@ -84,6 +84,11 @@
                   <li>
                     <router-link :to="{ name: 'diagnoses' }" class="treeview-item">
                       <i class="icon fa fa-circle-o"></i> Diagnoses
+                    </router-link>
+                  </li>
+                  <li>
+                    <router-link :to="{ name: 'typeOfLaboratories' }" class="treeview-item">
+                      <i class="icon fa fa-circle-o"></i> Type of Laboratory
                     </router-link>
                   </li>
                 </ul>

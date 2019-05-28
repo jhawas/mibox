@@ -37,6 +37,13 @@ class PatientDiagnoseController extends Controller
      */
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'patient_record_id' => 'required|not_in:0',
+            'diagnose_id' => 'required|not_in:0',
+            'description' => 'required',
+            'remarks' => 'required',
+        ]);
+
         $patientDiagnose = new PatientDiagnose;
         $patientDiagnose->patient_record_id = $request->patient_record_id;
         $patientDiagnose->diagnose_id = $request->diagnose_id;
@@ -81,6 +88,13 @@ class PatientDiagnoseController extends Controller
      */
     public function update(Request $request, PatientDiagnose $patientDiagnose)
     {
+        $validatedData = $request->validate([
+            'patient_record_id' => 'required|not_in:0',
+            'diagnose_id' => 'required|not_in:0',
+            'description' => 'required',
+            'remarks' => 'required',
+        ]);
+        
         $patientDiagnose->patient_record_id = $request->patient_record_id;
         $patientDiagnose->diagnose_id = $request->diagnose_id;
         $patientDiagnose->description = $request->description;

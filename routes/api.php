@@ -72,4 +72,12 @@ Route::group(['middleware' => 'auth:api'], function(){
 	Route::put('patientDiagnoses/{patientDiagnose}', 'api\PatientDiagnoseController@update');
 	Route::delete('patientDiagnoses/{patientDiagnose}', 'api\PatientDiagnoseController@destroy');
 
+	Route::apiResource('doctorsOrders', 'api\DoctorsOrderController');
+
+	Route::get('typeOfLaboratories', 'api\TypeOfLaboratoryController@index');
+	Route::post('typeOfLaboratories', 'api\TypeOfLaboratoryController@store');
+	Route::get('typeOfLaboratories/{typeOfCharge}', 'api\TypeOfLaboratoryController@show');
+	Route::put('typeOfLaboratories/{typeOfCharge}', 'api\TypeOfLaboratoryController@update');
+	Route::delete('typeOfLaboratories/{typeOfCharge}', 'api\TypeOfLaboratoryController@destroy');
+
 });

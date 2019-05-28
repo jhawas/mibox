@@ -50,6 +50,14 @@ import PatientDiagnose from './pages/patientDiagnoses/Home';
 import StorePatientDiagnose from './pages/patientDiagnoses/Store';
 import ShowPatientDiagnose from './pages/patientDiagnoses/Show';
 
+import DoctorsOrder from './pages/doctorsOrders/Home';
+import StoreDoctorsOrder from './pages/doctorsOrders/Store';
+import ShowDoctorsOrder from './pages/doctorsOrders/Show';
+
+import TypeOfLaboratory from './pages/typeOfLaboratories/Home';
+import StoreTypeOfLaboratory from './pages/typeOfLaboratories/Store';
+import ShowTypeOfLaboratory from './pages/typeOfLaboratories/Show';
+
 export default {
 
     mode: 'history',
@@ -370,6 +378,56 @@ export default {
             path: '/patientDiagnose/:id/show',
             name: 'patientDiagnose-show',
             component: ShowPatientDiagnose,
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        // doctors order
+        {
+            path: '/doctorsOrders',
+            name: 'doctorsOrders',
+            component: DoctorsOrder,
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        {
+            path: '/doctorsOrder/:id?',
+            name: 'doctorsOrder-create',
+            component: StoreDoctorsOrder,
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        {
+            path: '/doctorsOrder/:id/show',
+            name: 'doctorsOrder-show',
+            component: ShowDoctorsOrder,
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        // TypeOfLaboratory
+        {
+            path: '/typeOfLaboratories',
+            name: 'typeOfLaboratories',
+            component: TypeOfLaboratory,
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        {
+            path: '/typeOfLaboratory/:id?',
+            name: 'typeOfLaboratory-create',
+            component: StoreTypeOfLaboratory,
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        {
+            path: '/typeOfLaboratory/:id/show',
+            name: 'typeOfLaboratory-show',
+            component: ShowTypeOfLaboratory,
             meta: {
                 requiresAuth: true,
             }

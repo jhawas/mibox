@@ -19,6 +19,8 @@ import vitalSigns from './modules/vitalSigns';
 import intravenousFluids from './modules/intravenousFluids';
 import diagnoses from './modules/diagnoses';
 import patientDiagnoses from './modules/patientDiagnoses';
+import doctorsOrders from './modules/doctorsOrders';
+import typeOfLaboratories from './modules/typeOfLaboratories';
 
 Vue.use(Vuex);
 
@@ -42,6 +44,8 @@ export default new Vuex.Store({
       intravenousFluids,
       diagnoses,
       patientDiagnoses,
+      doctorsOrders,
+      typeOfLaboratories,
   	},
 });
 
