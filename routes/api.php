@@ -58,4 +58,6 @@ Route::group(['middleware' => 'auth:api'], function(){
 
 	Route::apiResource('vitalSigns', 'api\VitalSignController');
 
+	Route::apiResource('intravenousFluids', 'api\IntravenousFluidController');
+
 });

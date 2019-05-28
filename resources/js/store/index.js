@@ -16,6 +16,7 @@ import philhealthMemberships from './modules/philhealthMemberships';
 import nurseNotes from './modules/nurseNotes';
 import medicationAndTreatments from './modules/medicationAndTreatments';
 import vitalSigns from './modules/vitalSigns';
+import intravenousFluids from './modules/intravenousFluids';
 
 Vue.use(Vuex);
 
@@ -35,7 +36,8 @@ export default new Vuex.Store({
       philhealthMemberships,
       nurseNotes,
       medicationAndTreatments,
-      vitalSigns
+      vitalSigns,
+      intravenousFluids,
   	},
 });
 

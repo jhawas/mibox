@@ -34,9 +34,11 @@
                               <b-form-select v-model="sortBy" :options="sortOptions">
                                 <option slot="first" :value="null">-- none --</option>
                               </b-form-select>
-                              <b-form-select v-model="sortDesc" :disabled="!sortBy" slot="append">
-                                <option :value="false">Asc</option> <option :value="true">Desc</option>
-                              </b-form-select>
+                              <div class="input-group-append">
+                                <b-form-select v-model="sortDesc" :disabled="!sortBy">
+                                  <option :value="false">Asc</option> <option :value="true">Desc</option>
+                                </b-form-select>
+                              </div>
                             </b-input-group>
                           </b-form-group>
                         </b-col>

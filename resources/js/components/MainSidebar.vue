@@ -53,8 +53,8 @@
                       <i class="icon fa fa-circle-o"></i> Vital Signs
                     </router-link>
                   </li><li>
-                    <router-link :to="{ name: 'patientRecords' }" class="treeview-item">
-                      <i class="icon fa fa-circle-o"></i> Intravenouse Fluids
+                    <router-link :to="{ name: 'intravenousFluids' }" class="treeview-item">
+                      <i class="icon fa fa-circle-o"></i> Intravenous Fluids
                     </router-link>
                   </li>
                   <li>

@@ -38,6 +38,10 @@ import VitalSign from './pages/vitalSigns/Home';
 import StoreVitalSign from './pages/vitalSigns/Store';
 import ShowVitalSign from './pages/vitalSigns/Show';
 
+import IntravenousFluid from './pages/intravenousFluids/Home';
+import StoreIntravenousFluid from './pages/intravenousFluids/Store';
+import ShowIntravenousFluid from './pages/intravenousFluids/Show';
+
 export default {
 
     mode: 'history',
@@ -283,6 +287,31 @@ export default {
             path: '/vitalSign/:id/show',
             name: 'vitalSign-show',
             component: ShowVitalSign,
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        // intravenous fluid
+        {
+            path: '/intravenousFluids',
+            name: 'intravenousFluids',
+            component: IntravenousFluid,
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        {
+            path: '/intravenousFluid/:id?',
+            name: 'intravenousFluid-create',
+            component: StoreIntravenousFluid,
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        {
+            path: '/intravenousFluid/:id/show',
+            name: 'intravenousFluid-show',
+            component: ShowIntravenousFluid,
             meta: {
                 requiresAuth: true,
             }
