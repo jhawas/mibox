@@ -77,6 +77,20 @@
               <li class="treeview">
                 <a class="app-menu__item" href="#" data-toggle="treeview">
                   <i class="app-menu__icon fa fa-th-list"></i>
+                    <span class="app-menu__label">Utilities</span>
+                  <i class="treeview-indicator fa fa-angle-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                  <li>
+                    <router-link :to="{ name: 'diagnoses' }" class="treeview-item">
+                      <i class="icon fa fa-circle-o"></i> Diagnoses
+                    </router-link>
+                  </li>
+                </ul>
+              </li>
+              <li class="treeview">
+                <a class="app-menu__item" href="#" data-toggle="treeview">
+                  <i class="app-menu__icon fa fa-th-list"></i>
                     <span class="app-menu__label">Manage Rooms</span>
                   <i class="treeview-indicator fa fa-angle-right"></i>
                 </a>

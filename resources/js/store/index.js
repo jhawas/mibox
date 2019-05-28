@@ -17,6 +17,7 @@ import nurseNotes from './modules/nurseNotes';
 import medicationAndTreatments from './modules/medicationAndTreatments';
 import vitalSigns from './modules/vitalSigns';
 import intravenousFluids from './modules/intravenousFluids';
+import diagnoses from './modules/diagnoses';
 
 Vue.use(Vuex);
 
@@ -38,6 +39,7 @@ export default new Vuex.Store({
       medicationAndTreatments,
       vitalSigns,
       intravenousFluids,
+      diagnoses,
   	},
 });
 

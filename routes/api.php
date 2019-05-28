@@ -60,4 +60,10 @@ Route::group(['middleware' => 'auth:api'], function(){
 
 	Route::apiResource('intravenousFluids', 'api\IntravenousFluidController');
 
+	Route::get('diagnoses', 'api\DiagnoseController@index');
+	Route::post('diagnoses', 'api\DiagnoseController@store');
+	Route::get('diagnoses/{diagnose}', 'api\DiagnoseController@show');
+	Route::put('diagnoses/{diagnose}', 'api\DiagnoseController@update');
+	Route::delete('diagnoses/{diagnose}', 'api\DiagnoseController@destroy');
+
 });

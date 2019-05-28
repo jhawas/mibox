@@ -42,6 +42,10 @@ import IntravenousFluid from './pages/intravenousFluids/Home';
 import StoreIntravenousFluid from './pages/intravenousFluids/Store';
 import ShowIntravenousFluid from './pages/intravenousFluids/Show';
 
+import Diagnose from './pages/diagnoses/Home';
+import StoreDiagnose from './pages/diagnoses/Store';
+import ShowDiagnose from './pages/diagnoses/Show';
+
 export default {
 
     mode: 'history',
@@ -312,6 +316,31 @@ export default {
             path: '/intravenousFluid/:id/show',
             name: 'intravenousFluid-show',
             component: ShowIntravenousFluid,
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        // diagnoses
+        {
+            path: '/diagnoses',
+            name: 'diagnoses',
+            component: Diagnose,
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        {
+            path: '/diagnose/:id?',
+            name: 'diagnose-create',
+            component: StoreDiagnose,
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        {
+            path: '/diagnose/:id/show',
+            name: 'diagnose-show',
+            component: ShowDiagnose,
             meta: {
                 requiresAuth: true,
             }
