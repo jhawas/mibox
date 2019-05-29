@@ -58,6 +58,10 @@ import TypeOfLaboratory from './pages/typeOfLaboratories/Home';
 import StoreTypeOfLaboratory from './pages/typeOfLaboratories/Store';
 import ShowTypeOfLaboratory from './pages/typeOfLaboratories/Show';
 
+import Laboratory from './pages/laboratories/Home';
+import StoreLaboratory from './pages/laboratories/Store';
+import ShowLaboratory from './pages/laboratories/Show';
+
 export default {
 
     mode: 'history',
@@ -428,6 +432,31 @@ export default {
             path: '/typeOfLaboratory/:id/show',
             name: 'typeOfLaboratory-show',
             component: ShowTypeOfLaboratory,
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        // TLaboratory
+        {
+            path: '/laboratories',
+            name: 'laboratories',
+            component: Laboratory,
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        {
+            path: '/laboratory/:id?',
+            name: 'laboratory-create',
+            component: StoreLaboratory,
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        {
+            path: '/laboratory/:id/show',
+            name: 'laboratory-show',
+            component: ShowLaboratory,
             meta: {
                 requiresAuth: true,
             }

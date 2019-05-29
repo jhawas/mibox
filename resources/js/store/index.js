@@ -21,6 +21,7 @@ import diagnoses from './modules/diagnoses';
 import patientDiagnoses from './modules/patientDiagnoses';
 import doctorsOrders from './modules/doctorsOrders';
 import typeOfLaboratories from './modules/typeOfLaboratories';
+import laboratories from './modules/laboratories';
 
 Vue.use(Vuex);
 
@@ -46,6 +47,7 @@ export default new Vuex.Store({
       patientDiagnoses,
       doctorsOrders,
       typeOfLaboratories,
+      laboratories
   	},
 });
 

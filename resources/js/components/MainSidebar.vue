@@ -63,7 +63,7 @@
                     </router-link>
                   </li>
                   <li>
-                    <router-link :to="{ name: 'patientRecords' }" class="treeview-item">
+                    <router-link :to="{ name: 'laboratories' }" class="treeview-item">
                       <i class="icon fa fa-circle-o"></i> Laboratory
                     </router-link>
                   </li>

@@ -27,7 +27,7 @@ class Laboratory extends Model
      *
      * @var array
      */
-    protected $with = ['laboratory'];
+    protected $with = ['laboratory', 'patientRecord'];
 
     /**
      * The accessors to append to the model's array form.
@@ -35,6 +35,12 @@ class Laboratory extends Model
      * @var array
      */
     protected $appends = ['charge_id', 'charge_name'];
+
+    
+    public function patientRecord() 
+    {
+        return $this->belongsTo(PatientRecord::class, 'patient_record_id');
+    }
 
     /**
      * laboratories one to many

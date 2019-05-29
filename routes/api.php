@@ -80,4 +80,6 @@ Route::group(['middleware' => 'auth:api'], function(){
 	Route::put('typeOfLaboratories/{typeOfCharge}', 'api\TypeOfLaboratoryController@update');
 	Route::delete('typeOfLaboratories/{typeOfCharge}', 'api\TypeOfLaboratoryController@destroy');
 
+	Route::apiResource('laboratories', 'api\LaboratoryController');
+
 });
