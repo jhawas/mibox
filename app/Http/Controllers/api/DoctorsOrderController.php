@@ -37,16 +37,38 @@ class DoctorsOrderController extends Controller
      */
     public function store(Request $request)
     {
+
+        $validatedData = $request->validate([
+            'patient_record_id' => 'required|not_in:0',
+            'date' => 'required',
+            'time' => 'required',
+            'progress_note' => 'required',
+            'orders' => 'required',
+        ]);
+
         $doctorsOrder = new DoctorsOrder;
+
         $doctorsOrder->patient_record_id = $request->patient_record_id;
         $doctorsOrder->date = $request->date;
-        $doctorsOrder->time = $request->time;
+        $doctorsOrder->orders = $request->time;
         $doctorsOrder->progress_note = $request->progress_note;
         $doctorsOrder->orders = $request->orders;
         $doctorsOrder->is_laboratory = $request->is_laboratory;
-        $doctorsOrder->laboratories = $request->laboratories;
+        // $doctorsOrder->laboratories = $request->laboratories;
+        $doctorsOrder->requested_by = \Auth::user()->id;
         $doctorsOrder->user_id = \Auth::user()->id;
         $doctorsOrder->save();
+
+        $laboratories = json_decode($request->laboratories);
+
+        for ($i=0; $i < count($laboratories); $i++) { 
+            
+            $doctorsOrder->laboratories()->create([
+                'patient_record_id' => $request->patient_record_id,
+                'type_of_charge_id' => $laboratories[$i]->id,
+            ]);
+
+        }
 
         return response()->json([
             'message' => 'success',
@@ -84,13 +106,35 @@ class DoctorsOrderController extends Controller
      */
     public function update(Request $request, DoctorsOrder $doctorsOrder)
     {
+        $validatedData = $request->validate([
+            'patient_record_id' => 'required|not_in:0',
+            'date' => 'required',
+            'time' => 'required',
+            'progress_note' => 'required',
+            'orders' => 'required',
+        ]);
+        
+        $doctorsOrder->laboratories()->delete();
+
+        $laboratories = json_decode($request->laboratories);
+
+        for ($i=0; $i < count($laboratories); $i++) { 
+
+            $doctorsOrder->laboratories()->create([
+                'patient_record_id' => $request->patient_record_id,
+                'type_of_charge_id' => $laboratories[$i]->id,
+            ]);
+
+        }
+
         $doctorsOrder->patient_record_id = $request->patient_record_id;
         $doctorsOrder->date = $request->date;
         $doctorsOrder->time = $request->time;
         $doctorsOrder->progress_note = $request->progress_note;
         $doctorsOrder->orders = $request->orders;
         $doctorsOrder->is_laboratory = $request->is_laboratory;
-        $doctorsOrder->laboratories = $request->laboratories;
+        // $doctorsOrder->laboratories = $request->laboratories;
+        $doctorsOrder->requested_by = \Auth::user()->id;
         $doctorsOrder->user_id = \Auth::user()->id;
         $doctorsOrder->save();
 

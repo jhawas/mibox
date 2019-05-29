@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Laboratory;
 
 class DoctorsOrder extends Model
 {
@@ -11,10 +12,20 @@ class DoctorsOrder extends Model
      *
      * @var array
      */
-    protected $with = ['patientRecord'];
+    protected $with = ['patientRecord', 'laboratories'];
+
     
     public function patientRecord() 
     {
     	return $this->belongsTo(PatientRecord::class, 'patient_record_id');
     }
+
+    /**
+     * laboratories one to many
+     */
+    public function laboratories()
+    {
+        return $this->hasMany(Laboratory::class);
+    }
+
 }

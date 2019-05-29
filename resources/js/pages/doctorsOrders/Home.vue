@@ -148,6 +148,8 @@
                 { key: 'patient', label: 'Patient', sortable: true, sortDirection: 'desc' },
                 { key: 'date', label: 'Date', sortable: true, sortDirection: 'desc', class: 'text-center'},
                 { key: 'time', label: 'Time', sortable: true, sortDirection: 'desc', class: 'text-center'},
+                { key: 'requested', label: 'Requested By', sortable: true, sortDirection: 'desc', class: 'text-center'},
+                { key: 'is_done', label: 'Approved', sortable: true, sortDirection: 'desc', class: 'text-center'},
                 { key: 'actions', label: 'Actions', class: 'text-right' }
               ],
               totalRows: 1,

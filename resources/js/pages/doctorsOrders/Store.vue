@@ -109,7 +109,7 @@
                             >
                               with laboratory
                             </b-form-checkbox>
-                            
+
                             <b-form-group
                                 label="Laboratory:"
                                 label-for="patient"
@@ -118,8 +118,8 @@
                                 <multiselect 
                                   v-model="form.laboratories" 
                                   placeholder="Select Laboratory" 
-                                  label="name" 
-                                  track-by="id" 
+                                  label="charge_name" 
+                                  track-by="charge_id" 
                                   :options="allTypeOfLaboratories" 
                                   :multiple="true" 
                                 ></multiselect>
@@ -191,7 +191,6 @@
                 const doctorsOrder = this.showDoctorsOrderById(this.$route.params.id);
                 doctorsOrder.then(response => {
                       this.form = response.data;
-                      this.form.laboratories = JSON.parse(response.data.laboratories);
                       this.loading = false;
                 });
             }
