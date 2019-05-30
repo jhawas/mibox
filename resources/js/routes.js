@@ -74,6 +74,10 @@ import Billing from './pages/billings/Home';
 import StoreBilling from './pages/billings/Store';
 import ShowBilling from './pages/billings/Show';
 
+import TypeOfCharge from './pages/typeOfCharges/Home';
+import StoreTypeOfCharge from './pages/typeOfCharges/Store';
+import ShowTypeOfCharge from './pages/typeOfCharges/Show';
+
 
 export default {
 
@@ -545,6 +549,31 @@ export default {
             path: '/billing/:id/show',
             name: 'billing-show',
             component: ShowBilling,
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        // type Of charge
+        {
+            path: '/typeOfCharges',
+            name: 'typeOfCharges',
+            component: TypeOfCharge,
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        {
+            path: '/typeOfCharge/:id?',
+            name: 'typeOfCharge-create',
+            component: StoreTypeOfCharge,
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        {
+            path: '/typeOfCharge/:id/show',
+            name: 'typeOfCharge-show',
+            component: ShowTypeOfCharge,
             meta: {
                 requiresAuth: true,
             }

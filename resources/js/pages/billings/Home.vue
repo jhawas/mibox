@@ -91,6 +91,10 @@
                           <strong>Loading...</strong>
                         </div>
 
+                        <template slot="type_of_charge" slot-scope="row">
+                            {{ row.value ? row.value.name : null }}
+                        </template>
+
                         <template slot="actions" slot-scope="row" right>
                             <b-button>
                                 <i class="fa fa-eye" @click="show(row.item)" aria-hidden="true"></i>
@@ -161,7 +165,7 @@
               billing: {},
               fields: [
                 { key: 'patient_record_id', label: 'Name', sortable: true, sortDirection: 'desc' },
-                { key: 'type_of_charge_id', label: 'Charge', sortable: true, sortDirection: 'desc' },
+                { key: 'type_of_charge', label: 'Charge', sortable: true, sortDirection: 'desc' },
                 { key: 'amount', label: 'Amount', sortable: true, sortDirection: 'desc' },
                 { key: 'quantity_and_days', label: 'Quantity/Days', sortable: true, sortDirection: 'desc' },
                 { key: 'total', label: 'Total', sortable: true, sortDirection: 'desc' },
@@ -210,7 +214,12 @@
 
         methods: {
 
-          ...mapActions(['fetchBillings', 'deleteBilling', 'fetchPatientRecords', 'fetchBillingsByRecord']),
+          ...mapActions([
+            'fetchBillings', 
+            'deleteBilling', 
+            'fetchPatientRecords', 
+            'fetchBillingsByRecord',
+          ]),
 
           onFiltered(filteredItems) {
             // Trigger pagination to update the number of buttons/pages due to filtering

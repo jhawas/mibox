@@ -98,6 +98,11 @@
                     </router-link>
                   </li>
                   <li>
+                    <router-link :to="{ name: 'typeOfCharges' }" class="treeview-item">
+                      <i class="icon fa fa-circle-o"></i> Type of Charges
+                    </router-link>
+                  </li>
+                  <li>
                     <router-link :to="{ name: 'discounts' }" class="treeview-item">
                       <i class="icon fa fa-circle-o"></i> Discount
                     </router-link>

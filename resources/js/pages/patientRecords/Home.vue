@@ -77,11 +77,11 @@
                         </div>
 
                         <template slot="patient" slot-scope="row" right>
-                            {{row.item.patient.full_name}}
+                            {{row.item.patient ? row.item.patient.full_name : null }}
                         </template>
 
                         <template slot="type_of_record" slot-scope="row" right>
-                            {{row.item.type_of_record.name}}
+                            {{row.item.type_of_record ? row.item.type_of_record.name : null }}
                         </template>
 
                         <template slot="actions" slot-scope="row" right>

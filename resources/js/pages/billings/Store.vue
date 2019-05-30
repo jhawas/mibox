@@ -50,6 +50,21 @@
                             </b-form-group>
 
                             <b-form-group
+                                label="Charges:"
+                                label-for="charges"
+                            >
+                                <multiselect 
+                                  v-model="form.type_of_charge" 
+                                  placeholder="Select Charges" 
+                                  label="name" 
+                                  track-by="id" 
+                                  :options="allTypeOfCharges" 
+                                  @input="onChangeCharges"
+                                ></multiselect>
+
+                            </b-form-group>
+
+                            <b-form-group
                               label="Amount:"
                               label-for="amount"
                             >
@@ -138,6 +153,7 @@
         mounted() {
 
             this.fetchPatientRecords();
+            this.fetchTypeOfCharges();
 
             if(this.$route.params.id) {
                 this.loading = true;
@@ -152,7 +168,7 @@
 
         computed: {
             
-            ...mapGetters(['allBillings', 'allPatientRecords']),
+            ...mapGetters(['allBillings', 'allPatientRecords', 'allTypeOfCharges']),
 
         },
 
@@ -162,8 +178,13 @@
               'addBilling', 
               'updateBilling', 
               'showBillingById',
-              'fetchPatientRecords'
+              'fetchPatientRecords',
+              'fetchTypeOfCharges'
             ]),
+
+          onChangeCharges(value) {
+              this.form.amount = value.price;
+          },
 
           onSubmit(event) {
 
@@ -173,7 +194,11 @@
 
             let formData = new FormData();
 
-            formData.append('name', this.form.name);
+            formData.append('patient_record_id', this.form.patient_record ? this.form.patient_record.id : 0);
+            formData.append('type_of_charge_id', this.form.type_of_charge ? this.form.type_of_charge.id : 0);
+            formData.append('amount', this.form.amount);
+            formData.append('quantity_and_days', this.form.quantity_and_days);
+            formData.append('description', this.form.description);
 
             if(this.$route.params.id > 0) {
 

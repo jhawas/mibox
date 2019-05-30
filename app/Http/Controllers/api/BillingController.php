@@ -15,7 +15,7 @@ class BillingController extends Controller
      */
     public function index()
     {
-        $billings = Billing::all();
+        $billings = Billing::with(['typeOfCharge', 'patientRecord'])->get();
 
         return $billings;
     }
@@ -43,7 +43,7 @@ class BillingController extends Controller
         $billing->type_of_charge_id = $request->type_of_charge_id;
         $billing->amount = $request->amount;
         $billing->quantity_and_days = $request->quantity_and_days;
-        $billing->total = $request->total;
+        $billing->total = $request->amount * $request->quantity_and_days;
         $billing->description = $request->description;
         $billing->user_id = \Auth::user()->id;
         $billing->save();
@@ -61,7 +61,7 @@ class BillingController extends Controller
      */
     public function show(Billing $billing)
     {
-        return $billing;
+        return $billing->load(['typeOfCharge', 'patientRecord']);
     }
 
     /**
@@ -88,7 +88,7 @@ class BillingController extends Controller
         $billing->type_of_charge_id = $request->type_of_charge_id;
         $billing->amount = $request->amount;
         $billing->quantity_and_days = $request->quantity_and_days;
-        $billing->total = $request->total;
+        $billing->total = $request->amount * $request->quantity_and_days;
         $billing->description = $request->description;
         $billing->user_id = \Auth::user()->id;
         $billing->save();

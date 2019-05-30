@@ -90,4 +90,6 @@ Route::group(['middleware' => 'auth:api'], function(){
 
 	Route::get('billings/patientRecord/{patient_record_id}', 'api\BillingController@dataByRecord')->name('billings.databyRecord');
 
+	Route::apiResource('typeOfCharges', 'api\TypeOfChargeController');
+
 });

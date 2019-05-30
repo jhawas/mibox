@@ -25,6 +25,7 @@ import laboratories from './modules/laboratories';
 import insurances from './modules/insurances';
 import discounts from './modules/discounts';
 import billings from './modules/billings';
+import typeOfCharges from './modules/typeOfCharges';
 
 Vue.use(Vuex);
 
@@ -54,6 +55,7 @@ export default new Vuex.Store({
       insurances,
       discounts,
       billings,
+      typeOfCharges,
   	},
 });
 

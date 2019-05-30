@@ -37,4 +37,8 @@ class TypeOfCharge extends Model
     public function parent() {
     	return $this->belongsTo('App\TypeOfCharge', 'parent_id');
     }
+
+    public function type() {
+        return $this->belongsTo('App\Type', 'type_id');
+    }
 }
