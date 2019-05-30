@@ -62,6 +62,19 @@ import Laboratory from './pages/laboratories/Home';
 import StoreLaboratory from './pages/laboratories/Store';
 import ShowLaboratory from './pages/laboratories/Show';
 
+import Insurance from './pages/insurances/Home';
+import StoreInsurance from './pages/insurances/Store';
+import ShowInsurance from './pages/insurances/Show';
+
+import Discount from './pages/discounts/Home';
+import StoreDiscount from './pages/discounts/Store';
+import ShowDiscount from './pages/discounts/Show';
+
+import Billing from './pages/billings/Home';
+import StoreBilling from './pages/billings/Store';
+import ShowBilling from './pages/billings/Show';
+
+
 export default {
 
     mode: 'history',
@@ -457,6 +470,81 @@ export default {
             path: '/laboratory/:id/show',
             name: 'laboratory-show',
             component: ShowLaboratory,
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        // insurance
+        {
+            path: '/insurances',
+            name: 'insurances',
+            component: Insurance,
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        {
+            path: '/insurance/:id?',
+            name: 'insurance-create',
+            component: StoreInsurance,
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        {
+            path: '/insurance/:id/show',
+            name: 'insurance-show',
+            component: ShowInsurance,
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        // discount
+        {
+            path: '/discounts',
+            name: 'discounts',
+            component: Discount,
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        {
+            path: '/discount/:id?',
+            name: 'discount-create',
+            component: StoreDiscount,
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        {
+            path: '/discount/:id/show',
+            name: 'discount-show',
+            component: ShowDiscount,
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        // billing
+        {
+            path: '/billings',
+            name: 'billings',
+            component: Billing,
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        {
+            path: '/billing/:id?',
+            name: 'billing-create',
+            component: StoreBilling,
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        {
+            path: '/billing/:id/show',
+            name: 'billing-show',
+            component: ShowBilling,
             meta: {
                 requiresAuth: true,
             }

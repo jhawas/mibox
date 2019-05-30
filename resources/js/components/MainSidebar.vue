@@ -17,7 +17,7 @@
               </li>
               <li v-if="hasAccess('create-user')">
                 <router-link :to="{ name: 'users' }" class="app-menu__item">
-                    <i class="app-menu__icon fa fa-pie-chart"></i>
+                    <i class="app-menu__icon fa fa-users"></i>
                     <span class="app-menu__label">Users</span>
                 </router-link>
               </li>
@@ -74,6 +74,12 @@
                   </li>
                 </ul>
               </li>
+              <li>
+                <router-link :to="{ name: 'billings' }" class="app-menu__item">
+                    <i class="app-menu__icon fa fa-money"></i>
+                    <span class="app-menu__label">Billing</span>
+                </router-link>
+              </li>
               <li class="treeview">
                 <a class="app-menu__item" href="#" data-toggle="treeview">
                   <i class="app-menu__icon fa fa-th-list"></i>
@@ -89,6 +95,16 @@
                   <li>
                     <router-link :to="{ name: 'typeOfLaboratories' }" class="treeview-item">
                       <i class="icon fa fa-circle-o"></i> Type of Laboratory
+                    </router-link>
+                  </li>
+                  <li>
+                    <router-link :to="{ name: 'discounts' }" class="treeview-item">
+                      <i class="icon fa fa-circle-o"></i> Discount
+                    </router-link>
+                  </li>
+                  <li>
+                    <router-link :to="{ name: 'insurances' }" class="treeview-item">
+                      <i class="icon fa fa-circle-o"></i> Insurance
                     </router-link>
                   </li>
                 </ul>

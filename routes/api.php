@@ -82,4 +82,12 @@ Route::group(['middleware' => 'auth:api'], function(){
 
 	Route::apiResource('laboratories', 'api\LaboratoryController');
 
+	Route::apiResource('discounts', 'api\DiscountController');
+
+	Route::apiResource('insurances', 'api\InsuranceController');
+
+	Route::apiResource('billings', 'api\BillingController');
+
+	Route::get('billings/patientRecord/{patient_record_id}', 'api\BillingController@dataByRecord')->name('billings.databyRecord');
+
 });

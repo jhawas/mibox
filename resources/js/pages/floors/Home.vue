@@ -194,10 +194,6 @@
             this.currentPage = 1
           },
 
-          getAge(date) {
-              return moment().diff(date, 'years');
-          },
-
           create() {
 
             this.$router.push({ name: 'floor-create' });
@@ -235,7 +231,7 @@
                       console.log(response.data);
                       if(response.data.message === 'success') {
 
-                          toastr.success('Type of room successfully deleted.', 'Message');
+                          toastr.success('Floor successfully deleted.', 'Message');
                           
                           this.$router.push({ name: 'floors' });
                       }
