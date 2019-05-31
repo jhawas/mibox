@@ -82,7 +82,7 @@
                             
                         </template>
 
-                        <template slot="type" slot-scope="row">
+                        <template slot="category" slot-scope="row">
   
                           {{ row.value ? row.value.name : null }}
                             
@@ -157,7 +157,7 @@
               fields: [
                 { key: 'name', label: 'Name', sortable: true, sortDirection: 'desc' },
                 { key: 'parent', label: 'Parent', sortable: true, sortDirection: 'desc', class: 'text-center' },
-                { key: 'type', label: 'Types', sortable: true, sortDirection: 'desc', class: 'text-center' },
+                { key: 'category', label: 'Types', sortable: true, sortDirection: 'desc', class: 'text-center' },
                 { key: 'price', label: 'Price', sortable: true, sortDirection: 'desc', class: 'text-center' },
                 { key: 'actions', label: 'Actions', class: 'text-right' }
               ],

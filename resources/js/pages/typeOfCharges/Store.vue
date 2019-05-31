@@ -61,6 +61,20 @@
                             </b-form-group>
 
                             <b-form-group
+                                label="Type:"
+                                label-for="type"
+                            >
+                                <multiselect 
+                                  v-model="form.category" 
+                                  placeholder="Select Type" 
+                                  label="name" 
+                                  track-by="id" 
+                                  :options="allTypes" 
+                                ></multiselect>
+
+                            </b-form-group>
+
+                            <b-form-group
                               label="price:"
                               label-for="price"
                             >
@@ -112,6 +126,7 @@
                   name: '',
                   price: 0.00,
                   parent: {},
+                  category: {},
                 },
                 errors: [],
                 loading: false,
@@ -123,6 +138,7 @@
         mounted() {
 
             this.fetchTypeOfCharges();
+            this.fetchTypes();
 
             if(this.$route.params.id) {
                 this.loading = true;
@@ -137,7 +153,7 @@
 
         computed: {
 
-            ...mapGetters(['allTypeOfCharges']),
+            ...mapGetters(['allTypeOfCharges', 'allTypes']),
 
         },
 
@@ -147,7 +163,8 @@
             'addTypeOfCharge', 
             'updateTypeOfCharge', 
             'showTypeOfChargeById', 
-            'fetchTypeOfCharges'
+            'fetchTypeOfCharges',
+            'fetchTypes',
           ]),
 
           onSubmit(event) {
@@ -160,7 +177,8 @@
 
             formData.append('name', this.form.name);
             formData.append('price', this.form.price);
-            formData.append('parent', this.form.parent ? this.form.parent.id : 0);
+            formData.append('parent_id', this.form.parent ? this.form.parent.id : 0);
+            formData.append('type_id', this.form.category ? this.form.category.id : 0);
 
             if(this.$route.params.id > 0) {
 

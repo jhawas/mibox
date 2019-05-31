@@ -29,6 +29,13 @@
                             ></multiselect>
                           </b-form-group>
                         </b-col>
+
+                        <b-col md="6" class="my-1">
+                          <b-form-group label-cols-sm="3" label="Per page" class="mb-0">
+                            <b-form-select v-model="perPage" :options="pageOptions"></b-form-select>
+                          </b-form-group>
+                        </b-col>
+
                       </b-row>
 
                       <b-row>
@@ -59,14 +66,28 @@
                         </b-col>
 
                         <b-col md="6" class="my-1">
-                          <b-form-group label-cols-sm="3" label="Add" class="mb-0">
-                                <b-button @click="create">New</b-button>
+                          <b-form-group label-cols-sm="3" label="Action" class="mb-0">
+                                <b-button 
+                                  @click="create" 
+                                  :disabled="!billing.patient_record"
+                                >Add Bill</b-button>
+                                <b-button 
+                                  @click="create" 
+                                  :disabled="!billing.patient_record"
+                                >Add Insurance</b-button>
+                                <b-button 
+                                  @click="create" 
+                                  :disabled="!billing.patient_record"
+                                >Add Discount</b-button>
                           </b-form-group>
                         </b-col>
 
                         <b-col md="6" class="my-1">
-                          <b-form-group label-cols-sm="3" label="Per page" class="mb-0">
-                            <b-form-select v-model="perPage" :options="pageOptions"></b-form-select>
+                          <b-form-group label-cols-sm="3" label="Print">
+                                <b-button 
+                                  @click="create" 
+                                  :disabled="!billing.patient_record"
+                                >Billing</b-button>
                           </b-form-group>
                         </b-col>
                       </b-row>
@@ -130,7 +151,44 @@
                     </b-container>
                 </div>
               </div>
-           </div>
+            </div>
+
+            <!-- <div class="col-md-12">
+              <div class="tile">
+                <div class="tile-title">
+                    Insurance
+                </div>
+                <div class="tile-body">
+                    <div>
+                      <b-table
+                        :items="allBillings"
+                        :fields="fields"
+                        :sort-by.sync="sortBy"
+                        :sort-desc.sync="sortDesc"
+                      ></b-table>
+                    </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <div class="tile">
+                <div class="tile-title">
+                    Discount
+                </div>
+                <div class="tile-body">
+                    <div>
+                      <b-table
+                        :items="allBillings"
+                        :fields="fields"
+                        :sort-by.sync="sortBy"
+                        :sort-desc.sync="sortDesc"
+                      ></b-table>
+                    </div>
+                </div>
+              </div>
+            </div> -->
+
         </div>
     </Layout>
 </template>
@@ -184,6 +242,8 @@
 
         mounted() {
 
+            this.billing = this.defaultBilling ? this.defaultBilling : {};
+
             this.fetchPatientRecords();
 
             // Set the initial number of items
@@ -193,7 +253,7 @@
 
         computed: {
 
-          ...mapGetters(['allBillings', 'allPatientRecords']),
+          ...mapGetters(['allBillings', 'allPatientRecords', 'defaultBilling']),
 
           sortOptions() {
             // Create an options list from our fields
@@ -208,7 +268,7 @@
 
         created() {
 
-            this.fetchBillings();
+            // this.fetchBillings();
 
         },
 
@@ -228,7 +288,7 @@
           },
 
           onChange(value) {
-              this.fetchBillingsByRecord(value);
+              this.fetchBillingsByRecord(value ? value : 0);
           },
 
           create() {
@@ -245,7 +305,11 @@
 
           show(item) {
 
-            this.$router.push({ name: 'billing-show', params: { id: item.id } });
+            this.$router.push({ 
+              name: 'billing-show', 
+              params: { id: item.id },
+              props: { patient_record: this.billing.patient_record }
+            });
 
           },
 

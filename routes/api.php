@@ -92,4 +92,6 @@ Route::group(['middleware' => 'auth:api'], function(){
 
 	Route::apiResource('typeOfCharges', 'api\TypeOfChargeController');
 
+	Route::apiResource('types', 'api\TypeController');
+
 });

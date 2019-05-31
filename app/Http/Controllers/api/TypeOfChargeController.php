@@ -15,7 +15,7 @@ class TypeOfChargeController extends Controller
      */
     public function index()
     {
-        $typeOfCharges = TypeOfCharge::with(['parent', 'type'])->get();
+        $typeOfCharges = TypeOfCharge::with(['parent', 'category'])->get();
 
         return $typeOfCharges;
     }
@@ -41,12 +41,13 @@ class TypeOfChargeController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|max:191',
             'price' => 'required|max:191',
+            'type_id' => 'required|not_in:0',
         ]);
 
         $typeOfCharge = new TypeOfCharge;
         $typeOfCharge->name = $request->name;
         $typeOfCharge->price = $request->price;
-        $typeOfCharge->parent_id = $this->isDataEmpty($request->parent);
+        $typeOfCharge->parent_id = $this->isDataEmpty($request->parent_id);
         $typeOfCharge->type_id = $request->type;
         $typeOfCharge->user_id = \Auth::user()->id;
         $typeOfCharge->save();
@@ -64,7 +65,7 @@ class TypeOfChargeController extends Controller
      */
     public function show(TypeOfCharge $typeOfCharge)
     {
-        return $typeOfCharge->load(['parent', 'type']);
+        return $typeOfCharge->load(['parent', 'category']);
     }
 
     /**
@@ -90,11 +91,12 @@ class TypeOfChargeController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|max:191',
             'price' => 'required|max:191',
+            'type_id' => 'required|not_in:0',
         ]);
         
         $typeOfCharge->name = $request->name;
         $typeOfCharge->price = $request->price;
-        $typeOfCharge->parent_id = $this->isDataEmpty($request->parent);
+        $typeOfCharge->parent_id = $this->isDataEmpty($request->parent_id);
         $typeOfCharge->type_id = $request->type;
         $typeOfCharge->user_id = \Auth::user()->id;
         $typeOfCharge->save();

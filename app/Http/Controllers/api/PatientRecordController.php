@@ -104,7 +104,15 @@ class PatientRecordController extends Controller
             'dischargedBy',
             'physician',
             'chartCompletedBy',
-            'currentRoom'
+            'currentRoom',
+            'patientDiagnoses',
+            'nurseNotes',
+            'medicationAndTreatments',
+            'vitalSigns',
+            'intravenousFluids',
+            'doctorsOrders',
+            'laboratories',
+            'patientRooms'
         ]);
     }
 

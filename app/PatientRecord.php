@@ -9,6 +9,12 @@ use App\TypeOfRecord;
 use App\Disposition;
 use App\Result;
 use App\PhilhealthMembership;
+use App\PatientDiagnose;
+use App\NurseNote;
+use App\MedicationAndTreatment;
+use App\VitalSign;
+use App\IntravenousFluid;
+use App\DoctorsOrder;
 
 class PatientRecord extends Model
 {
@@ -69,6 +75,41 @@ class PatientRecord extends Model
     public function chartCompletedBy()
     {
     	return $this->belongsTo(User::class, 'chart_completed_by');
+    }
+
+    public function patientDiagnoses()
+    {
+        return $this->hasMany(PatientDiagnose::class);
+    }
+
+    public function nurseNotes()
+    {
+        return $this->hasMany(NurseNote::class);
+    }
+
+    public function medicationAndTreatments()
+    {
+        return $this->hasMany(MedicationAndTreatment::class);
+    }
+
+    public function vitalSigns()
+    {
+        return $this->hasMany(VitalSign::class);
+    }
+
+    public function intravenousFluids()
+    {
+        return $this->hasMany(IntravenousFluid::class);
+    }
+
+    public function doctorsOrders()
+    {
+        return $this->hasMany(DoctorsOrder::class);
+    }
+
+    public function laboratories()
+    {
+        return $this->hasMany(Laboratory::class);
     }
 
     public function patientRooms()

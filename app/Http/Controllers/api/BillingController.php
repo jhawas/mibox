@@ -38,6 +38,14 @@ class BillingController extends Controller
      */
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'patient_record_id' => 'required|not_in:0',
+            'type_of_charge_id' => 'required|not_in:0',
+            'amount' => 'required|max:191',
+            'quantity_and_days' => 'required|max:191|not_in:0',
+            'description' => 'required|max:191',
+        ]);
+
         $billing = new Billing;
         $billing->patient_record_id = $request->patient_record_id;
         $billing->type_of_charge_id = $request->type_of_charge_id;
@@ -84,6 +92,14 @@ class BillingController extends Controller
      */
     public function update(Request $request, Billing $billing)
     {
+        $validatedData = $request->validate([
+            'patient_record_id' => 'required|not_in:0',
+            'type_of_charge_id' => 'required|not_in:0',
+            'amount' => 'required|max:191',
+            'quantity_and_days' => 'required|max:191|not_in:0',
+            'description' => 'required|max:191',
+        ]);
+
         $billing->patient_record_id = $request->patient_record_id;
         $billing->type_of_charge_id = $request->type_of_charge_id;
         $billing->amount = $request->amount;
@@ -120,7 +136,7 @@ class BillingController extends Controller
      */
     public function dataByRecord($patient_record_id)
     {
-        $billings = Billing::where('patient_record_id', $patient_record_id)
+        $billings = Billing::with(['typeOfCharge', 'patientRecord'])->where('patient_record_id', $patient_record_id)
         ->get();
 
         return $billings;

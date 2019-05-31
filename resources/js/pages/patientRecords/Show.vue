@@ -27,45 +27,119 @@
                           <b-row>
                             <b-col col md="6">
                                 <b-form-group label-cols="4" label-cols-lg="2" label="Name" label-for="input-default">
-                                  <div class="form-control form-group-value">{{ patientRecord.name }}</div>
+                                  <div class="form-control form-group-value">{{ patientRecord.full_name }}</div>
+                                </b-form-group>
+
+                                <b-form-group label-cols="4" label-cols-lg="2" label="Type Of Record" label-for="input-default">
+                                  <div class="form-control form-group-value">{{ patientRecord.type_of_record ? patientRecord.type_of_record.name : null }}</div>
+                                </b-form-group>
+
+                                <b-form-group label-cols="4" label-cols-lg="2" label="Room" label-for="input-default">
+                                  <div class="form-control form-group-value">{{ patientRecord.current_room ? patientRecord.current_room.room_with_type : null }}</div>
+                                </b-form-group>
+
+                                <b-form-group label-cols="4" label-cols-lg="2" label="Disposition" label-for="input-default">
+                                  <div class="form-control form-group-value">{{ patientRecord.disposition ? patientRecord.disposition.name : null }}</div>
+                                </b-form-group>
+
+                                <b-form-group label-cols="4" label-cols-lg="2" label="Result" label-for="input-default">
+                                  <div class="form-control form-group-value">{{ patientRecord.result ? patientRecord.result.name : null }}</div>
+                                </b-form-group>
+
+                                <b-form-group label-cols="4" label-cols-lg="2" label="Philhealth Membership" label-for="input-default">
+                                  <div class="form-control form-group-value">{{ patientRecord.philhealth_membership ? patientRecord.philhealth_membership.name : null }}</div>
                                 </b-form-group>
                             </b-col>
+
+                            <b-col col md="6">
+                                <b-form-group label-cols="4" label-cols-lg="2" label="Cheif Complaints" label-for="input-default">
+                                  <div class="form-control form-group-value">{{ patientRecord.cheif_complaints}}</div>
+                                </b-form-group>
+
+                                <b-form-group label-cols="4" label-cols-lg="2" label="Breif history" label-for="input-default">
+                                  <div class="form-control form-group-value">{{ patientRecord.breif_history}}</div>
+                                </b-form-group>
+
+                                <legend>Admit & Check Up Details</legend>
+
+                                <b-form-group label-cols="4" label-cols-lg="2" label="Doctor" label-for="input-default">
+                                  <div class="form-control form-group-value">{{ patientRecord.admit_and_check_by ? patientRecord.admit_and_check_by.full_name : null }}</div>
+                                </b-form-group>
+
+                                <b-form-group label-cols="4" label-cols-lg="2" label="Date" label-for="input-default">
+                                  <div class="form-control form-group-value">{{ patientRecord.admit_and_check_date }}</div>
+                                </b-form-group>
+
+                                <b-form-group label-cols="4" label-cols-lg="2" label="Time" label-for="input-default">
+                                  <div class="form-control form-group-value">{{ patientRecord.admit_and_check_time }}</div>
+                                </b-form-group>
+
+                                <legend>Discharged Details</legend>
+
+                                <b-form-group label-cols="4" label-cols-lg="2" label="Doctor" label-for="input-default">
+                                  <div class="form-control form-group-value">{{ patientRecord.discharged_by ? patientRecord.discharged_by.full_name : null }}</div>
+                                </b-form-group>
+
+                                <b-form-group label-cols="4" label-cols-lg="2" label="Date" label-for="input-default">
+                                  <div class="form-control form-group-value">{{ patientRecord.discharged_date }}</div>
+                                </b-form-group>
+
+                                <b-form-group label-cols="4" label-cols-lg="2" label="Time" label-for="input-default">
+                                  <div class="form-control form-group-value">{{ patientRecord.discharged_time }}</div>
+                                </b-form-group>
+
+                                <legend>Physician Details</legend>
+
+                                <b-form-group label-cols="4" label-cols-lg="2" label="Doctor" label-for="input-default">
+                                  <div class="form-control form-group-value">{{ patientRecord.physician ? patientRecord.physician.full_name : null }}</div>
+                                </b-form-group>
+
+                                <legend>Chart Details</legend>
+
+                                <b-form-group label-cols="4" label-cols-lg="2" label="Completed by" label-for="input-default">
+                                  <div class="form-control form-group-value">{{ patientRecord.chart_completed_by ? patientRecord.chart_completed_by.full_name : null }}</div>
+                                </b-form-group>
+
+                            </b-col>
+
+
                           </b-row>
                         </b-tab>
                         <b-tab title="Diagnoses">
-                          <p></p>
+                            <patient-diagnoses-table
+                                :items="patientRecord.patient_diagnoses"
+                            ></patient-diagnoses-table>
                         </b-tab>
                         <b-tab title="Nurse Note">
-                          <p></p>
+                          <nurse-notes-table
+                                :items="patientRecord.nurse_notes"
+                          ></nurse-notes-table>
                         </b-tab>
                         <b-tab title="Medication And Treatment">
-                          <p></p>
+                          <medication-and-treatments-table
+                                :items="patientRecord.medication_and_treatments"
+                          ></medication-and-treatments-table>
                         </b-tab>
                         <b-tab title="Vital Sign">
-                          <p></p>
+                            <vital-signs-table
+                                :items="patientRecord.vital_signs"
+                          ></vital-signs-table>
                         </b-tab>
                         <b-tab title="Intravenous Fluid">
-                          <p></p>
+                          <intravenous-fluids-table
+                                :items="patientRecord.intravenous_fluids"
+                          ></intravenous-fluids-table>
                         </b-tab>
                         <b-tab title="Doctor's Order">
-                          <p></p>
+                          <doctors-orders-table
+                                :items="patientRecord.doctors_orders"
+                          ></doctors-orders-table>
                         </b-tab>
-                        <b-tab title="Laboratory">
-                          <p></p>
-                        </b-tab>
-                        <b-tab title="Disabled" disabled>
+                        <b-tab title="Laboratory" disabled>
                           <p></p>
                         </b-tab>
                       </b-tabs>
                     </div>
-                </div>
-              </div>
-           </div>
-
-           <div class="col-md-12" v-if="!loading">
-              <div class="tile">
-                <div class="tile-body">
-                    test
                 </div>
               </div>
            </div>
@@ -79,11 +153,23 @@
     import Layout from '../../components/Layout';
     import { mapActions, mapGetters } from 'vuex';
     import { FulfillingBouncingCircleSpinner } from 'epic-spinners';
+    import PatientDiagnosesTable from '../../components/view/PatientDiagnosesTable';
+    import NurseNotesTable from '../../components/view/NurseNotesTable';
+    import MedicationAndTreatmentsTable from '../../components/view/MedicationAndTreatmentsTable';
+    import VitalSignsTable from '../../components/view/VitalSignsTable';
+    import IntravenousFluidsTable from '../../components/view/IntravenousFluidsTable';
+    import DoctorsOrdersTable from '../../components/view/DoctorsOrdersTable';
 
     export default {
         components: {
             Layout,
-            FulfillingBouncingCircleSpinner
+            FulfillingBouncingCircleSpinner,
+            PatientDiagnosesTable,
+            NurseNotesTable,
+            MedicationAndTreatmentsTable,
+            VitalSignsTable,
+            IntravenousFluidsTable,
+            DoctorsOrdersTable,
         },
 
         props: {

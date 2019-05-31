@@ -1,6 +1,8 @@
 <template>
     <div class="main">
-        <router-view></router-view>
+        <transition>
+            <router-view></router-view>
+        </transition>
     </div>
 </template>
 

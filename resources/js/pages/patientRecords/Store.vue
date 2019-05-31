@@ -69,6 +69,7 @@
                                 id="input-group-room"
                                 label="Room:"
                                 label-for="room"
+                                v-if="form.type_of_record ? form.type_of_record.id == 1 : false"
                             >
                                 <multiselect 
                                     v-model="form.current_room" 
@@ -207,7 +208,7 @@
                               />
                             </b-form-group>
 
-                            <div class="admitted-section" v-if="form.type_of_record ? form.type_of_record.id == 2 : false">
+                            <div class="admitted-section" v-if="form.type_of_record ? form.type_of_record.id == 1 : false">
                                 <legend>Discharged Details</legend>
 
                                 <b-form-group

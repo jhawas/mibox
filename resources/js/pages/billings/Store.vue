@@ -152,6 +152,8 @@
 
         mounted() {
 
+            this.form.patient_record = this.defaultBilling.patient_record ? this.defaultBilling.patient_record : {};
+
             this.fetchPatientRecords();
             this.fetchTypeOfCharges();
 
@@ -168,7 +170,12 @@
 
         computed: {
             
-            ...mapGetters(['allBillings', 'allPatientRecords', 'allTypeOfCharges']),
+            ...mapGetters([
+              'allBillings', 
+              'allPatientRecords', 
+              'allTypeOfCharges', 
+              'defaultBilling'
+            ]),
 
         },
 
