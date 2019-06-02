@@ -36,7 +36,6 @@
                          <b-col col lg="6">
                             
                             <b-form-group
-                                id="input-group-patient"
                                 label="Patient:"
                                 label-for="patient"
                             >
@@ -50,26 +49,9 @@
 
                             </b-form-group>
 
-                             <b-form-group
-                                id="input-group-type_of_record"
-                                label="Type Of Record:"
-                                label-for="type_of_record"
-                            >
-                                <multiselect 
-                                  v-model="form.type_of_record" 
-                                  placeholder="Select Type Of Record" 
-                                  label="name" 
-                                  track-by="id" 
-                                  :options="allTypeOfRecords" 
-                                ></multiselect>
-
-                            </b-form-group>
-
                             <b-form-group
-                                id="input-group-room"
                                 label="Room:"
                                 label-for="room"
-                                v-if="form.type_of_record ? form.type_of_record.id == 1 : false"
                             >
                                 <multiselect 
                                     v-model="form.current_room" 
@@ -91,7 +73,6 @@
                             
                             <legend>Other Details</legend>
                             <b-form-group
-                                id="input-group-disposition"
                                 label="Disposition:"
                                 label-for="disposition"
                             >
@@ -106,7 +87,6 @@
                             </b-form-group>
 
                             <b-form-group
-                                id="input-group-result"
                                 label="Result:"
                                 label-for="result"
                             >
@@ -121,7 +101,6 @@
                             </b-form-group>
 
                              <b-form-group
-                                id="input-group-philhealth_membership"
                                 label="Philhealth Membership:"
                                 label-for="philhealth_membership"
                             >
@@ -140,12 +119,10 @@
                          <b-col col lg="6">
 
                             <b-form-group
-                              id="input-group-cheifComplaints"
                               label="Cheif Complaints:"
                               label-for="cheifComplaints"
                             >
                               <b-form-textarea
-                                id="textarea-cheifComplaints"
                                 v-model="form.chief_complaints"
                                 placeholder="Enter cheif complaints..."
                                 rows="3"
@@ -154,12 +131,10 @@
                             </b-form-group>
 
                             <b-form-group
-                              id="input-group-breifHistory"
                               label="Breif History:"
                               label-for="breifHistory"
                             >
                               <b-form-textarea
-                                id="textarea-breifHistory"
                                 v-model="form.brief_history"
                                 placeholder="Enter brief history..."
                                 rows="3"
@@ -167,10 +142,9 @@
                               ></b-form-textarea>
                             </b-form-group>
   
-                            <legend>Admit & Check Up Details</legend>
+                            <legend>Admission Details</legend>
 
                             <b-form-group
-                                id="input-group-admin-checkup-by"
                                 label="Doctor:"
                                 label-for="doctor"
                             >
@@ -185,7 +159,6 @@
                             </b-form-group>
 
                             <b-form-group
-                              id="input-group-admit_and_check_date"
                               label="Date:"
                               label-for="date"
                             >
@@ -197,7 +170,6 @@
                             </b-form-group>
 
                             <b-form-group
-                              id="input-group-admit_and_check_time"
                               label="Time:"
                               label-for="time"
                             >
@@ -208,11 +180,10 @@
                               />
                             </b-form-group>
 
-                            <div class="admitted-section" v-if="form.type_of_record ? form.type_of_record.id == 1 : false">
+                            <div class="admitted-section">
                                 <legend>Discharged Details</legend>
 
                                 <b-form-group
-                                    id="input-group-discharged_by"
                                     label="Doctor:"
                                     label-for="doctor"
                                 >
@@ -227,7 +198,6 @@
                                 </b-form-group>
 
                                 <b-form-group
-                                  id="input-group-discharged_date"
                                   label="Date:"
                                   label-for="date"
                                 >
@@ -239,7 +209,6 @@
                                 </b-form-group>
 
                                 <b-form-group
-                                  id="input-group-discharged_time"
                                   label="Time:"
                                   label-for="time"
                                 >
@@ -254,7 +223,6 @@
                             <legend>Physician Details</legend>
 
                             <b-form-group
-                                id="input-group-physician"
                                 label="Doctor:"
                                 label-for="doctor"
                             >
@@ -272,7 +240,6 @@
                             <legend>Chart Details</legend>
 
                             <b-form-group
-                                id="input-group-chart_completed_by"
                                 label="Completed By:"
                                 label-for="staff"
                             >
@@ -326,7 +293,6 @@
             return {
                 form: {
                   patient: null,
-                  type_of_record: null,
                   current_room: null,
                   disposition: null,
                   result: null,
@@ -409,7 +375,6 @@
             let formData = new FormData();
 
             formData.append('patient_id', this.form.patient ? this.form.patient.id : null);
-            formData.append('type_of_record_id', this.form.type_of_record ? this.form.type_of_record.id : null);
             formData.append('room_id', this.form.current_room ? this.form.current_room.id : null);
             formData.append('disposition_id', this.form.disposition ? this.form.disposition.id : null);
             formData.append('result_id', this.form.result ? this.form.result.id : null);

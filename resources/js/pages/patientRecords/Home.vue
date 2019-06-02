@@ -151,9 +151,8 @@
               // items: [{}],
               fields: [
                 { key: 'patient', label: 'Patient', sortable: true, sortDirection: 'desc' },
-                { key: 'type_of_record', label: 'Type of Record', sortable: true, sortDirection: 'desc' },
-                { key: 'admit_and_check_date', label: 'Admitted/Checkup Date', sortable: true, sortDirection: 'desc' },
-                { key: 'admit_and_check_time', label: 'Admitted/Checkup Time', sortable: true, sortDirection: 'desc' },
+                { key: 'admit_and_check_date', label: 'Date', sortable: true, sortDirection: 'desc' },
+                { key: 'admit_and_check_time', label: 'Time', sortable: true, sortDirection: 'desc' },
                 { key: 'actions', label: 'Actions', class: 'text-right' }
               ],
               totalRows: 1,

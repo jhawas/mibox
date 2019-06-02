@@ -48,7 +48,7 @@ class TypeOfChargeController extends Controller
         $typeOfCharge->name = $request->name;
         $typeOfCharge->price = $request->price;
         $typeOfCharge->parent_id = $this->isDataEmpty($request->parent_id);
-        $typeOfCharge->type_id = $request->type;
+        $typeOfCharge->type_id = $request->type_id;
         $typeOfCharge->user_id = \Auth::user()->id;
         $typeOfCharge->save();
 
@@ -97,7 +97,7 @@ class TypeOfChargeController extends Controller
         $typeOfCharge->name = $request->name;
         $typeOfCharge->price = $request->price;
         $typeOfCharge->parent_id = $this->isDataEmpty($request->parent_id);
-        $typeOfCharge->type_id = $request->type;
+        $typeOfCharge->type_id = $request->type_id;
         $typeOfCharge->user_id = \Auth::user()->id;
         $typeOfCharge->save();
 
@@ -133,5 +133,18 @@ class TypeOfChargeController extends Controller
             return $value;
         }
         return null;
+    }
+
+    /**
+     * Display a listing of the resource by record.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function chargeByType($type_id)
+    {
+        $typeOfCharge = TypeOfCharge::where('type_id', $type_id)->get();
+
+        return $typeOfCharge;
+        
     }
 }

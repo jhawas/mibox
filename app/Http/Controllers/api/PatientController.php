@@ -38,6 +38,7 @@ class PatientController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
+            'case_no' => 'required|max:191',
             'first_name' => 'required|max:191',
             'middle_name' => 'required|max:191',
             'last_name' => 'required|max:191',
@@ -46,11 +47,11 @@ class PatientController extends Controller
             'religion' => 'required|max:191',
             'sex' => 'required|max:191',
             'address' => 'required|max:191',
-            'civil_status' => 'required|max:191',
+            'civil_status' => 'required|max:191:not_in:0',
             'father' => 'required|max:191',
             'mother' => 'required|max:191',
-            'spouse' => 'required|max:191',
-            'spouse_address' => 'required|max:191',
+            'spouse' => $request->civil_status == 'married' ? 'required|max:191' : '',
+            'spouse_address' => $request->civil_status == 'married' ? 'required|max:191' : '',
             'contact_no' => 'required|max:191',
             'e_name' => 'required|max:191',
             'e_contact' => 'required|max:191',
@@ -58,6 +59,7 @@ class PatientController extends Controller
         ]);
 
         $patient = new Patient;
+        $patient->case_no = $request->case_no;
         $patient->first_name = $request->first_name;
         $patient->middle_name = $request->middle_name;
         $patient->last_name = $request->last_name;

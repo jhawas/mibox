@@ -21,7 +21,12 @@ class CreateIntravenousFluidsTable extends Migration
             $table->date('date')->nullable();
             $table->time('time')->nullable();
             $table->integer('bot_no')->nullable();
-            $table->string('kind_of_solution')->nullable();
+            
+            $table->integer('type_of_charge_id')->unsigned()->nullable();
+            $table->foreign('type_of_charge_id')->references('id')->on('type_of_charges')->onDelete('cascade');
+
+            $table->integer('quantity')->default(1)->nullable();
+            
             $table->string('vol')->nullable();
             $table->string('gtss')->nullable();
             $table->string('remarks')->nullable();

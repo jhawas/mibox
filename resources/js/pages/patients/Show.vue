@@ -24,6 +24,9 @@
                     <b-card title="Patient Information" v-if="!loading">
                       <b-row>
                         <b-col col md="6">
+                            <b-form-group label-cols="4" label-cols-lg="2" label="Case No." label-for="input-default">
+                              <div class="form-control form-group-value">{{ patient.case_no }}</div>
+                            </b-form-group>
                             <b-form-group label-cols="4" label-cols-lg="2" label="First Name" label-for="input-default">
                               <div class="form-control form-group-value">{{ patient.first_name }}</div>
                             </b-form-group>

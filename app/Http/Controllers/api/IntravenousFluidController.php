@@ -41,11 +41,9 @@ class IntravenousFluidController extends Controller
             'patient_record_id' => 'required|not_in:0',
             'date' => 'required',
             'time' => 'required',
-            'bot_no' => 'required',
-            'kind_of_solution' => 'required',
-            'vol' => 'required',
-            'gtss' => 'required',
+            'type_of_charge_id' => 'required|not_in:0',
             'remarks' => 'required',
+            'quantity' => 'required|not_in:0',
         ]);
 
         $intravenousFluid = new IntravenousFluid;
@@ -53,7 +51,8 @@ class IntravenousFluidController extends Controller
         $intravenousFluid->date = $request->date;
         $intravenousFluid->time = $request->time;
         $intravenousFluid->bot_no = $request->bot_no;
-        $intravenousFluid->kind_of_solution = $request->kind_of_solution;
+        $intravenousFluid->quantity = $request->quantity;
+        $intravenousFluid->type_of_charge_id = $request->type_of_charge_id;
         $intravenousFluid->vol = $request->vol;
         $intravenousFluid->gtss = $request->gtss;
         $intravenousFluid->remarks = $request->remarks;
@@ -100,18 +99,17 @@ class IntravenousFluidController extends Controller
             'patient_record_id' => 'required|not_in:0',
             'date' => 'required',
             'time' => 'required',
-            'bot_no' => 'required',
-            'kind_of_solution' => 'required',
-            'vol' => 'required',
-            'gtss' => 'required',
+            'type_of_charge_id' => 'required|not_in:0',
             'remarks' => 'required',
+            'quantity' => 'required|not_in:0',
         ]);
         
         $intravenousFluid->patient_record_id = $request->patient_record_id;
         $intravenousFluid->date = $request->date;
         $intravenousFluid->time = $request->time;
         $intravenousFluid->bot_no = $request->bot_no;
-        $intravenousFluid->kind_of_solution = $request->kind_of_solution;
+        $intravenousFluid->quantity = $request->quantity;
+        $intravenousFluid->type_of_charge_id = $request->type_of_charge_id;
         $intravenousFluid->vol = $request->vol;
         $intravenousFluid->gtss = $request->gtss;
         $intravenousFluid->remarks = $request->remarks;

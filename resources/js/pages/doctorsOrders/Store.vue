@@ -191,6 +191,7 @@
                 const doctorsOrder = this.showDoctorsOrderById(this.$route.params.id);
                 doctorsOrder.then(response => {
                       this.form = response.data;
+                      this.form.laboratories = JSON.parse(response.data.laboratories);
                       this.loading = false;
                 });
             }

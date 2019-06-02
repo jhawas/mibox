@@ -35,7 +35,7 @@
                   </li>
                   <li>
                     <router-link :to="{ name: 'patientRecords' }" class="treeview-item">
-                      <i class="icon fa fa-circle-o"></i> In & Out Patient
+                      <i class="icon fa fa-circle-o"></i> In Patient
                     </router-link>
                   </li>
                   <li>
@@ -80,40 +80,7 @@
                     <span class="app-menu__label">Billing</span>
                 </router-link>
               </li>
-              <li class="treeview">
-                <a class="app-menu__item" href="#" data-toggle="treeview">
-                  <i class="app-menu__icon fa fa-th-list"></i>
-                    <span class="app-menu__label">Utilities</span>
-                  <i class="treeview-indicator fa fa-angle-right"></i>
-                </a>
-                <ul class="treeview-menu">
-                  <li>
-                    <router-link :to="{ name: 'diagnoses' }" class="treeview-item">
-                      <i class="icon fa fa-circle-o"></i> Diagnoses
-                    </router-link>
-                  </li>
-                  <li>
-                    <router-link :to="{ name: 'typeOfLaboratories' }" class="treeview-item">
-                      <i class="icon fa fa-circle-o"></i> Type of Laboratory
-                    </router-link>
-                  </li>
-                  <li>
-                    <router-link :to="{ name: 'typeOfCharges' }" class="treeview-item">
-                      <i class="icon fa fa-circle-o"></i> Type of Charges
-                    </router-link>
-                  </li>
-                  <li>
-                    <router-link :to="{ name: 'discounts' }" class="treeview-item">
-                      <i class="icon fa fa-circle-o"></i> Discount
-                    </router-link>
-                  </li>
-                  <li>
-                    <router-link :to="{ name: 'insurances' }" class="treeview-item">
-                      <i class="icon fa fa-circle-o"></i> Insurance
-                    </router-link>
-                  </li>
-                </ul>
-              </li>
+              
               <li class="treeview">
                 <a class="app-menu__item" href="#" data-toggle="treeview">
                   <i class="app-menu__icon fa fa-th-list"></i>
@@ -131,9 +98,34 @@
                       <i class="icon fa fa-circle-o"></i> Floors
                     </router-link>
                   </li>
+                </ul>
+              </li>
+
+              <li class="treeview">
+                <a class="app-menu__item" href="#" data-toggle="treeview">
+                  <i class="app-menu__icon fa fa-th-list"></i>
+                    <span class="app-menu__label">Utilities</span>
+                  <i class="treeview-indicator fa fa-angle-right"></i>
+                </a>
+                <ul class="treeview-menu">
                   <li>
-                    <router-link :to="{ name: 'typeOfRooms' }" class="treeview-item">
-                      <i class="icon fa fa-circle-o"></i> Type Of Rooms
+                    <router-link :to="{ name: 'diagnoses' }" class="treeview-item">
+                      <i class="icon fa fa-circle-o"></i> Diagnoses
+                    </router-link>
+                  </li>
+                  <li>
+                    <router-link :to="{ name: 'typeOfCharges' }" class="treeview-item">
+                      <i class="icon fa fa-circle-o"></i> Type of Charges
+                    </router-link>
+                  </li>
+                  <li>
+                    <router-link :to="{ name: 'discounts' }" class="treeview-item">
+                      <i class="icon fa fa-circle-o"></i> Discount
+                    </router-link>
+                  </li>
+                  <li>
+                    <router-link :to="{ name: 'insurances' }" class="treeview-item">
+                      <i class="icon fa fa-circle-o"></i> Insurance
                     </router-link>
                   </li>
                 </ul>

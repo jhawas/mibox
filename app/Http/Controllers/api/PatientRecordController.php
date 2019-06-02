@@ -19,7 +19,6 @@ class PatientRecordController extends Controller
         $patientRecords = PatientRecord::with([
             'user',
             'patient',
-            'typeOfRecord',
             'disposition',
             'result',
             'philhealthMembership',
@@ -54,7 +53,6 @@ class PatientRecordController extends Controller
 
         $patientRecord = new PatientRecord;
         $patientRecord->patient_id = $request->patient_id;
-        $patientRecord->type_of_record_id = $this->isDataEmpty($request->type_of_record_id);
         $patientRecord->disposition_id = $this->isDataEmpty($request->disposition_id);
         $patientRecord->result_id = $this->isDataEmpty($request->result_id);
         $patientRecord->philhealth_membership_id = $this->isDataEmpty($request->philhealth_membership_id);
@@ -76,9 +74,7 @@ class PatientRecordController extends Controller
         $patientRoom->date_started = $request->admit_and_check_date;
         $patientRoom->time_start = $request->admit_and_check_time;
 
-        if($request->type_of_record_id == 1) {
-            $patientRecord->patientRooms()->save($patientRoom);
-        }
+        $patientRecord->patientRooms()->save($patientRoom);
         
         return response()->json([
             'message' => 'success',
@@ -96,7 +92,6 @@ class PatientRecordController extends Controller
         return $patientRecord->load([
             'user',
             'patient',
-            'typeOfRecord',
             'disposition',
             'result',
             'philhealthMembership',
@@ -124,19 +119,7 @@ class PatientRecordController extends Controller
      */
     public function edit(PatientRecord $patientRecord)
     {
-        return $patientRecord->load([
-            'user',
-            'patient',
-            'typeOfRecord',
-            'disposition',
-            'result',
-            'philhealthMembership',
-            'admitAndCheckBy',
-            'dischargedBy',
-            'physician',
-            'chartCompletedBy',
-            'currentRoom'
-        ]);
+        // 
     }
 
     /**

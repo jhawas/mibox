@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\PatientRecord;
+use App\TypeOfCharge;
 
 class IntravenousFluid extends Model
 {
@@ -11,10 +13,15 @@ class IntravenousFluid extends Model
      *
      * @var array
      */
-    protected $with = ['patientRecord'];
+    protected $with = ['patientRecord', 'typeOfCharge'];
     
     public function patientRecord() 
     {
     	return $this->belongsTo(PatientRecord::class, 'patient_record_id');
+    }
+
+    public function typeOfCharge()
+    {
+        return $this->belongsTo(TypeOfCharge::class, 'type_of_charge_id');
     }
 }

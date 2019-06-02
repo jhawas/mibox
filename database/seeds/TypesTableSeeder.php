@@ -18,10 +18,10 @@ class TypesTableSeeder extends Seeder
             'description' => 'laboratory',
         ]);
 
-        $medicine = Type::create([
-            'name' => 'medicine', 
-            'slug' => 'medicine',
-            'description' => 'medicine',
+        $medicationAndTreatment = Type::create([
+            'name' => 'Medication And Treatment', 
+            'slug' => 'Medication And Treatment',
+            'description' => 'Medication And Treatment',
         ]);
 
         $room = Type::create([
@@ -30,10 +30,10 @@ class TypesTableSeeder extends Seeder
             'description' => 'room',
         ]);
 
-        $others = Type::create([
-            'name' => 'others', 
-            'slug' => 'others',
-            'description' => 'others',
+        $intravenousFluid = Type::create([
+            'name' => 'Intravenous Fluid', 
+            'slug' => 'Intravenous Fluid',
+            'description' => 'Intravenous Fluid',
         ]);
     }
 }

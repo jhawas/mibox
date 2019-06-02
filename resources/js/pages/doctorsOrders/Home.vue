@@ -80,6 +80,14 @@
                             {{ row.item.patient_record ? row.item.patient_record.full_name : null }}
                         </template>
 
+                        <template slot="user" slot-scope="row">
+                            {{ row.value ? row.value.full_name : null }}
+                        </template>
+
+                        <template slot="laboratories" slot-scope="row">
+                            <span v-for="laboratory in stringToObject(row.value)">{{ laboratory.name + ', ' }}</span>
+                        </template>
+
                         <template slot="actions" slot-scope="row" right>
                             <b-button>
                                 <i class="fa fa-eye" @click="show(row.item)" aria-hidden="true"></i>
@@ -148,8 +156,8 @@
                 { key: 'patient', label: 'Patient', sortable: true, sortDirection: 'desc' },
                 { key: 'date', label: 'Date', sortable: true, sortDirection: 'desc', class: 'text-center'},
                 { key: 'time', label: 'Time', sortable: true, sortDirection: 'desc', class: 'text-center'},
-                { key: 'requested', label: 'Requested By', sortable: true, sortDirection: 'desc', class: 'text-center'},
-                { key: 'is_done', label: 'Approved', sortable: true, sortDirection: 'desc', class: 'text-center'},
+                { key: 'laboratories', label: 'Laboratories', sortable: true, sortDirection: 'desc', class: 'text-center'},
+                { key: 'user', label: 'Added By', class: 'text-right' },
                 { key: 'actions', label: 'Actions', class: 'text-right' }
               ],
               totalRows: 1,
@@ -199,6 +207,10 @@
             // Trigger pagination to update the number of buttons/pages due to filtering
             this.totalRows = filteredItems.length
             this.currentPage = 1
+          },
+
+          stringToObject(value) {
+              return JSON.parse(value);
           },
 
           create() {

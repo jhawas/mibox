@@ -11,6 +11,15 @@ const getters= {
 };
 
 const actions= {
+
+	async fetchChargesByType({ commit }, id) {
+
+		const response = await axios.get(`/api/typeOfCharges/types/${id}`);
+
+		commit('setTypeOfCharges', response.data);
+
+	},
+
 	
 	async fetchTypeOfCharges({ commit }) {
 

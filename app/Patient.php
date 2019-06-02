@@ -55,7 +55,7 @@ class Patient extends Model
      */
     public function getFullNameAttribute()
     {
-        return "{$this->first_name} {$this->middle_name} {$this->last_name}";
+        return "{$this->first_name} {$this->middle_name} {$this->last_name} (Case No.: {$this->case_no})";
     }
 
     public function user()

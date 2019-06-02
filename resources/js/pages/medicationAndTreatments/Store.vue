@@ -72,14 +72,29 @@
                             </b-form-group>
 
                             <b-form-group
-                              label="Medicine:"
-                              label-for="medicine"
+                                label="Medicine:"
+                                label-for="medicine"
+                            >
+                                <multiselect 
+                                  v-model="form.type_of_charge" 
+                                  placeholder="Select Medicine" 
+                                  label="name" 
+                                  track-by="id" 
+                                  :options="allTypeOfCharges" 
+                                ></multiselect>
+
+                            </b-form-group>
+
+                            <b-form-group
+                              label="Quantity:"
+                              label-for="quantity"
                             >
                               <b-form-input
-                                v-model="form.medicine"
-                                type="text"
-                                placeholder="Enter medicine"
+                                v-model="form.quantity"
+                                type="number"
+                                placeholder="Enter quantity"
                               />
+                            
                             </b-form-group>
 
                             <b-form-group
@@ -136,8 +151,9 @@
                   patient_record: null,
                   date: moment().format('YYYY-MM-DD'),
                   time: moment().format('HH:mm'),
-                  medicine: '',
+                  type_of_charge: {},
                   remarks: '',
+                  quantity: 1,
                 },
                 errors: [],
                 loading: false,
@@ -149,6 +165,7 @@
         mounted() {
 
             this.fetchPatientRecords();
+            this.fetchChargesByType(2); //medication and treatment
 
             if(this.$route.params.id) {
                 this.loading = true;
@@ -163,7 +180,11 @@
 
         computed: {
             
-            ...mapGetters(['allMedicationAndTreatments', 'allPatientRecords']),
+            ...mapGetters([
+              'allMedicationAndTreatments', 
+              'allPatientRecords',
+              'allTypeOfCharges'
+            ]),
 
         },
 
@@ -174,6 +195,7 @@
               'updateMedicationAndTreatment', 
               'showMedicationAndTreatmentById',
               'fetchPatientRecords',
+              'fetchChargesByType',
             ]),
 
           onSubmit(event) {
@@ -187,7 +209,9 @@
             formData.append('patient_record_id', this.form.patient_record ? this.form.patient_record.id : 0);
             formData.append('date', this.form.date);
             formData.append('time', this.form.time);
-            formData.append('medicine', this.form.medicine);
+            formData.append('type_of_charge_id', this.form.type_of_charge ? this.form.type_of_charge.id : 0);
+            formData.append('price', this.form.type_of_charge ? this.form.type_of_charge.price : 0);
+            formData.append('quantity', this.form.quantity);
             formData.append('remarks', this.form.remarks);
 
             if(this.$route.params.id > 0) {

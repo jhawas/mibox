@@ -86,12 +86,25 @@
                               label="Kind Of Solution:"
                               label-for="kind_of_solution"
                             >
-                              <b-form-textarea
-                                v-model="form.kind_of_solution"
-                                placeholder="Enter kind of solution..."
-                                rows="3"
-                                max-rows="6"
-                              ></b-form-textarea>
+                              <multiselect 
+                                  v-model="form.type_of_charge" 
+                                  placeholder="Select kind of solution" 
+                                  label="name" 
+                                  track-by="id" 
+                                  :options="allTypeOfCharges" 
+                              ></multiselect>
+                            
+                            </b-form-group>
+
+                            <b-form-group
+                              label="Quantity:"
+                              label-for="quantity"
+                            >
+                              <b-form-input
+                                v-model="form.quantity"
+                                type="number"
+                                placeholder="Enter quantity"
+                              />
                             
                             </b-form-group>
 
@@ -175,10 +188,11 @@
                   date: moment().format('YYYY-MM-DD'),
                   time: moment().format('HH:mm'),
                   bot_no: '',
-                  kind_of_solution: '',
+                  type_of_charge: {},
                   vol: '',
                   gtss: '',
                   remarks: '',
+                  quantity: 1,
                 },
                 errors: [],
                 loading: false,
@@ -190,6 +204,7 @@
         mounted() {
 
             this.fetchPatientRecords();
+            this.fetchChargesByType(4); //intravenous fluid
 
             if(this.$route.params.id) {
                 this.loading = true;
@@ -204,7 +219,12 @@
 
         computed: {
             
-            ...mapGetters(['allIntravenousFluids', 'allPatients', 'allPatientRecords']),
+            ...mapGetters([
+              'allIntravenousFluids', 
+              'allPatients', 
+              'allPatientRecords',
+              'allTypeOfCharges'
+            ]),
 
         },
 
@@ -215,6 +235,7 @@
               'updateIntravenousFluid', 
               'showIntravenousFluidById',
               'fetchPatientRecords',
+              'fetchChargesByType'
             ]),
 
           onSubmit(event) {
@@ -229,7 +250,8 @@
             formData.append('date', this.form.date);
             formData.append('time', this.form.time);
             formData.append('bot_no', this.form.bot_no);
-            formData.append('kind_of_solution', this.form.kind_of_solution);
+            formData.append('type_of_charge_id', this.form.type_of_charge ? this.form.type_of_charge.id : 0);
+            formData.append('quantity', this.form.quantity);
             formData.append('vol', this.form.vol);
             formData.append('gtss', this.form.gtss);
             formData.append('remarks', this.form.remarks);

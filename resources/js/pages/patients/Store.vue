@@ -36,12 +36,21 @@
                          <b-col col lg="6">
 
                             <b-form-group
-                              id="input-group-first-name"
+                              label="Case No:"
+                              label-for="case_no"
+                            >
+                              <b-form-input
+                                v-model="form.case_no"
+                                type="text"
+                                placeholder="Enter Case No."
+                              />
+                            </b-form-group>
+
+                            <b-form-group
                               label="First Name:"
                               label-for="first_name"
                             >
                               <b-form-input
-                                id="first_name"
                                 v-model="form.first_name"
                                 type="text"
                                 placeholder="Enter First Name"
@@ -49,12 +58,10 @@
                             </b-form-group>
 
                             <b-form-group
-                              id="input-group-middle-name"
                               label="Middle Name:"
                               label-for="middle_name"
                             >
                               <b-form-input
-                                id="middle_name"
                                 v-model="form.middle_name"
                                 type="text"
                                 placeholder="Enter Middle Name"
@@ -62,12 +69,10 @@
                             </b-form-group>
 
                             <b-form-group
-                              id="input-group-last-name"
                               label="Last Name:"
                               label-for="last_name"
                             >
                               <b-form-input
-                                id="last_name"
                                 v-model="form.last_name"
                                 type="text"
                                 placeholder="Enter Last Name"
@@ -75,12 +80,10 @@
                             </b-form-group>
 
                             <b-form-group
-                              id="input-group-suffix"
                               label="suffix:"
                               label-for="suffix"
                             >
                               <b-form-input
-                                id="suffix"
                                 v-model="form.suffix"
                                 type="text"
                                 placeholder="Enter suffix"
@@ -88,12 +91,10 @@
                             </b-form-group>
 
                             <b-form-group
-                              id="input-group-birthdate"
                               label="Birthdate:"
                               label-for="birthdate"
                             >
                               <b-form-input
-                                id="birthdate"
                                 v-model="form.birthdate"
                                 type="date"
                                 placeholder="Enter birthdate"
@@ -101,7 +102,6 @@
                             </b-form-group>
 
                             <b-form-group
-                              id="input-group-sex"
                               label="Sex:"
                               label-for="sex"
                             >
@@ -112,12 +112,10 @@
                             </b-form-group>
 
                             <b-form-group
-                              id="input-group-religion"
                               label="Religion:"
                               label-for="religion"
                             >
                               <b-form-input
-                                id="religion"
                                 v-model="form.religion"
                                 type="text"
                                 placeholder="Enter religion"
@@ -125,12 +123,10 @@
                             </b-form-group>
 
                             <b-form-group
-                              id="input-group-address"
                               label="Address:"
                               label-for="address"
                             >
                               <b-form-input
-                                id="address"
                                 v-model="form.address"
                                 type="text"
                                 placeholder="Enter address"
@@ -138,7 +134,6 @@
                             </b-form-group>
 
                             <b-form-group
-                              id="input-group-civil_status"
                               label="Civil Status:"
                               label-for="civil_status"
                             >
@@ -152,12 +147,10 @@
                          <b-col col lg="6">
 
                             <b-form-group
-                              id="input-group-father"
                               label="Father:"
                               label-for="father"
                             >
                               <b-form-input
-                                id="father"
                                 v-model="form.father"
                                 type="text"
                                 placeholder="Enter father"
@@ -165,12 +158,10 @@
                             </b-form-group>
 
                             <b-form-group
-                              id="input-group-mother"
                               label="Mother:"
                               label-for="mother"
                             >
                               <b-form-input
-                                id="mother"
                                 v-model="form.mother"
                                 type="text"
                                 placeholder="Enter mother"
@@ -178,13 +169,11 @@
                             </b-form-group>
 
                             <b-form-group
-                              id="input-group-spouse"
                               label="Spouse:"
                               label-for="spouse"
                             >
                               <b-form-input
                                 v-if="form.civil_status === 'married'"
-                                id="spouse"
                                 v-model="form.spouse"
                                 type="text"
                                 placeholder="Enter spouse"
@@ -193,12 +182,10 @@
 
                             <b-form-group
                               v-if="form.civil_status === 'married'"
-                              id="input-group-spouse_address"
                               label="Spouse address:"
                               label-for="spouse_address"
                             >
                               <b-form-input
-                                id="spouse_address"
                                 v-model="form.spouse_address"
                                 type="text"
                                 placeholder="Enter spouse address"
@@ -206,12 +193,10 @@
                             </b-form-group>
 
                             <b-form-group
-                              id="input-group-contact_no"
                               label="Contact No.:"
                               label-for="contact_no"
                             >
                               <b-form-input
-                                id="Contact No."
                                 v-model="form.contact_no"
                                 type="text"
                                 placeholder="Enter contact no"
@@ -221,12 +206,10 @@
                             <legend>Emegency Contact</legend>
 
                             <b-form-group
-                              id="input-group-e_name"
                               label="Name:"
                               label-for="e_name"
                             >
                               <b-form-input
-                                id="e_name"
                                 v-model="form.e_name"
                                 type="text"
                                 placeholder="Enter name"
@@ -234,12 +217,10 @@
                             </b-form-group>
 
                             <b-form-group
-                              id="input-group-e_contact"
                               label="Contact:"
                               label-for="e_contact"
                             >
                               <b-form-input
-                                id="e_contact"
                                 v-model="form.e_contact"
                                 type="text"
                                 placeholder="Enter contact"
@@ -247,12 +228,10 @@
                             </b-form-group>
 
                             <b-form-group
-                              id="input-group-e_address"
                               label="Address:"
                               label-for="e_address"
                             >
                               <b-form-input
-                                id="e_address"
                                 v-model="form.e_address"
                                 type="text"
                                 placeholder="Enter address"
@@ -307,6 +286,7 @@
                     { value: 'female', text: 'Female' },
                 ],
                 form: {
+                  case_no: '',
                   first_name: '',
                   middle_name: '',
                   last_name: '',
@@ -361,6 +341,7 @@
 
             let formData = new FormData();
 
+            formData.append('case_no', this.form.case_no);
             formData.append('first_name', this.form.first_name);
             formData.append('middle_name', this.form.middle_name);
             formData.append('last_name', this.form.last_name);

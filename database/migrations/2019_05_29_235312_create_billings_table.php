@@ -22,6 +22,15 @@ class CreateBillingsTable extends Migration
             $table->integer('type_of_charge_id')->unsigned()->nullable();
             $table->foreign('type_of_charge_id')->references('id')->on('type_of_charges')->onDelete('cascade');
 
+            $table->integer('medication_and_treatment_id')->unsigned()->nullable();
+            $table->foreign('medication_and_treatment_id')->references('id')->on('medication_and_treatments')->onDelete('cascade');
+
+            $table->integer('intravenous_fluid_id')->unsigned()->nullable();
+            $table->foreign('intravenous_fluid_id')->references('id')->on('intravenous_fluids')->onDelete('cascade');
+
+            $table->integer('laboratory_id')->unsigned()->nullable();
+            $table->foreign('laboratory_id')->references('id')->on('laboratories')->onDelete('cascade');
+
             $table->decimal('amount', 8, 2)->nullable();
 
             $table->integer('quantity_and_days')->nullable();

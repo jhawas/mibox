@@ -159,6 +159,7 @@
             return {
               // items: [{}],
               fields: [
+                { key: 'case_no', label: 'Case No.', sortable: true, sortDirection: 'desc' },
                 { key: 'name', label: 'Name', sortable: true, sortDirection: 'desc' },
                 { key: 'birthdate', label: 'Age', sortable: true, sortDirection: 'desc', class: 'text-center' },
                 { key: 'sex', label: 'Sex', sortable: true, sortDirection: 'desc', class: 'text-center' },

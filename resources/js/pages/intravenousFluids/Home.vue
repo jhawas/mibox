@@ -80,6 +80,10 @@
                             {{ row.item.patient_record ? row.item.patient_record.full_name : null }}
                         </template>
 
+                        <template slot="type_of_charge" slot-scope="row">
+                            {{ row.value ? row.value.name : null }}
+                        </template>
+
                         <template slot="actions" slot-scope="row" right>
                             <b-button>
                                 <i class="fa fa-eye" @click="show(row.item)" aria-hidden="true"></i>
@@ -147,10 +151,10 @@
               // items: [{}],
               fields: [
                 { key: 'patient', label: 'Patient', sortable: true, sortDirection: 'desc' },
+                { key: 'type_of_charge', label: 'Kind of Solution', sortable: true, sortDirection: 'desc', class: 'text-center'},
+                { key: 'remarks', label: 'Remarks', sortable: true, sortDirection: 'desc', class: 'text-center'},
                 { key: 'date', label: 'Date', sortable: true, sortDirection: 'desc', class: 'text-center'},
                 { key: 'time', label: 'Time', sortable: true, sortDirection: 'desc', class: 'text-center'},
-                { key: 'bot_no', label: 'Bot No.', sortable: true, sortDirection: 'desc', class: 'text-center'},
-                { key: 'remarks', label: 'Remarks', sortable: true, sortDirection: 'desc', class: 'text-center'},
                 { key: 'actions', label: 'Actions', class: 'text-right' }
               ],
               totalRows: 1,

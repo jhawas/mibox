@@ -29,6 +29,8 @@ class CreateDoctorsOrdersTable extends Migration
 
             $table->boolean('is_laboratory')->default(0)->nullable();
 
+            $table->json('laboratories')->nullable();
+
             $table->integer('requested_by')->unsigned()->nullable();
             $table->foreign('requested_by')->references('id')->on('users')->onDelete('cascade');
 
