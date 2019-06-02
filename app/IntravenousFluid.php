@@ -13,7 +13,7 @@ class IntravenousFluid extends Model
      *
      * @var array
      */
-    protected $with = ['patientRecord', 'typeOfCharge'];
+    protected $with = ['patientRecord', 'typeOfCharge', 'billing'];
     
     public function patientRecord() 
     {
@@ -23,5 +23,10 @@ class IntravenousFluid extends Model
     public function typeOfCharge()
     {
         return $this->belongsTo(TypeOfCharge::class, 'type_of_charge_id');
+    }
+
+    public function billing()
+    {
+        return $this->hasOne(Billing::class, 'intravenous_fluid_id');
     }
 }

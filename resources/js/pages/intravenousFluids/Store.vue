@@ -187,7 +187,7 @@
                   patient_record: '',
                   date: moment().format('YYYY-MM-DD'),
                   time: moment().format('HH:mm'),
-                  bot_no: '',
+                  bot_no: null,
                   type_of_charge: {},
                   vol: '',
                   gtss: '',
@@ -251,6 +251,7 @@
             formData.append('time', this.form.time);
             formData.append('bot_no', this.form.bot_no);
             formData.append('type_of_charge_id', this.form.type_of_charge ? this.form.type_of_charge.id : 0);
+            formData.append('price', this.form.type_of_charge ? this.form.type_of_charge.price : 0);
             formData.append('quantity', this.form.quantity);
             formData.append('vol', this.form.vol);
             formData.append('gtss', this.form.gtss);

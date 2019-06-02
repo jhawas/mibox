@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api;
 use App\IntravenousFluid;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Billing;
 
 class IntravenousFluidController extends Controller
 {
@@ -58,6 +59,16 @@ class IntravenousFluidController extends Controller
         $intravenousFluid->remarks = $request->remarks;
         $intravenousFluid->user_id = \Auth::user()->id;
         $intravenousFluid->save();
+
+        $billing = new Billing;
+        $billing->type_of_charge_id = $request->type_of_charge_id;
+        $billing->patient_record_id = $request->patient_record_id;
+        $billing->amount = $request->price;
+        $billing->quantity_and_days = $request->quantity;
+        $billing->total = $request->price * $request->quantity;
+        $billing->user_id = \Auth::user()->id;
+
+        $intravenousFluid->billing()->save($billing);
 
         return response()->json([
             'message' => 'success',
@@ -115,6 +126,23 @@ class IntravenousFluidController extends Controller
         $intravenousFluid->remarks = $request->remarks;
         $intravenousFluid->user_id = \Auth::user()->id;
         $intravenousFluid->save();
+
+        $billing = Billing::where('intravenous_fluid_id', $intravenousFluid->id);
+        $billing->type_of_charge_id = $request->type_of_charge_id;
+        $billing->patient_record_id = $request->patient_record_id;
+        $billing->amount = $request->price;
+        $billing->quantity_and_days = $request->quantity;
+        $billing->total = $request->price * $request->quantity;
+        $billing->user_id = \Auth::user()->id;
+
+        $intravenousFluid->billing()->update([
+            'patient_record_id' => $request->patient_record_id,
+            'type_of_charge_id' => $request->type_of_charge_id,
+            'amount' => $request->price,
+            'quantity_and_days' => $request->quantity,
+            'total' => $request->price * $request->quantity,
+            'user_id' => \Auth::user()->id,
+        ]);
 
         return response()->json([
             'message' => 'success',
