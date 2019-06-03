@@ -125,8 +125,8 @@
                 form: {
                   name: '',
                   price: 0.00,
-                  parent: {},
-                  category: {},
+                  parent: null,
+                  category: null,
                 },
                 errors: [],
                 loading: false,

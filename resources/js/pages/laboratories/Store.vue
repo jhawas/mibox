@@ -167,6 +167,7 @@
 
             formData.append('patient_record_id', this.form.patient_record ? this.form.patient_record.id : 0);
             formData.append('type_of_charge_id', this.form.laboratory ? this.form.laboratory.id : 0);
+            formData.append('price', this.form.laboratory ? this.form.laboratory.price : 0);
             formData.append('description', this.form.description);
 
             if(this.$route.params.id > 0) {

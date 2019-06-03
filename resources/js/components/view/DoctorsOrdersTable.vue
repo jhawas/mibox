@@ -56,7 +56,7 @@
       </div>
 
       <template slot="laboratories" slot-scope="row">
-          <span v-for="laboratory in row.value">{{ laboratory.charge_name + ', ' }}</span>
+          <span v-for="laboratory in JSON.parse(row.value)">{{ laboratory.charge_name + ', ' }}</span>
       </template>
 
       <template slot="actions" slot-scope="row" right>

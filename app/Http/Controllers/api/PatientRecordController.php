@@ -51,6 +51,18 @@ class PatientRecordController extends Controller
     public function store(Request $request)
     {
 
+        $validatedData = $request->validate([
+            'patient_id' => 'required|not_in:0',
+            'chief_complaints' => 'required',
+            'brief_history' => 'required',
+            'admit_and_check_by' => 'required|not_in:0',
+            'admit_and_check_date' => 'required',
+            'admit_and_check_time' => 'required',
+            'physician_id' => 'required|not_in:0',
+            'discharged_date' => $request->discharged_by > 0 ? 'required' : '',
+            'discharged_time' => $request->discharged_by > 0 ? 'required' : '',
+        ]);
+
         $patientRecord = new PatientRecord;
         $patientRecord->patient_id = $request->patient_id;
         $patientRecord->disposition_id = $this->isDataEmpty($request->disposition_id);
@@ -132,6 +144,18 @@ class PatientRecordController extends Controller
     public function update(Request $request, PatientRecord $patientRecord)
     {
 
+        $validatedData = $request->validate([
+            'patient_id' => 'required|not_in:0',
+            'chief_complaints' => 'required',
+            'brief_history' => 'required',
+            'admit_and_check_by' => 'required|not_in:0',
+            'admit_and_check_date' => 'required',
+            'admit_and_check_time' => 'required',
+            'physician_id' => 'required|not_in:0',
+            'discharged_date' => $request->discharged_by > 0 ? 'required' : '',
+            'discharged_time' => $request->discharged_by > 0 ? 'required' : '',
+        ]);
+        
         $patientRecord->patient_id = $request->patient_id;
         $patientRecord->type_of_record_id = $this->isDataEmpty($request->type_of_record_id);
         $patientRecord->disposition_id = $this->isDataEmpty($request->disposition_id);

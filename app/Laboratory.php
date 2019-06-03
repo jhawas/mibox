@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\TypeOfCharge;
+use App\Billing;
 
 class Laboratory extends Model
 {
@@ -27,7 +28,7 @@ class Laboratory extends Model
      *
      * @var array
      */
-    protected $with = ['laboratory', 'patientRecord'];
+    protected $with = ['laboratory', 'patientRecord', 'billing'];
 
     /**
      * The accessors to append to the model's array form.
@@ -48,6 +49,11 @@ class Laboratory extends Model
     public function laboratory()
     {
         return $this->belongsTo(TypeOfCharge::class, 'type_of_charge_id');
+    }
+
+    public function billing()
+    {
+        return $this->hasOne(Billing::class, 'laboratory_id');
     }
 
     /**

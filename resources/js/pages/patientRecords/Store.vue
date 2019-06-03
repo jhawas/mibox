@@ -70,6 +70,46 @@
                               <pre class="language-json"><code>{{ form.room  }}</code></pre>
 
                             </b-form-group>
+
+                            <legend>Physician Details</legend>
+
+                            <b-form-group
+                                label="Doctor:"
+                                label-for="doctor"
+                            >
+                                <multiselect 
+                                  v-model="form.physician" 
+                                  placeholder="Select Doctor" 
+                                  label="full_name" 
+                                  track-by="id" 
+                                  :options="allUsers" 
+                                ></multiselect>
+
+                            </b-form-group>
+
+                            <b-form-group
+                              label="Cheif Complaints:"
+                              label-for="cheifComplaints"
+                            >
+                              <b-form-textarea
+                                v-model="form.chief_complaints"
+                                placeholder="Enter cheif complaints..."
+                                rows="3"
+                                max-rows="6"
+                              ></b-form-textarea>
+                            </b-form-group>
+
+                            <b-form-group
+                              label="Breif History:"
+                              label-for="breifHistory"
+                            >
+                              <b-form-textarea
+                                v-model="form.brief_history"
+                                placeholder="Enter brief history..."
+                                rows="3"
+                                max-rows="6"
+                              ></b-form-textarea>
+                            </b-form-group>
                             
                             <legend>Other Details</legend>
                             <b-form-group
@@ -117,30 +157,6 @@
                          </b-col>
 
                          <b-col col lg="6">
-
-                            <b-form-group
-                              label="Cheif Complaints:"
-                              label-for="cheifComplaints"
-                            >
-                              <b-form-textarea
-                                v-model="form.chief_complaints"
-                                placeholder="Enter cheif complaints..."
-                                rows="3"
-                                max-rows="6"
-                              ></b-form-textarea>
-                            </b-form-group>
-
-                            <b-form-group
-                              label="Breif History:"
-                              label-for="breifHistory"
-                            >
-                              <b-form-textarea
-                                v-model="form.brief_history"
-                                placeholder="Enter brief history..."
-                                rows="3"
-                                max-rows="6"
-                              ></b-form-textarea>
-                            </b-form-group>
   
                             <legend>Admission Details</legend>
 
@@ -219,23 +235,6 @@
                                   />
                                 </b-form-group>
                             </div>
-                              
-                            <legend>Physician Details</legend>
-
-                            <b-form-group
-                                label="Doctor:"
-                                label-for="doctor"
-                            >
-                                <multiselect 
-                                  v-model="form.physician" 
-                                  placeholder="Select Doctor" 
-                                  label="full_name" 
-                                  track-by="id" 
-                                  :options="allUsers" 
-                                ></multiselect>
-
-                            </b-form-group>
-
 
                             <legend>Chart Details</legend>
 

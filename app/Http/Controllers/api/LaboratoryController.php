@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\Laboratory;
+use App\Billing;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -50,6 +51,16 @@ class LaboratoryController extends Controller
         $laboratory->user_id = \Auth::user()->id;
         $laboratory->save();
 
+        $billing = new Billing;
+        $billing->type_of_charge_id = $request->type_of_charge_id;
+        $billing->patient_record_id = $request->patient_record_id;
+        $billing->amount = $request->price;
+        $billing->quantity_and_days = 1;
+        $billing->total = $request->price;
+        $billing->user_id = \Auth::user()->id;
+
+        $laboratory->billing()->save($billing);
+
         return response()->json([
             'message' => 'success',
         ]);
@@ -93,6 +104,23 @@ class LaboratoryController extends Controller
         $laboratory->is_done = 1;
         $laboratory->user_id = \Auth::user()->id;
         $laboratory->save();
+
+        $billing = Billing::where('laboratory_id', $laboratory->id);
+        $billing->type_of_charge_id = $request->type_of_charge_id;
+        $billing->patient_record_id = $request->patient_record_id;
+        $billing->amount = $request->price;
+        $billing->quantity_and_days = 1;
+        $billing->total = $request->price;
+        $billing->user_id = \Auth::user()->id;
+
+        $laboratory->billing()->update([
+            'patient_record_id' => $request->patient_record_id,
+            'type_of_charge_id' => $request->type_of_charge_id,
+            'amount' => $request->price,
+            'quantity_and_days' => 1,
+            'total' => $request->price,
+            'user_id' => \Auth::user()->id,
+        ]);
         
         return response()->json([
             'message' => 'success',
