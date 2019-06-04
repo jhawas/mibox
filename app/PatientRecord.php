@@ -15,6 +15,7 @@ use App\MedicationAndTreatment;
 use App\VitalSign;
 use App\IntravenousFluid;
 use App\DoctorsOrder;
+use App\Room;
 
 class PatientRecord extends Model
 {
@@ -110,6 +111,11 @@ class PatientRecord extends Model
     public function laboratories()
     {
         return $this->hasMany(Laboratory::class);
+    }
+
+    public function rooms()
+    {
+        return $this->belongsToMany(Room::class, 'patient_rooms');
     }
 
     public function patientRooms()

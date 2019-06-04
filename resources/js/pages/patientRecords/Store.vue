@@ -2,12 +2,12 @@
     <Layout>
         <div class="app-title">
             <div>
-                <h1><i class="fa fa-dashboard"></i> In & Out Patient Page</h1>
+                <h1><i class="fa fa-dashboard"></i> In Patient Page</h1>
                   <p>Start a beautiful journey here</p>
                 </div>
                 <ul class="app-breadcrumb breadcrumb">
                   <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-                  <li class="breadcrumb-item"><a href="#">In & Out Patient Page</a></li>
+                  <li class="breadcrumb-item"><a href="#">In Patient Page</a></li>
                 </ul>
             </div>
           <div class="row">
@@ -44,7 +44,7 @@
                                   placeholder="Select Patient" 
                                   label="full_name" 
                                   track-by="id" 
-                                  :options="allPatients" 
+                                  :options="allAvailablePatients" 
                                 ></multiselect>
 
                             </b-form-group>
@@ -252,6 +252,16 @@
 
                             </b-form-group>
 
+                            <b-form-checkbox
+                                v-model="form.discharged"
+                                name="discharged"
+                                value="1"
+                                unchecked-value="0"
+                                class="form-group"
+                            >
+                              Discharged
+                            </b-form-checkbox>
+
                          </b-col>
                       </b-row>
                       <b-button type="submit" variant="primary" :disabled="loadSubmit">
@@ -306,6 +316,7 @@
                   discharged_time: moment().format('HH:mm'),
                   physician: null,
                   chart_completed_by: null,
+                  discharged: false,
                 },
                 errors: [],
                 loading: false,
@@ -316,7 +327,7 @@
 
         mounted() {
 
-            this.fetchPatients();
+            this.fetchAvailablePatients();
             this.fetchFloors();
             this.fetchDispositions();
             this.fetchResults();
@@ -339,7 +350,7 @@
             
             ...mapGetters([
                 'allPatientRecords', 
-                'allPatients', 
+                'allAvailablePatients', 
                 'allFloors',
                 'allDispositions',
                 'allResults',
@@ -356,7 +367,7 @@
               'addPatientRecord', 
               'updatePatientRecord', 
               'showPatientRecordById', 
-              'fetchPatients',
+              'fetchAvailablePatients',
               'fetchFloors',
               'fetchDispositions',
               'fetchResults',
@@ -388,6 +399,7 @@
             formData.append('discharged_time', this.form.discharged_time);
             formData.append('physician_id', this.form.physician ? this.form.physician.id : null);
             formData.append('chart_completed_by', this.form.chart_completed_by ? this.form.chart_completed_by.id : null);
+            formData.append('discharged', this.form.discharged);
 
             if(this.$route.params.id > 0) {
 

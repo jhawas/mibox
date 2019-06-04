@@ -44,7 +44,7 @@
                                   placeholder="Select Patient" 
                                   label="full_name" 
                                   track-by="id" 
-                                  :options="allPatientRecords" 
+                                  :options="allAvailablePatientRecords" 
                                 ></multiselect>
 
                             </b-form-group>
@@ -164,7 +164,7 @@
 
         mounted() {
 
-            this.fetchPatientRecords();
+            this.fetchAvailablePatientRecords();
             this.fetchChargesByType(2); //medication and treatment
 
             if(this.$route.params.id) {
@@ -182,7 +182,7 @@
             
             ...mapGetters([
               'allMedicationAndTreatments', 
-              'allPatientRecords',
+              'allAvailablePatientRecords',
               'allTypeOfCharges'
             ]),
 
@@ -194,7 +194,7 @@
               'addMedicationAndTreatment', 
               'updateMedicationAndTreatment', 
               'showMedicationAndTreatmentById',
-              'fetchPatientRecords',
+              'fetchAvailablePatientRecords',
               'fetchChargesByType',
             ]),
 

@@ -31,6 +31,7 @@ Route::group(['middleware' => 'auth:api'], function(){
 	Route::apiResource('users', 'api\UserController');
 
 	Route::apiResource('patients', 'api\PatientController');
+	Route::get('patients/list/available', 'api\PatientController@available')->name('patients.available');
 
 	Route::get('typeOfRooms', 'api\TypeOfRoomController@index');
 	Route::post('typeOfRooms', 'api\TypeOfRoomController@store');
@@ -43,6 +44,7 @@ Route::group(['middleware' => 'auth:api'], function(){
 	Route::apiResource('rooms', 'api\RoomController');
 
 	Route::apiResource('patientRecords', 'api\PatientRecordController');
+	Route::get('patientRecords/list/available', 'api\PatientRecordController@available')->name('patientRecords.available');
 
 	Route::apiResource('dispositions', 'api\DispositionController');
 

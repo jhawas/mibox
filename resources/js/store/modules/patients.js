@@ -1,17 +1,27 @@
 const state = {
 
 	patients: [],
+	availablePatients: [],
 
 };
 
 const getters= {
 	
 	allPatients: (state) => state.patients,
+	allAvailablePatients: (state) => state.availablePatients,
 
 };
 
 const actions= {
 	
+	async fetchAvailablePatients ({ commit }) {
+
+		const response = await axios.get(`/api/patients/list/available`);
+		
+		commit('setAvailablePatients', response.data);
+
+	},
+
 	async fetchPatients({ commit }) {
 
 		const response = await axios.get(`/api/patients`);
@@ -62,6 +72,8 @@ const actions= {
 };
 
 const mutations= {
+
+	setAvailablePatients: (state, availablePatients) => (state.availablePatients = availablePatients),
 	
 	setPatients: (state, patients) => (state.patients = patients),
 

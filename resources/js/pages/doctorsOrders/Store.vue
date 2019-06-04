@@ -44,7 +44,7 @@
                                   placeholder="Select Patient" 
                                   label="full_name" 
                                   track-by="id" 
-                                  :options="allPatientRecords" 
+                                  :options="allAvailablePatientRecords" 
                                 ></multiselect>
 
                             </b-form-group>
@@ -183,7 +183,7 @@
 
         mounted() {
 
-            this.fetchPatientRecords();
+            this.fetchAvailablePatientRecords();
             this.fetchTypeOfLaboratories();
 
             if(this.$route.params.id) {
@@ -200,7 +200,7 @@
 
         computed: {
             
-            ...mapGetters(['allDoctorsOrders', 'allPatientRecords', 'allTypeOfLaboratories']),
+            ...mapGetters(['allDoctorsOrders', 'allAvailablePatientRecords', 'allTypeOfLaboratories']),
 
         },
 
@@ -210,7 +210,7 @@
               'addDoctorsOrder', 
               'updateDoctorsOrder', 
               'showDoctorsOrderById',
-              'fetchPatientRecords',
+              'fetchAvailablePatientRecords',
               'fetchTypeOfLaboratories',
             ]),
 

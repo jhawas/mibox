@@ -19,7 +19,10 @@ class FloorController extends Controller
             'user',
             'rooms' => function($query) {
                 $query->with([
-                    'typeOfRoom'
+                    'user',
+                    'floor',
+                    'typeOfRoom',
+                    'patientRecords',
                 ]);
             },
         ])->get();

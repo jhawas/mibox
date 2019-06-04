@@ -44,7 +44,7 @@
                                   placeholder="Select Patient" 
                                   label="full_name" 
                                   track-by="id" 
-                                  :options="allPatientRecords" 
+                                  :options="allAvailablePatientRecords" 
                                 ></multiselect>
 
                             </b-form-group>
@@ -260,7 +260,7 @@
 
         mounted() {
 
-            this.fetchPatientRecords();
+            this.fetchAvailablePatientRecords();
 
             if(this.$route.params.id) {
                 this.loading = true;
@@ -275,7 +275,7 @@
 
         computed: {
             
-            ...mapGetters(['allVitalSigns', 'allPatientRecords']),
+            ...mapGetters(['allVitalSigns', 'allAvailablePatientRecords']),
 
         },
 
@@ -285,7 +285,7 @@
               'addVitalSign', 
               'updateVitalSign', 
               'showVitalSignById',
-              'fetchPatientRecords',
+              'fetchAvailablePatientRecords',
             ]),
 
           onSubmit(event) {

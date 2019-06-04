@@ -176,5 +176,15 @@ class PatientController extends Controller
             'message' => 'success',
         ]);
     }
+
+    public function available() 
+    {
+        $patients = Patient::whereDoesntHave(
+            'patientRecords', function($query) {
+                $query->where('discharged', 0);
+            },
+        )->get();
+        return $patients;
+    }
     
 }

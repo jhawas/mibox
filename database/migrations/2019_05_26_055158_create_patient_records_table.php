@@ -59,6 +59,8 @@ class CreatePatientRecordsTable extends Migration
             $table->integer('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
+            $table->boolean('discharged')->default(0)->nullable();
+
             $table->timestamps();
         });
     }

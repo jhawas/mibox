@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\User;
 use App\Floor;
 use App\TypeOfCharge;
+use App\PatientRecord;
 
 class Room extends Model
 {
@@ -15,7 +16,7 @@ class Room extends Model
      *
      * @var array
      */
-    protected $appends = ['room_with_type'];
+    protected $appends = ['room_with_type', 'patient_in_room', 'room_status'];
 
     public function user()
     {
@@ -32,6 +33,11 @@ class Room extends Model
     	return $this->belongsTo(TypeOfCharge::class, 'type_of_charge_id');
     }
 
+    public function patientRecords()
+    {
+        return $this->belongsToMany(PatientRecord::class, 'patient_rooms');
+    }
+
     /**
      * Get the administrator flag for the user.
      *
@@ -41,4 +47,25 @@ class Room extends Model
     {
         return "{$this->name} ({$this->typeOfRoom->name})";
     }
+
+    /**
+     * Get the administrator flag for the user.
+     *
+     * @return bool
+     */
+    public function getPatientInRoomAttribute()
+    {
+        return $this->patientRecords()->where('discharged', 0)->count();
+    }
+
+     /**
+     * Get the administrator flag for the user.
+     *
+     * @return bool
+     */
+    public function getRoomStatusAttribute()
+    {
+        return $this->patientRecords()->where('discharged', 0)->count() >= $this->capacity;
+    }
+
 }

@@ -18,7 +18,8 @@ class RoomController extends Controller
         $rooms = Room::with([
             'user',
             'floor',
-            'typeOfRoom'
+            'typeOfRoom',
+            'patientRecords',
         ])->get();
         return $rooms;
     }

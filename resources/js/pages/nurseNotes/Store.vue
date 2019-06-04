@@ -44,7 +44,7 @@
                                   placeholder="Select Patient" 
                                   label="full_name" 
                                   track-by="id" 
-                                  :options="allPatientRecords" 
+                                  :options="allAvailablePatientRecords" 
                                 ></multiselect>
 
                             </b-form-group>
@@ -149,7 +149,7 @@
         mounted() {
 
             this.fetchPatients();
-            this.fetchPatientRecords();
+            this.fetchAvailablePatientRecords();
 
             if(this.$route.params.id) {
                 this.loading = true;
@@ -164,7 +164,7 @@
 
         computed: {
             
-            ...mapGetters(['allNurseNotes', 'allPatients', 'allPatientRecords']),
+            ...mapGetters(['allNurseNotes', 'allPatients', 'allAvailablePatientRecords']),
 
         },
 
@@ -175,7 +175,7 @@
               'updateNurseNote', 
               'showNurseNoteById',
               'fetchPatients',
-              'fetchPatientRecords',
+              'fetchAvailablePatientRecords',
             ]),
 
           onSubmit(event) {

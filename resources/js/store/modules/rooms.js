@@ -7,6 +7,7 @@ const state = {
 const getters= {
 	
 	allRooms: (state) => state.rooms,
+	allAvailableRooms: (state) => state.rooms.filter(room => room.room_status !== true),
 
 };
 

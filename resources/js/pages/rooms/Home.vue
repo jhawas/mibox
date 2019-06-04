@@ -152,6 +152,7 @@
               fields: [
                 { key: 'name', label: 'Name', sortable: true, sortDirection: 'desc' },
                 { key: 'capacity', label: 'Capacity', sortable: true, sortDirection: 'desc' },
+                { key: 'patient_in_room', label: 'Occupied', sortable: true, sortDirection: 'desc' },
                 { key: 'type_of_room', label: 'Type Of Room', sortable: true, sortDirection: 'desc' },
                 { key: 'floor', label: 'Floor', sortable: true, sortDirection: 'desc' },
                 { key: 'actions', label: 'Actions', class: 'text-right' }

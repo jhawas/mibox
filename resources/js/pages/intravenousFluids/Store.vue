@@ -44,7 +44,7 @@
                                   placeholder="Select Patient" 
                                   label="full_name" 
                                   track-by="id" 
-                                  :options="allPatientRecords" 
+                                  :options="allAvailablePatientRecords" 
                                 ></multiselect>
 
                             </b-form-group>
@@ -203,7 +203,7 @@
 
         mounted() {
 
-            this.fetchPatientRecords();
+            this.fetchAvailablePatientRecords();
             this.fetchChargesByType(4); //intravenous fluid
 
             if(this.$route.params.id) {
@@ -222,7 +222,7 @@
             ...mapGetters([
               'allIntravenousFluids', 
               'allPatients', 
-              'allPatientRecords',
+              'allAvailablePatientRecords',
               'allTypeOfCharges'
             ]),
 
@@ -234,7 +234,7 @@
               'addIntravenousFluid', 
               'updateIntravenousFluid', 
               'showIntravenousFluidById',
-              'fetchPatientRecords',
+              'fetchAvailablePatientRecords',
               'fetchChargesByType'
             ]),
 

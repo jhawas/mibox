@@ -2,12 +2,12 @@
     <Layout>
         <div class="app-title">
             <div>
-                <h1><i class="fa fa-dashboard"></i> In & Out Patient Page</h1>
+                <h1><i class="fa fa-dashboard"></i> In Patient Page</h1>
                   <p>Start a beautiful journey here</p>
                 </div>
                 <ul class="app-breadcrumb breadcrumb">
                   <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-                  <li class="breadcrumb-item"><a href="#">In & Out Patient Page</a></li>
+                  <li class="breadcrumb-item"><a href="#">In Patient Page</a></li>
                 </ul>
             </div>
           <div class="row">
@@ -159,9 +159,9 @@
               currentPage: 1,
               perPage: 5,
               pageOptions: [5, 10, 15],
-              sortBy: null,
-              sortDesc: false,
-              sortDirection: 'asc',
+              sortBy: 'admit_and_check_date',
+              sortDesc: true,
+              sortDirection: 'desc',
               filter: null,
             }
         },

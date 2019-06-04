@@ -21,6 +21,8 @@ class CreateTypeOfChargesTable extends Migration
             
             $table->decimal('price', 8, 2)->nullable();
 
+            $table->boolean('is_default')->default(0)->nullable();
+
             $table->integer('parent_id')->unsigned()->nullable();
             $table->foreign('parent_id')->references('id')->on('type_of_charges')->onDelete('cascade');
 

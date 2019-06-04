@@ -27,7 +27,8 @@ class PatientRecordController extends Controller
             'physician',
             'chartCompletedBy',
             'patientRooms',
-            'currentRoom'
+            'currentRoom',
+            'rooms'
         ])->get();
         return $patientRecords;
     }
@@ -78,6 +79,7 @@ class PatientRecordController extends Controller
         $patientRecord->discharged_time = $request->discharged_time;
         $patientRecord->physician_id = $this->isDataEmpty($request->physician_id);
         $patientRecord->chart_completed_by = $this->isDataEmpty($request->chart_completed_by);
+        $patientRecord->discharged = $request->discharged;
         $patientRecord->user_id = \Auth::user()->id;
         $patientRecord->save();
 
@@ -171,6 +173,7 @@ class PatientRecordController extends Controller
         $patientRecord->discharged_time = $request->discharged_time;
         $patientRecord->physician_id = $this->isDataEmpty($request->physician_id);
         $patientRecord->chart_completed_by = $this->isDataEmpty($request->chart_completed_by);
+        $patientRecord->discharged = $request->discharged;
         $patientRecord->user_id = \Auth::user()->id;
         $patientRecord->save();
 
@@ -207,4 +210,23 @@ class PatientRecordController extends Controller
         }
         return null;
     }
+
+    public function available() 
+    {
+        $patientRecords = PatientRecord::with([
+            'user',
+            'patient',
+            'disposition',
+            'result',
+            'philhealthMembership',
+            'admitAndCheckBy',
+            'dischargedBy',
+            'physician',
+            'chartCompletedBy',
+            'patientRooms',
+            'currentRoom'
+        ])->where('discharged', 0)->get();
+        return $patientRecords;
+    }
+    
 }
