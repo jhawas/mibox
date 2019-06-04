@@ -4,6 +4,8 @@ namespace App\Http\Controllers\api;
 
 use App\PatientRecord;
 use App\PatientRoom;
+use App\Billing;
+use App\Room;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -83,12 +85,26 @@ class PatientRecordController extends Controller
         $patientRecord->user_id = \Auth::user()->id;
         $patientRecord->save();
 
-        $patientRoom = new PatientRoom;
-        $patientRoom->room_id = $request->room_id;
-        $patientRoom->date_started = $request->admit_and_check_date;
-        $patientRoom->time_start = $request->admit_and_check_time;
+        // add to patient room
+        $patientRecord->rooms()->attach($request->room_id, [
+            'date_started' => $request->admit_and_check_date,
+            'time_start' => $request->admit_and_check_time,
+        ]);
 
-        $patientRecord->patientRooms()->save($patientRoom);
+        // get current room
+        $patientRoom = PatientRoom::currentRoom($patientRecord->id)->latest()->first();
+
+        $roomRate = Room::roomRate($request->room_id);
+
+        // add to billing
+        $patientRecord->patientRooms()->attach($patientRoom->id, [
+            'patient_record_id' => $patientRecord->id,
+            'type_of_charge_id' => $roomRate->type_of_room_id,
+            'quantity_and_days' => 3,
+            'amount' => $roomRate->room_rate,
+            'total' => $roomRate->room_rate * 3,
+            'user_id' => \Auth::user()->id,
+        ]);
         
         return response()->json([
             'message' => 'success',
@@ -121,7 +137,9 @@ class PatientRecordController extends Controller
             'intravenousFluids',
             'doctorsOrders',
             'laboratories',
-            'patientRooms'
+            // 'patientRooms'
+            'currentRoom',
+            'rooms',
         ]);
     }
 

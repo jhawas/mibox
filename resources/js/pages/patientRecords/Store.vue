@@ -61,8 +61,9 @@
                                     group-label="name" 
                                     :group-select="false" 
                                     placeholder="Type to search" 
-                                    track-by="id" 
+                                    track-by="room_id" 
                                     label="room_with_type"
+                                    :disabled="this.$route.params.id > 0"
                                 >
                                 <span slot="noResult">Oops! No elements found. Consider changing the search query.</span>
                               </multiselect>
@@ -255,8 +256,8 @@
                             <b-form-checkbox
                                 v-model="form.discharged"
                                 name="discharged"
-                                value="1"
-                                unchecked-value="0"
+                                :value="1"
+                                :unchecked-value="0"
                                 class="form-group"
                             >
                               Discharged
@@ -316,7 +317,7 @@
                   discharged_time: moment().format('HH:mm'),
                   physician: null,
                   chart_completed_by: null,
-                  discharged: false,
+                  discharged: 0,
                 },
                 errors: [],
                 loading: false,
@@ -385,23 +386,24 @@
             let formData = new FormData();
 
             formData.append('patient_id', this.form.patient ? this.form.patient.id : null);
-            formData.append('room_id', this.form.current_room ? this.form.current_room.id : null);
-            formData.append('disposition_id', this.form.disposition ? this.form.disposition.id : null);
-            formData.append('result_id', this.form.result ? this.form.result.id : null);
-            formData.append('philhealth_membership_id', this.form.philhealth_membership ? this.form.philhealth_membership.id : null);
+            
+            formData.append('disposition_id', this.form.disposition ? this.form.disposition.id : 0);
+            formData.append('result_id', this.form.result ? this.form.result.id : 0);
+            formData.append('philhealth_membership_id', this.form.philhealth_membership ? this.form.philhealth_membership.id : 0);
             formData.append('chief_complaints', this.form.chief_complaints);
             formData.append('brief_history', this.form.brief_history);
-            formData.append('admit_and_check_by', this.form.admit_and_check_by ? this.form.admit_and_check_by.id : null);
+            formData.append('admit_and_check_by', this.form.admit_and_check_by ? this.form.admit_and_check_by.id : 0);
             formData.append('admit_and_check_date', this.form.admit_and_check_date);
             formData.append('admit_and_check_time', this.form.admit_and_check_time);
-            formData.append('discharged_by', this.form.discharged_by ? this.form.discharged_by.id : null);
+            formData.append('discharged_by', this.form.discharged_by ? this.form.discharged_by.id : 0);
             formData.append('discharged_date', this.form.discharged_date);
             formData.append('discharged_time', this.form.discharged_time);
-            formData.append('physician_id', this.form.physician ? this.form.physician.id : null);
-            formData.append('chart_completed_by', this.form.chart_completed_by ? this.form.chart_completed_by.id : null);
+            formData.append('physician_id', this.form.physician ? this.form.physician.id : 0);
+            formData.append('chart_completed_by', this.form.chart_completed_by ? this.form.chart_completed_by.id : 0);
             formData.append('discharged', this.form.discharged);
 
             if(this.$route.params.id > 0) {
+
 
               formData.append('_method', 'PUT');
 
@@ -432,6 +434,8 @@
               });
 
             } else {
+
+              formData.append('room_id', this.form.current_room ? this.form.current_room.id : 0);
              
               const response = this.addPatientRecord(formData);
               

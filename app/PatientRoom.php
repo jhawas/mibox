@@ -22,16 +22,6 @@ class PatientRoom extends Model
      */
     protected $appends = ['room_with_type'];
 
-    public function patientRecord()
-    {
-    	return $this->belongsTo(PatientRecord::class);
-    }
-
-    public function room()
-    {
-    	return $this->belongsTo(Room::class);
-    }
-
     /**
      * Get the administrator flag for the user.
      *
@@ -42,14 +32,22 @@ class PatientRoom extends Model
         return "{$this->room->room_with_type}";
     }
 
-    // /**
-    //  * Get the user's full name.
-    //  *
-    //  * @param  string  $value
-    //  * @return string
-    //  */
-    // public function getRoomValueAttribute()
-    // {
-    //     return $this->room->id;
-    // }
+    public function scopeCurrentRoom($query, $patient_record_id) 
+    {
+        return $query->where('patient_record_id', $patient_record_id);
+    }
+
+    public function patientRecord()
+    {
+    	return $this->belongsTo(PatientRecord::class);
+    }
+
+    public function room()
+    {
+    	return $this->belongsTo(Room::class);
+    }
+
+    
+
+    
 }

@@ -16,6 +16,7 @@ use App\VitalSign;
 use App\IntravenousFluid;
 use App\DoctorsOrder;
 use App\Room;
+use App\TypeOfCharge;
 
 class PatientRecord extends Model
 {
@@ -27,6 +28,15 @@ class PatientRecord extends Model
      */
     protected $appends = ['full_name'];
 
+    /**
+     * Get the administrator flag for the user.
+     *
+     * @return bool
+     */
+    public function getFullNameAttribute()
+    {
+        return "{$this->patient->full_name}";
+    }
 
     public function user()
     {
@@ -115,12 +125,12 @@ class PatientRecord extends Model
 
     public function rooms()
     {
-        return $this->belongsToMany(Room::class, 'patient_rooms');
+        return $this->belongsToMany(Room::class, 'patient_rooms')->withTimestamps();
     }
 
     public function patientRooms()
     {
-    	return $this->hasMany(PatientRoom::class);
+    	return $this->belongsToMany(PatientRoom::class, 'billings')->withTimestamps();
     }
 
     public function currentRoom()
@@ -129,14 +139,9 @@ class PatientRecord extends Model
         return $this->hasOne(PatientRoom::class)->latest();
     }
 
-    /**
-     * Get the administrator flag for the user.
-     *
-     * @return bool
-     */
-    public function getFullNameAttribute()
+    public function typeOfCharges()
     {
-        return "{$this->patient->full_name}";
+        return $this->belongsToMany(TypeOfCharge::class, 'billings')->withTimestamps();
     }
 
 }

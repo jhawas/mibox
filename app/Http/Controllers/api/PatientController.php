@@ -182,7 +182,7 @@ class PatientController extends Controller
         $patients = Patient::whereDoesntHave(
             'patientRecords', function($query) {
                 $query->where('discharged', 0);
-            },
+            }
         )->get();
         return $patients;
     }
