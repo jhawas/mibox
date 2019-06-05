@@ -26,77 +26,76 @@
                         <b-tab title="Informtation" active>
                           <b-row>
                             <b-col col md="6">
-                                <b-form-group label-cols="4" label-cols-lg="2" label="Name" label-for="input-default">
+
+                                <b-form-group label-cols="4" label-cols-lg="4" label="Name" label-for="input-default">
                                   <div class="form-control form-group-value">{{ patientRecord.full_name }}</div>
                                 </b-form-group>
 
-                                <b-form-group label-cols="4" label-cols-lg="2" label="Type Of Record" label-for="input-default">
-                                  <div class="form-control form-group-value">{{ patientRecord.type_of_record ? patientRecord.type_of_record.name : null }}</div>
-                                </b-form-group>
-
-                                <b-form-group label-cols="4" label-cols-lg="2" label="Room" label-for="input-default">
+                                <b-form-group label-cols="4" label-cols-lg="4" label="Room" label-for="input-default">
                                   <div class="form-control form-group-value">{{ patientRecord.current_room ? patientRecord.current_room.room_with_type : null }}</div>
                                 </b-form-group>
 
-                                <b-form-group label-cols="4" label-cols-lg="2" label="Disposition" label-for="input-default">
+                                <legend>Physician Details</legend>
+
+                                <b-form-group label-cols="4" label-cols-lg="4" label="Doctor" label-for="input-default">
+                                  <div class="form-control form-group-value">{{ patientRecord.physician ? patientRecord.physician.full_name : null }}</div>
+                                </b-form-group>
+
+                                <b-form-group label-cols="4" label-cols-lg="4" label="Cheif Complaints" label-for="input-default">
+                                  <div class="form-control form-group-value">{{ patientRecord.cheif_complaints}}</div>
+                                </b-form-group>
+
+                                <b-form-group label-cols="4" label-cols-lg="4" label="Breif history" label-for="input-default">
+                                  <div class="form-control form-group-value">{{ patientRecord.breif_history}}</div>
+                                </b-form-group>
+
+                                <legend>Other Details</legend>
+
+                                <b-form-group label-cols="4" label-cols-lg="4" label="Disposition" label-for="input-default">
                                   <div class="form-control form-group-value">{{ patientRecord.disposition ? patientRecord.disposition.name : null }}</div>
                                 </b-form-group>
 
-                                <b-form-group label-cols="4" label-cols-lg="2" label="Result" label-for="input-default">
+                                <b-form-group label-cols="4" label-cols-lg="4" label="Result" label-for="input-default">
                                   <div class="form-control form-group-value">{{ patientRecord.result ? patientRecord.result.name : null }}</div>
                                 </b-form-group>
 
-                                <b-form-group label-cols="4" label-cols-lg="2" label="Philhealth Membership" label-for="input-default">
+                                <b-form-group label-cols="4" label-cols-lg="4" label="Philhealth Membership" label-for="input-default">
                                   <div class="form-control form-group-value">{{ patientRecord.philhealth_membership ? patientRecord.philhealth_membership.name : null }}</div>
                                 </b-form-group>
                             </b-col>
 
                             <b-col col md="6">
-                                <b-form-group label-cols="4" label-cols-lg="2" label="Cheif Complaints" label-for="input-default">
-                                  <div class="form-control form-group-value">{{ patientRecord.cheif_complaints}}</div>
-                                </b-form-group>
+                                <legend>Admission Details</legend>
 
-                                <b-form-group label-cols="4" label-cols-lg="2" label="Breif history" label-for="input-default">
-                                  <div class="form-control form-group-value">{{ patientRecord.breif_history}}</div>
-                                </b-form-group>
-
-                                <legend>Admit & Check Up Details</legend>
-
-                                <b-form-group label-cols="4" label-cols-lg="2" label="Doctor" label-for="input-default">
+                                <b-form-group label-cols="4" label-cols-lg="4" label="Doctor" label-for="input-default">
                                   <div class="form-control form-group-value">{{ patientRecord.admit_and_check_by ? patientRecord.admit_and_check_by.full_name : null }}</div>
                                 </b-form-group>
 
-                                <b-form-group label-cols="4" label-cols-lg="2" label="Date" label-for="input-default">
+                                <b-form-group label-cols="4" label-cols-lg="4" label="Date" label-for="input-default">
                                   <div class="form-control form-group-value">{{ patientRecord.admit_and_check_date }}</div>
                                 </b-form-group>
 
-                                <b-form-group label-cols="4" label-cols-lg="2" label="Time" label-for="input-default">
+                                <b-form-group label-cols="4" label-cols-lg="4" label="Time" label-for="input-default">
                                   <div class="form-control form-group-value">{{ patientRecord.admit_and_check_time }}</div>
                                 </b-form-group>
 
                                 <legend>Discharged Details</legend>
 
-                                <b-form-group label-cols="4" label-cols-lg="2" label="Doctor" label-for="input-default">
+                                <b-form-group label-cols="4" label-cols-lg="4" label="Doctor" label-for="input-default">
                                   <div class="form-control form-group-value">{{ patientRecord.discharged_by ? patientRecord.discharged_by.full_name : null }}</div>
                                 </b-form-group>
 
-                                <b-form-group label-cols="4" label-cols-lg="2" label="Date" label-for="input-default">
+                                <b-form-group label-cols="4" label-cols-lg="4" label="Date" label-for="input-default">
                                   <div class="form-control form-group-value">{{ patientRecord.discharged_date }}</div>
                                 </b-form-group>
 
-                                <b-form-group label-cols="4" label-cols-lg="2" label="Time" label-for="input-default">
+                                <b-form-group label-cols="4" label-cols-lg="4" label="Time" label-for="input-default">
                                   <div class="form-control form-group-value">{{ patientRecord.discharged_time }}</div>
-                                </b-form-group>
-
-                                <legend>Physician Details</legend>
-
-                                <b-form-group label-cols="4" label-cols-lg="2" label="Doctor" label-for="input-default">
-                                  <div class="form-control form-group-value">{{ patientRecord.physician ? patientRecord.physician.full_name : null }}</div>
                                 </b-form-group>
 
                                 <legend>Chart Details</legend>
 
-                                <b-form-group label-cols="4" label-cols-lg="2" label="Completed by" label-for="input-default">
+                                <b-form-group label-cols="4" label-cols-lg="4" label="Completed by" label-for="input-default">
                                   <div class="form-control form-group-value">{{ patientRecord.chart_completed_by ? patientRecord.chart_completed_by.full_name : null }}</div>
                                 </b-form-group>
 
@@ -135,16 +134,18 @@
                                 :items="patientRecord.doctors_orders"
                           ></doctors-orders-table>
                         </b-tab>
-                        <b-tab title="Laboratory" disabled>
-                          <p></p>
+                        <b-tab title="Laboratory">
+                          <laboratories-table
+                                :items="patientRecord.laboratories"
+                          ></laboratories-table>
                         </b-tab>
                       </b-tabs>
                     </div>
                 </div>
               </div>
-           </div>
+          </div>
         </div>
-         <b-button type="button" variant="secondary" @click="cancel">Back</b-button>
+        <b-button type="button" variant="secondary" @click="cancel">Back</b-button>
     </Layout>
 </template>
 
@@ -159,6 +160,7 @@
     import VitalSignsTable from '../../components/view/VitalSignsTable';
     import IntravenousFluidsTable from '../../components/view/IntravenousFluidsTable';
     import DoctorsOrdersTable from '../../components/view/DoctorsOrdersTable';
+    import LaboratoriesTable from '../../components/view/LaboratoriesTable';
 
     export default {
         components: {
@@ -170,6 +172,7 @@
             VitalSignsTable,
             IntravenousFluidsTable,
             DoctorsOrdersTable,
+            LaboratoriesTable,
         },
 
         props: {
