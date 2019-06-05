@@ -82,6 +82,12 @@
                             
                         </template>
 
+                        <template slot="is_default" slot-scope="row">
+  
+                            <span :class="onDefault(row.value)"></span>
+                            
+                        </template>
+
                         <template slot="category" slot-scope="row">
   
                           {{ row.value ? row.value.name : null }}
@@ -159,6 +165,7 @@
                 { key: 'parent', label: 'Parent', sortable: true, sortDirection: 'desc', class: 'text-center' },
                 { key: 'category', label: 'Types', sortable: true, sortDirection: 'desc', class: 'text-center' },
                 { key: 'price', label: 'Price', sortable: true, sortDirection: 'desc', class: 'text-center' },
+                { key: 'is_default', label: 'Default', sortable: true, sortDirection: 'desc', class: 'text-center' },
                 { key: 'actions', label: 'Actions', class: 'text-right' }
               ],
               totalRows: 1,
@@ -208,6 +215,10 @@
             // Trigger pagination to update the number of buttons/pages due to filtering
             this.totalRows = filteredItems.length
             this.currentPage = 1
+          },
+
+          onDefault(value) {
+              return value ? 'fa fa-check' : '';
           },
 
           create() {

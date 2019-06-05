@@ -54,6 +54,17 @@
                                 label-for="room"
                             >
                                 <multiselect 
+                                  v-model="form.current_room" 
+                                  placeholder="Select Room" 
+                                  label="room_with_type" 
+                                  track-by="id" 
+                                  :options="allAvailableRooms" 
+                                  :disabled="this.$route.params.id > 0"
+                                >
+                                  <span slot="noResult">Oops! No elements found. Consider changing the search query.</span>
+                                </multiselect>
+
+                                <!-- <multiselect 
                                     v-model="form.current_room" 
                                     :options="allFloors" 
                                     :multiple="false" 
@@ -65,8 +76,8 @@
                                     label="room_with_type"
                                     :disabled="this.$route.params.id > 0"
                                 >
-                                <span slot="noResult">Oops! No elements found. Consider changing the search query.</span>
-                              </multiselect>
+                                
+                              </multiselect> -->
 
                               <pre class="language-json"><code>{{ form.room  }}</code></pre>
 
@@ -313,8 +324,8 @@
                   admit_and_check_date: moment().format('YYYY-MM-DD'),
                   admit_and_check_time: moment().format('HH:mm'),
                   discharged_by: null,
-                  discharged_date: moment().format('YYYY-MM-DD'),
-                  discharged_time: moment().format('HH:mm'),
+                  discharged_date: '',
+                  discharged_time: '',
                   physician: null,
                   chart_completed_by: null,
                   discharged: 0,
@@ -329,7 +340,7 @@
         mounted() {
 
             this.fetchAvailablePatients();
-            this.fetchFloors();
+            this.fetchRooms();
             this.fetchDispositions();
             this.fetchResults();
             this.fetchTypeOfRecords();
@@ -352,7 +363,7 @@
             ...mapGetters([
                 'allPatientRecords', 
                 'allAvailablePatients', 
-                'allFloors',
+                'allAvailableRooms',
                 'allDispositions',
                 'allResults',
                 'allTypeOfRecords',
@@ -369,7 +380,7 @@
               'updatePatientRecord', 
               'showPatientRecordById', 
               'fetchAvailablePatients',
-              'fetchFloors',
+              'fetchRooms',
               'fetchDispositions',
               'fetchResults',
               'fetchTypeOfRecords',

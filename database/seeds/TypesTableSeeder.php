@@ -35,5 +35,11 @@ class TypesTableSeeder extends Seeder
             'slug' => 'Intravenous Fluid',
             'description' => 'Intravenous Fluid',
         ]);
+
+        $others = Type::create([
+            'name' => 'Others', 
+            'slug' => 'Others',
+            'description' => 'Others',
+        ]);
     }
 }

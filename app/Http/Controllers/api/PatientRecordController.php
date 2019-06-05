@@ -6,8 +6,10 @@ use App\PatientRecord;
 use App\PatientRoom;
 use App\Billing;
 use App\Room;
+use App\TypeOfCharge;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 
 class PatientRecordController extends Controller
 {
@@ -105,6 +107,20 @@ class PatientRecordController extends Controller
             'total' => $roomRate->room_rate * 3,
             'user_id' => \Auth::user()->id,
         ]);
+
+        // fetch default charges
+        $typeOfCharges = TypeOfCharge::where('is_default', 1)->get();
+
+        // add all default charges to billing
+        foreach ($typeOfCharges as $charge) {
+            $patientRecord->typeOfCharges()->attach($charge->id, [
+                'patient_record_id' => $patientRecord->id,
+                'quantity_and_days' => 1,
+                'amount' => $charge->price,
+                'total' => $charge->price,
+                'user_id' => \Auth::user()->id,
+            ]);
+        }
         
         return response()->json([
             'message' => 'success',
@@ -169,8 +185,8 @@ class PatientRecordController extends Controller
             'chief_complaints' => 'required',
             'brief_history' => 'required',
             'admit_and_check_by' => 'required|not_in:0',
-            'admit_and_check_date' => 'required',
-            'admit_and_check_time' => 'required',
+            'admit_and_check_date' => 'required|not_in:null',
+            'admit_and_check_time' => 'required|not_in:null',
             'physician_id' => 'required|not_in:0',
             'discharged_date' => $request->discharged_by > 0 ? 'required' : '',
             'discharged_time' => $request->discharged_by > 0 ? 'required' : '',
@@ -187,13 +203,41 @@ class PatientRecordController extends Controller
         $patientRecord->admit_and_check_date = $request->admit_and_check_date;
         $patientRecord->admit_and_check_time = $request->admit_and_check_time;
         $patientRecord->discharged_by = $this->isDataEmpty($request->discharged_by);
-        $patientRecord->discharged_date = $request->discharged_date;
-        $patientRecord->discharged_time = $request->discharged_time;
+        $patientRecord->discharged_date = $this->isDataEmpty($request->discharged_date);
+        $patientRecord->discharged_time = $this->isDataEmpty($request->discharged_time);
         $patientRecord->physician_id = $this->isDataEmpty($request->physician_id);
         $patientRecord->chart_completed_by = $this->isDataEmpty($request->chart_completed_by);
         $patientRecord->discharged = $request->discharged;
         $patientRecord->user_id = \Auth::user()->id;
         $patientRecord->save();
+
+        if($request->discharged_by > 0) {
+            
+            $from = Carbon::createFromFormat('Y-m-d', $request->admit_and_check_date);
+
+            $to = Carbon::createFromFormat('Y-m-d', $request->discharged_date);
+
+            $diff_in_days = $to->diffInDays($from);
+
+            $patientRecord->currentRoom()->update([
+                'end_date' => $request->discharged_date,
+                'end_time' => $request->discharged_time,
+            ]);
+
+            $patientRoom = $patientRecord->currentRoom()->first();
+
+            $roomRate = Room::roomRate($patientRoom->room_id);
+
+            $patientRecord->patientRooms()->sync([$patientRoom->id => [
+                'patient_record_id' => $patientRecord->id,
+                'quantity_and_days' => $diff_in_days,
+                'amount' => $roomRate->room_rate,
+                'total' => $roomRate->room_rate * $diff_in_days,
+                'user_id' => \Auth::user()->id,
+            ]]);
+
+
+        }
 
         return response()->json([
             'message' => 'success',

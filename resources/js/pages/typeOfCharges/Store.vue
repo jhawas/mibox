@@ -85,6 +85,16 @@
                               />
                             </b-form-group>
 
+                            <b-form-checkbox
+                                v-model="form.is_default"
+                                name="is_default"
+                                :value="1"
+                                :unchecked-value="0"
+                                class="form-group"
+                            >
+                              Default 
+                            </b-form-checkbox>
+
                          </b-col>
                       </b-row>
                       <b-button type="submit" variant="primary" :disabled="loadSubmit">
@@ -127,6 +137,7 @@
                   price: 0.00,
                   parent: null,
                   category: null,
+                  is_default: 0,
                 },
                 errors: [],
                 loading: false,
@@ -177,6 +188,7 @@
 
             formData.append('name', this.form.name);
             formData.append('price', this.form.price);
+            formData.append('is_default', this.form.is_default);
             formData.append('parent_id', this.form.parent ? this.form.parent.id : 0);
             formData.append('type_id', this.form.category ? this.form.category.id : 0);
 
