@@ -212,11 +212,10 @@ class PatientRecordController extends Controller
 
         if($request->discharged_by > 0) {
             
-            $from = Carbon::createFromFormat('Y-m-d', $request->admit_and_check_date);
-
-            $to = Carbon::createFromFormat('Y-m-d', $request->discharged_date);
-
-            $diff_in_days = $to->diffInDays($from);
+            $diff_in_days = $this->countDaysBetween(
+                $request->admit_and_check_date,
+                $request->discharged_date
+            );
 
             $patientRecord->currentRoom()->update([
                 'end_date' => $request->discharged_date,
@@ -287,6 +286,15 @@ class PatientRecordController extends Controller
             'currentRoom'
         ])->where('discharged', 0)->get();
         return $patientRecords;
+    }
+
+    private function countDaysBetween($startDate, $endDate)
+    {
+        $from = Carbon::createFromFormat('Y-m-d', $startDate);
+
+        $to = Carbon::createFromFormat('Y-m-d', $endDate);
+
+        return $to->diffInDays($from);
     }
     
 }
