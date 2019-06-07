@@ -89,6 +89,7 @@ class PatientRecordController extends Controller
 
         // add to patient room
         $patientRecord->rooms()->attach($request->room_id, [
+            'patient_id' => $request->patient_id,
             'date_started' => $request->admit_and_check_date,
             'time_start' => $request->admit_and_check_time,
         ]);
@@ -100,7 +101,6 @@ class PatientRecordController extends Controller
 
         // add to billing
         $patientRecord->patientRooms()->attach($patientRoom->id, [
-            'patient_record_id' => $patientRecord->id,
             'type_of_charge_id' => $roomRate->type_of_room_id,
             'quantity_and_days' => 3,
             'amount' => $roomRate->room_rate,
@@ -114,7 +114,6 @@ class PatientRecordController extends Controller
         // add all default charges to billing
         foreach ($typeOfCharges as $charge) {
             $patientRecord->typeOfCharges()->attach($charge->id, [
-                'patient_record_id' => $patientRecord->id,
                 'quantity_and_days' => 1,
                 'amount' => $charge->price,
                 'total' => $charge->price,
@@ -228,8 +227,7 @@ class PatientRecordController extends Controller
 
             $roomRate = Room::roomRate($patientRoom->room_id);
 
-            $patientRecord->patientRooms()->sync([$patientRoom->id => [
-                'patient_record_id' => $patientRecord->id,
+            $patientRecord->patientRooms()->syncWithoutDetaching([$patientRoom->id => [
                 'quantity_and_days' => $diff_in_days,
                 'amount' => $roomRate->room_rate,
                 'total' => $roomRate->room_rate * $diff_in_days,

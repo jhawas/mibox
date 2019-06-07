@@ -78,6 +78,10 @@ import TypeOfCharge from './pages/typeOfCharges/Home';
 import StoreTypeOfCharge from './pages/typeOfCharges/Store';
 import ShowTypeOfCharge from './pages/typeOfCharges/Show';
 
+import PatientRoom from './pages/patientRooms/Home';
+import StorePatientRoom from './pages/patientRooms/Store';
+import ShowPatientRoom from './pages/patientRooms/Show';
+
 
 export default {
 
@@ -574,6 +578,31 @@ export default {
             path: '/typeOfCharge/:id/show',
             name: 'typeOfCharge-show',
             component: ShowTypeOfCharge,
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        // patien Rooms
+        {
+            path: '/patientRooms',
+            name: 'patientRooms',
+            component: PatientRoom,
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        {
+            path: '/patientRoom/:id?',
+            name: 'patientRoom-create',
+            component: StorePatientRoom,
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        {
+            path: '/patientRoom/:id/show',
+            name: 'patientRoom-show',
+            component: ShowPatientRoom,
             meta: {
                 requiresAuth: true,
             }

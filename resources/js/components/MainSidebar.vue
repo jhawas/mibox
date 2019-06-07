@@ -39,6 +39,11 @@
                     </router-link>
                   </li>
                   <li>
+                    <router-link :to="{ name: 'patientRooms' }" class="treeview-item">
+                      <i class="icon fa fa-circle-o"></i> Room
+                    </router-link>
+                  </li>
+                  <li>
                     <router-link :to="{ name: 'nurseNotes' }" class="treeview-item">
                       <i class="icon fa fa-circle-o"></i> Nurses Notes
                     </router-link>

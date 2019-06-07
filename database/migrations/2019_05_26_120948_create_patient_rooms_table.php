@@ -16,6 +16,9 @@ class CreatePatientRoomsTable extends Migration
         Schema::create('patient_rooms', function (Blueprint $table) {
             $table->increments('id');
 
+            $table->integer('patient_id')->unsigned()->nullable();
+            $table->foreign('patient_id')->references('id')->on('patients')->onDelete('cascade');  
+
             $table->integer('patient_record_id')->unsigned()->nullable();
             $table->foreign('patient_record_id')->references('id')->on('patient_records')->onDelete('cascade');            
 
