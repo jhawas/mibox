@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PhilhealthMembershipTableSeeder::class);
         $this->call(ResultTableSeeder::class);
         $this->call(TypeOfRecordTableSeeder::class);
+        $this->call(DiscountTableSeeder::class);
         
         
     }

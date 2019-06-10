@@ -17,6 +17,7 @@ use App\IntravenousFluid;
 use App\DoctorsOrder;
 use App\Room;
 use App\TypeOfCharge;
+use Carbon\Carbon;
 
 class PatientRecord extends Model
 {

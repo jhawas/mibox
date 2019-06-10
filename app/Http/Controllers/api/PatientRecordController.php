@@ -10,6 +10,7 @@ use App\TypeOfCharge;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
+use App\PatientDiscount;
 
 class PatientRecordController extends Controller
 {
@@ -120,7 +121,18 @@ class PatientRecordController extends Controller
                 'user_id' => \Auth::user()->id,
             ]);
         }
-        
+
+        $age = \Carbon\Carbon::parse($patientRecord->patient->birthdate)->age;
+
+        if($age >= 60) {
+            $patientDiscount = new PatientDiscount;
+            $patientDiscount->patient_record_id = $patientRecord->id;
+            $patientDiscount->discount_id = 1; //senior
+            $patientDiscount->amount = 0.20;
+            $patientDiscount->user_id = \Auth::user()->id;
+            $patientDiscount->save();
+        }
+
         return response()->json([
             'message' => 'success',
         ]);
