@@ -57,7 +57,6 @@ class UserController extends Controller
         $user->first_name = $request->first_name;
         $user->middle_name = $request->middle_name;
         $user->last_name = $request->last_name;
-        $patient->full_name = $request->first_name + ' ' + $request->middle_name + ' ' + $request->last_name;
         $user->username = $request->username;
         $user->suffix = $request->suffix;
         $user->email = $request->email;
