@@ -222,7 +222,7 @@
             return {
               billing: {},
               fields: [
-                { key: 'patient_record_id', label: 'Name', sortable: true, sortDirection: 'desc' },
+                { key: 'patient_record_id', label: 'Record ID', sortable: true, sortDirection: 'desc' },
                 { key: 'type_of_charge', label: 'Charge', sortable: true, sortDirection: 'desc' },
                 { key: 'amount', label: 'Amount', sortable: true, sortDirection: 'desc' },
                 { key: 'quantity_and_days', label: 'Quantity/Days', sortable: true, sortDirection: 'desc' },

@@ -43,6 +43,7 @@ class DiscountController extends Controller
 
         $discount = new Discount;
         $discount->name = $request->name;
+        $discount->is_percent = $request->is_percent;
         $discount->user_id = \Auth::user()->id;
         $discount->save();
 
@@ -87,6 +88,7 @@ class DiscountController extends Controller
         ]);
 
         $discount->name = $request->name;
+        $discount->is_percent = $request->is_percent;
         $discount->user_id = \Auth::user()->id;
         $discount->save();
 

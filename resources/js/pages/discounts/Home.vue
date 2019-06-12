@@ -76,6 +76,12 @@
                           <strong>Loading...</strong>
                         </div>
 
+                        <template slot="is_percent" slot-scope="row">
+  
+                            <span :class="onPercent(row.value)"></span>
+                            
+                        </template>
+
                         <template slot="actions" slot-scope="row" right>
                             <b-button>
                                 <i class="fa fa-eye" @click="show(row.item)" aria-hidden="true"></i>
@@ -143,6 +149,7 @@
               // items: [{}],
               fields: [
                 { key: 'name', label: 'Name', sortable: true, sortDirection: 'desc' },
+                { key: 'is_percent', label: 'Percent', sortable: true, sortDirection: 'desc' },
                 { key: 'actions', label: 'Actions', class: 'text-right' }
               ],
               totalRows: 1,
@@ -192,6 +199,10 @@
             // Trigger pagination to update the number of buttons/pages due to filtering
             this.totalRows = filteredItems.length
             this.currentPage = 1
+          },
+
+          onPercent(value) {
+              return value ? 'fa fa-check' : '';
           },
 
           create() {

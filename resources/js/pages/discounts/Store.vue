@@ -46,6 +46,16 @@
                               />
                             </b-form-group>
 
+                            <b-form-checkbox
+                                v-model="form.is_percent"
+                                name="is_percent"
+                                :value="1"
+                                :unchecked-value="0"
+                                class="form-group"
+                            >
+                              Percent 
+                            </b-form-checkbox>
+
                          </b-col>
                       </b-row>
                       <b-button type="submit" variant="primary" :disabled="loadSubmit">
@@ -83,6 +93,7 @@
             return {
                 form: {
                   name: '',
+                  is_percent: 0,
                 },
                 errors: [],
                 loading: false,
@@ -123,6 +134,7 @@
             let formData = new FormData();
 
             formData.append('name', this.form.name);
+            formData.append('is_percent', this.form.is_percent);
 
             if(this.$route.params.id > 0) {
 
