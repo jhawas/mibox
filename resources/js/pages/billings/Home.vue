@@ -156,7 +156,7 @@
               </div>
             </div>
 
-            <!-- <div class="col-md-12">
+            <div class="col-md-12">
               <div class="tile">
                 <div class="tile-title">
                     Insurance
@@ -190,7 +190,7 @@
                     </div>
                 </div>
               </div>
-            </div> -->
+            </div>
 
         </div>
     </Layout>
@@ -234,7 +234,7 @@
               ],
               totalRows: 1,
               currentPage: 1,
-              perPage: 5,
+              perPage: 10,
               pageOptions: [5, 10, 15],
               sortBy: null,
               sortDesc: false,
@@ -272,9 +272,9 @@
         created() {
 
             // this.fetchBillings();
-            // if(this.defaultBilling.patient_record_id) {
-            //     this.fetchBillingsByRecord(this.defaultBilling.patient_record_id);
-            // }
+            if(this.defaultBilling.patient_record_id) {
+                this.fetchBillingsByRecord(this.defaultBilling);
+            }
 
         },
 
@@ -294,6 +294,7 @@
           },
 
           onChange(value) {
+
               this.fetchBillingsByRecord(value ? value : 0);
           },
 

@@ -36,7 +36,7 @@ const actions= {
 
 		const response = await axios.post(`/api/billings`, formData);
 
-		commit('newBilling', response.data);
+		commit('newBilling', response.data.billing);
 
 		return response;
 

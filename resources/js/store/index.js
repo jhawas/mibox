@@ -28,6 +28,8 @@ import billings from './modules/billings';
 import typeOfCharges from './modules/typeOfCharges';
 import types from './modules/types';
 import patientRooms from './modules/patientRooms';
+import patientDiscounts from './modules/patientDiscounts';
+import patientInsurances from './modules/patientInsurances';
 
 Vue.use(Vuex);
 
@@ -60,6 +62,8 @@ export default new Vuex.Store({
       typeOfCharges,
       types,
       patientRooms,
+      patientDiscounts,
+      patientInsurances,
   	},
 });
 

@@ -58,6 +58,7 @@ class BillingController extends Controller
 
         return response()->json([
             'message' => 'success',
+            'billing' => $billing->load(['typeOfCharge', 'patientRecord']),
         ]);
     }
 
@@ -136,9 +137,9 @@ class BillingController extends Controller
      */
     public function dataByRecord($patient_record_id)
     {
-        $billings = Billing::with(['typeOfCharge', 'patientRecord'])->where('patient_record_id', $patient_record_id)
-        ->get();
-
+        $billings = Billing::with(['typeOfCharge', 'patientRecord'])
+            ->where('patient_record_id', $patient_record_id)
+            ->get();
         return $billings;
     }
 }

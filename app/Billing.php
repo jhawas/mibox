@@ -8,6 +8,12 @@ use App\PatientRecord;
 
 class Billing extends Model
 {
+    /**
+     * The relationships that should always be loaded.
+     *
+     * @var array
+     */
+    // protected $with = ['patientRecord', 'typeOfCharge'];
     
 	public function patientRecord()
     {

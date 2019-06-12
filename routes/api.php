@@ -99,4 +99,10 @@ Route::group(['middleware' => 'auth:api'], function(){
 
 	Route::apiResource('patientRooms', 'api\PatientRoomController');
 
+	Route::apiResource('patientDiscounts', 'api\PatientDiscountController');
+	Route::get('patientDiscounts/patientRecord/{patient_record_id}', 'api\PatientDiscountController@dataByRecord')->name('billings.dataByRecord');
+
+	Route::apiResource('patientInsurances', 'api\PatientInsuranceController');
+	Route::get('patientInsurances/patientRecord/{patient_record_id}', 'api\PatientInsuranceController@dataByRecord')->name('billings.dataByRecord');
+
 });

@@ -171,9 +171,9 @@
                             <b-form-group
                               label="Spouse:"
                               label-for="spouse"
+                              v-if="form.civil_status === 'married'"
                             >
                               <b-form-input
-                                v-if="form.civil_status === 'married'"
                                 v-model="form.spouse"
                                 type="text"
                                 placeholder="Enter spouse"
