@@ -269,6 +269,9 @@
         created() {
 
             // this.fetchBillings();
+            // if(this.defaultBilling.patient_record_id) {
+            //     this.fetchBillingsByRecord(this.defaultBilling.patient_record_id);
+            // }
 
         },
 
