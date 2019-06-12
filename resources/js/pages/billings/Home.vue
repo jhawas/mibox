@@ -70,14 +70,17 @@
                                 <b-button 
                                   @click="create" 
                                   :disabled="!billing.patient_record"
+                                  v-if="hasAccess('create-billing')"
                                 >Add Bill</b-button>
                                 <b-button 
                                   @click="create" 
                                   :disabled="!billing.patient_record"
+                                  v-if="hasAccess('create-patientInsurance')"
                                 >Add Insurance</b-button>
                                 <b-button 
                                   @click="create" 
                                   :disabled="!billing.patient_record"
+                                  v-if="hasAccess('create-patientDiscount')"
                                 >Add Discount</b-button>
                           </b-form-group>
                         </b-col>
@@ -117,14 +120,14 @@
                         </template>
 
                         <template slot="actions" slot-scope="row" right>
-                            <b-button>
+                            <b-button v-if="hasAccess('view-billing')">
                                 <i class="fa fa-eye" @click="show(row.item)" aria-hidden="true"></i>
                             </b-button>
                             
-                            <b-button @click="update(row.item)">
+                            <b-button @click="update(row.item)" v-if="hasAccess('update-billing')">
                                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                             </b-button>
-                            <b-button @click="destroy(row.item)">
+                            <b-button @click="destroy(row.item)" v-if="hasAccess('delete-billing')">
                                 <i class="fa fa-eraser" aria-hidden="true"></i>
                             </b-button>
                         </template>
@@ -253,7 +256,7 @@
 
         computed: {
 
-          ...mapGetters(['allBillings', 'allPatientRecords', 'defaultBilling']),
+          ...mapGetters(['allBillings', 'allPatientRecords', 'defaultBilling', 'hasAccess']),
 
           sortOptions() {
             // Create an options list from our fields

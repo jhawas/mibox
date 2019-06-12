@@ -43,7 +43,7 @@
                           </b-form-group>
                         </b-col>
 
-                        <b-col md="6" class="my-1">
+                        <b-col md="6" class="my-1" v-if="hasAccess('create-user')">
                           <b-form-group label-cols-sm="3" label="Add" class="mb-0">
                                 <b-button @click="create">New</b-button>
                           </b-form-group>
@@ -90,14 +90,14 @@
 
                         <template slot="actions" slot-scope="row" right>
                             
-                            <b-button size="sm">
+                            <b-button size="sm" v-if="hasAccess('view-user')">
                                 <i class="fa fa-eye" @click="show(row.item)" aria-hidden="true"></i>
                             </b-button>
 
-                            <b-button size="sm" @click="update(row.item)">
+                            <b-button size="sm" @click="update(row.item)"  v-if="hasAccess('update-user')">
                                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                             </b-button>
-                            <b-button size="sm" @click="destroy(row.item)">
+                            <b-button size="sm" @click="destroy(row.item)" v-if="hasAccess('delete-user')">
                                 <i class="fa fa-eraser" aria-hidden="true"></i>
                             </b-button>
                             
@@ -184,7 +184,7 @@
 
         computed: {
 
-          ...mapGetters(['allUsers']),
+          ...mapGetters(['allUsers', 'hasAccess']),
 
           sortOptions() {
             // Create an options list from our fields

@@ -43,7 +43,7 @@
                           </b-form-group>
                         </b-col>
 
-                        <b-col md="6" class="my-1">
+                        <b-col md="6" class="my-1" v-if="hasAccess('create-medicationAndTreatment')">
                           <b-form-group label-cols-sm="3" label="Add" class="mb-0">
                                 <b-button @click="create">New</b-button>
                           </b-form-group>
@@ -85,14 +85,14 @@
                         </template>
 
                         <template slot="actions" slot-scope="row" right>
-                            <b-button>
+                            <b-button v-if="hasAccess('view-medicationAndTreatment')">
                                 <i class="fa fa-eye" @click="show(row.item)" aria-hidden="true"></i>
                             </b-button>
                             
-                            <b-button @click="update(row.item)">
+                            <b-button @click="update(row.item)" v-if="hasAccess('update-medicationAndTreatment')">
                                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                             </b-button>
-                            <b-button @click="destroy(row.item)">
+                            <b-button @click="destroy(row.item)" v-if="hasAccess('delete-medicationAndTreatment')">
                                 <i class="fa fa-eraser" aria-hidden="true"></i>
                             </b-button>
                         </template>
@@ -176,7 +176,7 @@
 
         computed: {
 
-          ...mapGetters(['allMedicationAndTreatments']),
+          ...mapGetters(['allMedicationAndTreatments', 'hasAccess']),
 
           sortOptions() {
             // Create an options list from our fields

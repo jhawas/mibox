@@ -103,8 +103,8 @@
                               <b-form-checkbox
                                 v-model="form.is_laboratory"
                                 name="is_laboratory"
-                                value="1"
-                                unchecked-value="0"
+                                :value="1"
+                                :unchecked-value="0"
                                 class="form-group"
                             >
                               with laboratory
@@ -171,7 +171,7 @@
                   time: moment().format('HH:mm'),
                   progress_note: '',
                   orders: '',
-                  is_laboratory: false,
+                  is_laboratory: 0,
                   laboratories: [],
                 },
                 errors: [],

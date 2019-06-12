@@ -15,7 +15,7 @@
                   <span class="app-menu__label">Dashboard</span>
                 </router-link>
               </li>
-              <li v-if="hasAccess('create-user')">
+              <li v-if="hasAccess('view-user')">
                 <router-link :to="{ name: 'users' }" class="app-menu__item">
                     <i class="app-menu__icon fa fa-users"></i>
                     <span class="app-menu__label">Users</span>
@@ -28,58 +28,59 @@
                   <i class="treeview-indicator fa fa-angle-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                  <li>
+                  <li v-if="hasAccess('view-patient')">
                     <router-link :to="{ name: 'patients' }" class="treeview-item">
                       <i class="icon fa fa-circle-o"></i> Patient Information
                     </router-link>
                   </li>
-                  <li>
+                  <li v-if="hasAccess('view-patientRecord')">
                     <router-link :to="{ name: 'patientRecords' }" class="treeview-item">
                       <i class="icon fa fa-circle-o"></i> In Patient
                     </router-link>
                   </li>
-                  <li>
+                  <li v-if="hasAccess('view-patientRoom')">
                     <router-link :to="{ name: 'patientRooms' }" class="treeview-item">
                       <i class="icon fa fa-circle-o"></i> Room
                     </router-link>
                   </li>
-                  <li>
+                  <li v-if="hasAccess('view-nurseNote')">
                     <router-link :to="{ name: 'nurseNotes' }" class="treeview-item">
                       <i class="icon fa fa-circle-o"></i> Nurses Notes
                     </router-link>
                   </li>
-                  <li>
+                  <li v-if="hasAccess('view-medicationAndTreatment')">
                     <router-link :to="{ name: 'medicationAndTreatments' }" class="treeview-item">
                       <i class="icon fa fa-circle-o"></i> Medication and Treatments
                     </router-link>
                   </li>
-                  <li>
+                  <li v-if="hasAccess('view-vitalSign')">
                     <router-link :to="{ name: 'vitalSigns' }" class="treeview-item">
                       <i class="icon fa fa-circle-o"></i> Vital Signs
                     </router-link>
-                  </li><li>
+                  </li>
+                  <li v-if="hasAccess('view-intravenousFluid')">
                     <router-link :to="{ name: 'intravenousFluids' }" class="treeview-item">
                       <i class="icon fa fa-circle-o"></i> Intravenous Fluids
                     </router-link>
                   </li>
-                  <li>
+                  <li v-if="hasAccess('view-doctorsOrder')">
                     <router-link :to="{ name: 'doctorsOrders' }" class="treeview-item">
                       <i class="icon fa fa-circle-o"></i> Doctors Order
                     </router-link>
                   </li>
-                  <li>
+                  <li v-if="hasAccess('view-laboratory')">
                     <router-link :to="{ name: 'laboratories' }" class="treeview-item">
                       <i class="icon fa fa-circle-o"></i> Laboratory
                     </router-link>
                   </li>
-                  <li>
+                  <li v-if="hasAccess('view-patientDiagnoses')">
                     <router-link :to="{ name: 'patientDiagnoses' }" class="treeview-item">
                       <i class="icon fa fa-circle-o"></i> Diagnoses
                     </router-link>
                   </li>
                 </ul>
               </li>
-              <li>
+              <li v-if="hasAccess('view-billing')">
                 <router-link :to="{ name: 'billings' }" class="app-menu__item">
                     <i class="app-menu__icon fa fa-money"></i>
                     <span class="app-menu__label">Billing</span>
@@ -93,12 +94,12 @@
                   <i class="treeview-indicator fa fa-angle-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                  <li>
+                  <li v-if="hasAccess('view-room')">
                     <router-link :to="{ name: 'rooms' }" class="treeview-item">
                       <i class="icon fa fa-circle-o"></i> Rooms
                     </router-link>
                   </li>
-                  <li>
+                  <li v-if="hasAccess('view-floor')">
                     <router-link :to="{ name: 'floors' }" class="treeview-item">
                       <i class="icon fa fa-circle-o"></i> Floors
                     </router-link>
@@ -113,22 +114,22 @@
                   <i class="treeview-indicator fa fa-angle-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                  <li>
+                  <li v-if="hasAccess('view-diagnoses')">
                     <router-link :to="{ name: 'diagnoses' }" class="treeview-item">
                       <i class="icon fa fa-circle-o"></i> Diagnoses
                     </router-link>
                   </li>
-                  <li>
+                  <li v-if="hasAccess('view-typeOfCharge')">
                     <router-link :to="{ name: 'typeOfCharges' }" class="treeview-item">
                       <i class="icon fa fa-circle-o"></i> Type of Charges
                     </router-link>
                   </li>
-                  <li>
+                  <li v-if="hasAccess('view-discount')">
                     <router-link :to="{ name: 'discounts' }" class="treeview-item">
                       <i class="icon fa fa-circle-o"></i> Discount
                     </router-link>
                   </li>
-                  <li>
+                  <li v-if="hasAccess('view-insurance')">
                     <router-link :to="{ name: 'insurances' }" class="treeview-item">
                       <i class="icon fa fa-circle-o"></i> Insurance
                     </router-link>
