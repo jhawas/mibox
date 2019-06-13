@@ -73,6 +73,7 @@ import ShowDiscount from './pages/discounts/Show';
 import Billing from './pages/billings/Home';
 import StoreBilling from './pages/billings/Store';
 import ShowBilling from './pages/billings/Show';
+import PrintBilling from './pages/billings/Print';
 
 import TypeOfCharge from './pages/typeOfCharges/Home';
 import StoreTypeOfCharge from './pages/typeOfCharges/Store';
@@ -557,6 +558,14 @@ export default {
             path: '/billing/:id/show',
             name: 'billing-show',
             component: ShowBilling,
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        {
+            path: '/print/billing/:patient_record_id?',
+            name: 'billing-print',
+            component: PrintBilling,
             meta: {
                 requiresAuth: true,
             }

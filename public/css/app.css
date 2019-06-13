@@ -20292,3 +20292,35 @@ body #app .page-error {
   margin: 0 auto;
 }
 
+.print header {
+  text-align: center;
+  padding: 0 10px 20px 10px;
+}
+
+.print header h2 {
+  padding: 20px 0px;
+}
+
+.print header .title {
+  font-size: 18px;
+}
+
+.print .content {
+  display: flex;
+  width: 100%;
+  padding: 0 10px;
+}
+
+.print .hospital-logo {
+  width: 100px;
+  height: auto;
+}
+
+.print .patient-details {
+  display: flex;
+}
+
+.print .patient-details .group {
+  display: flex;
+}
+

@@ -88,7 +88,7 @@
                         <b-col md="6" class="my-1">
                           <b-form-group label-cols-sm="3" label="Print">
                                 <b-button 
-                                  @click="create" 
+                                  @click="printBill" 
                                   :disabled="!billing.patient_record"
                                 >Billing</b-button>
                           </b-form-group>
@@ -179,6 +179,8 @@
     import moment from 'moment';
 
     import { mapGetters, mapActions } from 'vuex';
+
+    import jsPDF from 'jspdf';
 
     import Multiselect from 'vue-multiselect';
 
@@ -286,6 +288,13 @@
               this.fetchInsurancesByRecord(value ? value : 0);
 
               this.fetchDiscountsByRecord(value ? value : 0);
+          },
+
+          printBill() {
+
+              let routeData = this.$router.resolve({name: 'billing-print' });
+              window.open(routeData.href, '_blank');
+
           },
 
           create() {

@@ -114,3 +114,34 @@ body {
 .ibox-spinner {
 	margin: 0 auto;
 }
+
+.print {
+	header {
+		text-align: center;
+		padding: 0 10px 20px 10px;
+		h2 {
+			padding: 20px 0px;
+		}
+		.title {
+			font-size: 18px;
+		}
+	}
+
+	.content {
+		display: flex;
+		width: 100%;
+		padding: 0 10px;
+	}
+
+	.hospital-logo {
+	    width: 100px;
+	    height: auto;
+	}
+
+	.patient-details {
+		display: flex;
+		.group {
+			display: flex;
+		}
+	}
+}
