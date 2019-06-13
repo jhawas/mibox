@@ -38,6 +38,7 @@ class PatientRecord extends Model
     {
         return "{$this->patient->full_name}";
     }
+    
 
     public function user()
     {
@@ -91,7 +92,16 @@ class PatientRecord extends Model
 
     public function patientDiagnoses()
     {
-        return $this->hasMany(PatientDiagnose::class);
+        // return $this->hasMany(PatientDiagnose::class);
+        return $this->belongsToMany(Diagnose::class, 'patient_diagnoses')
+            ->withPivot('remarks', 'description')
+            ->withTimestamps();
+
+    }
+
+    public function currentDiagnose()
+    {
+        return $this->hasOne(PatientDiagnose::class)->latest();
     }
 
     public function nurseNotes()

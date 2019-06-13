@@ -8,12 +8,31 @@ use App\Diagnose;
 
 class PatientDiagnose extends Model
 {
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = ['diagnose_name'];
+
     /**
      * The relationships that should always be loaded.
      *
      * @var array
      */
     protected $with = ['patientRecord', 'diagnose'];
+
+    /**
+     * Get the administrator flag for the user.
+     *
+     * @return bool
+     */
+    public function getDiagnoseNameAttribute()
+    {
+        return "{$this->diagnose->name}";
+    }
+
     
     public function patientRecord() 
     {
@@ -22,6 +41,6 @@ class PatientDiagnose extends Model
 
     public function diagnose() 
     {
-    	return $this->belongsTo(Diagnose::class, 'patient_record_id');
+    	return $this->belongsTo(Diagnose::class, 'diagnose_id');
     }
 }

@@ -99,30 +99,50 @@
 
                             </b-form-group>
 
+                            <legend>Diagnoses</legend>
+
                             <b-form-group
-                              label="Cheif Complaints:"
-                              label-for="cheifComplaints"
+                                label="Diagnoses:"
+                                label-for="diagnoses"
+                            >
+                                <multiselect 
+                                  v-model="form.current_diagnose" 
+                                  placeholder="Select Diagnoses" 
+                                  label="diagnose_name" 
+                                  track-by="diagnose_id" 
+                                  :options="allDiagnoses" 
+                                  @input="onDiagnosesChange"
+                                  :disabled="this.$route.params.id > 0"
+                                ></multiselect>
+
+                            </b-form-group>
+
+                            <b-form-group
+                              label="Description:"
+                              label-for="description"
                             >
                               <b-form-textarea
-                                v-model="form.chief_complaints"
-                                placeholder="Enter cheif complaints..."
+                                v-model="form.description"
+                                placeholder="Enter Description..."
                                 rows="3"
                                 max-rows="6"
+                                :disabled="this.$route.params.id > 0"
                               ></b-form-textarea>
                             </b-form-group>
 
                             <b-form-group
-                              label="Breif History:"
-                              label-for="breifHistory"
+                              label="Remarks:"
+                              label-for="remarks"
                             >
                               <b-form-textarea
-                                v-model="form.brief_history"
-                                placeholder="Enter brief history..."
+                                v-model="form.remarks"
+                                placeholder="Enter remarks..."
                                 rows="3"
                                 max-rows="6"
+                                :disabled="this.$route.params.id > 0"
                               ></b-form-textarea>
                             </b-form-group>
-                            
+
                             <legend>Other Details</legend>
                             <b-form-group
                                 label="Disposition:"
@@ -169,6 +189,30 @@
                          </b-col>
 
                          <b-col col lg="6">
+
+                            <b-form-group
+                              label="Cheif Complaints:"
+                              label-for="cheifComplaints"
+                            >
+                              <b-form-textarea
+                                v-model="form.chief_complaints"
+                                placeholder="Enter cheif complaints..."
+                                rows="3"
+                                max-rows="6"
+                              ></b-form-textarea>
+                            </b-form-group>
+
+                            <b-form-group
+                              label="Breif History:"
+                              label-for="breifHistory"
+                            >
+                              <b-form-textarea
+                                v-model="form.brief_history"
+                                placeholder="Enter brief history..."
+                                rows="3"
+                                max-rows="6"
+                              ></b-form-textarea>
+                            </b-form-group>
   
                             <legend>Admission Details</legend>
 
@@ -329,6 +373,9 @@
                   physician: null,
                   chart_completed_by: null,
                   discharged: 0,
+                  current_diagnose: null,
+                  description: '',
+                  remarks: '',
                 },
                 errors: [],
                 loading: false,
@@ -346,12 +393,15 @@
             this.fetchTypeOfRecords();
             this.fetchPhilhealthMemberships();
             this.fetchUsers();
+            this.fetchDiagnoses();
 
             if(this.$route.params.id) {
                 this.loading = true;
-                const floor = this.showPatientRecordById(this.$route.params.id);
-                floor.then(response => {
+                const patientRecord = this.showPatientRecordById(this.$route.params.id);
+                patientRecord.then(response => {
                       this.form = response.data;
+                      this.form.description = response.data.current_diagnose.description;
+                      this.form.remarks = response.data.current_diagnose.remarks;
                       this.loading = false;
                 });
             }
@@ -369,6 +419,7 @@
                 'allTypeOfRecords',
                 'allPhilhealthMemberships',
                 'allUsers',
+                'allDiagnoses',
               ]),
 
         },
@@ -386,7 +437,12 @@
               'fetchTypeOfRecords',
               'fetchPhilhealthMemberships',
               'fetchUsers',
+              'fetchDiagnoses'
             ]),
+
+          onDiagnosesChange(value) {
+              this.form.description = value.description;
+          },
 
           onSubmit(event) {
 
@@ -412,6 +468,9 @@
             formData.append('physician_id', this.form.physician ? this.form.physician.id : 0);
             formData.append('chart_completed_by', this.form.chart_completed_by ? this.form.chart_completed_by.id : 0);
             formData.append('discharged', this.form.discharged);
+
+            formData.append('description', this.form.description);
+            formData.append('remarks', this.form.remarks);
 
             if(this.$route.params.id > 0) {
 
@@ -447,6 +506,8 @@
             } else {
 
               formData.append('room_id', this.form.current_room ? this.form.current_room.id : 0);
+
+              formData.append('diagnose_id', this.form.current_diagnose ? this.form.current_diagnose.id : 0);
              
               const response = this.addPatientRecord(formData);
               

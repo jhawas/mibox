@@ -55,8 +55,8 @@
         <strong>Loading...</strong>
       </div>
 
-      <template slot="diagnose" slot-scope="row">
-          {{ row.value ? row.value.name : null }}
+      <template slot="remarks" slot-scope="row">
+          {{ row.item.pivot.remarks }}
       </template>
 
       <template slot="actions" slot-scope="row" right>
@@ -108,7 +108,8 @@
             return {
               // items: [{}],
               fields: [
-                { key: 'diagnose', label: 'Diagnoses', sortable: true, sortDirection: 'desc' },
+                { key: 'name', label: 'Name', sortable: true, sortDirection: 'desc' },
+                { key: 'description', label: 'Description', sortable: true, sortDirection: 'desc' },
                 { key: 'remarks', label: 'Remarks', sortable: true, sortDirection: 'desc' },
                 { key: 'created_at', label: 'Date/Time', sortable: true, sortDirection: 'desc', class: 'text-right' },
               ],

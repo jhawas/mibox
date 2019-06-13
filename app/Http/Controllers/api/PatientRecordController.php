@@ -33,6 +33,7 @@ class PatientRecordController extends Controller
             'chartCompletedBy',
             'patientRooms',
             'currentRoom',
+            'currentDiagnose',
             'rooms'
         ])->get();
         return $patientRecords;
@@ -67,6 +68,9 @@ class PatientRecordController extends Controller
             'physician_id' => 'required|not_in:0',
             'discharged_date' => $request->discharged_by > 0 ? 'required' : '',
             'discharged_time' => $request->discharged_by > 0 ? 'required' : '',
+            'diagnose_id' => 'required|not_in:0',
+            'description' => 'required',
+            'remarks' => 'required',
         ]);
 
         $patientRecord = new PatientRecord;
@@ -106,6 +110,13 @@ class PatientRecordController extends Controller
             'quantity_and_days' => 3,
             'amount' => $roomRate->room_rate,
             'total' => $roomRate->room_rate * 3,
+            'user_id' => \Auth::user()->id,
+        ]);
+
+        // add initial diagnoses
+        $patientRecord->patientDiagnoses()->attach($request->diagnose_id, [
+            'description' => $request->description,
+            'remarks' => $request->remarks,
             'user_id' => \Auth::user()->id,
         ]);
 
@@ -167,6 +178,7 @@ class PatientRecordController extends Controller
             // 'patientRooms'
             'currentRoom',
             'rooms',
+            'currentDiagnose',
         ]);
     }
 
@@ -295,7 +307,8 @@ class PatientRecordController extends Controller
             'physician',
             'chartCompletedBy',
             'patientRooms',
-            'currentRoom'
+            'currentRoom',
+            'currentDiagnose',
         ])->where('discharged', 0)->get();
         return $patientRecords;
     }
