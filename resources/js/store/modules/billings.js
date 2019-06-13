@@ -56,7 +56,7 @@ const actions= {
 
 		const response = await axios.post(`/api/billings/${billing.id}`, billing.formData);
 
-		commit('editBilling', response.data);
+		commit('editBilling', response.data.billing);
 
 		return response;
 

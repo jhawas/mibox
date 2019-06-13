@@ -112,6 +112,7 @@ class BillingController extends Controller
 
         return response()->json([
             'message' => 'success',
+            'billing' => $billing->load(['typeOfCharge', 'patientRecord']),
         ]);
     }
 

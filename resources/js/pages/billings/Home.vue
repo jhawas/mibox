@@ -73,12 +73,12 @@
                                   v-if="hasAccess('create-billing')"
                                 >Add Bill</b-button>
                                 <b-button 
-                                  @click="create" 
+                                  @click="createInsurance" 
                                   :disabled="!billing.patient_record"
                                   v-if="hasAccess('create-patientInsurance')"
                                 >Add Insurance</b-button>
                                 <b-button 
-                                  @click="create" 
+                                  @click="createDiscount" 
                                   :disabled="!billing.patient_record"
                                   v-if="hasAccess('create-patientDiscount')"
                                 >Add Discount</b-button>
@@ -156,41 +156,9 @@
               </div>
             </div>
 
-            <div class="col-md-12">
-              <div class="tile">
-                <div class="tile-title">
-                    Insurance
-                </div>
-                <div class="tile-body">
-                    <div>
-                      <b-table
-                        :items="allBillings"
-                        :fields="fields"
-                        :sort-by.sync="sortBy"
-                        :sort-desc.sync="sortDesc"
-                      ></b-table>
-                    </div>
-                </div>
-              </div>
-            </div>
+            <insurance-component :items="allPatientInsurances"/>
 
-            <div class="col-md-12">
-              <div class="tile">
-                <div class="tile-title">
-                    Discount
-                </div>
-                <div class="tile-body">
-                    <div>
-                      <b-table
-                        :items="allBillings"
-                        :fields="fields"
-                        :sort-by.sync="sortBy"
-                        :sort-desc.sync="sortDesc"
-                      ></b-table>
-                    </div>
-                </div>
-              </div>
-            </div>
+            <discount-component :items="allPatientDiscounts"/>
 
         </div>
     </Layout>
@@ -204,6 +172,10 @@
 
     import Layout from '../../components/Layout';
 
+    import InsuranceComponent from '../../components/InsuranceComponent';
+
+    import DiscountComponent from '../../components/DiscountComponent';
+
     import moment from 'moment';
 
     import { mapGetters, mapActions } from 'vuex';
@@ -214,7 +186,9 @@
 
         components: {
             Layout,
-            Multiselect
+            Multiselect,
+            InsuranceComponent,
+            DiscountComponent,
         },
 
         props: {
@@ -256,7 +230,15 @@
 
         computed: {
 
-          ...mapGetters(['allBillings', 'allPatientRecords', 'defaultBilling', 'hasAccess']),
+          ...mapGetters([
+              'allBillings', 
+              'allPatientRecords', 
+              'allPatientRecords',
+              'allPatientInsurances',
+              'allPatientDiscounts',
+              'defaultBilling', 
+              'hasAccess'
+            ]),
 
           sortOptions() {
             // Create an options list from our fields
@@ -274,6 +256,8 @@
             // this.fetchBillings();
             if(this.defaultBilling.patient_record_id) {
                 this.fetchBillingsByRecord(this.defaultBilling);
+                this.fetchInsurancesByRecord(this.defaultBilling);
+                this.fetchDiscountsByRecord(this.defaultBilling);
             }
 
         },
@@ -285,6 +269,8 @@
             'deleteBilling', 
             'fetchPatientRecords', 
             'fetchBillingsByRecord',
+            'fetchInsurancesByRecord',
+            'fetchDiscountsByRecord',
           ]),
 
           onFiltered(filteredItems) {
@@ -296,11 +282,27 @@
           onChange(value) {
 
               this.fetchBillingsByRecord(value ? value : 0);
+
+              this.fetchInsurancesByRecord(value ? value : 0);
+
+              this.fetchDiscountsByRecord(value ? value : 0);
           },
 
           create() {
 
             this.$router.push({ name: 'billing-create' });
+
+          },
+
+          createInsurance() {
+            
+            this.$router.push({ name: 'patientInsurance-create' });
+
+          },
+
+          createDiscount() {
+            
+            this.$router.push({ name: 'patientDiscount-create' });
 
           },
 

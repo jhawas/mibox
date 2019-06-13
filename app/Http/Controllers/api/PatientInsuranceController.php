@@ -39,7 +39,7 @@ class PatientInsuranceController extends Controller
         $validatedData = $request->validate([
             'patient_record_id' => 'required|not_in:0',
             'insurance_id' => 'required|not_in:0',
-            'amount' => 'required',
+            'amount' => 'required|not_in:0',
         ]);
 
         $patientInsurance = new PatientInsurance;
@@ -51,6 +51,7 @@ class PatientInsuranceController extends Controller
 
         return response()->json([
             'message' => 'success',
+            'patientInsurance' => $patientInsurance->load('insurance'),
         ]);
     }
 
@@ -99,6 +100,7 @@ class PatientInsuranceController extends Controller
 
         return response()->json([
             'message' => 'success',
+            'patientInsurance' => $patientInsurance->load('insurance'),
         ]);
     }
 

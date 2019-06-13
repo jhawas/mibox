@@ -82,6 +82,10 @@ import PatientRoom from './pages/patientRooms/Home';
 import StorePatientRoom from './pages/patientRooms/Store';
 import ShowPatientRoom from './pages/patientRooms/Show';
 
+import StorePatientInsurance from './pages/patientInsurances/Store';
+
+import StorePatientDiscount from './pages/patientDiscounts/Store';
+
 
 export default {
 
@@ -603,6 +607,25 @@ export default {
             path: '/patientRoom/:id/show',
             name: 'patientRoom-show',
             component: ShowPatientRoom,
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        // patient insurance
+        {
+            path: '/patientInsurance/:id?',
+            name: 'patientInsurance-create',
+            component: StorePatientInsurance,
+            meta: {
+                requiresAuth: true,
+            }
+        },
+
+        // patient discount
+        {
+            path: '/patientDiscount/:id?',
+            name: 'patientDiscount-create',
+            component: StorePatientDiscount,
             meta: {
                 requiresAuth: true,
             }

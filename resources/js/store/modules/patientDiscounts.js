@@ -20,11 +20,19 @@ const actions= {
 
 	},
 
+	async fetchDiscountsByRecord({ commit }, patient_record) {
+
+		const response = await axios.get(`/api/patientDiscounts/patientRecord/${patient_record.id}`);
+		
+		commit('setPatientDiscounts', response.data);
+
+	},
+
 	async addPatientDiscount( { commit }, formData ) {
 
 		const response = await axios.post(`/api/patientDiscounts`, formData);
 
-		commit('newPatientDiscount', response.data);
+		commit('newPatientDiscount', response.data.patientDiscount);
 
 		return response;
 
@@ -44,7 +52,7 @@ const actions= {
 
 		const response = await axios.post(`/api/patientDiscounts/${patientDiscount.id}`, patientDiscount.formData);
 
-		commit('editPatientDiscount', response.data);
+		commit('editPatientDiscount', response.data.patientDiscount);
 
 		return response;
 

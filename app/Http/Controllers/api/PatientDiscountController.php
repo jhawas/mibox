@@ -52,6 +52,7 @@ class PatientDiscountController extends Controller
 
         return response()->json([
             'message' => 'success',
+            'patientDiscount' => $patientDiscount->load('discount'),
         ]);
     }
 
@@ -100,6 +101,7 @@ class PatientDiscountController extends Controller
 
         return response()->json([
             'message' => 'success',
+            'patientDiscount' => $patientDiscount->load('discount'),
         ]);
     }
 

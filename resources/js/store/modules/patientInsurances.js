@@ -20,11 +20,19 @@ const actions= {
 
 	},
 
+	async fetchInsurancesByRecord({ commit }, patient_record) {
+
+		const response = await axios.get(`/api/patientInsurances/patientRecord/${patient_record.id}`);
+		
+		commit('setPatientInsurances', response.data);
+
+	},
+
 	async addPatientInsurance( { commit }, formData ) {
 
 		const response = await axios.post(`/api/patientInsurances`, formData);
 
-		commit('newPatientInsurance', response.data);
+		commit('newPatientInsurance', response.data.patientInsurance);
 
 		return response;
 
@@ -44,7 +52,7 @@ const actions= {
 
 		const response = await axios.post(`/api/patientInsurances/${patientInsurance.id}`, patientInsurance.formData);
 
-		commit('editPatientInsurance', response.data);
+		commit('editPatientInsurance', response.data.patientInsurance);
 
 		return response;
 
