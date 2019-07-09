@@ -54,8 +54,16 @@
                             <b-form-select v-model="perPage" :options="pageOptions"></b-form-select>
                           </b-form-group>
                         </b-col>
-                      </b-row>
 
+                        <b-col md="6" class="my-1">
+                          <b-form-group label-cols-sm="3" label="Print">
+                                <b-button 
+                                  @click="print" 
+                                >Patient</b-button>
+                          </b-form-group>
+                        </b-col>
+
+                      </b-row>
                       <!-- Main table element -->
                       <b-table
                         show-empty
@@ -214,6 +222,15 @@
             // Trigger pagination to update the number of buttons/pages due to filtering
             this.totalRows = filteredItems.length
             this.currentPage = 1
+          },
+
+          print() {
+
+              let routeData = this.$router.resolve({
+                  name: 'patient-print', 
+              });
+              window.open(routeData.href, '_blank');
+
           },
 
           getAge(date) {

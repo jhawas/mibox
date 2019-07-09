@@ -80,4 +80,10 @@ class Patient extends Model
         return $this->hasMany(PatientRecord::class);
     }
 
+    public function currentPatientRecords()
+    {
+        // return $this->patientRooms()->latest();
+        return $this->hasOne(PatientRecord::class)->latest();
+    }
+
 }

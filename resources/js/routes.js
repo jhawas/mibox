@@ -9,6 +9,7 @@ import ShowUser from './pages/users/Show';
 import Patient from './pages/patients/Home';
 import StorePatient from './pages/patients/Store';
 import ShowPatient from './pages/patients/Show';
+import PrintPatient from './pages/patients/Print';
 
 import TypeOfRoom from './pages/typeOfRooms/Home';
 import StoreTypeOfRoom from './pages/typeOfRooms/Store';
@@ -158,6 +159,14 @@ export default {
             path: '/patient/:id/show',
             name: 'patient-show',
             component: ShowPatient,
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        {
+            path: '/print/patient',
+            name: 'patient-print',
+            component: PrintPatient,
             meta: {
                 requiresAuth: true,
             }
