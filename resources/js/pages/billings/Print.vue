@@ -102,7 +102,7 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td colspan="2" class="bill-right">HMO</td>
+                <td colspan="2" class="bill-right">HMO/Phic</td>
                 <td>{{allBillingReports.totalHMO}}</td>
               </tr>
               <tr>

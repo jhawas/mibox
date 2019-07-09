@@ -22,6 +22,8 @@ class CreatePatientInsurancesTable extends Migration
             $table->integer('insurance_id')->unsigned()->nullable();
             $table->foreign('insurance_id')->references('id')->on('insurances')->onDelete('cascade');
 
+            $table->string('description')->nullable();
+
             $table->decimal('amount', 8, 2)->nullable();
 
             $table->integer('user_id')->unsigned()->nullable();
