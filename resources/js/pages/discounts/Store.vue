@@ -52,6 +52,7 @@
                                 :value="1"
                                 :unchecked-value="0"
                                 class="form-group"
+                                disabled
                             >
                               Percent 
                             </b-form-checkbox>
@@ -93,7 +94,7 @@
             return {
                 form: {
                   name: '',
-                  is_percent: 0,
+                  is_percent: 1,
                 },
                 errors: [],
                 loading: false,

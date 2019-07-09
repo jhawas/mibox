@@ -92,6 +92,8 @@ Route::group(['middleware' => 'auth:api'], function(){
 
 	Route::get('billings/patientRecord/{patient_record_id}', 'api\BillingController@dataByRecord')->name('billings.databyRecord');
 
+	Route::get('print/billing/{patient_record_id}', 'api\BillingController@print')->name('billings.print');
+
 	Route::apiResource('typeOfCharges', 'api\TypeOfChargeController');
 	Route::get('typeOfCharges/types/{type_id}', 'api\TypeOfChargeController@chargeByType')->name('billings.chargeByType');
 

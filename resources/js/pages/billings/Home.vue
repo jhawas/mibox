@@ -180,8 +180,6 @@
 
     import { mapGetters, mapActions } from 'vuex';
 
-    import jsPDF from 'jspdf';
-
     import Multiselect from 'vue-multiselect';
 
     export default {
@@ -292,7 +290,10 @@
 
           printBill() {
 
-              let routeData = this.$router.resolve({name: 'billing-print' });
+              let routeData = this.$router.resolve({
+                  name: 'billing-print',
+                  params: { patient_record_id: this.defaultBilling.patient_record.id }  
+              });
               window.open(routeData.href, '_blank');
 
           },

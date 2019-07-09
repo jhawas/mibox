@@ -69,8 +69,9 @@
                             >
                               <b-form-input
                                 v-model="form.amount"
-                                type="number"
+                                type="text"
                                 placeholder="Enter amount"
+                                @keypress="isNumber($event)"
                               />
                             </b-form-group>
 
@@ -160,6 +161,16 @@
               'fetchPatientRecords',
               'fetchDiscounts'
             ]),
+
+          isNumber: function(evt) {
+            evt = (evt) ? evt : window.event;
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
+              evt.preventDefault();;
+            } else {
+              return true;
+            }
+          },
 
           onSubmit(event) {
 

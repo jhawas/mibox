@@ -2,12 +2,14 @@ const state = {
 
 	billings: [],
 	billing: {},
+	billingReports: [],
 };
 
 const getters= {
 	
 	allBillings: (state) => state.billings,
 	defaultBilling: (state) => state.billing,
+	allBillingReports: (state) => state.billingReports,
 
 };
 
@@ -28,6 +30,14 @@ const actions= {
 		commit('setBillings', response.data);
 
 		commit('setBillingRecord', patient_record);
+
+	},
+
+	async fetchBillingReports({ commit }, patient_record) {
+
+		const response = await axios.get(`/api/print/billing/${patient_record}`);
+		
+		commit('setBillingReports', response.data);
 
 	},
 
@@ -75,6 +85,8 @@ const actions= {
 };
 
 const mutations= {
+
+	setBillingReports: (state, billingReports) => (state.billingReports = billingReports),
 
 	setBillingRecord: (state, patient_record) => (state.billing.patient_record = patient_record),
 

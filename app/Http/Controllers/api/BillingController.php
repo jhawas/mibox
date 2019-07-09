@@ -143,4 +143,55 @@ class BillingController extends Controller
             ->get();
         return $billings;
     }
+
+    /**
+     * Display a listing of the resource by record report.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function print($patient_record_id)
+    {
+        $billings = Billing::with(['typeOfCharge', 'patientRecord'])
+            ->where('patient_record_id', $patient_record_id)
+            ->get();
+
+        $patientRecord = \App\PatientRecord::with([
+            'user',
+            'patient',
+            'disposition',
+            'result',
+            'philhealthMembership',
+            'admitAndCheckBy',
+            'dischargedBy',
+            'physician',
+            'chartCompletedBy',
+            'patientRooms',
+            'currentRoom',
+            'currentDiagnose',
+            'rooms',
+            'patientInsurances',
+            'patientDiscounts'
+        ])->where('id', $patient_record_id)
+        ->first();
+
+        $patient = \App\Patient::where('id', $patientRecord->patient->id)->first();
+
+        $totalBill = $billings->sum('total');
+
+        $totalDiscount = ($totalBill * 0.70) * $patientRecord->patientDiscounts->sum('amount');
+
+        $totalHMO = $patientRecord->patientInsurances->sum('amount');
+
+        $grandTotal = $totalBill - ($totalDiscount + $totalHMO);
+
+        return [
+            'billings' => $billings,
+            'totalBill' => number_format($totalBill, 2),
+            'patient' => $patient,
+            'patientRecord' => $patientRecord,
+            'totalDiscount' => number_format($totalDiscount, 2),
+            'totalHMO' => number_format($totalHMO, 2),
+            'grandTotal' => number_format($grandTotal, 2)
+        ];
+    }
 }

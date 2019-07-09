@@ -155,4 +155,14 @@ class PatientRecord extends Model
         return $this->belongsToMany(TypeOfCharge::class, 'billings')->withTimestamps();
     }
 
+    public function patientInsurances()
+    {
+        return $this->hasMany(\App\PatientInsurance::class);
+    }
+
+    public function patientDiscounts()
+    {
+        return $this->hasMany(\App\PatientDiscount::class);
+    }
+
 }

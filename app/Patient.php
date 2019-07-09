@@ -13,7 +13,7 @@ class Patient extends Model
      *
      * @var array
      */
-    protected $appends = ['full_name'];
+    protected $appends = ['full_name', 'full_name_plain'];
 
     /**
      * Get the user's first name.
@@ -57,6 +57,17 @@ class Patient extends Model
     public function getFullNameAttribute()
     {
         return "{$this->first_name} {$this->middle_name} {$this->last_name} (Case No.: {$this->case_no})";
+    }
+
+    /**
+     * Get the user's full name.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getFullNamePlainAttribute()
+    {
+        return "{$this->first_name} {$this->middle_name} {$this->last_name}";
     }
 
     public function user()
