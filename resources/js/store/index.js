@@ -31,6 +31,7 @@ import groupOfCharges from './modules/groupOfCharges';
 import patientRooms from './modules/patientRooms';
 import patientDiscounts from './modules/patientDiscounts';
 import patientInsurances from './modules/patientInsurances';
+import dashboard from './modules/dashboard';
 
 Vue.use(Vuex);
 
@@ -66,6 +67,7 @@ export default new Vuex.Store({
       patientRooms,
       patientDiscounts,
       patientInsurances,
+      dashboard,
   	},
 });
 

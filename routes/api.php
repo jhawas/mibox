@@ -30,6 +30,8 @@ Route::group(['middleware' => 'auth:api'], function(){
 
 	Route::apiResource('users', 'api\UserController');
 
+	Route::apiResource('dashboard', 'api\DashboardController');
+
 	Route::apiResource('patients', 'api\PatientController');
 	Route::get('patients/list/available', 'api\PatientController@available')->name('patients.available');
 
