@@ -136,6 +136,7 @@ body {
 		display: flex;
 		width: 100%;
 		padding: 0 10px;
+		flex-flow: column;
 	}
 
 	.hospital-logo {
@@ -148,5 +149,20 @@ body {
 		.group {
 			display: flex;
 		}
+	}
+	.summary {
+		width: 100%;
+	}
+
+	.breakdown-content {
+		width: 100%;
+		display: flex;
+		flex-flow: row wrap;
+		border-top: 1px solid;
+	}
+
+	.breakdown {
+		flex: 1;
+		padding: 0 10px;
 	}
 }

@@ -29,6 +29,9 @@ class CreateTypeOfChargesTable extends Migration
             $table->integer('type_id')->unsigned()->nullable();
             $table->foreign('type_id')->references('id')->on('types')->onDelete('cascade');
 
+            $table->integer('group_of_charge_id')->unsigned()->nullable();
+            $table->foreign('group_of_charge_id')->references('id')->on('group_of_charges')->onDelete('cascade');
+
             $table->integer('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();

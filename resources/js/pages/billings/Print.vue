@@ -8,15 +8,15 @@
               <div class="col-md-6">
                   <div class="group">
                     <div class="label">Patient Name:</div>
-                    <div class="value">{{allBillingReports.patient.full_name_plain}}</div>
+                    <div class="value">{{allBillingReports.patient ? allBillingReports.patient.full_name_plain : null}}</div>
                   </div>
                   <div class="group">
                     <div class="label">Address:</div>
-                    <div class="value">{{allBillingReports.patient.address}}</div>
+                    <div class="value">{{allBillingReports.patient ? allBillingReports.patient.address : null}}</div>
                   </div>
                    <div class="group">
                     <div class="label">Attending Physician:</div>
-                    <div class="value">{{allBillingReports.patientRecord.physician.full_name}}</div>
+                    <div class="value">{{allBillingReports.patientRecord ? allBillingReports.patientRecord.physician.full_name : null}}</div>
                   </div>
                   <div class="group">
                     <div class="label">Room:</div>
@@ -48,72 +48,162 @@
           </div>
       </header><!-- /header -->
       <div class="content main-billing">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Particulars</th>
-              <th>Actual Bill</th>
-              <th>VAT exempt</th>
-              <th>Sr. Citizen</th>
-              <th>HMO/Phic</th>
-              <th>Excess</th>
-            </tr>
-          </thead>
-          <tbody>
-              <tr v-for="item in allBillingReports.billings">
-                <td>{{item.type_of_charge.name}}</td>
-                <td>{{formatPrice(item.total)}}</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>{{formatPrice(item.total)}}</td>
-              </tr>
-              <tr v-for="item in allBillingReports.patientRecord.patient_discounts">
-                <td>{{item.discount ? item.discount.name : ''}}</td>
-                <td></td>
-                <td></td>
-                <td>{{(item.amount * 100) + '%'}}</td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr v-for="item in allBillingReports.patientRecord.patient_insurances">
-                <td>{{item.insurance ? item.insurance.name : ''}}</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>{{formatPrice(item.amount)}}</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td colspan="2" class="bill-right">Total</td>
-                <td>{{allBillingReports.totalBill}}</td>
-              </tr>
-              <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td colspan="2" class="bill-right">Discount</td>
-                <td>{{allBillingReports.totalDiscount}}</td>
-              </tr>
-              <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td colspan="2" class="bill-right">HMO/Phic</td>
-                <td>{{allBillingReports.totalHMO}}</td>
-              </tr>
-              <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td colspan="2" class="bill-right">Grand Total</td>
-                <td class="bill-right">{{allBillingReports.grandTotal}}</td>
-              </tr>
-          </tbody>
-        </table>
+          <div class="summary">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Particulars</th>
+                    <th>Actual Bill</th>
+                    <th>VAT exempt</th>
+                    <th>Sr. Citizen</th>
+                    <th>HMO/Phic</th>
+                    <th>Excess</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="item in allBillingReports.withoutGroupBill">
+                      <td>{{item.type_of_charge.name}}</td>
+                      <td>{{formatPrice(item.total)}}</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td>{{formatPrice(item.total)}}</td>
+                    </tr>
+                    <tr>
+                      <td>Laboratory</td>
+                      <td>{{formatPrice(allBillingReports.laboratoryGroupBillTotal)}}</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td>{{formatPrice(allBillingReports.laboratoryGroupBillTotal)}}</td>
+                    </tr>
+                    <tr>
+                      <td>Medicine</td>
+                      <td>{{formatPrice(allBillingReports.medicineGroupBillTotal)}}</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td>{{formatPrice(allBillingReports.medicineGroupBillTotal)}}</td>
+                    </tr>
+                    <tr>
+                      <td>Supplies</td>
+                      <td>{{formatPrice(allBillingReports.suppliesGroupBillTotal)}}</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td>{{formatPrice(allBillingReports.suppliesGroupBillTotal)}}</td>
+                    </tr>
+                    <tr v-for="item in allBillingReports.patientRecord.patient_discounts">
+                      <td>{{item.discount ? item.discount.name : ''}}</td>
+                      <td></td>
+                      <td></td>
+                      <td>{{(item.amount * 100) + '%'}}</td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr v-for="item in allBillingReports.patientRecord.patient_insurances">
+                      <td>{{item.insurance ? item.insurance.name : ''}}</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td>{{formatPrice(item.amount)}}</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td colspan="2" class="bill-right">Total</td>
+                      <td>{{allBillingReports.totalBill}}</td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td colspan="2" class="bill-right">Discount</td>
+                      <td>{{allBillingReports.totalDiscount}}</td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td colspan="2" class="bill-right">HMO/Phic</td>
+                      <td>{{allBillingReports.totalHMO}}</td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td colspan="2" class="bill-right">Grand Total</td>
+                      <td class="bill-right">{{allBillingReports.grandTotal}}</td>
+                    </tr>
+                </tbody>
+              </table>
+          </div>
+
+          <div class="breakdown-content">
+              <div class="breakdown">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Medicine</th>
+                        <th>QTY</th>
+                        <th>Unit Price</th>
+                        <th>Total</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="item in allBillingReports.medicineGroupBill">
+                          <td>{{item.type_of_charge.name}}</td>
+                          <td>{{item.quantity_and_days}}</td>
+                          <td>{{item.amount}}</td>
+                          <td>{{formatPrice(item.total)}}</td>
+                        </tr>
+                    </tbody>
+                  </table>
+              </div>
+              <div class="breakdown">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Supplies</th>
+                        <th>QTY</th>
+                        <th>Unit Price</th>
+                        <th>Total</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="item in allBillingReports.suppliesGroupBill">
+                          <td>{{item.type_of_charge.name}}</td>
+                          <td>{{item.quantity_and_days}}</td>
+                          <td>{{item.amount}}</td>
+                          <td>{{formatPrice(item.total)}}</td>
+                        </tr>
+                    </tbody>
+                  </table>
+              </div>
+              <div class="breakdown">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Laboratory</th>
+                        <th>QTY</th>
+                        <th>Unit Price</th>
+                        <th>Total</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="item in allBillingReports.laboratoryGroupBill">
+                          <td>{{item.type_of_charge.name}}</td>
+                          <td>{{item.quantity_and_days}}</td>
+                          <td>{{item.amount}}</td>
+                          <td>{{formatPrice(item.total)}}</td>
+                        </tr>
+                    </tbody>
+                  </table>
+              </div>
+          </div>
+
       </div>
     </div>
 </template>

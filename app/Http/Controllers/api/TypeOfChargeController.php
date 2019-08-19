@@ -15,7 +15,7 @@ class TypeOfChargeController extends Controller
      */
     public function index()
     {
-        $typeOfCharges = TypeOfCharge::with(['parent', 'category'])->get();
+        $typeOfCharges = TypeOfCharge::with(['parent', 'category', 'groupOfCharge'])->get();
 
         return $typeOfCharges;
     }
@@ -47,7 +47,7 @@ class TypeOfChargeController extends Controller
         $typeOfCharge = new TypeOfCharge;
         $typeOfCharge->name = $request->name;
         $typeOfCharge->price = $request->price;
-        $typeOfCharge->parent_id = $this->isDataEmpty($request->parent_id);
+        $typeOfCharge->group_of_charge_id = $this->isDataEmpty($request->group_of_charge_id);
         $typeOfCharge->type_id = $request->type_id;
         $typeOfCharge->is_default = $request->is_default;
         $typeOfCharge->user_id = \Auth::user()->id;
@@ -66,7 +66,7 @@ class TypeOfChargeController extends Controller
      */
     public function show(TypeOfCharge $typeOfCharge)
     {
-        return $typeOfCharge->load(['parent', 'category']);
+        return $typeOfCharge->load(['parent', 'category', 'groupOfCharge']);
     }
 
     /**
@@ -97,7 +97,7 @@ class TypeOfChargeController extends Controller
         
         $typeOfCharge->name = $request->name;
         $typeOfCharge->price = $request->price;
-        $typeOfCharge->parent_id = $this->isDataEmpty($request->parent_id);
+        $typeOfCharge->group_of_charge_id = $this->isDataEmpty($request->group_of_charge_id);
         $typeOfCharge->type_id = $request->type_id;
         $typeOfCharge->is_default = $request->is_default;
         $typeOfCharge->user_id = \Auth::user()->id;

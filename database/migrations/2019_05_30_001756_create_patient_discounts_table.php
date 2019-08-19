@@ -24,6 +24,8 @@ class CreatePatientDiscountsTable extends Migration
 
             $table->decimal('amount', 8, 2)->nullable();
 
+            $table->unique(array('patient_record_id', 'discount_id'));
+
             $table->integer('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 

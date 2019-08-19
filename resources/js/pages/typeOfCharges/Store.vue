@@ -47,15 +47,15 @@
                             </b-form-group>
 
                             <b-form-group
-                                label="Parent:"
-                                label-for="parent"
+                                label="Group Of charge:"
+                                label-for="groupOfCharge"
                             >
                                 <multiselect 
-                                  v-model="form.parent" 
-                                  placeholder="Select Charges" 
+                                  v-model="form.group_of_charge" 
+                                  placeholder="Select Group Of Charge" 
                                   label="name" 
                                   track-by="id" 
-                                  :options="allTypeOfCharges" 
+                                  :options="allGroupOfCharges" 
                                 ></multiselect>
 
                             </b-form-group>
@@ -135,7 +135,7 @@
                 form: {
                   name: '',
                   price: 0.00,
-                  parent: null,
+                  group_of_charge: null,
                   category: null,
                   is_default: 0,
                 },
@@ -150,6 +150,7 @@
 
             this.fetchTypeOfCharges();
             this.fetchTypes();
+            this.fetchGroupOfCharges();
 
             if(this.$route.params.id) {
                 this.loading = true;
@@ -164,7 +165,7 @@
 
         computed: {
 
-            ...mapGetters(['allTypeOfCharges', 'allTypes']),
+            ...mapGetters(['allTypeOfCharges', 'allTypes', 'allGroupOfCharges']),
 
         },
 
@@ -176,6 +177,7 @@
             'showTypeOfChargeById', 
             'fetchTypeOfCharges',
             'fetchTypes',
+            'fetchGroupOfCharges'
           ]),
 
           onSubmit(event) {
@@ -189,7 +191,7 @@
             formData.append('name', this.form.name);
             formData.append('price', this.form.price);
             formData.append('is_default', this.form.is_default);
-            formData.append('parent_id', this.form.parent ? this.form.parent.id : 0);
+            formData.append('group_of_charge_id', this.form.group_of_charge ? this.form.group_of_charge.id : 0);
             formData.append('type_id', this.form.category ? this.form.category.id : 0);
 
             if(this.$route.params.id > 0) {

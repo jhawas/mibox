@@ -99,6 +99,8 @@ Route::group(['middleware' => 'auth:api'], function(){
 
 	Route::apiResource('types', 'api\TypeController');
 
+	Route::apiResource('groupOfCharges', 'api\GroupOfChargeController');
+
 	Route::apiResource('patientRooms', 'api\PatientRoomController');
 
 	Route::apiResource('patientDiscounts', 'api\PatientDiscountController');

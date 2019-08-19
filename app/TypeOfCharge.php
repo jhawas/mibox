@@ -38,6 +38,10 @@ class TypeOfCharge extends Model
     	return $this->belongsTo('App\TypeOfCharge', 'parent_id');
     }
 
+    public function groupOfCharge() {
+        return $this->belongsTo('App\GroupOfCharge', 'group_of_charge_id');
+    }
+
     public function category() {
         return $this->belongsTo('App\Type', 'type_id');
     }

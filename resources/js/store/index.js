@@ -27,6 +27,7 @@ import discounts from './modules/discounts';
 import billings from './modules/billings';
 import typeOfCharges from './modules/typeOfCharges';
 import types from './modules/types';
+import groupOfCharges from './modules/groupOfCharges';
 import patientRooms from './modules/patientRooms';
 import patientDiscounts from './modules/patientDiscounts';
 import patientInsurances from './modules/patientInsurances';
@@ -61,6 +62,7 @@ export default new Vuex.Store({
       billings,
       typeOfCharges,
       types,
+      groupOfCharges,
       patientRooms,
       patientDiscounts,
       patientInsurances,

@@ -55,6 +55,10 @@
         <strong>Loading...</strong>
       </div>
 
+      <template slot="type_of_charge" slot-scope="row" right>
+          {{row.value ? row.value.name : null}}
+      </template>
+
       <template slot="actions" slot-scope="row" right>
           <b-button>
               <i class="fa fa-eye" @click="show(row.item)" aria-hidden="true"></i>
@@ -104,7 +108,7 @@
             return {
               // items: [{}],
               fields: [
-                { key: 'medicine', label: 'Medicine', sortable: true, sortDirection: 'desc' },
+                { key: 'type_of_charge', label: 'Medicine', sortable: true, sortDirection: 'desc' },
                 { key: 'remarks', label: 'Remarks', sortable: true, sortDirection: 'desc', class: 'text-center' },
                 { key: 'date', label: 'Date', sortable: true, sortDirection: 'desc', class: 'text-right' },
                 { key: 'time', label: 'Time', sortable: true, sortDirection: 'desc', class: 'text-right' },
@@ -124,6 +128,8 @@
 
             // Set the initial number of items
             this.totalRows = this.items.length;
+
+            console.log(this.items)
 
         },
 

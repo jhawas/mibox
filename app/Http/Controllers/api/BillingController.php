@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\Billing;
+use App\GroupOfCharge;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -151,8 +152,63 @@ class BillingController extends Controller
      */
     public function print($patient_record_id)
     {
-        $billings = Billing::with(['typeOfCharge', 'patientRecord'])
-            ->where('patient_record_id', $patient_record_id)
+        $billings = Billing::with([
+            'typeOfCharge' => function($query) {
+                $query->with([
+                    'groupOfCharge'
+                ]);
+            }, 
+            'patientRecord'
+        ])->where('patient_record_id', $patient_record_id)
+            ->get();
+
+        $withoutGroupBill = Billing::with([
+            'typeOfCharge' => function($query) {
+                $query->with([
+                    'groupOfCharge'
+                ]);
+            }, 
+            'patientRecord'
+        ])->whereHas('typeOfCharge', function($q) {
+            $q->where('group_of_charge_id',null);
+        })->where('patient_record_id', $patient_record_id)
+            ->get();
+
+
+        $laboratoryGroupBill = Billing::with([
+            'typeOfCharge' => function($query) {
+                $query->with([
+                    'groupOfCharge'
+                ]);
+            }, 
+            'patientRecord'
+        ])->whereHas('typeOfCharge', function($q) {
+            $q->where('group_of_charge_id', 1);
+        })->where('patient_record_id', $patient_record_id)
+            ->get();
+
+        $medicineGroupBill = Billing::with([
+            'typeOfCharge' => function($query) {
+                $query->with([
+                    'groupOfCharge'
+                ]);
+            }, 
+            'patientRecord'
+        ])->whereHas('typeOfCharge', function($q) {
+            $q->where('group_of_charge_id', 2);
+        })->where('patient_record_id', $patient_record_id)
+            ->get();
+
+        $suppliesGroupBill = Billing::with([
+            'typeOfCharge' => function($query) {
+                $query->with([
+                    'groupOfCharge'
+                ]);
+            }, 
+            'patientRecord'
+        ])->whereHas('typeOfCharge', function($q) {
+            $q->where('group_of_charge_id', 3);
+        })->where('patient_record_id', $patient_record_id)
             ->get();
 
         $patientRecord = \App\PatientRecord::with([
@@ -186,6 +242,17 @@ class BillingController extends Controller
 
         return [
             'billings' => $billings,
+            'withoutGroupBill' => $withoutGroupBill,
+
+            'laboratoryGroupBill' => $laboratoryGroupBill,
+            'laboratoryGroupBillTotal' => $laboratoryGroupBill->sum('total'),
+
+            'medicineGroupBill' => $medicineGroupBill,
+            'medicineGroupBillTotal' => $medicineGroupBill->sum('total'),
+
+            'suppliesGroupBill' => $suppliesGroupBill,
+            'suppliesGroupBillTotal' => $suppliesGroupBill->sum('total'),
+            
             'totalBill' => number_format($totalBill, 2),
             'patient' => $patient,
             'patientRecord' => $patientRecord,

@@ -20313,6 +20313,7 @@ body #app .page-error {
   display: flex;
   width: 100%;
   padding: 0 10px;
+  flex-flow: column;
 }
 
 .print .hospital-logo {
@@ -20326,5 +20327,21 @@ body #app .page-error {
 
 .print .patient-details .group {
   display: flex;
+}
+
+.print .summary {
+  width: 100%;
+}
+
+.print .breakdown-content {
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  border-top: 1px solid;
+}
+
+.print .breakdown {
+  flex: 1;
+  padding: 0 10px;
 }
 

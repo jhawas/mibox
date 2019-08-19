@@ -55,6 +55,10 @@
         <strong>Loading...</strong>
       </div>
 
+      <template slot="type_of_charge" slot-scope="row" right>
+          {{row.value ? row.value.name : null}}
+      </template>
+
       <template slot="actions" slot-scope="row" right>
           <b-button>
               <i class="fa fa-eye" @click="show(row.item)" aria-hidden="true"></i>
@@ -105,7 +109,7 @@
               // items: [{}],
               fields: [
               { key: 'bot_no', label: 'Bot No.', sortable: true, sortDirection: 'desc' },
-              { key: 'kind_of_solutions', label: 'Kind of Solutions', sortable: true, sortDirection: 'desc' },
+              { key: 'type_of_charge', label: 'Kind of Solutions', sortable: true, sortDirection: 'desc' },
                 { key: 'gtss', label: 'GTSS', sortable: true, sortDirection: 'desc' },
                 { key: 'remarks', label: 'Remarks', sortable: true, sortDirection: 'desc' },
                 { key: 'date', label: 'Date', sortable: true, sortDirection: 'desc', class: 'text-right' },

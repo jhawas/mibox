@@ -76,7 +76,7 @@
                           <strong>Loading...</strong>
                         </div>
 
-                        <template slot="parent" slot-scope="row">
+                        <template slot="group_of_charge" slot-scope="row">
   
                           {{ row.value ? row.value.name : null }}
                             
@@ -162,7 +162,7 @@
             return {
               fields: [
                 { key: 'name', label: 'Name', sortable: true, sortDirection: 'desc' },
-                { key: 'parent', label: 'Parent', sortable: true, sortDirection: 'desc', class: 'text-center' },
+                { key: 'group_of_charge', label: 'Group', sortable: true, sortDirection: 'desc', class: 'text-center' },
                 { key: 'category', label: 'Types', sortable: true, sortDirection: 'desc', class: 'text-center' },
                 { key: 'price', label: 'Price', sortable: true, sortDirection: 'desc', class: 'text-center' },
                 { key: 'is_default', label: 'Default', sortable: true, sortDirection: 'desc', class: 'text-center' },
