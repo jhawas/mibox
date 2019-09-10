@@ -20,6 +20,14 @@ const actions= {
 
 	},
 
+	async fetchNurseNotesByParentId({ commit }, patient_record) {
+
+		const response = await axios.get(`/api/nurseNotes/${patient_record.id}/showByPatientId`);
+		
+		commit('setNurseNotes', response.data);
+
+	},
+
 	async addNurseNote( { commit }, formData ) {
 
 		const response = await axios.post(`/api/nurseNotes`, formData);

@@ -18,6 +18,19 @@
                       <!-- User Interface controls -->
                       <b-row>
                         <b-col md="6" class="my-1">
+                          <b-form-group label-cols-sm="3" label="Patient">
+                            <multiselect 
+                              v-model="nursesNotes.patient_record" 
+                              placeholder="Select Patient" 
+                              label="full_name" 
+                              track-by="id" 
+                              :options="allPatientRecords" 
+                              @input="onChange"
+                            ></multiselect>
+                          </b-form-group>
+                        </b-col>
+
+                        <b-col md="6" class="my-1">
                           <b-form-group label-cols-sm="3" label="Filter" class="mb-0">
                             <b-input-group>
                               <b-form-input v-model="filter" placeholder="Type to Search"></b-form-input>
@@ -132,10 +145,13 @@
 
     import { mapGetters, mapActions } from 'vuex';
 
+    import Multiselect from 'vue-multiselect';
+
     export default {
 
         components: {
-            Layout
+            Layout,
+            Multiselect
         },
 
         props: {
@@ -144,6 +160,7 @@
 
         data() {
             return {
+              nursesNotes: {},
               // items: [{}],
               fields: [
                 { key: 'patient', label: 'Patient', sortable: true, sortDirection: 'desc' },
@@ -168,11 +185,17 @@
             // Set the initial number of items
             this.totalRows = this.allNurseNotes.length;
 
+            this.fetchPatientRecords();
+
         },
 
         computed: {
 
-          ...mapGetters(['allNurseNotes', 'hasAccess']),
+          ...mapGetters([
+              'allNurseNotes', 
+              'hasAccess', 
+              'allPatientRecords'
+            ]),
 
           sortOptions() {
             // Create an options list from our fields
@@ -193,12 +216,29 @@
 
         methods: {
 
-          ...mapActions(['fetchNurseNotes', 'deleteNurseNote']),
+          ...mapActions([
+              'fetchNurseNotes', 
+              'deleteNurseNote',
+              'fetchPatientRecords',
+              'fetchNurseNotesByParentId'
+            ]),
 
           onFiltered(filteredItems) {
             // Trigger pagination to update the number of buttons/pages due to filtering
             this.totalRows = filteredItems.length
             this.currentPage = 1
+          },
+
+          onChange(value) {
+              if(value) {
+
+                this.fetchNurseNotesByParentId(value);
+
+              } else {
+
+                this.fetchNurseNotes();
+                
+              }
           },
 
           create() {

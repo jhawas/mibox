@@ -57,6 +57,7 @@ Route::group(['middleware' => 'auth:api'], function(){
 	Route::apiResource('philhealthMemberships', 'api\PhilhealthMembershipController');
 
 	Route::apiResource('nurseNotes', 'api\NurseNoteController');
+	Route::get('nurseNotes/{nurseNote}/showByPatientId', 'api\NurseNoteController@showByPatientId');
 
 	Route::apiResource('medicationAndTreatments', 'api\MedicationAndTreatmentController');
 

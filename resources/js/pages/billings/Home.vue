@@ -233,7 +233,6 @@
           ...mapGetters([
               'allBillings', 
               'allPatientRecords', 
-              'allPatientRecords',
               'allPatientInsurances',
               'allPatientDiscounts',
               'defaultBilling', 
