@@ -133,7 +133,7 @@
         data() {
             return {
                 form: {
-                  patient_record: '',
+                  patient_record: {},
                   date: moment().format('YYYY-MM-DD'),
                   time: moment().format('HH:mm'),
                   focus: '',
@@ -147,6 +147,8 @@
         },
 
         mounted() {
+          
+            this.form.patient_record = this.defaultNurseNote.patient_record ? this.defaultNurseNote.patient_record : {};
 
             this.fetchPatients();
             this.fetchAvailablePatientRecords();
@@ -164,7 +166,12 @@
 
         computed: {
             
-            ...mapGetters(['allNurseNotes', 'allPatients', 'allAvailablePatientRecords']),
+            ...mapGetters([
+              'allNurseNotes', 
+              'allPatients', 
+              'allAvailablePatientRecords',
+              'defaultNurseNote'
+            ]),
 
         },
 

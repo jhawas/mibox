@@ -20,7 +20,7 @@
                         <b-col md="6" class="my-1">
                           <b-form-group label-cols-sm="3" label="Patient">
                             <multiselect 
-                              v-model="nursesNotes.patient_record" 
+                              v-model="nurseNote.patient_record" 
                               placeholder="Select Patient" 
                               label="full_name" 
                               track-by="id" 
@@ -160,7 +160,7 @@
 
         data() {
             return {
-              nursesNotes: {},
+              nurseNote: {},
               // items: [{}],
               fields: [
                 { key: 'patient', label: 'Patient', sortable: true, sortDirection: 'desc' },
@@ -182,6 +182,8 @@
 
         mounted() {
 
+            this.nurseNote = this.defaultNurseNote ? this.defaultNurseNote : {};
+
             // Set the initial number of items
             this.totalRows = this.allNurseNotes.length;
 
@@ -194,7 +196,8 @@
           ...mapGetters([
               'allNurseNotes', 
               'hasAccess', 
-              'allPatientRecords'
+              'allPatientRecords',
+              'defaultNurseNote'
             ]),
 
           sortOptions() {
@@ -209,8 +212,11 @@
         },
 
         created() {
-
-            this.fetchNurseNotes();
+            if(this.defaultNurseNote && this.defaultNurseNote.patient_record) {
+              this.fetchNurseNotesByParentId(this.defaultNurseNote.patient_record);
+            } else {
+              this.fetchNurseNotes();
+            }
 
         },
 

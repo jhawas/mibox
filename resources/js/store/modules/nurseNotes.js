@@ -1,13 +1,13 @@
 const state = {
 
 	nurseNotes: [],
-
+	nurseNote: {},
 };
 
 const getters= {
 	
 	allNurseNotes: (state) => state.nurseNotes,
-
+	defaultNurseNote: (state) => state.nurseNote,
 };
 
 const actions= {
@@ -25,6 +25,8 @@ const actions= {
 		const response = await axios.get(`/api/nurseNotes/${patient_record.id}/showByPatientId`);
 		
 		commit('setNurseNotes', response.data);
+
+		commit('setNurseNoteRecord', patient_record);
 
 	},
 
@@ -73,6 +75,8 @@ const actions= {
 const mutations= {
 	
 	setNurseNotes: (state, nurseNotes) => (state.nurseNotes = nurseNotes),
+
+	setNurseNoteRecord: (state, patient_record) => (state.nurseNote.patient_record = patient_record),
 
 	newNurseNote: (state, nurseNote) => state.nurseNotes.unshift(nurseNote),
 
