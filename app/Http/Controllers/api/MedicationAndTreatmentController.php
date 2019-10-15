@@ -25,9 +25,9 @@ class MedicationAndTreatmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function showByPatientId(MedicationAndTreatment $medicationAndTreatment)
+    public function showByPatientId($id)
     {
-        $medicationAndTreatments = MedicationAndTreatment::where('patient_record_id', $medicationAndTreatment->patient_record_id)->get();
+        $medicationAndTreatments = MedicationAndTreatment::where('patient_record_id', $id)->get();
         return $medicationAndTreatments;
     }
 

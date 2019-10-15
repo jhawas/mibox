@@ -24,9 +24,9 @@ class DoctorsOrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function showByPatientId(DoctorsOrder $doctorsOrder)
+    public function showByPatientId($id)
     {
-        $doctorsOrders = DoctorsOrder::where('patient_record_id', $doctorsOrder->patient_record_id)->get();
+        $doctorsOrders = DoctorsOrder::where('patient_record_id', $id)->get();
         return $doctorsOrders;
     }
 

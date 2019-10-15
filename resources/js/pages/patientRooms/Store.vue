@@ -147,7 +147,7 @@
         data() {
             return {
                 form: {
-                    patient_record: null,
+                    patient_record: {},
                     room: null,
                     date_started: moment().format('YYYY-MM-DD'),
                     time_start: moment().format('HH:mm'),
@@ -162,6 +162,8 @@
         },
 
         mounted() {
+
+            this.form.patient_record = this.defaultPatientRoom.patient_record ? this.defaultPatientRoom.patient_record : null;
 
             this.fetchAvailablePatientRecords();
             this.fetchRooms();
@@ -182,7 +184,8 @@
             ...mapGetters([
               'allPatientRooms', 
               'allAvailablePatientRecords', 
-              'allAvailableRooms'
+              'allAvailableRooms',
+              'defaultPatientRoom'
             ]),
 
         },

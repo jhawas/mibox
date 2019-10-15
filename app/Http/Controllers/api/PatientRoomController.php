@@ -26,6 +26,21 @@ class PatientRoomController extends Controller
     }
 
     /**
+     * Display a listing of the resource by showByPatientId.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showByPatientId($id)
+    {
+        $patientRooms = PatientRoom::with([
+            'patientRecords',
+            'room',
+            'patient'
+        ])->where('patient_record_id', $id)->get();
+        return $patientRooms;
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

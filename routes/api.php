@@ -57,16 +57,16 @@ Route::group(['middleware' => 'auth:api'], function(){
 	Route::apiResource('philhealthMemberships', 'api\PhilhealthMembershipController');
 
 	Route::apiResource('nurseNotes', 'api\NurseNoteController');
-	Route::get('nurseNotes/{nurseNote}/showByPatientId', 'api\NurseNoteController@showByPatientId');
+	Route::get('nurseNotes/{id}/showByPatientId', 'api\NurseNoteController@showByPatientId');
 
 	Route::apiResource('medicationAndTreatments', 'api\MedicationAndTreatmentController');
-	Route::get('medicationAndTreatments/{medicationAndTreatment}/showByPatientId', 'api\MedicationAndTreatmentController@showByPatientId');
+	Route::get('medicationAndTreatments/{id}/showByPatientId', 'api\MedicationAndTreatmentController@showByPatientId');
 
 	Route::apiResource('vitalSigns', 'api\VitalSignController');
-	Route::get('vitalSigns/{vitalSign}/showByPatientId', 'api\VitalSignController@showByPatientId');
+	Route::get('vitalSigns/{id}/showByPatientId', 'api\VitalSignController@showByPatientId');
 
 	Route::apiResource('intravenousFluids', 'api\IntravenousFluidController');
-	Route::get('intravenousFluids/{intravenousFluid}/showByPatientId', 'api\IntravenousFluidController@showByPatientId');
+	Route::get('intravenousFluids/{id}/showByPatientId', 'api\IntravenousFluidController@showByPatientId');
 
 	Route::get('diagnoses', 'api\DiagnoseController@index');
 	Route::post('diagnoses', 'api\DiagnoseController@store');
@@ -83,7 +83,7 @@ Route::group(['middleware' => 'auth:api'], function(){
 
 
 	Route::apiResource('doctorsOrders', 'api\DoctorsOrderController');
-	Route::get('doctorsOrders/{doctorsOrder}/showByPatientId', 'api\DoctorsOrderController@showByPatientId');
+	Route::get('doctorsOrders/{id}/showByPatientId', 'api\DoctorsOrderController@showByPatientId');
 
 	Route::get('typeOfLaboratories', 'api\TypeOfLaboratoryController@index');
 	Route::post('typeOfLaboratories', 'api\TypeOfLaboratoryController@store');
@@ -113,6 +113,7 @@ Route::group(['middleware' => 'auth:api'], function(){
 	Route::apiResource('groupOfCharges', 'api\GroupOfChargeController');
 
 	Route::apiResource('patientRooms', 'api\PatientRoomController');
+	Route::get('patientRooms/{id}/showByPatientId', 'api\PatientRoomController@showByPatientId');
 
 	Route::apiResource('patientDiscounts', 'api\PatientDiscountController');
 	Route::get('patientDiscounts/patientRecord/{patient_record_id}', 'api\PatientDiscountController@dataByRecord')->name('billings.dataByRecord');

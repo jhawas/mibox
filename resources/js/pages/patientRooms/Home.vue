@@ -18,6 +18,18 @@
                       <!-- User Interface controls -->
                       <b-row>
                         <b-col md="6" class="my-1">
+                          <b-form-group label-cols-sm="3" label="Patient">
+                            <multiselect 
+                              v-model="patientRoom.patient_record" 
+                              placeholder="Select Patient" 
+                              label="full_name" 
+                              track-by="id" 
+                              :options="allPatientRecords" 
+                              @input="onChange"
+                            ></multiselect>
+                          </b-form-group>
+                        </b-col>
+                        <b-col md="6" class="my-1">
                           <b-form-group label-cols-sm="3" label="Filter" class="mb-0">
                             <b-input-group>
                               <b-form-input v-model="filter" placeholder="Type to Search"></b-form-input>
@@ -136,10 +148,13 @@
 
     import { mapGetters, mapActions } from 'vuex';
 
+    import Multiselect from 'vue-multiselect';
+
     export default {
 
         components: {
-            Layout
+            Layout,
+            Multiselect
         },
 
         props: {
@@ -148,7 +163,7 @@
 
         data() {
             return {
-              // items: [{}],
+              patientRoom: {},
               fields: [
                 { key: 'patient', label: 'Name', sortable: true, sortDirection: 'desc' },
                 { key: 'room', label: 'Name', sortable: true, sortDirection: 'desc' },
@@ -170,15 +185,24 @@
         },
 
         mounted() {
+            
+            this.patientRoom = this.defaultPatientRoom ? this.defaultPatientRoom : {};
 
             // Set the initial number of items
             this.totalRows = this.allPatientRooms.length;
+
+            this.fetchPatientRecords();
 
         },
 
         computed: {
 
-          ...mapGetters(['allPatientRooms', 'hasAccess']),
+          ...mapGetters([
+            'allPatientRooms', 
+            'hasAccess',
+            'allPatientRecords',
+            'defaultPatientRoom'
+          ]),
 
           sortOptions() {
             // Create an options list from our fields
@@ -192,19 +216,38 @@
         },
 
         created() {
-
-            this.fetchPatientRooms();
-
+            if(this.defaultPatientRoom && this.defaultPatientRoom.patient_record) {
+              this.fetchVitalSignsByParentId(this.defaultPatientRoom.patient_record);
+            } else {
+              this.fetchPatientRooms();
+            }
         },
 
         methods: {
 
-          ...mapActions(['fetchPatientRooms', 'deletePatientRoom']),
+          ...mapActions([
+            'fetchPatientRooms', 
+            'deletePatientRoom',
+            'fetchPatientRecords',
+            'fetchPatientRoomsByParentId'
+          ]),
 
           onFiltered(filteredItems) {
             // Trigger pagination to update the number of buttons/pages due to filtering
             this.totalRows = filteredItems.length
             this.currentPage = 1
+          },
+
+          onChange(value) {
+              if(value) {
+
+                this.fetchPatientRoomsByParentId(value);
+
+              } else {
+
+                this.fetchPatientRooms();
+                
+              }
           },
 
           create() {

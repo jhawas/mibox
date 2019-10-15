@@ -25,9 +25,9 @@ class IntravenousFluidController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function showByPatientId(IntravenousFluid $intravenousFluid)
+    public function showByPatientId($id)
     {
-        $intravenousFluids = IntravenousFluid::where('patient_record_id', $intravenousFluid->patient_record_id)->get();
+        $intravenousFluids = IntravenousFluid::where('patient_record_id', $id)->get();
         return $intravenousFluids;
     }
 

@@ -24,9 +24,9 @@ class VitalSignController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function showByPatientId(VitalSign $vitalSign)
+    public function showByPatientId($id)
     {
-        $vitalSigns = VitalSign::where('patient_record_id', $vitalSign->patient_record_id)->get();
+        $vitalSigns = VitalSign::where('patient_record_id', $id)->get();
         return $vitalSigns;
     }
 

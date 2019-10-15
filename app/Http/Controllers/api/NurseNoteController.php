@@ -24,9 +24,9 @@ class NurseNoteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function showByPatientId(NurseNote $nurseNote)
+    public function showByPatientId($id)
     {
-        $nurseNotes = NurseNote::where('patient_record_id', $nurseNote->patient_record_id)->get();
+        $nurseNotes = NurseNote::where('patient_record_id', $id)->get();
         return $nurseNotes;
     }
 
