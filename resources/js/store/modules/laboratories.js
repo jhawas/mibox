@@ -1,12 +1,14 @@
 const state = {
 
 	laboratories: [],
+	laboratory: {},
 
 };
 
 const getters= {
 	
 	allLaboratories: (state) => state.laboratories,
+	defaultLaboratory: (state) => state.laboratory,
 
 };
 
@@ -17,6 +19,16 @@ const actions= {
 		const response = await axios.get(`/api/laboratories`);
 		
 		commit('setLaboratories', response.data);
+
+	},
+
+	async fetchLaboratoriesByParentId({ commit }, patient_record) {
+
+		const response = await axios.get(`/api/laboratories/${patient_record.id}/showByPatientId`);
+		
+		commit('setLaboratories', response.data);
+
+		commit('setLaboratoryRecord', patient_record);
 
 	},
 
@@ -65,6 +77,8 @@ const actions= {
 const mutations= {
 	
 	setLaboratories: (state, laboratories) => (state.laboratories = laboratories),
+
+	setLaboratoryRecord: (state, patient_record) => (state.laboratory.patient_record = patient_record),
 
 	newLaboratory: (state, laboratory) => state.laboratories.unshift(laboratory),
 

@@ -18,6 +18,18 @@
                       <!-- User Interface controls -->
                       <b-row>
                         <b-col md="6" class="my-1">
+                          <b-form-group label-cols-sm="3" label="Patient">
+                            <multiselect 
+                              v-model="laboratory.patient_record" 
+                              placeholder="Select Patient" 
+                              label="full_name" 
+                              track-by="id" 
+                              :options="allPatientRecords" 
+                              @input="onChange"
+                            ></multiselect>
+                          </b-form-group>
+                        </b-col>
+                        <b-col md="6" class="my-1">
                           <b-form-group label-cols-sm="3" label="Filter" class="mb-0">
                             <b-input-group>
                               <b-form-input v-model="filter" placeholder="Type to Search"></b-form-input>
@@ -144,10 +156,13 @@
 
     import { mapGetters, mapActions } from 'vuex';
 
+    import Multiselect from 'vue-multiselect';
+
     export default {
 
         components: {
-            Layout
+            Layout,
+            Multiselect
         },
 
         props: {
@@ -156,7 +171,7 @@
 
         data() {
             return {
-              // items: [{}],
+              laboratory: {},
               fields: [
                 { key: 'patient', label: 'Patient', sortable: true, sortDirection: 'desc' },
                 { key: 'laboratory', label: 'Laboratory', sortable: true, sortDirection: 'desc' },
@@ -175,14 +190,23 @@
 
         mounted() {
 
+            this.laboratory = this.defaultLaboratory ? this.defaultLaboratory : {};
+
             // Set the initial number of items
             this.totalRows = this.allLaboratories.length;
+            
+            this.fetchPatientRecords();
 
         },
 
         computed: {
 
-          ...mapGetters(['allLaboratories', 'hasAccess']),
+          ...mapGetters([
+            'allLaboratories', 
+            'hasAccess',
+            'allPatientRecords',
+            'defaultLaboratory'
+          ]),
 
           sortOptions() {
             // Create an options list from our fields
@@ -196,20 +220,41 @@
         },
 
         created() {
-
-            this.fetchLaboratories();
+            if(this.defaultLaboratory && this.defaultLaboratory.patient_record) {
+              this.fetchLaboratoriesByParentId(this.defaultLaboratory.patient_record);
+            } else {
+              this.fetchLaboratories();
+            }
 
         },
 
         methods: {
 
-          ...mapActions(['fetchLaboratories', 'deleteLaboratory']),
+          ...mapActions([
+            'fetchLaboratories', 
+            'deleteLaboratory',
+            'fetchPatientRecords',
+            'fetchLaboratoriesByParentId'
+          ]),
 
           onFiltered(filteredItems) {
             // Trigger pagination to update the number of buttons/pages due to filtering
             this.totalRows = filteredItems.length
             this.currentPage = 1
           },
+
+          onChange(value) {
+              if(value) {
+
+                this.fetchLaboratoriesByParentId(value);
+
+              } else {
+
+                this.fetchLaboratories();
+                
+              }
+          },
+
           create() {
 
             this.$router.push({ name: 'laboratory-create' });

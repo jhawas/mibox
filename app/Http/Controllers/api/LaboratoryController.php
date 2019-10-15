@@ -21,6 +21,17 @@ class LaboratoryController extends Controller
     }
 
     /**
+     * Display a listing of the resource by showByPatientId.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showByPatientId($id)
+    {
+        $laboratories = Laboratory::where('patient_record_id', $id)->get();
+        return $laboratories;
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -38,9 +49,11 @@ class LaboratoryController extends Controller
      */
     public function store(Request $request)
     {
-        // $validatedData = $request->validate([
-        //     'name' => 'required|max:191',
-        // ]);
+        $validatedData = $request->validate([
+            'patient_record_id' => 'required|not_in:0',
+            'type_of_charge_id' => 'required|not_in:0',
+            'description' => 'required',
+        ]);
         
         $laboratory = new Laboratory;
         $laboratory->patient_record_id = $request->patient_record_id;
@@ -97,6 +110,12 @@ class LaboratoryController extends Controller
      */
     public function update(Request $request, Laboratory $laboratory)
     {
+        $validatedData = $request->validate([
+            'patient_record_id' => 'required|not_in:0',
+            'type_of_charge_id' => 'required|not_in:0',
+            'description' => 'required',
+        ]);
+        
         $laboratory->patient_record_id = $request->patient_record_id;
         $laboratory->type_of_charge_id = $request->type_of_charge_id;
         $laboratory->description = $request->description;

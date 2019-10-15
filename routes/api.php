@@ -90,6 +90,8 @@ Route::group(['middleware' => 'auth:api'], function(){
 	Route::delete('typeOfLaboratories/{typeOfCharge}', 'api\TypeOfLaboratoryController@destroy');
 
 	Route::apiResource('laboratories', 'api\LaboratoryController');
+	Route::get('laboratories/{laboratory}/showByPatientId', 'api\LaboratoryController@showByPatientId');
+
 
 	Route::apiResource('discounts', 'api\DiscountController');
 

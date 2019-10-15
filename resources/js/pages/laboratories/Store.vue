@@ -114,7 +114,7 @@
         data() {
             return {
                 form: {
-                  patient_record: '',
+                  patient_record: {},
                   laboratory: '',
                   description: '',
                 },
@@ -126,6 +126,8 @@
         },
 
         mounted() {
+
+            this.form.patient_record = this.defaultLaboratory.patient_record ? this.defaultLaboratory.patient_record : null;
 
             this.fetchAvailablePatientRecords();
             this.fetchTypeOfLaboratories();
@@ -143,7 +145,11 @@
 
         computed: {
             
-            ...mapGetters(['allAvailablePatientRecords', 'allTypeOfLaboratories']),
+            ...mapGetters([
+              'allAvailablePatientRecords', 
+              'allTypeOfLaboratories',
+              'defaultLaboratory'
+            ]),
 
         },
 
