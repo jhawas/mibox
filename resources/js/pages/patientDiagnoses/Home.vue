@@ -18,6 +18,18 @@
                       <!-- User Interface controls -->
                       <b-row>
                         <b-col md="6" class="my-1">
+                          <b-form-group label-cols-sm="3" label="Patient">
+                            <multiselect 
+                              v-model="patientDiagnose.patient_record" 
+                              placeholder="Select Patient" 
+                              label="full_name" 
+                              track-by="id" 
+                              :options="allPatientRecords" 
+                              @input="onChange"
+                            ></multiselect>
+                          </b-form-group>
+                        </b-col>
+                        <b-col md="6" class="my-1">
                           <b-form-group label-cols-sm="3" label="Filter" class="mb-0">
                             <b-input-group>
                               <b-form-input v-model="filter" placeholder="Type to Search"></b-form-input>
@@ -136,10 +148,13 @@
 
     import { mapGetters, mapActions } from 'vuex';
 
+    import Multiselect from 'vue-multiselect';
+
     export default {
 
         components: {
-            Layout
+            Layout,
+            Multiselect
         },
 
         props: {
@@ -148,7 +163,7 @@
 
         data() {
             return {
-              // items: [{}],
+              patientDiagnose: {},
               fields: [
                 { key: 'patient', label: 'Patient', sortable: true, sortDirection: 'desc' },
                 { key: 'diagnose', label: 'Diagnoses', sortable: true, sortDirection: 'desc' },
@@ -168,14 +183,23 @@
 
         mounted() {
 
+            this.patientDiagnose = this.defaultPatientDiagnose ? this.defaultPatientDiagnose : {};
+
             // Set the initial number of items
             this.totalRows = this.allPatientDiagnoses.length;
+
+            this.fetchPatientRecords();
 
         },
 
         computed: {
 
-          ...mapGetters(['allPatientDiagnoses', 'hasAccess']),
+          ...mapGetters([
+            'allPatientDiagnoses', 
+            'hasAccess',
+            'allPatientRecords',
+            'defaultPatientDiagnose'
+          ]),
 
           sortOptions() {
             // Create an options list from our fields
@@ -190,18 +214,39 @@
 
         created() {
 
-            this.fetchPatientDiagnoses();
+            if(this.defaultPatientDiagnose && this.defaultPatientDiagnose.patient_record) {
+              this.fetchPatientDiagnosesByParentId(this.defaultPatientDiagnose.patient_record);
+            } else {
+              this.fetchPatientDiagnoses();
+            }
 
         },
 
         methods: {
 
-          ...mapActions(['fetchPatientDiagnoses', 'deletePatientDiagnose']),
+          ...mapActions([
+            'fetchPatientDiagnoses', 
+            'deletePatientDiagnose',
+            'fetchPatientRecords',
+            'fetchPatientDiagnosesByParentId',
+          ]),
 
           onFiltered(filteredItems) {
             // Trigger pagination to update the number of buttons/pages due to filtering
             this.totalRows = filteredItems.length
             this.currentPage = 1
+          },
+
+          onChange(value) {
+              if(value) {
+
+                this.fetchPatientDiagnosesByParentId(value);
+
+              } else {
+
+                this.fetchPatientDiagnoses();
+                
+              }
           },
 
           create() {

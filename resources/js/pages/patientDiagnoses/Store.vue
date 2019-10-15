@@ -126,7 +126,7 @@
         data() {
             return {
                 form: {
-                  patient_record: '',
+                  patient_record: {},
                   diagnose: '',
                   description: '',
                   remarks: '',
@@ -139,6 +139,8 @@
         },
 
         mounted() {
+
+            this.form.patient_record = this.defaultPatientDiagnose.patient_record ? this.defaultPatientDiagnose.patient_record : null;
 
             this.fetchAvailablePatientRecords();
             this.fetchDiagnoses();
@@ -156,7 +158,12 @@
 
         computed: {
             
-            ...mapGetters(['allPatientDiagnoses', 'allDiagnoses', 'allAvailablePatientRecords']),
+            ...mapGetters([
+              'allPatientDiagnoses', 
+              'allDiagnoses', 
+              'allAvailablePatientRecords',
+              'defaultPatientDiagnose'
+            ]),
 
         },
 

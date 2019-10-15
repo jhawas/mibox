@@ -20,6 +20,17 @@ class PatientDiagnoseController extends Controller
     }
 
     /**
+     * Display a listing of the resource by showByPatientId.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showByPatientId($id)
+    {
+        $patientDiagnoses = PatientDiagnose::where('patient_record_id', $id)->get();
+        return $patientDiagnoses;
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
