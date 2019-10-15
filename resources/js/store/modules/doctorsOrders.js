@@ -1,12 +1,14 @@
 const state = {
 
 	doctorsOrders: [],
+	doctorsOrder: {},
 
 };
 
 const getters= {
 	
 	allDoctorsOrders: (state) => state.doctorsOrders,
+	defaultDoctorsOrder: (state) => state.doctorsOrder,
 
 };
 
@@ -17,6 +19,16 @@ const actions= {
 		const response = await axios.get(`/api/doctorsOrders`);
 		
 		commit('setDoctorsOrders', response.data);
+
+	},
+
+	async fetchDoctorsOrdersByParentId({ commit }, patient_record) {
+
+		const response = await axios.get(`/api/doctorsOrders/${patient_record.id}/showByPatientId`);
+		
+		commit('setDoctorsOrders', response.data);
+
+		commit('setDoctorsOrderRecord', patient_record);
 
 	},
 
@@ -65,6 +77,8 @@ const actions= {
 const mutations= {
 	
 	setDoctorsOrders: (state, doctorsOrders) => (state.doctorsOrders = doctorsOrders),
+
+	setDoctorsOrderRecord: (state, patient_record) => (state.doctorsOrder.patient_record = patient_record),
 
 	newDoctorsOrder: (state, doctorsOrder) => state.doctorsOrders.unshift(doctorsOrder),
 

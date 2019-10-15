@@ -166,7 +166,7 @@
         data() {
             return {
                 form: {
-                  patient_record: '',
+                  patient_record: {},
                   date: moment().format('YYYY-MM-DD'),
                   time: moment().format('HH:mm'),
                   progress_note: '',
@@ -182,6 +182,8 @@
         },
 
         mounted() {
+
+            this.form.patient_record = this.defaultDoctorsOrder.patient_record ? this.defaultDoctorsOrder.patient_record : null;
 
             this.fetchAvailablePatientRecords();
             this.fetchTypeOfLaboratories();
@@ -200,7 +202,12 @@
 
         computed: {
             
-            ...mapGetters(['allDoctorsOrders', 'allAvailablePatientRecords', 'allTypeOfLaboratories']),
+            ...mapGetters([
+              'allDoctorsOrders', 
+              'allAvailablePatientRecords', 
+              'allTypeOfLaboratories',
+              'defaultDoctorsOrder'
+            ]),
 
         },
 

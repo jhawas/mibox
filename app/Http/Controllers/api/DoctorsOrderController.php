@@ -20,6 +20,17 @@ class DoctorsOrderController extends Controller
     }
 
     /**
+     * Display a listing of the resource by showByPatientId.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showByPatientId(DoctorsOrder $doctorsOrder)
+    {
+        $doctorsOrders = DoctorsOrder::where('patient_record_id', $doctorsOrder->patient_record_id)->get();
+        return $doctorsOrders;
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

@@ -18,6 +18,18 @@
                       <!-- User Interface controls -->
                       <b-row>
                         <b-col md="6" class="my-1">
+                          <b-form-group label-cols-sm="3" label="Patient">
+                            <multiselect 
+                              v-model="doctorsOrder.patient_record" 
+                              placeholder="Select Patient" 
+                              label="full_name" 
+                              track-by="id" 
+                              :options="allPatientRecords" 
+                              @input="onChange"
+                            ></multiselect>
+                          </b-form-group>
+                        </b-col>
+                        <b-col md="6" class="my-1">
                           <b-form-group label-cols-sm="3" label="Filter" class="mb-0">
                             <b-input-group>
                               <b-form-input v-model="filter" placeholder="Type to Search"></b-form-input>
@@ -139,11 +151,14 @@
     import moment from 'moment';
 
     import { mapGetters, mapActions } from 'vuex';
+    
+    import Multiselect from 'vue-multiselect';
 
     export default {
 
         components: {
-            Layout
+            Layout,
+            Multiselect
         },
 
         props: {
@@ -152,6 +167,7 @@
 
         data() {
             return {
+              doctorsOrder: {},
               fields: [
                 { key: 'patient', label: 'Patient', sortable: true, sortDirection: 'desc' },
                 { key: 'date', label: 'Date', sortable: true, sortDirection: 'desc', class: 'text-center'},
@@ -173,14 +189,23 @@
 
         mounted() {
 
+            this.doctorsOrder = this.defaultDoctorsOrder ? this.defaultDoctorsOrder : {};
+
             // Set the initial number of items
             this.totalRows = this.allDoctorsOrders.length;
+
+            this.fetchPatientRecords();
 
         },
 
         computed: {
 
-          ...mapGetters(['allDoctorsOrders', 'hasAccess']),
+          ...mapGetters([
+            'allDoctorsOrders', 
+            'hasAccess',
+            'allPatientRecords',
+            'defaultDoctorsOrder',
+          ]),
 
           sortOptions() {
             // Create an options list from our fields
@@ -195,18 +220,39 @@
 
         created() {
 
-            this.fetchDoctorsOrders();
+            if(this.defaultDoctorsOrder && this.defaultDoctorsOrder.patient_record) {
+              this.fetchDoctorsOrdersByParentId(this.defaultDoctorsOrder.patient_record);
+            } else {
+              this.fetchDoctorsOrders();
+            }
 
         },
 
         methods: {
 
-          ...mapActions(['fetchDoctorsOrders', 'deleteDoctorsOrder']),
+          ...mapActions([
+            'fetchDoctorsOrders', 
+            'deleteDoctorsOrder',
+            'fetchPatientRecords',
+            'fetchDoctorsOrdersByParentId',
+          ]),
 
           onFiltered(filteredItems) {
             // Trigger pagination to update the number of buttons/pages due to filtering
             this.totalRows = filteredItems.length
             this.currentPage = 1
+          },
+
+          onChange(value) {
+              if(value) {
+
+                this.fetchDoctorsOrdersByParentId(value);
+
+              } else {
+
+                this.fetchDoctorsOrders();
+                
+              }
           },
 
           stringToObject(value) {
