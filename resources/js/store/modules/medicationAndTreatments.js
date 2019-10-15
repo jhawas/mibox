@@ -1,12 +1,14 @@
 const state = {
 
 	medicationAndTreatments: [],
+	medicationAndTreatment: {},
 
 };
 
 const getters= {
 	
 	allMedicationAndTreatments: (state) => state.medicationAndTreatments,
+	defaultMedicationAndTreatment: (state) => state.medicationAndTreatment,
 
 };
 
@@ -17,6 +19,16 @@ const actions= {
 		const response = await axios.get(`/api/medicationAndTreatments`);
 		
 		commit('setMedicationAndTreatments', response.data);
+
+	},
+
+	async fetchMedicationAndTreatmentsByParentId({ commit }, patient_record) {
+
+		const response = await axios.get(`/api/medicationAndTreatments/${patient_record.id}/showByPatientId`);
+		
+		commit('setMedicationAndTreatments', response.data);
+
+		commit('setMedicationAndTreatmentRecord', patient_record);
 
 	},
 
@@ -65,6 +77,8 @@ const actions= {
 const mutations= {
 	
 	setMedicationAndTreatments: (state, medicationAndTreatments) => (state.medicationAndTreatments = medicationAndTreatments),
+
+	setMedicationAndTreatmentRecord: (state, patient_record) => (state.medicationAndTreatment.patient_record = patient_record),
 
 	newMedicationAndTreatment: (state, medicationAndTreatments) => state.medicationAndTreatments.unshift(medicationAndTreatments),
 

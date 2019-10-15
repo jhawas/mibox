@@ -60,8 +60,10 @@ Route::group(['middleware' => 'auth:api'], function(){
 	Route::get('nurseNotes/{nurseNote}/showByPatientId', 'api\NurseNoteController@showByPatientId');
 
 	Route::apiResource('medicationAndTreatments', 'api\MedicationAndTreatmentController');
+	Route::get('medicationAndTreatments/{medicationAndTreatment}/showByPatientId', 'api\MedicationAndTreatmentController@showByPatientId');
 
 	Route::apiResource('vitalSigns', 'api\VitalSignController');
+	Route::get('vitalSigns/{vitalSign}/showByPatientId', 'api\VitalSignController@showByPatientId');
 
 	Route::apiResource('intravenousFluids', 'api\IntravenousFluidController');
 

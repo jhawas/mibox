@@ -164,6 +164,8 @@
 
         mounted() {
 
+            this.form.patient_record = this.defaultMedicationAndTreatment.patient_record ? this.defaultMedicationAndTreatment.patient_record : null;
+
             this.fetchAvailablePatientRecords();
             this.fetchChargesByType(2); //medication and treatment
 
@@ -183,7 +185,8 @@
             ...mapGetters([
               'allMedicationAndTreatments', 
               'allAvailablePatientRecords',
-              'allTypeOfCharges'
+              'allTypeOfCharges',
+              'defaultMedicationAndTreatment',
             ]),
 
         },

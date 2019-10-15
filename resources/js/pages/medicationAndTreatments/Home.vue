@@ -18,6 +18,19 @@
                       <!-- User Interface controls -->
                       <b-row>
                         <b-col md="6" class="my-1">
+                          <b-form-group label-cols-sm="3" label="Patient">
+                            <multiselect 
+                              v-model="medicationAndTreatment.patient_record" 
+                              placeholder="Select Patient" 
+                              label="full_name" 
+                              track-by="id" 
+                              :options="allPatientRecords" 
+                              @input="onChange"
+                            ></multiselect>
+                          </b-form-group>
+                        </b-col>
+
+                        <b-col md="6" class="my-1">
                           <b-form-group label-cols-sm="3" label="Filter" class="mb-0">
                             <b-input-group>
                               <b-form-input v-model="filter" placeholder="Type to Search"></b-form-input>
@@ -136,10 +149,13 @@
 
     import { mapGetters, mapActions } from 'vuex';
 
+    import Multiselect from 'vue-multiselect';
+
     export default {
 
         components: {
-            Layout
+            Layout,
+            Multiselect
         },
 
         props: {
@@ -149,6 +165,7 @@
         data() {
             return {
               // items: [{}],
+              medicationAndTreatment: {},
               fields: [
                 { key: 'patient', label: 'Patient', sortable: true, sortDirection: 'desc' },
                 { key: 'date', label: 'Date', sortable: true, sortDirection: 'desc', class: 'text-center'},
@@ -169,14 +186,23 @@
 
         mounted() {
 
+            this.medicationAndTreatment = this.defaultMedicationAndTreatment ? this.defaultMedicationAndTreatment : {};
+
             // Set the initial number of items
             this.totalRows = this.allMedicationAndTreatments.length;
+
+            this.fetchPatientRecords();
 
         },
 
         computed: {
 
-          ...mapGetters(['allMedicationAndTreatments', 'hasAccess']),
+          ...mapGetters([
+            'allMedicationAndTreatments', 
+            'hasAccess',
+            'allPatientRecords',
+            'defaultMedicationAndTreatment',
+          ]),
 
           sortOptions() {
             // Create an options list from our fields
@@ -190,19 +216,38 @@
         },
 
         created() {
-
-            this.fetchMedicationAndTreatments();
-
+            if(this.defaultMedicationAndTreatment && this.defaultMedicationAndTreatment.patient_record) {
+              this.fetchMedicationAndTreatmentsByParentId(this.defaultMedicationAndTreatment.patient_record);
+            } else {
+              this.fetchMedicationAndTreatments();
+            }
         },
 
         methods: {
 
-          ...mapActions(['fetchMedicationAndTreatments', 'deleteMedicationAndTreatment']),
+          ...mapActions([
+            'fetchMedicationAndTreatments', 
+            'deleteMedicationAndTreatment',
+            'fetchPatientRecords',
+            'fetchMedicationAndTreatmentsByParentId',
+          ]),
 
           onFiltered(filteredItems) {
             // Trigger pagination to update the number of buttons/pages due to filtering
             this.totalRows = filteredItems.length
             this.currentPage = 1
+          },
+
+          onChange(value) {
+              if(value) {
+
+                this.fetchMedicationAndTreatmentsByParentId(value);
+
+              } else {
+
+                this.fetchMedicationAndTreatments();
+                
+              }
           },
 
           create() {

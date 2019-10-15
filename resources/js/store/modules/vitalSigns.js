@@ -1,12 +1,14 @@
 const state = {
 
 	vitalSigns: [],
+	vitalSign: {},
 
 };
 
 const getters= {
 	
 	allVitalSigns: (state) => state.vitalSigns,
+	defaultVitalSign: (state) => state.vitalSign,
 
 };
 
@@ -17,6 +19,16 @@ const actions= {
 		const response = await axios.get(`/api/vitalSigns`);
 		
 		commit('setVitalSigns', response.data);
+
+	},
+
+	async fetchVitalSignsByParentId({ commit }, patient_record) {
+
+		const response = await axios.get(`/api/vitalSigns/${patient_record.id}/showByPatientId`);
+		
+		commit('setVitalSigns', response.data);
+
+		commit('setVitalSignRecord', patient_record);
 
 	},
 
@@ -65,6 +77,8 @@ const actions= {
 const mutations= {
 	
 	setVitalSigns: (state, vitalSigns) => (state.vitalSigns = vitalSigns),
+
+	setVitalSignRecord: (state, patient_record) => (state.vitalSign.patient_record = patient_record),
 
 	newVitalSign: (state, vitalSign) => state.vitalSigns.unshift(vitalSign),
 

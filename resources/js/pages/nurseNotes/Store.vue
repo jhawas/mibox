@@ -148,7 +148,7 @@
 
         mounted() {
           
-            this.form.patient_record = this.defaultNurseNote.patient_record ? this.defaultNurseNote.patient_record : {};
+            this.form.patient_record = this.defaultNurseNote.patient_record ? this.defaultNurseNote.patient_record : null;
 
             this.fetchPatients();
             this.fetchAvailablePatientRecords();

@@ -21,6 +21,17 @@ class MedicationAndTreatmentController extends Controller
     }
 
     /**
+     * Display a listing of the resource by showByPatientId.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showByPatientId(MedicationAndTreatment $medicationAndTreatment)
+    {
+        $medicationAndTreatments = MedicationAndTreatment::where('patient_record_id', $medicationAndTreatment->patient_record_id)->get();
+        return $medicationAndTreatments;
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

@@ -20,6 +20,17 @@ class VitalSignController extends Controller
     }
 
     /**
+     * Display a listing of the resource by showByPatientId.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showByPatientId(VitalSign $vitalSign)
+    {
+        $vitalSigns = VitalSign::where('patient_record_id', $vitalSign->patient_record_id)->get();
+        return $vitalSigns;
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

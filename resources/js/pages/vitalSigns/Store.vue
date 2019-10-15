@@ -236,7 +236,7 @@
         data() {
             return {
                 form: {
-                  patient_record: '',
+                  patient_record: {},
                   date: moment().format('YYYY-MM-DD'),
                   time: moment().format('HH:mm'),
                   bp: '',
@@ -260,6 +260,8 @@
 
         mounted() {
 
+            this.form.patient_record = this.defaultVitalSign.patient_record ? this.defaultVitalSign.patient_record : null;
+
             this.fetchAvailablePatientRecords();
 
             if(this.$route.params.id) {
@@ -275,7 +277,11 @@
 
         computed: {
             
-            ...mapGetters(['allVitalSigns', 'allAvailablePatientRecords']),
+            ...mapGetters([
+              'allVitalSigns', 
+              'allAvailablePatientRecords',
+              'defaultVitalSign'
+            ]),
 
         },
 

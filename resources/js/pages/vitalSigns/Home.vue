@@ -18,6 +18,18 @@
                       <!-- User Interface controls -->
                       <b-row>
                         <b-col md="6" class="my-1">
+                          <b-form-group label-cols-sm="3" label="Patient">
+                            <multiselect 
+                              v-model="vitalSign.patient_record" 
+                              placeholder="Select Patient" 
+                              label="full_name" 
+                              track-by="id" 
+                              :options="allPatientRecords" 
+                              @input="onChange"
+                            ></multiselect>
+                          </b-form-group>
+                        </b-col>
+                        <b-col md="6" class="my-1">
                           <b-form-group label-cols-sm="3" label="Filter" class="mb-0">
                             <b-input-group>
                               <b-form-input v-model="filter" placeholder="Type to Search"></b-form-input>
@@ -132,10 +144,14 @@
 
     import { mapGetters, mapActions } from 'vuex';
 
+    import Multiselect from 'vue-multiselect';
+
+
     export default {
 
         components: {
-            Layout
+            Layout,
+            Multiselect
         },
 
         props: {
@@ -144,6 +160,7 @@
 
         data() {
             return {
+              vitalSign: {},
               fields: [
                 { key: 'patient', label: 'Patient', sortable: true, sortDirection: 'desc' },
                 { key: 'date', label: 'Date', sortable: true, sortDirection: 'desc', class: 'text-center'},
@@ -163,14 +180,23 @@
 
         mounted() {
 
+            this.vitalSign = this.defaultVitalSign ? this.defaultVitalSign : {};
+
             // Set the initial number of items
             this.totalRows = this.allVitalSigns.length;
+
+            this.fetchPatientRecords();
 
         },
 
         computed: {
 
-          ...mapGetters(['allVitalSigns', 'hasAccess']),
+          ...mapGetters([
+            'allVitalSigns', 
+            'hasAccess',
+            'allPatientRecords',
+            'defaultVitalSign'
+          ]),
 
           sortOptions() {
             // Create an options list from our fields
@@ -185,18 +211,39 @@
 
         created() {
 
-            this.fetchVitalSigns();
+            if(this.defaultVitalSign && this.defaultVitalSign.patient_record) {
+              this.fetchVitalSignsByParentId(this.defaultVitalSign.patient_record);
+            } else {
+              this.fetchVitalSigns();
+            }
 
         },
 
         methods: {
 
-          ...mapActions(['fetchVitalSigns', 'deleteVitalSign']),
+          ...mapActions([
+            'fetchVitalSigns', 
+            'deleteVitalSign',
+            'fetchPatientRecords',
+            'fetchVitalSignsByParentId',
+          ]),
 
           onFiltered(filteredItems) {
             // Trigger pagination to update the number of buttons/pages due to filtering
             this.totalRows = filteredItems.length
             this.currentPage = 1
+          },
+
+          onChange(value) {
+              if(value) {
+
+                this.fetchVitalSignsByParentId(value);
+
+              } else {
+
+                this.fetchVitalSigns();
+                
+              }
           },
 
           create() {
