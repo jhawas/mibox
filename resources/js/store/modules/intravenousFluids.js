@@ -1,12 +1,14 @@
 const state = {
 
 	intravenousFluids: [],
+	intravenousFluid: {},
 
 };
 
 const getters= {
 	
 	allIntravenousFluids: (state) => state.intravenousFluids,
+	defaultIntravenousFluid: (state) => state.intravenousFluid,
 
 };
 
@@ -17,6 +19,16 @@ const actions= {
 		const response = await axios.get(`/api/intravenousFluids`);
 		
 		commit('setIntravenousFluids', response.data);
+
+	},
+
+	async fetchIntravenousFluidsByParentId({ commit }, patient_record) {
+
+		const response = await axios.get(`/api/intravenousFluids/${patient_record.id}/showByPatientId`);
+		
+		commit('setIntravenousFluids', response.data);
+
+		commit('setIntravenousFluidRecord', patient_record);
 
 	},
 
@@ -65,6 +77,8 @@ const actions= {
 const mutations= {
 	
 	setIntravenousFluids: (state, intravenousFluid) => (state.intravenousFluids = intravenousFluid),
+
+	setIntravenousFluidRecord: (state, patient_record) => (state.intravenousFluid.patient_record = patient_record),
 
 	newIntravenousFluid: (state, intravenousFluid) => state.intravenousFluids.unshift(intravenousFluid),
 

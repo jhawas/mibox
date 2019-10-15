@@ -18,6 +18,18 @@
                       <!-- User Interface controls -->
                       <b-row>
                         <b-col md="6" class="my-1">
+                          <b-form-group label-cols-sm="3" label="Patient">
+                            <multiselect 
+                              v-model="intravenousFluid.patient_record" 
+                              placeholder="Select Patient" 
+                              label="full_name" 
+                              track-by="id" 
+                              :options="allPatientRecords" 
+                              @input="onChange"
+                            ></multiselect>
+                          </b-form-group>
+                        </b-col>
+                        <b-col md="6" class="my-1">
                           <b-form-group label-cols-sm="3" label="Filter" class="mb-0">
                             <b-input-group>
                               <b-form-input v-model="filter" placeholder="Type to Search"></b-form-input>
@@ -136,10 +148,14 @@
 
     import { mapGetters, mapActions } from 'vuex';
 
+    import Multiselect from 'vue-multiselect';
+
+
     export default {
 
         components: {
-            Layout
+            Layout,
+            Multiselect
         },
 
         props: {
@@ -148,7 +164,7 @@
 
         data() {
             return {
-              // items: [{}],
+              intravenousFluid: {},
               fields: [
                 { key: 'patient', label: 'Patient', sortable: true, sortDirection: 'desc' },
                 { key: 'type_of_charge', label: 'Kind of Solution', sortable: true, sortDirection: 'desc', class: 'text-center'},
@@ -170,14 +186,24 @@
 
         mounted() {
 
+            this.intravenousFluid = this.defaultIntravenousFluid ? this.defaultIntravenousFluid : {};
+
             // Set the initial number of items
             this.totalRows = this.allIntravenousFluids.length;
+
+            this.fetchPatientRecords();
+
 
         },
 
         computed: {
 
-          ...mapGetters(['allIntravenousFluids', 'hasAccess']),
+          ...mapGetters([
+            'allIntravenousFluids', 
+            'hasAccess',
+            'allPatientRecords',
+            'defaultIntravenousFluid'
+          ]),
 
           sortOptions() {
             // Create an options list from our fields
@@ -192,18 +218,39 @@
 
         created() {
 
-            this.fetchIntravenousFluids();
+            if(this.defaultIntravenousFluid && this.defaultIntravenousFluid.patient_record) {
+              this.fetchIntravenousFluidsByParentId(this.defaultIntravenousFluid.patient_record);
+            } else {
+              this.fetchIntravenousFluids();
+            }
 
         },
 
         methods: {
 
-          ...mapActions(['fetchIntravenousFluids', 'deleteIntravenousFluid']),
+          ...mapActions([
+            'fetchIntravenousFluids', 
+            'deleteIntravenousFluid',
+            'fetchPatientRecords',
+            'fetchIntravenousFluidsByParentId',
+          ]),
 
           onFiltered(filteredItems) {
             // Trigger pagination to update the number of buttons/pages due to filtering
             this.totalRows = filteredItems.length
             this.currentPage = 1
+          },
+
+          onChange(value) {
+              if(value) {
+
+                this.fetchIntravenousFluidsByParentId(value);
+
+              } else {
+
+                this.fetchIntravenousFluids();
+                
+              }
           },
 
           create() {

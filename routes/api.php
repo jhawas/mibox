@@ -66,6 +66,7 @@ Route::group(['middleware' => 'auth:api'], function(){
 	Route::get('vitalSigns/{vitalSign}/showByPatientId', 'api\VitalSignController@showByPatientId');
 
 	Route::apiResource('intravenousFluids', 'api\IntravenousFluidController');
+	Route::get('intravenousFluids/{intravenousFluid}/showByPatientId', 'api\IntravenousFluidController@showByPatientId');
 
 	Route::get('diagnoses', 'api\DiagnoseController@index');
 	Route::post('diagnoses', 'api\DiagnoseController@store');

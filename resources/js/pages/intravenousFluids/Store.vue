@@ -184,7 +184,7 @@
         data() {
             return {
                 form: {
-                  patient_record: '',
+                  patient_record: {},
                   date: moment().format('YYYY-MM-DD'),
                   time: moment().format('HH:mm'),
                   bot_no: 0,
@@ -202,6 +202,8 @@
         },
 
         mounted() {
+
+            this.form.patient_record = this.defaultIntravenousFluid.patient_record ? this.defaultIntravenousFluid.patient_record : null;
 
             this.fetchAvailablePatientRecords();
             this.fetchChargesByType(4); //intravenous fluid
@@ -223,7 +225,8 @@
               'allIntravenousFluids', 
               'allPatients', 
               'allAvailablePatientRecords',
-              'allTypeOfCharges'
+              'allTypeOfCharges',
+              'defaultIntravenousFluid'
             ]),
 
         },
