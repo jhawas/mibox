@@ -63,35 +63,35 @@
                 <tbody>
                     <tr v-for="item in allBillingReports.withoutGroupBill">
                       <td>{{item.type_of_charge.name}}</td>
-                      <td>{{formatPrice(item.total)}}</td>
+                      <td class="align-right">{{formatPrice(item.total)}}</td>
                       <td></td>
                       <td></td>
                       <td></td>
-                      <td>{{formatPrice(item.total)}}</td>
+                      <td class="align-right">{{formatPrice(item.total)}}</td>
                     </tr>
                     <tr>
                       <td>Laboratory</td>
-                      <td>{{formatPrice(allBillingReports.laboratoryGroupBillTotal)}}</td>
+                      <td class="align-right">{{formatPrice(allBillingReports.laboratoryGroupBillTotal)}}</td>
                       <td></td>
                       <td></td>
                       <td></td>
-                      <td>{{formatPrice(allBillingReports.laboratoryGroupBillTotal)}}</td>
+                      <td class="align-right">{{formatPrice(allBillingReports.laboratoryGroupBillTotal)}}</td>
                     </tr>
                     <tr>
                       <td>Medicine</td>
-                      <td>{{formatPrice(allBillingReports.medicineGroupBillTotal)}}</td>
+                      <td class="align-right">{{formatPrice(allBillingReports.medicineGroupBillTotal)}}</td>
                       <td></td>
                       <td></td>
                       <td></td>
-                      <td>{{formatPrice(allBillingReports.medicineGroupBillTotal)}}</td>
+                      <td class="align-right">{{formatPrice(allBillingReports.medicineGroupBillTotal)}}</td>
                     </tr>
                     <tr>
                       <td>Supplies</td>
-                      <td>{{formatPrice(allBillingReports.suppliesGroupBillTotal)}}</td>
+                      <td class="align-right">{{formatPrice(allBillingReports.suppliesGroupBillTotal)}}</td>
                       <td></td>
                       <td></td>
                       <td></td>
-                      <td>{{formatPrice(allBillingReports.suppliesGroupBillTotal)}}</td>
+                      <td class="align-right">{{formatPrice(allBillingReports.suppliesGroupBillTotal)}}</td>
                     </tr>
                     <tr v-for="item in allBillingReports.patientRecord.patient_discounts">
                       <td>{{item.discount ? item.discount.name : ''}}</td>
@@ -106,7 +106,7 @@
                       <td></td>
                       <td></td>
                       <td></td>
-                      <td>{{formatPrice(item.amount)}}</td>
+                      <td class="align-right">{{formatPrice(item.amount)}}</td>
                       <td></td>
                     </tr>
                     <tr>
@@ -114,28 +114,28 @@
                       <td></td>
                       <td></td>
                       <td colspan="2" class="bill-right">Total</td>
-                      <td>{{allBillingReports.totalBill}}</td>
+                      <td class="align-right">{{allBillingReports.totalBill}}</td>
                     </tr>
                     <tr>
                       <td></td>
                       <td></td>
                       <td></td>
                       <td colspan="2" class="bill-right">Discount</td>
-                      <td>{{allBillingReports.totalDiscount}}</td>
+                      <td class="align-right">{{allBillingReports.totalDiscount}}</td>
                     </tr>
                     <tr>
                       <td></td>
                       <td></td>
                       <td></td>
                       <td colspan="2" class="bill-right">HMO/Phic</td>
-                      <td>{{allBillingReports.totalHMO}}</td>
+                      <td class="align-right">{{allBillingReports.totalHMO}}</td>
                     </tr>
                     <tr>
                       <td></td>
                       <td></td>
                       <td></td>
                       <td colspan="2" class="bill-right">Grand Total</td>
-                      <td class="bill-right">{{allBillingReports.grandTotal}}</td>
+                      <td class="bill-right align-right">{{allBillingReports.grandTotal}}</td>
                     </tr>
                 </tbody>
               </table>
@@ -156,8 +156,8 @@
                         <tr v-for="item in allBillingReports.medicineGroupBill">
                           <td>{{item.type_of_charge.name}}</td>
                           <td>{{item.quantity_and_days}}</td>
-                          <td>{{item.amount}}</td>
-                          <td>{{formatPrice(item.total)}}</td>
+                          <td class="align-right">{{item.amount}}</td>
+                          <td class="align-right">{{formatPrice(item.total)}}</td>
                         </tr>
                     </tbody>
                   </table>
@@ -176,8 +176,8 @@
                         <tr v-for="item in allBillingReports.suppliesGroupBill">
                           <td>{{item.type_of_charge.name}}</td>
                           <td>{{item.quantity_and_days}}</td>
-                          <td>{{item.amount}}</td>
-                          <td>{{formatPrice(item.total)}}</td>
+                          <td class="align-right">{{item.amount}}</td>
+                          <td class="align-right">{{formatPrice(item.total)}}</td>
                         </tr>
                     </tbody>
                   </table>
@@ -196,8 +196,8 @@
                         <tr v-for="item in allBillingReports.laboratoryGroupBill">
                           <td>{{item.type_of_charge.name}}</td>
                           <td>{{item.quantity_and_days}}</td>
-                          <td>{{item.amount}}</td>
-                          <td>{{formatPrice(item.total)}}</td>
+                          <td class="align-right">{{item.amount}}</td>
+                          <td class="align-right">{{formatPrice(item.total)}}</td>
                         </tr>
                     </tbody>
                   </table>

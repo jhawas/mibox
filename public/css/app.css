@@ -20309,6 +20309,10 @@ body #app .page-error {
   font-weight: 600;
 }
 
+.print .align-right {
+  text-align: right;
+}
+
 .print .content {
   display: flex;
   width: 100%;
