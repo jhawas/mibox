@@ -34,7 +34,11 @@
                   </div>
                   <div class="group">
                     <div class="label">Final Diagnoses:</div>
-                    <div class="value">{{allBillingReports.patientRecord.current_diagnose ? allBillingReports.patientRecord.current_diagnose.diagnose_name + '(' + allBillingReports.patientRecord.current_diagnose.description + ')' : ''}}</div>
+                    <div class="value">{{allBillingReports.patientRecord.current_diagnose &&allBillingReports.patientRecord.current_diagnose.description }}</div>
+                  </div>
+                  <div class="group">
+                    <div class="label">Case Rate:</div>
+                    <div class="value">{{allBillingReports.patientRecord.current_diagnose && allBillingReports.patientRecord.current_diagnose.diagnose_name}}</div>
                   </div>
                   <div class="group">
                     <div class="label">Date of Adminission/Time:</div>
