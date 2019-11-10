@@ -72,7 +72,7 @@
                             </b-form-group>
 
                             <b-form-group
-                              label="BP:"
+                              label="BP (mm/hg):"
                               label-for="bp"
                             >
                               <b-form-input
@@ -83,7 +83,7 @@
                             </b-form-group>
 
                             <b-form-group
-                              label="T:"
+                              label="T (°C):"
                               label-for="t"
                             >
                               <b-form-input
@@ -94,7 +94,7 @@
                             </b-form-group>
 
                             <b-form-group
-                              label="P:"
+                              label="P (bit/minute):"
                               label-for="p"
                             >
                               <b-form-input
@@ -105,7 +105,7 @@
                             </b-form-group>
 
                             <b-form-group
-                              label="R:"
+                              label="RR (cycle/minute):"
                               label-for="r"
                             >
                               <b-form-input

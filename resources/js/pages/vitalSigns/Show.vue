@@ -24,31 +24,31 @@
                     <b-card title="Vital Sign Information" v-if="!loading">
                       <b-row>
                         <b-col col md="6">
-                            <b-form-group label-cols="4" label-cols-lg="2" label="Patient" label-for="input-default">
+                            <b-form-group label-cols="4" label-cols-lg="3" label="Patient" label-for="input-default">
                               <div class="form-control form-group-value">{{ vitalSign.patient_record.full_name }}</div>
                             </b-form-group>
 
-                            <b-form-group label-cols="4" label-cols-lg="2" label="Date" label-for="input-default">
+                            <b-form-group label-cols="4" label-cols-lg="3" label="Date" label-for="input-default">
                                   <div class="form-control form-group-value">{{ vitalSign.date }}</div>
                             </b-form-group>
 
-                            <b-form-group label-cols="4" label-cols-lg="2" label="Time" label-for="input-default">
+                            <b-form-group label-cols="4" label-cols-lg="3" label="Time" label-for="input-default">
                               <div class="form-control form-group-value">{{ vitalSign.time }}</div>
                             </b-form-group>
 
-                            <b-form-group label-cols="4" label-cols-lg="2" label="BP" label-for="input-default">
+                            <b-form-group label-cols="4" label-cols-lg="3" label="BP (mm/hg)" label-for="input-default">
                               <div class="form-control form-group-value">{{ vitalSign.bp }}</div>
                             </b-form-group>
 
-                            <b-form-group label-cols="4" label-cols-lg="2" label="T" label-for="input-default">
+                            <b-form-group label-cols="4" label-cols-lg="3" label="T (°C)" label-for="input-default">
                               <div class="form-control form-group-value">{{ vitalSign.t }}</div>
                             </b-form-group>
 
-                            <b-form-group label-cols="4" label-cols-lg="2" label="P" label-for="input-default">
+                            <b-form-group label-cols="4" label-cols-lg="3" label="P (bit/minute)" label-for="input-default">
                               <div class="form-control form-group-value">{{ vitalSign.p }}</div>
                             </b-form-group>
 
-                            <b-form-group label-cols="4" label-cols-lg="2" label="R" label-for="input-default">
+                            <b-form-group label-cols="4" label-cols-lg="3" label="R (cycle/minute)" label-for="input-default">
                               <div class="form-control form-group-value">{{ vitalSign.r }}</div>
                             </b-form-group>
 
@@ -57,41 +57,41 @@
                         <b-col col md="6">
                             <legend>Intake</legend>
                             
-                            <b-form-group label-cols="4" label-cols-lg="2" label="Oral" label-for="input-default">
+                            <b-form-group label-cols="4" label-cols-lg="3" label="Oral" label-for="input-default">
                               <div class="form-control form-group-value">{{ vitalSign.intake_oral }}</div>
                             </b-form-group>
 
-                            <b-form-group label-cols="4" label-cols-lg="2" label="I.V." label-for="input-default">
+                            <b-form-group label-cols="4" label-cols-lg="3" label="I.V." label-for="input-default">
                               <div class="form-control form-group-value">{{ vitalSign.intake_iv }}</div>
                             </b-form-group>
 
-                            <b-form-group label-cols="4" label-cols-lg="2" label="N.G." label-for="input-default">
+                            <b-form-group label-cols="4" label-cols-lg="3" label="N.G." label-for="input-default">
                               <div class="form-control form-group-value">{{ vitalSign.intake_ng }}</div>
                             </b-form-group>
 
-                            <b-form-group label-cols="4" label-cols-lg="2" label="Total" label-for="input-default">
+                            <b-form-group label-cols="4" label-cols-lg="3" label="Total" label-for="input-default">
                               <div class="form-control form-group-value">{{ vitalSign.total_intake }}</div>
                             </b-form-group>
 
                             <legend>Output</legend>
 
-                            <b-form-group label-cols="4" label-cols-lg="2" label="Urine" label-for="input-default">
+                            <b-form-group label-cols="4" label-cols-lg="3" label="Urine" label-for="input-default">
                               <div class="form-control form-group-value">{{ vitalSign.output_urine }}</div>
                             </b-form-group>
 
-                            <b-form-group label-cols="4" label-cols-lg="2" label="Stool" label-for="input-default">
+                            <b-form-group label-cols="4" label-cols-lg="3" label="Stool" label-for="input-default">
                               <div class="form-control form-group-value">{{ vitalSign.output_stool }}</div>
                             </b-form-group>
 
-                            <b-form-group label-cols="4" label-cols-lg="2" label="Emesis" label-for="input-default">
+                            <b-form-group label-cols="4" label-cols-lg="3" label="Emesis" label-for="input-default">
                               <div class="form-control form-group-value">{{ vitalSign.output_emesis }}</div>
                             </b-form-group>
 
-                            <b-form-group label-cols="4" label-cols-lg="2" label="N.G." label-for="input-default">
+                            <b-form-group label-cols="4" label-cols-lg="3" label="N.G." label-for="input-default">
                               <div class="form-control form-group-value">{{ vitalSign.output_ng }}</div>
                             </b-form-group>
 
-                            <b-form-group label-cols="4" label-cols-lg="2" label="Total" label-for="input-default">
+                            <b-form-group label-cols="4" label-cols-lg="3" label="Total" label-for="input-default">
                               <div class="form-control form-group-value">{{ vitalSign.total_output }}</div>
                             </b-form-group>
 
