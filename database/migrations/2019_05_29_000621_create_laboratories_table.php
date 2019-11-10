@@ -25,9 +25,9 @@ class CreateLaboratoriesTable extends Migration
             $table->integer('type_of_charge_id')->unsigned()->nullable();
             $table->foreign('type_of_charge_id')->references('id')->on('type_of_charges')->onDelete('cascade');
 
-            $table->string('description')->nullable();
+            $table->longText('description')->nullable();
 
-            $table->string('images')->nullable();
+            $table->longText('images')->nullable();
 
             $table->boolean('is_done')->default(0)->nullable();
 

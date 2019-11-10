@@ -40,7 +40,7 @@ class CreateBillingsTable extends Migration
 
             $table->decimal('total', 8, 2)->nullable();
 
-            $table->string('description')->nullable();
+            $table->longText('description')->nullable();
 
             $table->integer('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

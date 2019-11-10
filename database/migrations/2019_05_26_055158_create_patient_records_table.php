@@ -47,14 +47,14 @@ class CreatePatientRecordsTable extends Migration
             $table->integer('philhealth_membership_id')->unsigned()->nullable();
             $table->foreign('philhealth_membership_id')->references('id')->on('philhealth_memberships')->onDelete('cascade');
 
-            $table->string('sponsor')->nullable();
+            $table->longText('sponsor')->nullable();
 
             $table->integer('result_id')->unsigned()->nullable();
             $table->foreign('result_id')->references('id')->on('results')->onDelete('cascade');
 
-            $table->string('chief_complaints')->nullable();
+            $table->longText('chief_complaints')->nullable();
 
-            $table->string('brief_history')->nullable();
+            $table->longText('brief_history')->nullable();
 
             $table->integer('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

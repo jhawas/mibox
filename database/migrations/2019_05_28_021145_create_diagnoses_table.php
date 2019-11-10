@@ -18,7 +18,7 @@ class CreateDiagnosesTable extends Migration
 
             $table->string('name')->unique()->nullable();
 
-            $table->string('description')->nullable();
+            $table->longText('description')->nullable();
 
             $table->integer('parent_id')->unsigned()->nullable();
             $table->foreign('parent_id')->references('id')->on('diagnoses')->onDelete('cascade');

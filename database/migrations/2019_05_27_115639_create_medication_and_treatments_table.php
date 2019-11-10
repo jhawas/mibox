@@ -28,7 +28,7 @@ class CreateMedicationAndTreatmentsTable extends Migration
             
             $table->time('time')->nullable();
             
-            $table->string('remarks')->nullable();
+            $table->longText('remarks')->nullable();
 
             $table->integer('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

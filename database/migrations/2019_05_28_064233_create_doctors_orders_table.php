@@ -23,9 +23,9 @@ class CreateDoctorsOrdersTable extends Migration
             $table->date('date')->nullable();
             $table->time('time')->nullable();
 
-            $table->string('progress_note')->nullable();
+            $table->longText('progress_note')->nullable();
 
-            $table->string('orders')->nullable();
+            $table->longText('orders')->nullable();
 
             $table->boolean('is_laboratory')->default(0)->nullable();
 

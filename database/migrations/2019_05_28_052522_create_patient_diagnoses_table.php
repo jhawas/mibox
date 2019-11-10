@@ -21,9 +21,9 @@ class CreatePatientDiagnosesTable extends Migration
             $table->integer('patient_record_id')->unsigned()->nullable();
             $table->foreign('patient_record_id')->references('id')->on('patient_records')->onDelete('cascade');
 
-            $table->string('description')->nullable();
+            $table->longText('description')->nullable();
 
-            $table->string('remarks')->nullable();
+            $table->longText('remarks')->nullable();
 
             $table->integer('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

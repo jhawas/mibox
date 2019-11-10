@@ -24,18 +24,18 @@ class CreatePatientsTable extends Migration
             $table->date('birthdate')->nullable();
             $table->string('religion')->nullable();
             $table->string('sex')->nullable();
-            $table->string('address')->nullable();
+            $table->longText('address')->nullable();
             $table->string('civil_status')->nullable();
             $table->string('father')->nullable();
             $table->string('mother')->nullable();
             $table->string('spouse')->nullable();
-            $table->string('spouse_address')->nullable();
+            $table->longText('spouse_address')->nullable();
             $table->string('contact_no')->nullable();
             
             // emergency contact
             $table->string('e_name')->nullable();
             $table->string('e_contact')->nullable();
-            $table->string('e_address')->nullable();
+            $table->longText('e_address')->nullable();
 
             $table->unique(array('first_name', 'middle_name', 'last_name'));
             $table->timestamps();
