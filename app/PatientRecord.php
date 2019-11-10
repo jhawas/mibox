@@ -27,7 +27,7 @@ class PatientRecord extends Model
      *
      * @var array
      */
-    protected $appends = ['full_name'];
+    protected $appends = ['full_name', 'admission_time'];
 
     /**
      * Get the administrator flag for the user.
@@ -38,7 +38,16 @@ class PatientRecord extends Model
     {
         return "{$this->patient->full_name}";
     }
-    
+
+    /**
+     * Get the administrator flag for the user.
+     *
+     * @return bool
+     */
+    public function getAdmissionTimeAttribute()
+    {
+        return \Carbon\Carbon::createFromFormat('H:i:s',$this->admit_and_check_time)->format('h:i a');
+    }
 
     public function user()
     {

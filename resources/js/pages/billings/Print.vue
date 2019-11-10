@@ -11,6 +11,10 @@
                     <div class="value">{{allBillingReports.patient ? allBillingReports.patient.full_name_plain : null}}</div>
                   </div>
                   <div class="group">
+                    <div class="label">Age:</div>
+                    <div class="value">{{allBillingReports.patient ? getAge(allBillingReports.patient.birthdate) : null}}</div>
+                  </div>
+                  <div class="group">
                     <div class="label">Address:</div>
                     <div class="value">{{allBillingReports.patient ? allBillingReports.patient.address : null}}</div>
                   </div>
@@ -30,18 +34,20 @@
                   </div>
                   <div class="group">
                     <div class="label">Final Diagnoses:</div>
-                    <div class="value">{{allBillingReports.patientRecord.current_diagnose ? allBillingReports.patientRecord.current_diagnose.diagnose_name : ''}}</div>
+                    <div class="value">{{allBillingReports.patientRecord.current_diagnose ? allBillingReports.patientRecord.current_diagnose.diagnose_name + '(' + allBillingReports.patientRecord.current_diagnose.description + ')' : ''}}</div>
                   </div>
                   <div class="group">
                     <div class="label">Date of Adminission/Time:</div>
-                    <div class="value">{{allBillingReports.patientRecord.admit_and_check_date + '/' + allBillingReports.patientRecord.admit_and_check_time}}</div>
+                    <!-- <div class="value">{{allBillingReports.patientRecord.admit_and_check_date + '/' + allBillingReports.patientRecord.admit_and_check_time}}</div> -->
+                    <div class="value">{{ admissionDatetime(allBillingReports.patientRecord) }}</div>
                   </div>
                   <div class="group">
                     <div class="label">Date of Discharge/Time:</div>
-                    <div class="value">{{
+                    <!-- <div class="value">{{
                     allBillingReports.patientRecord.discharged_date ? allBillingReports.patientRecord.discharged_date : '' 
                     + '/' 
-                    + allBillingReports.patientRecord.discharged_time ? allBillingReports.patientRecord.discharged_time : null}}</div>
+                    + allBillingReports.patientRecord.discharged_time ? allBillingReports.patientRecord.discharged_time : null}}</div> -->
+                    <div class="value">{{ checkDischargeDatetime(allBillingReports.patientRecord) }}</div>
                   </div>
                   
               </div>
@@ -211,6 +217,7 @@
 <script>
 
   import { mapGetters, mapActions } from 'vuex';
+  import moment from 'moment';
 
   export default {
 
@@ -221,6 +228,8 @@
       data() {
           return {
               // reports: []
+              currentDate: moment().format('YYYY-MM-DD'),
+              currentTime: moment().format('hh:mm a')
           }
       },
 
@@ -228,6 +237,7 @@
           // this.fetchBillingReports(this.$route.params.patient_record_id);
 
           // console.log(this.allBillingReports);
+          console.log('current', this.currentTime, this.currentDate);
       },
 
       computed: {
@@ -248,6 +258,22 @@
         formatPrice(value) {
             let val = (value/1).toFixed(2).replace(',', '.')
             return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+        },
+
+        getAge(date) {
+              return moment().diff(date, 'years');
+        },
+
+        checkDischargeDatetime(data) {
+            if(data.discharged_date != null && data.discharged_time != null) {
+                return moment(data.discharged_date).format('YYYY-MM-DD') + '/' + moment(data.discharged_time).format('hh:mm a');
+            } else {
+                return this.currentDate + '/' + this.currentTime;
+            }
+        },
+ 
+        admissionDatetime(data) {
+            return moment(data.admit_and_check_date).format('YYYY-MM-DD') + '/' + data.admission_time;
         }
       },
   }
