@@ -23,5 +23,12 @@ class DatabaseSeeder extends Seeder
         $this->call(DiscountTableSeeder::class);
         
         
-    }
+        // intial data
+        $this->call(InsurancesTableSeeder::class);
+        $this->call(TypeOfChargesTableSeeder::class);
+        $this->call(DiagnosesTableSeeder::class);
+        $this->call(FloorTableSeeder::class);
+        $this->call(RoomTableSeeder::class);
+
+    }   
 }

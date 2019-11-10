@@ -35,7 +35,7 @@ class PatientRecordController extends Controller
             'currentRoom',
             'currentDiagnose',
             'rooms'
-        ])->get();
+        ])->where('discharged', 0)->get();
         return $patientRecords;
     }
 
