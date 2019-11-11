@@ -16,7 +16,9 @@ class IntravenousFluidController extends Controller
      */
     public function index()
     {
-        $intravenousFluids = IntravenousFluid::all();
+        $intravenousFluids = IntravenousFluid::whereHas('patientRecord', function($q) {
+            $q->where('discharged', 0);
+        })->get();
         return $intravenousFluids;
     }
 

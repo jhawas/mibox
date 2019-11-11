@@ -15,7 +15,9 @@ class NurseNoteController extends Controller
      */
     public function index()
     {
-        $nurseNotes = NurseNote::all();
+        $nurseNotes = NurseNote::whereHas('patientRecord', function($q) {
+            $q->where('discharged', 0);
+        })->get();
         return $nurseNotes;
     }
 

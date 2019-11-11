@@ -15,7 +15,9 @@ class VitalSignController extends Controller
      */
     public function index()
     {
-        $vitalSigns = VitalSign::all();
+        $vitalSigns = VitalSign::whereHas('patientRecord', function($q) {
+            $q->where('discharged', 0);
+        })->get();
         return $vitalSigns;
     }
 

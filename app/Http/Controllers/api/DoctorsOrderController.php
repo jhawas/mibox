@@ -15,7 +15,9 @@ class DoctorsOrderController extends Controller
      */
     public function index()
     {
-        $doctorsOrders = DoctorsOrder::all();
+        $doctorsOrders = DoctorsOrder::whereHas('patientRecord', function($q) {
+            $q->where('discharged', 0);
+        })->get();
         return $doctorsOrders;
     }
 

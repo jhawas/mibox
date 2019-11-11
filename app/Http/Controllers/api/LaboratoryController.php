@@ -16,7 +16,9 @@ class LaboratoryController extends Controller
      */
     public function index()
     {
-        $laboratories =  Laboratory::all();
+        $laboratories =  Laboratory::whereHas('patientRecord', function($q) {
+            $q->where('discharged', 0);
+        })->get();
         return $laboratories;
     }
 

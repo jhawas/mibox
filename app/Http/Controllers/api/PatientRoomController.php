@@ -21,7 +21,9 @@ class PatientRoomController extends Controller
             'patientRecords',
             'room',
             'patient'
-        ])->get();
+        ])->whereHas('patientRecords', function($q) {
+            $q->where('discharged', 0);
+        })->get();
         return $patientRooms;
     }
 

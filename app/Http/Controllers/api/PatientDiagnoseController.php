@@ -15,7 +15,9 @@ class PatientDiagnoseController extends Controller
      */
     public function index()
     {
-        $patientDiagnoses = PatientDiagnose::all();
+        $patientDiagnoses = PatientDiagnose::whereHas('patientRecord', function($q) {
+            $q->where('discharged', 0);
+        })->get();
         return $patientDiagnoses;
     }
 

@@ -16,7 +16,9 @@ class MedicationAndTreatmentController extends Controller
      */
     public function index()
     {
-        $medicationAndTreatments = MedicationAndTreatment::all();
+        $medicationAndTreatments = MedicationAndTreatment::whereHas('patientRecord', function($q) {
+            $q->where('discharged', 0);
+        })->get();
         return $medicationAndTreatments;
     }
 
