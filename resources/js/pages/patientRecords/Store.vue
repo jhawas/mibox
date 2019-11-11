@@ -143,6 +143,56 @@
                               ></b-form-textarea>
                             </b-form-group>
 
+                            <legend>Vital Sign</legend>
+
+                            <b-form-group
+                              label="BP (mm/hg):"
+                              label-for="bp"
+                            >
+                              <b-form-input
+                                v-model="form.current_vital_sign.bp"
+                                type="text"
+                                placeholder="Enter BP"
+                                :disabled="this.$route.params.id > 0"
+                              />
+                            </b-form-group>
+
+                            <b-form-group
+                              label="T (°C):"
+                              label-for="t"
+                            >
+                              <b-form-input
+                                v-model="form.current_vital_sign.t"
+                                type="text"
+                                placeholder="Enter T"
+                                :disabled="this.$route.params.id > 0"
+                              />
+                            </b-form-group>
+
+                            <b-form-group
+                              label="P (bit/minute):"
+                              label-for="p"
+                            >
+                              <b-form-input
+                                v-model="form.current_vital_sign.p"
+                                type="text"
+                                placeholder="Enter P"
+                                :disabled="this.$route.params.id > 0"
+                              />
+                            </b-form-group>
+
+                            <b-form-group
+                              label="RR (cycle/minute):"
+                              label-for="r"
+                            >
+                              <b-form-input
+                                v-model="form.current_vital_sign.r"
+                                type="text"
+                                placeholder="Enter R"
+                                :disabled="this.$route.params.id > 0"
+                              />
+                            </b-form-group>
+
                             <legend>Other Details</legend>
                             <b-form-group
                                 label="Disposition:"
@@ -374,6 +424,12 @@
                   chart_completed_by: null,
                   discharged: 0,
                   current_diagnose: null,
+                  current_vital_sign: {
+                    bp: '',
+                    t: '',
+                    p: '',
+                    r: ''
+                  },
                   description: '',
                   remarks: '',
                 },
@@ -402,6 +458,7 @@
                       this.form = response.data;
                       this.form.description = response.data.current_diagnose.description;
                       this.form.remarks = response.data.current_diagnose.remarks;
+                      this.form.current_vital_sign = response.data.current_vital_sign;
                       this.loading = false;
                 });
             }
@@ -508,6 +565,11 @@
               formData.append('room_id', this.form.current_room ? this.form.current_room.id : 0);
 
               formData.append('diagnose_id', this.form.current_diagnose ? this.form.current_diagnose.id : 0);
+
+              formData.append('bp', this.form.current_vital_sign.bp);
+              formData.append('t', this.form.current_vital_sign.t);
+              formData.append('p', this.form.current_vital_sign.p);
+              formData.append('r', this.form.current_vital_sign.r);
              
               const response = this.addPatientRecord(formData);
               

@@ -113,6 +113,11 @@ class PatientRecord extends Model
         return $this->hasOne(PatientDiagnose::class)->latest();
     }
 
+    public function currentVitalSign()
+    {
+        return $this->hasOne(VitalSign::class)->latest();
+    }
+
     public function nurseNotes()
     {
         return $this->hasMany(NurseNote::class);

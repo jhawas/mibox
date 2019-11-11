@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use App\PatientDiscount;
+use App\VitalSign;
 
 class PatientRecordController extends Controller
 {
@@ -34,7 +35,8 @@ class PatientRecordController extends Controller
             'patientRooms',
             'currentRoom',
             'currentDiagnose',
-            'rooms'
+            'rooms',
+            'currentVitalSign'
         ])->where('discharged', 0)->get();
         return $patientRecords;
     }
@@ -71,6 +73,10 @@ class PatientRecordController extends Controller
             'diagnose_id' => 'required|not_in:0',
             'description' => 'required',
             'remarks' => 'required',
+            'bp' => 'required',
+            't' => 'required',
+            'p' => 'required',
+            'r' => 'required',
         ]);
 
         $patientRecord = new PatientRecord;
@@ -119,6 +125,16 @@ class PatientRecordController extends Controller
             'remarks' => $request->remarks,
             'user_id' => \Auth::user()->id,
         ]);
+        
+
+        $vitalSign = new VitalSign;
+
+        $vitalSign->patient_record_id = $patientRecord->id;
+        $vitalSign->bp = $request->bp;
+        $vitalSign->t = $request->t;
+        $vitalSign->p = $request->p;
+        $vitalSign->r = $request->r;
+        $vitalSign->save();
 
         // fetch default charges
         $typeOfCharges = TypeOfCharge::where('is_default', 1)->get();
@@ -179,6 +195,7 @@ class PatientRecordController extends Controller
             'currentRoom',
             'rooms',
             'currentDiagnose',
+            'currentVitalSign',
         ]);
     }
 
@@ -309,6 +326,7 @@ class PatientRecordController extends Controller
             'patientRooms',
             'currentRoom',
             'currentDiagnose',
+            'currentVitalSign',
         ])->where('discharged', 0)->get();
         return $patientRecords;
     }

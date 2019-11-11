@@ -97,7 +97,6 @@ class PatientController extends Controller
      */
     public function show(Patient $patient)
     {
-        // $p = Patient::with([])
         return $patient->load(['patientRecords' => function($query) {
             $query->with([
                 'user',
