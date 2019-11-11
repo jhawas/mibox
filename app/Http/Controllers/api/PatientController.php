@@ -97,7 +97,32 @@ class PatientController extends Controller
      */
     public function show(Patient $patient)
     {
-        return $patient;
+        // $p = Patient::with([])
+        return $patient->load(['patientRecords' => function($query) {
+            $query->with([
+                'user',
+                'patient',
+                'disposition',
+                'result',
+                'philhealthMembership',
+                'admitAndCheckBy',
+                'dischargedBy',
+                'physician',
+                'chartCompletedBy',
+                'currentRoom',
+                'patientDiagnoses',
+                'nurseNotes',
+                'medicationAndTreatments',
+                'vitalSigns',
+                'intravenousFluids',
+                'doctorsOrders',
+                'laboratories',
+                // 'patientRooms'
+                'currentRoom',
+                'rooms',
+                'currentDiagnose',
+            ]);
+        }]);
     }
 
     /**
