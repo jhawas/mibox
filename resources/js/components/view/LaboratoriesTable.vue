@@ -66,6 +66,13 @@
           </ul>
         </b-card>
       </template>
+      <template slot="images" slot-scope="row">
+          <div class="row">
+            <div class="col-md-1" v-for="(img, index) in JSON.parse(row.item.images)" :key="index" v-viewer>
+                <b-img :src="replaceUrl(img, row.item.id)" thumbnail fluid alt="Responsive image" />
+            </div>
+          </div>
+      </template>
     </b-table>
 
     <b-row>
@@ -97,6 +104,7 @@
               fields: [
                 { key: 'laboratory', label: 'Laboratory', sortable: true, sortDirection: 'desc' },
                 { key: 'description', label: 'Description', sortable: true, sortDirection: 'desc' },
+                { key: 'images', label: 'Images', sortable: true, sortDirection: 'desc' },
                 { key: 'created_at', label: 'Date/Time', sortable: true, sortDirection: 'desc', class: 'text-right' },
               ],
               totalRows: 1,
@@ -140,6 +148,12 @@
             // Trigger pagination to update the number of buttons/pages due to filtering
             this.totalRows = filteredItems.length
             this.currentPage = 1
+          },
+
+          replaceUrl(url, id) {
+            if(url) {
+              return '/storage/laboratory/' + id + '/' + url;
+            }
           },
 
         },

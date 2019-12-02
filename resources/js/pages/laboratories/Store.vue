@@ -28,7 +28,7 @@
                       variant="danger" 
                       dismissible
                     >
-                        <div v-for="error in errors">{{ error }}</div>
+                        <div v-for="(error, index) in errors" :key="index">{{ error }}</div>
                     </b-alert>
 
                     <b-form @submit="onSubmit" v-if="!loading">
@@ -77,6 +77,20 @@
                             </b-form-group>
 
                          </b-col>
+                         <b-col col lg="6">
+                            <b-form-group label-cols-sm="2" label="File">
+                                <b-input-group>
+                                    <b-form-file
+                                      ref="file"
+                                      id="file"
+                                      multiple
+                                      placeholder="Choose a file..."
+                                      drop-placeholder="Drop file here..."
+                                      @change="onFileChange"
+                                    />
+                                </b-input-group>
+                            </b-form-group>
+                         </b-col>
                       </b-row>
                       <b-button type="submit" variant="primary" :disabled="loadSubmit">
                           <b-spinner small label="Small Spinner" v-if="loadSubmit"></b-spinner>
@@ -104,7 +118,7 @@
         components: {
             Layout,
             FulfillingBouncingCircleSpinner,
-            Multiselect
+            Multiselect,
         },
 
         props: {
@@ -122,6 +136,7 @@
                 loading: false,
                 showAlert: false,
                 loadSubmit: false,
+                files: [],
             }
         },
 
@@ -170,6 +185,11 @@
             this.loadSubmit = true;
 
             let formData = new FormData();
+
+            for( var i = 0; i < this.files.length; i++ ){
+              let file = this.files[i];
+              formData.append('files[' + i + ']', file);
+            }
 
             formData.append('patient_record_id', this.form.patient_record ? this.form.patient_record.id : 0);
             formData.append('type_of_charge_id', this.form.laboratory ? this.form.laboratory.id : 0);
@@ -232,6 +252,18 @@
               
             }
 
+          },
+
+          onFileChange(e) {
+            console.log('file changed', e);
+            let files = e.target.files || e.dataTransfer.files;
+            if (!files.length)
+                return;
+            this.files = files;
+          },
+
+          onRemoveUploadingFile(file, error, xhr) {
+            console.log(file, error, xhr);
           },
 
           cancel() {

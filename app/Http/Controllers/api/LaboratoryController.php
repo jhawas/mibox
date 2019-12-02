@@ -7,6 +7,8 @@ use App\Billing;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use Storage;
+
 class LaboratoryController extends Controller
 {
     /**
@@ -61,10 +63,20 @@ class LaboratoryController extends Controller
         $laboratory->patient_record_id = $request->patient_record_id;
         $laboratory->type_of_charge_id = $request->type_of_charge_id;
         $laboratory->description = $request->description;
-        $laboratory->images = $request->images;
+        // $laboratory->images = json_encode($data);
         $laboratory->is_done = 1;
         $laboratory->user_id = \Auth::user()->id;
         $laboratory->save();
+
+        if($request->hasfile('files')) {
+            foreach($request->file('files') as $key => $file) {
+                $name=$file->getClientOriginalName();
+                $file->move(public_path().'/storage/laboratory/'. $laboratory->id, $name);  
+                $data[$key] = $name;  
+            }
+            $laboratory->images = json_encode($data);
+            $laboratory->save();
+        }
 
         $billing = new Billing;
         $billing->type_of_charge_id = $request->type_of_charge_id;
@@ -117,11 +129,22 @@ class LaboratoryController extends Controller
             'type_of_charge_id' => 'required|not_in:0',
             'description' => 'required',
         ]);
+
+        if($request->hasfile('files')) {
+            $files = json_decode($laboratory->images);
+            Storage::deleteDirectory('public/laboratory/'. $laboratory->id);
+            foreach($request->file('files') as $key => $file) {
+                $name=$file->getClientOriginalName();
+                $file->move(public_path().'/storage/laboratory/'. $laboratory->id, $name);  
+                $data[$key] = $name;  
+            }
+            $laboratory->images = json_encode($data);
+        }
         
         $laboratory->patient_record_id = $request->patient_record_id;
         $laboratory->type_of_charge_id = $request->type_of_charge_id;
         $laboratory->description = $request->description;
-        $laboratory->images = $request->images;
+        // $laboratory->images = $request->images;
         $laboratory->is_done = 1;
         $laboratory->user_id = \Auth::user()->id;
         $laboratory->save();
@@ -156,6 +179,8 @@ class LaboratoryController extends Controller
      */
     public function destroy(Laboratory $laboratory)
     {
+        Storage::deleteDirectory('public/laboratory/'.$laboratory->id);
+
         $laboratory->delete();
 
         return response()->json([
