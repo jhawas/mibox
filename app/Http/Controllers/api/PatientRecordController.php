@@ -13,6 +13,10 @@ use Carbon\Carbon;
 use App\PatientDiscount;
 use App\VitalSign;
 
+use App\Notifications\NewPatientRecord;
+use Illuminate\Support\Facades\Notification;
+use App\User;
+
 class PatientRecordController extends Controller
 {
     /**
@@ -159,6 +163,11 @@ class PatientRecordController extends Controller
             $patientDiscount->user_id = \Auth::user()->id;
             $patientDiscount->save();
         }
+
+        $users = User::all();
+        $inPatient = PatientRecord::find($patientRecord->id)->first();
+
+        Notification::send($users, new NewPatientRecord($inPatient));
 
         return response()->json([
             'message' => 'success',

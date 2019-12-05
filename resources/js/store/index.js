@@ -32,42 +32,44 @@ import patientRooms from './modules/patientRooms';
 import patientDiscounts from './modules/patientDiscounts';
 import patientInsurances from './modules/patientInsurances';
 import dashboard from './modules/dashboard';
+import notifications from "./modules/notifications";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  	modules: {
-  		auth,
-  		users,
-  		patients,
-  		roles,
-  		typeOfRooms,
-  		floors,
-  		rooms,
-  		patientRecords,
-      dispositions,
-      results,
-      typeOfRecords,
-      philhealthMemberships,
-      nurseNotes,
-      medicationAndTreatments,
-      vitalSigns,
-      intravenousFluids,
-      diagnoses,
-      patientDiagnoses,
-      doctorsOrders,
-      typeOfLaboratories,
-      laboratories,
-      insurances,
-      discounts,
-      billings,
-      typeOfCharges,
-      types,
-      groupOfCharges,
-      patientRooms,
-      patientDiscounts,
-      patientInsurances,
-      dashboard,
-  	},
+    modules: {
+        auth,
+        users,
+        patients,
+        roles,
+        typeOfRooms,
+        floors,
+        rooms,
+        patientRecords,
+        dispositions,
+        results,
+        typeOfRecords,
+        philhealthMemberships,
+        nurseNotes,
+        medicationAndTreatments,
+        vitalSigns,
+        intravenousFluids,
+        diagnoses,
+        patientDiagnoses,
+        doctorsOrders,
+        typeOfLaboratories,
+        laboratories,
+        insurances,
+        discounts,
+        billings,
+        typeOfCharges,
+        types,
+        groupOfCharges,
+        patientRooms,
+        patientDiscounts,
+        patientInsurances,
+        dashboard,
+        notifications
+    }
 });
 

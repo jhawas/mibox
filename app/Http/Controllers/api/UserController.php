@@ -5,6 +5,9 @@ namespace App\Http\Controllers\api;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Notifications\NewUser;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 
 class UserController extends Controller
 {
@@ -37,6 +40,9 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+
+        $users = User::all();
+
         $validatedData = $request->validate([
             'roles' => 'required|not_in:[]',
             'first_name' => 'required|max:191',
@@ -68,6 +74,8 @@ class UserController extends Controller
         $user->save();
 
         $user->roles()->attach($roles);
+
+        Notification::send($users, new NewUser($user));
 
         return response()->json([
             'message' => 'success',

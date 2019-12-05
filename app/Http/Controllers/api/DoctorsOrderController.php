@@ -5,6 +5,9 @@ namespace App\Http\Controllers\api;
 use App\DoctorsOrder;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Notifications\NewDoctorsOrder;
+use Illuminate\Support\Facades\Notification;
+use App\User;
 
 class DoctorsOrderController extends Controller
 {
@@ -71,6 +74,9 @@ class DoctorsOrderController extends Controller
         $doctorsOrder->requested_by = \Auth::user()->id;
         $doctorsOrder->user_id = \Auth::user()->id;
         $doctorsOrder->save();
+        
+        $users = User::all();
+        Notification::send($users, new NewDoctorsOrder($doctorsOrder));
 
         return response()->json([
             'message' => 'success',

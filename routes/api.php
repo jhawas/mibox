@@ -120,5 +120,8 @@ Route::group(['middleware' => 'auth:api'], function(){
 
 	Route::apiResource('patientInsurances', 'api\PatientInsuranceController');
 	Route::get('patientInsurances/patientRecord/{patient_record_id}', 'api\PatientInsuranceController@dataByRecord')->name('billings.dataByRecord');
-
+	
+	Route::get('notifications/read', 'api\NotificationController@notification');
+	Route::get('notifications/unRead', 'api\NotificationController@unReadNotification');
+	Route::post('notifications/markAsAllRead', 'api\NotificationController@markAsAllRead');
 });

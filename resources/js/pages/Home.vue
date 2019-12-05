@@ -43,7 +43,10 @@
 
     import Layout from '../components/Layout';
     import { mapGetters, mapActions } from 'vuex';
-    
+    import io from 'socket.io-client';
+
+    var socket = io('http://192.168.10.11:3000');
+
     export default {
         components: {
             Layout

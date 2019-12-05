@@ -5,6 +5,9 @@ namespace App\Http\Controllers\api;
 use App\Patient;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\NewPatient;
+use App\User;
 
 class PatientController extends Controller
 {
@@ -83,6 +86,10 @@ class PatientController extends Controller
         $patient->e_address = $request->e_address;
         $patient->user_id = \Auth::user()->id;
         $patient->save();
+
+        $users = User::all();
+
+        Notification::send($users, new NewPatient($patient));
 
         return response()->json([
             'message' => 'success',
