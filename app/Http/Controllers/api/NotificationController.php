@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\User;
+use App\Events\NotificationEvent;
 
 class NotificationController extends Controller
 {
@@ -44,6 +45,9 @@ class NotificationController extends Controller
         foreach ($user->unreadNotifications as $notification) {
             $notification->markAsRead();
         }
+
+        event(new NotificationEvent());
+
         return response()->json([
             'message' => 'success',
         ]);
