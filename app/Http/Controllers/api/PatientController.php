@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\NewPatient;
 use App\User;
+use App\Events\NotificationEvent;
 
 class PatientController extends Controller
 {
@@ -90,6 +91,8 @@ class PatientController extends Controller
         $users = User::all();
 
         Notification::send($users, new NewPatient($patient));
+
+        event(new NotificationEvent());
 
         return response()->json([
             'message' => 'success',

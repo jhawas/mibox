@@ -96,6 +96,16 @@
             this.fetchUnReadNotifications();
         },
 
+        sockets: {
+            connect() {
+                console.log('socket connected');
+            },
+            notification(data) {
+                this.fetchUnReadNotifications();
+                this.fetchNotifications();
+            }
+        },
+
         computed: {
 
             ...mapGetters(['currentUserDisplayName', 'displayUserRoles', 'allNotifications', 'allUnReadNotifications']),
@@ -105,6 +115,11 @@
         methods: {
 
             ...mapActions(['logout', 'fetchNotifications', 'fetchUnReadNotifications', 'markAllAsRead']),
+            
+            refreshNotification() {
+                this.fetchUnReadNotifications();
+                this.fetchNotifications();
+            },
 
             logoutUser() {
                 
@@ -139,14 +154,9 @@
                 formData.append('notification', this.allUnReadNotifications);
 
                 const response = this.markAllAsRead({formData: formData});
-
-                response.then( response => {
-                    console.log(response);
-                });
             },
 
             notificationType(notification, type) {
-                console.log('test', notification.data.data.type, type);
                 if(notification.data.data.type === type) {
                     return true;
                 }

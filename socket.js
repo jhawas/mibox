@@ -1,64 +1,38 @@
-var server = require("http").Server();
+var app = require("express")();
+
+var server = require("http").Server(app);
 
 var io = require("socket.io")(server);
 
 var Redis = require("ioredis");
+
 var redis = new Redis();
 
-redis.subscribe("test-channel");
+redis.psubscribe(["*"], function(err, count) {});
 
-redis.on("message", function(channel, message) {
+redis.on("pmessage", function(subscribe, channel, message) {
+    console.log("message received");
+
+    console.log("psubscribe: " + subscribe);
+    console.log("pchannel: " + channel);
+    console.log("pmessage: " + message);
+
     message = JSON.parse(message);
 
     io.emit(channel + ":" + message.event, message.data);
-    
-    console.log(message);
+    io.emit(message.event, message.data);
+
 });
 
-server.listen(3000);
+server.listen(3000, function() {
+    console.log("server run at port 3000 to stop ctr + c");
+});
 
 io.on("connection", function(socket) {
-    console.log("connected");
+    console.log("a user connected");
     socket.on("disconnect", function() {
-        console.log("disconnected");
+        console.log("user disconnected");
     });
 });
-
-// var app = require("express")();
-
-// var server = require("http").Server(app);
-
-// var io = require("socket.io")(server);
-
-// var Redis = require("ioredis");
-
-// var redis = new Redis();
-
-// redis.psubscribe(["*"], function(err, count) {});
-
-// redis.subscribe(["*"], function(err, count) {});
-
-// redis.on("pmessage", function(subscribe, channel, message) {
-//     console.log("message received");
-
-//     console.log("subscribe: " + subscribe);
-//     console.log("channel: " + channel);
-//     console.log("message: " + message);
-
-//     message = JSON.parse(message);
-
-//     io.emit(channel + ":" + message.event, message.data);
-// });
-
-// server.listen(3000, function() {
-//     console.log("server run at port 3000 to stop ctr + c");
-// });
-
-// io.on("connection", function(socket) {
-//     console.log("a user connected");
-//     socket.on("disconnect", function() {
-//         console.log("user disconnected");
-//     });
-// });
 
 

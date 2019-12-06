@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Notifications\NewUser;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
+use App\Events\NotificationEvent;
 
 class UserController extends Controller
 {
@@ -76,6 +77,8 @@ class UserController extends Controller
         $user->roles()->attach($roles);
 
         Notification::send($users, new NewUser($user));
+
+        event(new NotificationEvent());
 
         return response()->json([
             'message' => 'success',

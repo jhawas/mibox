@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Notifications\NewDoctorsOrder;
 use Illuminate\Support\Facades\Notification;
 use App\User;
+use App\Events\NotificationEvent;
 
 class DoctorsOrderController extends Controller
 {
@@ -77,6 +78,7 @@ class DoctorsOrderController extends Controller
         
         $users = User::all();
         Notification::send($users, new NewDoctorsOrder($doctorsOrder));
+        event(new NotificationEvent());
 
         return response()->json([
             'message' => 'success',

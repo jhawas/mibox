@@ -16,6 +16,7 @@ use App\VitalSign;
 use App\Notifications\NewPatientRecord;
 use Illuminate\Support\Facades\Notification;
 use App\User;
+use App\Events\NotificationEvent;
 
 class PatientRecordController extends Controller
 {
@@ -41,7 +42,7 @@ class PatientRecordController extends Controller
             'currentDiagnose',
             'rooms',
             'currentVitalSign'
-        ])->where('discharged', 0)->get();
+        ])->where('discharged', 0)->orderBy('id', 'desc')->get();
         return $patientRecords;
     }
 
@@ -168,6 +169,8 @@ class PatientRecordController extends Controller
         $inPatient = PatientRecord::find($patientRecord->id)->first();
 
         Notification::send($users, new NewPatientRecord($inPatient));
+
+        event(new NotificationEvent());
 
         return response()->json([
             'message' => 'success',

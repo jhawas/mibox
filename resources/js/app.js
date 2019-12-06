@@ -22,6 +22,8 @@ import MainApp from './components/MainApp.vue';
 
 import { initialize } from './helpers/default';
 
+import VueSocketIO from "vue-socket.io";
+
 Vue.use(VueRouter);
 
 Vue.use(BootstrapVue);
@@ -52,6 +54,15 @@ const router = new VueRouter(routes);
 
 initialize(store, router);
 
+Vue.use(
+    new VueSocketIO({
+        debug: true,
+        connection: "http://192.168.10.11:3000",
+        vuex: {
+            store
+        }
+    })
+);
 
 const app = new Vue({
     store,
