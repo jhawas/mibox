@@ -211,6 +211,24 @@ class BillingController extends Controller
         })->where('patient_record_id', $patient_record_id)
             ->get();
 
+        $patientRecordModel = \App\PatientRecord::with([
+            'user',
+            'patient',
+            'disposition',
+            'result',
+            'philhealthMembership',
+            'admitAndCheckBy',
+            'dischargedBy',
+            'physician',
+            'chartCompletedBy',
+            'patientRooms',
+            'currentRoom',
+            'currentDiagnose',
+            'rooms',
+            'patientInsurances',
+            'patientDiscounts'
+        ])->where('id', $patient_record_id);
+
         $patientRecord = \App\PatientRecord::with([
             'user',
             'patient',
@@ -236,9 +254,9 @@ class BillingController extends Controller
 
         $totalDiscount = ($totalBill * 0.70) * $patientRecord->patientDiscounts->sum('amount');
 
-        $totalPhic = $patientRecord->patientInsurances->where('id', 1)->sum('amount');
+        $totalPhic = $patientRecord->patientInsurances->where('insurance_id', 1)->sum('amount');
 
-        $totalHMO = $patientRecord->patientInsurances->where('id', '!=', 1)->sum('amount');
+        $totalHMO = $patientRecord->patientInsurances->where('insurance_id', '!=', 1)->sum('amount');
         
         $totalWithDiscount = $totalBill - $totalDiscount;
         

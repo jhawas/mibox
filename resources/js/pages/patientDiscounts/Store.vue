@@ -50,7 +50,7 @@
                             </b-form-group>
 
                             <b-form-group
-                                label="Discount:"
+                                label="Discount Category:"
                                 label-for="Discount"
                             >
                                 <multiselect 
@@ -64,7 +64,7 @@
                             </b-form-group>
 
                             <b-form-group
-                              label="Amount:"
+                              label="Discount %:"
                               label-for="amount"
                             >
                               <b-form-input
