@@ -236,9 +236,26 @@ class BillingController extends Controller
 
         $totalDiscount = ($totalBill * 0.70) * $patientRecord->patientDiscounts->sum('amount');
 
-        $totalHMO = $patientRecord->patientInsurances->sum('amount');
+        $totalPhic = $patientRecord->patientInsurances->where('id', 1)->sum('amount');
 
-        $grandTotal = $totalBill - ($totalDiscount + $totalHMO);
+        $totalHMO = $patientRecord->patientInsurances->where('id', '!=', 1)->sum('amount');
+        
+        $totalWithDiscount = $totalBill - $totalDiscount;
+        
+        $specialtyFee = 0;
+        $grandTotal = 0;
+
+        if($totalWithDiscount < $totalPhic) {
+            
+            $specialtyFee = $totalPhic - $totalWithDiscount;
+
+            $grandTotal = ($totalWithDiscount + $specialtyFee) - ($totalPhic + $totalHMO);
+
+        } else {
+            $grandTotal = $totalWithDiscount - ($totalPhic + $totalHMO);
+        }
+
+        // $grandTotal = $totalBill - ($totalDiscount + $totalHMO);
 
         return [
             'billings' => $billings,
@@ -258,7 +275,10 @@ class BillingController extends Controller
             'patientRecord' => $patientRecord,
             'totalDiscount' => number_format($totalDiscount, 2),
             'totalHMO' => number_format($totalHMO, 2),
-            'grandTotal' => number_format($grandTotal, 2)
+            'totalPhic' => number_format($totalPhic, 2),
+            'grandTotal' => number_format($grandTotal, 2),
+            'specialtyFeeString' => number_format($specialtyFee, 2),
+            'specialtyFee' => $specialtyFee
         ];
     }
 }

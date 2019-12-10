@@ -130,15 +130,29 @@
                       <td></td>
                       <td></td>
                       <td></td>
-                      <td colspan="2" class="bill-right">Discount</td>
-                      <td class="align-right">{{allBillingReports.totalDiscount}}</td>
+                      <td colspan="2" class="bill-right">Specialty Fee</td>
+                      <td class="align-right">+ {{allBillingReports.specialtyFeeString}}</td>
                     </tr>
                     <tr>
                       <td></td>
                       <td></td>
                       <td></td>
-                      <td colspan="2" class="bill-right">HMO/Phic</td>
-                      <td class="align-right">{{allBillingReports.totalHMO}}</td>
+                      <td colspan="2" class="bill-right">Discount</td>
+                      <td class="align-right">- {{allBillingReports.totalDiscount}}</td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td colspan="2" class="bill-right">Phic</td>
+                      <td class="align-right">- {{allBillingReports.totalPhic}}</td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td colspan="2" class="bill-right">HMO</td>
+                      <td class="align-right">- {{allBillingReports.totalHMO}}</td>
                     </tr>
                     <tr>
                       <td></td>

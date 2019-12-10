@@ -57,7 +57,7 @@ initialize(store, router);
 Vue.use(
     new VueSocketIO({
         debug: true,
-        connection: "http://192.168.10.11:3000",
+        connection: "http://192.168.10.10:3000",
         vuex: {
             store
         }

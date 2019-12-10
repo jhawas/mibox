@@ -81,10 +81,20 @@
                                 <i class="fa fa-eye" @click="show(row.item)" aria-hidden="true"></i>
                             </b-button>
                             
-                            <b-button @click="update(row.item)" v-if="hasAccess('update-insurance')">
+                            <b-button 
+                              @click="update(row.item)" 
+                              v-if="hasAccess('update-insurance')"
+                              :disabled="row.item.id === 1"
+                              :hidden="row.item.id === 1"
+                            >
                                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                             </b-button>
-                            <b-button @click="destroy(row.item)" v-if="hasAccess('delete-insurance')">
+                            <b-button 
+                              @click="destroy(row.item)" 
+                              v-if="hasAccess('delete-insurance')"
+                              :disabled="row.item.id === 1"
+                              :hidden="row.item.id === 1"
+                            >
                                 <i class="fa fa-eraser" aria-hidden="true"></i>
                             </b-button>
                         </template>
