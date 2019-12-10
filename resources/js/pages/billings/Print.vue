@@ -65,7 +65,7 @@
                     <th>Particulars</th>
                     <th>Actual Bill</th>
                     <th>VAT exempt</th>
-                    <th>Sr. Citizen</th>
+                    <th>Discount</th>
                     <th>HMO/Phic</th>
                     <th>Excess</th>
                   </tr>
