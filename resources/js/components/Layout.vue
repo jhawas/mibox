@@ -43,8 +43,7 @@
                                     <!-- <p class="app-notification__meta">2 min ago</p> -->
                                 </div>
                                 <div v-if="notificationType(notification,'doctorsOrder')">
-                                    <p class="app-notification__message">{{notification.data.data.patient.user.first_name + ' ' + notification.data.data.patient.user.middle_name + ' ' + notification.data.data.patient.user.last_name}}</p>
-                                    <p class="app-notification__meta">Orders:{{notification.data.data.patient.orders}}</p>
+                                    <p class="app-notification__message">{{notification.data.data.patient.orders}}</p>
                                     <p class="app-notification__meta">{{notification.data.data.message}}</p>
                                     <!-- <p class="app-notification__meta">2 min ago</p> -->
                                 </div>

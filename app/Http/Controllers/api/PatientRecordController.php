@@ -166,7 +166,8 @@ class PatientRecordController extends Controller
         }
 
         $users = User::all();
-        $inPatient = PatientRecord::find($patientRecord->id)->first();
+
+        $inPatient = PatientRecord::latest('id')->first();
 
         Notification::send($users, new NewPatientRecord($inPatient));
 
