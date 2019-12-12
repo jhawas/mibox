@@ -21,7 +21,7 @@
                       v-if="loading"
                       class="ibox-spinner"
                     />
-                    <b-card title="Nurse Note Information" v-if="!loading">
+                    <b-card title="Doctor's Order Information" v-if="!loading">
                       <b-row>
                         <b-col col md="6">
                             
@@ -32,6 +32,22 @@
 
                             <b-form-group label-cols="4" label-cols-lg="2" label="Date" label-for="input-default">
                               <div class="form-control form-group-value">{{ doctorsOrder.date }}</div>
+                            </b-form-group>
+
+                            <b-form-group label-cols="4" label-cols-lg="2" label="Orders" label-for="input-default">
+                              <div class="form-control form-group-value">{{ doctorsOrder.orders }}</div>
+                            </b-form-group>
+
+                            <b-form-group label-cols="4" label-cols-lg="2" label="Progress note" label-for="input-default">
+                              <div class="form-control form-group-value">{{ doctorsOrder.progress_note }}</div>
+                            </b-form-group>
+
+                            <b-form-group label-cols="4" label-cols-lg="2" label="Laboratories" label-for="input-default">
+                              <div class="form-control form-group-value">
+                                <span v-for="(laboratory, index) in stringToObject(doctorsOrder.laboratories)" :key="index">
+                                  {{ laboratory.name + ', ' }}
+                                </span>
+                              </div>
                             </b-form-group>
 
                             <b-form-group label-cols="4" label-cols-lg="2" label="Time" label-for="input-default">
@@ -107,7 +123,11 @@
 
             this.$router.push({ name: 'doctorsOrders' });
 
-          }
+          },
+
+          stringToObject(value) {
+              return JSON.parse(value);
+          },
 
         },
     }

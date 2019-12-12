@@ -20,7 +20,7 @@
                     <!-- <li class="app-notification__title">You have {{allUnReadNotifications.length}} new notifications.</li> -->
                     <div class="app-notification__content">
                         <li v-for="(notification, index) in allNotifications" :key="index">
-                            <a class="app-notification__item" href="javascript:;">
+                            <a class="app-notification__item" href="javascript:;" @click="onClickNotification(notification.data)">
                                 <span class="app-notification__icon">
                                     <span class="fa-stack fa-lg">
                                         <i class="fa fa-circle fa-stack-2x text-primary"></i>
@@ -158,6 +158,25 @@
             notificationType(notification, type) {
                 if(notification.data.data.type === type) {
                     return true;
+                }
+            },
+
+            onClickNotification(data) {
+                if(data.data.type == 'user') {
+                    const user = data.data.user;
+                    this.$router.push({ name: 'user-show', params: { id:  user.id } });
+                }
+                if(data.data.type == 'patient') {
+                    const patient = data.data.patient;
+                    this.$router.push({ name: 'patient-show', params: { id: patient.id } });
+                }
+                if(data.data.type == 'patientRecord') {
+                    const patientRecord = data.data.patient;
+                    this.$router.push({ name: 'patientRecord-show', params: { id: patientRecord.id } });
+                }
+                if(data.data.type == 'doctorsOrder') {
+                    const doctorsOrder = data.data.patient;
+                    this.$router.push({ name: 'doctorsOrder-show', params: { id: doctorsOrder.id } });
                 }
             }
 
