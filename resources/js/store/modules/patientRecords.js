@@ -30,6 +30,14 @@ const actions= {
 
 	},
 
+	async fetchPatientRecordsByDischarged({ commit }, discharged) {
+
+		const response = await axios.get(`/api/patientRecords/getPatientRecordByDischarged/${discharged}`);
+
+		commit('setPatientRecords', response.data);
+
+	},
+
 	async addPatientRecord( { commit }, formData ) {
 
 		const response = await axios.post(`/api/patientRecords`, formData);

@@ -55,7 +55,21 @@
                           </b-form-group>
                         </b-col>
                       </b-row>
-
+                      <b-row>
+                        <b-col md="6" class="my-1">
+                          <b-form-group label-cols-sm="3" label="Discharged" class="mb-0">
+                            <b-form-checkbox
+                              v-model="discharged"
+                              name="discharged"
+                              :value="1"
+                              :unchecked-value="0"
+                              class="form-group"
+                              @change="onDischargeStatusChanged"
+                            >
+                            </b-form-checkbox>
+                          </b-form-group>
+                        </b-col>
+                      </b-row>
                       <!-- Main table element -->
                       <b-table
                         show-empty
@@ -82,6 +96,10 @@
 
                         <template slot="type_of_record" slot-scope="row" right>
                             {{row.item.type_of_record ? row.item.type_of_record.name : null }}
+                        </template>
+
+                        <template slot="for_discharge" slot-scope="row" right>
+                           <i :class="displayStatus(row.item.for_discharge)" aria-hidden="true"></i>
                         </template>
 
                         <template slot="actions" slot-scope="row" right>
@@ -153,6 +171,7 @@
                 { key: 'patient', label: 'Patient', sortable: true, sortDirection: 'desc' },
                 { key: 'admit_and_check_date', label: 'Date', sortable: true, sortDirection: 'desc' },
                 { key: 'admit_and_check_time', label: 'Time', sortable: true, sortDirection: 'desc' },
+                { key: 'for_discharge', label: 'For Discharge', class: 'text-center' },
                 { key: 'actions', label: 'Actions', class: 'text-right' }
               ],
               totalRows: 1,
@@ -163,6 +182,7 @@
               sortDesc: true,
               sortDirection: 'desc',
               filter: null,
+              discharged: 0,
             }
         },
 
@@ -190,18 +210,26 @@
 
         created() {
 
-            this.fetchPatientRecords();
+            this.fetchPatientRecordsByDischarged(0);
 
         },
 
         methods: {
 
-          ...mapActions(['fetchPatientRecords', 'deletePatientRecord']),
+          ...mapActions(['fetchPatientRecords', 'deletePatientRecord', 'fetchPatientRecordsByDischarged']),
 
           onFiltered(filteredItems) {
             // Trigger pagination to update the number of buttons/pages due to filtering
             this.totalRows = filteredItems.length
             this.currentPage = 1
+          },
+
+          onDischargeStatusChanged(checked) {
+              this.fetchPatientRecordsByDischarged(checked);
+          },
+
+          displayStatus(status) {
+            return status ? 'fa fa-check' : 'fa fa-close'
           },
 
           create() {

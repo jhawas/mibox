@@ -47,6 +47,32 @@ class PatientRecordController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getPatientRecordByDischarged($discharged = 0)
+    {
+        $patientRecords = PatientRecord::with([
+            'user',
+            'patient',
+            'disposition',
+            'result',
+            'philhealthMembership',
+            'admitAndCheckBy',
+            'dischargedBy',
+            'physician',
+            'chartCompletedBy',
+            'patientRooms',
+            'currentRoom',
+            'currentDiagnose',
+            'rooms',
+            'currentVitalSign'
+        ])->where('discharged', $discharged)->orderBy('id', 'desc')->get();
+        return $patientRecords;
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -100,6 +126,7 @@ class PatientRecordController extends Controller
         $patientRecord->physician_id = $this->isDataEmpty($request->physician_id);
         $patientRecord->chart_completed_by = $this->isDataEmpty($request->chart_completed_by);
         $patientRecord->discharged = $request->discharged;
+        $patientRecord->for_discharge = $request->for_discharge;
         $patientRecord->user_id = \Auth::user()->id;
         $patientRecord->save();
 
@@ -261,6 +288,7 @@ class PatientRecordController extends Controller
         $patientRecord->physician_id = $this->isDataEmpty($request->physician_id);
         $patientRecord->chart_completed_by = $this->isDataEmpty($request->chart_completed_by);
         $patientRecord->discharged = $request->discharged;
+        $patientRecord->for_discharge = $request->for_discharge;
         $patientRecord->user_id = \Auth::user()->id;
         $patientRecord->save();
 

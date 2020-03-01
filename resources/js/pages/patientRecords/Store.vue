@@ -28,7 +28,7 @@
                       variant="danger" 
                       dismissible
                     >
-                        <div v-for="error in errors">{{ error }}</div>
+                        <div v-for="(error, index) in errors" :key="index">{{ error }}</div>
                     </b-alert>
 
                     <b-form @submit="onSubmit" v-if="!loading">
@@ -305,6 +305,17 @@
                             <div class="admitted-section">
                                 <legend>Discharged Details</legend>
 
+                                <b-form-checkbox
+                                    v-model="form.for_discharge"
+                                    name="for_discharge"
+                                    :value="1"
+                                    :unchecked-value="0"
+                                    class="form-group"
+                                    :disabled="!hasAccess('update-doctorsOrder')"
+                                >
+                                  For Discharge
+                                </b-form-checkbox>
+
                                 <b-form-group
                                     label="Doctor:"
                                     label-for="doctor"
@@ -364,6 +375,7 @@
                                 :value="1"
                                 :unchecked-value="0"
                                 class="form-group"
+                                :disabled="!form.for_discharge"
                             >
                               Discharged
                             </b-form-checkbox>
@@ -423,6 +435,7 @@
                   physician: null,
                   chart_completed_by: null,
                   discharged: 0,
+                  for_discharge: 0,
                   current_diagnose: null,
                   current_vital_sign: {
                     bp: '',
@@ -477,6 +490,7 @@
                 'allPhilhealthMemberships',
                 'allUsers',
                 'allDiagnoses',
+                'hasAccess',
               ]),
 
         },
@@ -525,6 +539,7 @@
             formData.append('physician_id', this.form.physician ? this.form.physician.id : 0);
             formData.append('chart_completed_by', this.form.chart_completed_by ? this.form.chart_completed_by.id : 0);
             formData.append('discharged', this.form.discharged);
+            formData.append('for_discharge', this.form.for_discharge);
 
             formData.append('description', this.form.description);
             formData.append('remarks', this.form.remarks);

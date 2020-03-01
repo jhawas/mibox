@@ -35,7 +35,6 @@
 
   import { mapGetters, mapActions } from 'vuex';
   import moment from 'moment';
-  import 'moment-range';
 
   export default {
 
@@ -60,8 +59,6 @@
 
       created() {
           this.fetchReports({ start: this.$route.params.startDate, end: this.$route.params.endDate});
-          var range = moment().range(this.$route.params.startDate, this.$route.params.endDate);
-          console.log(range.toString());
       },
 
       methods: {

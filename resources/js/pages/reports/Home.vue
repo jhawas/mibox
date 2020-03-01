@@ -129,8 +129,8 @@
               sortDirection: 'asc',
               filter: null,
               reportDate: {
-                  start: moment('2019-07-21').format('YYYY-MM-DD'),
-                  end: moment('2020-07-21').format('YYYY-MM-DD')
+                  start: moment().format('YYYY-MM-DD'),
+                  end: moment().format('YYYY-MM-DD')
               },
               disabledSearch: false,
             }
@@ -165,8 +165,6 @@
         },
 
         created() {
-
-            this.fetchReports({ start: this.reportDate.start, end: this.reportDate.end });
 
         },
 

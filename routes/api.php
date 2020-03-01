@@ -46,6 +46,7 @@ Route::group(['middleware' => 'auth:api'], function(){
 	Route::apiResource('rooms', 'api\RoomController');
 
 	Route::apiResource('patientRecords', 'api\PatientRecordController');
+	Route::get('patientRecords/getPatientRecordByDischarged/{discharged}', 'api\PatientRecordController@getPatientRecordByDischarged')->name('patientRecords.getPatientRecordByDischarged');
 	Route::get('patientRecords/list/available', 'api\PatientRecordController@available')->name('patientRecords.available');
 
 	Route::apiResource('dispositions', 'api\DispositionController');
