@@ -27,7 +27,7 @@
 @import '~vali-admin/src/sass/1-tools/vars';
 @import '~vali-admin/src/sass/1-tools/customize-bootstrap';
 
-// Vendor plugin files 
+// Vendor plugin files
 // Can be excluded based on your needs
 @import '~vali-admin/src/sass/1-tools/dataTables.bootstrap';
 @import '~vali-admin/src/sass/1-tools/bootstrap-datepicker';
@@ -169,4 +169,8 @@ body {
 		flex: 1;
 		padding: 0 10px;
 	}
+}
+
+.control-panel {
+    padding-bottom: 15px;
 }

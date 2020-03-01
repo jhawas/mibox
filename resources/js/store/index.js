@@ -33,6 +33,7 @@ import patientDiscounts from './modules/patientDiscounts';
 import patientInsurances from './modules/patientInsurances';
 import dashboard from './modules/dashboard';
 import notifications from "./modules/notifications";
+import reports from './modules/reports';
 
 Vue.use(Vuex);
 
@@ -69,7 +70,8 @@ export default new Vuex.Store({
         patientDiscounts,
         patientInsurances,
         dashboard,
-        notifications
+        notifications,
+        reports
     }
 });
 

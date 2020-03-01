@@ -57,8 +57,8 @@
 
                         <b-col md="6" class="my-1">
                           <b-form-group label-cols-sm="3" label="Print">
-                                <b-button 
-                                  @click="print" 
+                                <b-button
+                                  @click="print"
                                 >Patient</b-button>
                           </b-form-group>
                         </b-col>
@@ -93,15 +93,15 @@
                         </template>
 
                         <template slot="actions" slot-scope="row" right>
-                            
+
                             <!-- <b-button size="sm" @click="row.toggleDetails">
                               {{ row.detailsShowing ? 'Hide' : 'Show' }} Details
                             </b-button> -->
-                            
+
                             <b-button v-if="hasAccess('view-patient')">
                                 <i class="fa fa-eye" @click="show(row.item)" aria-hidden="true"></i>
                             </b-button>
-                            
+
                             <b-button @click="update(row.item)" v-if="hasAccess('update-patient')">
                                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                             </b-button>
@@ -204,7 +204,7 @@
               .map(f => {
                 return { text: f.label, value: f.key }
               });
-          }
+          },
 
         },
 
@@ -227,7 +227,7 @@
           print() {
 
               let routeData = this.$router.resolve({
-                  name: 'patient-print', 
+                  name: 'patient-print',
               });
               window.open(routeData.href, '_blank');
 
@@ -274,7 +274,7 @@
                       if(response.data.message === 'success') {
 
                           toastr.success('Patient successfully deleted.', 'Message');
-                          
+
                           this.$router.push({ name: 'patients' });
                       }
                   });

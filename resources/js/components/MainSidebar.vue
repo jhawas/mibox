@@ -86,7 +86,12 @@
                     <span class="app-menu__label">Billing</span>
                 </router-link>
               </li>
-              
+              <li>
+                <router-link :to="{ name: 'reports' }" class="app-menu__item">
+                    <i class="app-menu__icon fa fa-file"></i>
+                    <span class="app-menu__label">Reports</span>
+                </router-link>
+              </li>
               <li class="treeview">
                 <a class="app-menu__item" href="#" data-toggle="treeview">
                   <i class="app-menu__icon fa fa-th-list"></i>
@@ -150,12 +155,12 @@
         },
 
         props: {
-            
+
         },
 
         data() {
             return {
-                
+
             }
         },
 

@@ -4,6 +4,9 @@
 
 Medical Information Box
 
+php artisan key:generate
+
+php artisan passport:install --force
 
 php artisan make:controller PhotoController --resource --model=Photo
 

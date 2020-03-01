@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "834c5220216afba85ff0e1bbb0a72aa1",
+    "content-hash": "da03fa5f3bd5b0eb14b6dca19c00c1d8",
     "packages": [
         {
             "name": "defuse/php-encryption",
@@ -2207,17 +2207,17 @@
             ],
             "authors": [
                 {
+                    "name": "Ben Ramsey",
+                    "email": "ben@benramsey.com",
+                    "homepage": "https://benramsey.com"
+                },
+                {
                     "name": "Marijn Huizendveld",
                     "email": "marijn.huizendveld@gmail.com"
                 },
                 {
                     "name": "Thibaud Fabre",
                     "email": "thibaud@aztech.io"
-                },
-                {
-                    "name": "Ben Ramsey",
-                    "email": "ben@benramsey.com",
-                    "homepage": "https://benramsey.com"
                 }
             ],
             "description": "Formerly rhumsaa/uuid. A PHP 5.4+ library for generating RFC 4122 version 1, 3, 4, and 5 universally unique identifiers (UUID).",
@@ -3596,6 +3596,7 @@
                 "psr",
                 "psr-7"
             ],
+            "abandoned": "laminas/laminas-diactoros",
             "time": "2019-04-29T21:11:00+00:00"
         }
     ],
@@ -3878,23 +3879,23 @@
         },
         {
             "name": "laravel/homestead",
-            "version": "v8.4.0",
+            "version": "v10.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/homestead.git",
-                "reference": "c1e194bac77a03374adb9f92be818d25fa16335a"
+                "reference": "4faeed1644f5878e6b53cdc53b4b7e538d8334ea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/homestead/zipball/c1e194bac77a03374adb9f92be818d25fa16335a",
-                "reference": "c1e194bac77a03374adb9f92be818d25fa16335a",
+                "url": "https://api.github.com/repos/laravel/homestead/zipball/4faeed1644f5878e6b53cdc53b4b7e538d8334ea",
+                "reference": "4faeed1644f5878e6b53cdc53b4b7e538d8334ea",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.1",
-                "symfony/console": "~3.0||~4.0",
-                "symfony/process": "~3.0||~4.0",
-                "symfony/yaml": "~3.0||~4.0"
+                "symfony/console": "~3.0||~4.0||~5.0",
+                "symfony/process": "~3.0||~4.0||~5.0",
+                "symfony/yaml": "~3.0||~4.0||~5.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "^6.0"
@@ -3903,11 +3904,6 @@
                 "bin/homestead"
             ],
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "4.0-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "Laravel\\Homestead\\": "src/"
@@ -3920,11 +3916,11 @@
             "authors": [
                 {
                     "name": "Taylor Otwell",
-                    "email": "taylorotwell@gmail.com"
+                    "email": "taylor@laravel.com"
                 }
             ],
             "description": "A virtual machine for web artisans.",
-            "time": "2019-05-01T14:45:57+00:00"
+            "time": "2020-01-28T15:30:34+00:00"
         },
         {
             "name": "mockery/mockery",

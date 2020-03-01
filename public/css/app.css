@@ -20349,3 +20349,7 @@ body #app .page-error {
   padding: 0 10px;
 }
 
+.control-panel {
+  padding-bottom: 15px;
+}
+

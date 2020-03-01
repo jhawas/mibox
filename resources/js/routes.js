@@ -88,6 +88,9 @@ import StorePatientInsurance from './pages/patientInsurances/Store';
 
 import StorePatientDiscount from './pages/patientDiscounts/Store';
 
+import Report from './pages/reports/Home';
+import PatientPrint from './pages/reports/PatientPrint';
+
 
 export default {
 
@@ -648,6 +651,25 @@ export default {
                 requiresAuth: true,
             }
         },
+
+        // patient discount
+        {
+            path: '/reports',
+            name: 'reports',
+            component: Report,
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        // patient discount
+        {
+            path: '/reports/print/:startDate?/:endDate?',
+            name: 'patient-report-date',
+            component: PatientPrint,
+            meta: {
+                requiresAuth: true,
+            }
+        },
     ],
-    
+
 }
