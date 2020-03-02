@@ -61,6 +61,8 @@ class CreatePatientRecordsTable extends Migration
 
             $table->boolean('discharged')->default(0)->nullable();
 
+            $table->boolean('for_discharge')->default(0)->nullable();
+
             $table->timestamps();
         });
     }
