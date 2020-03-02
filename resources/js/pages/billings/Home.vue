@@ -27,6 +27,16 @@
                               :options="allPatientRecords" 
                               @input="onChange"
                             ></multiselect>
+                            <b-form-checkbox
+                              v-model="discharged"
+                              name="discharged"
+                              :value="1"
+                              :unchecked-value="0"
+                              class="form-group"
+                              @change="onDischargeStatusChanged"
+                            >
+                            Discharged
+                            </b-form-checkbox>
                           </b-form-group>
                         </b-col>
 
@@ -145,7 +155,7 @@
                         <b-col md="6" class="my-1">
                           <b-pagination
                             v-model="currentPage"
-                            :total-rows="totalRows"
+                            :total-rows="rows"
                             :per-page="perPage"
                             class="my-0"
                           ></b-pagination>
@@ -221,7 +231,7 @@
 
             this.billing = this.defaultBilling ? this.defaultBilling : {};
 
-            this.fetchPatientRecords();
+            this.fetchPatientRecordsByDischarged(0);
 
             // Set the initial number of items
             this.totalRows = this.allBillings.length;
@@ -238,6 +248,10 @@
               'defaultBilling', 
               'hasAccess'
             ]),
+
+          rows() {
+            return this.allBillings.length;
+          },
 
           sortOptions() {
             // Create an options list from our fields
@@ -270,12 +284,17 @@
             'fetchBillingsByRecord',
             'fetchInsurancesByRecord',
             'fetchDiscountsByRecord',
+            'fetchPatientRecordsByDischarged',
           ]),
 
           onFiltered(filteredItems) {
             // Trigger pagination to update the number of buttons/pages due to filtering
             this.totalRows = filteredItems.length
             this.currentPage = 1
+          },
+
+          onDischargeStatusChanged(checked) {
+              this.fetchPatientRecordsByDischarged(checked);
           },
 
           onChange(value) {

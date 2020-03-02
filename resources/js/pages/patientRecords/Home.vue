@@ -128,7 +128,7 @@
                         <b-col md="6" class="my-1">
                           <b-pagination
                             v-model="currentPage"
-                            :total-rows="totalRows"
+                            :total-rows="rows"
                             :per-page="perPage"
                             class="my-0"
                           ></b-pagination>
@@ -196,6 +196,11 @@
         computed: {
 
           ...mapGetters(['allPatientRecords']),
+
+          rows() {
+            return this.allPatientRecords.length;
+          },
+
 
           sortOptions() {
             // Create an options list from our fields
