@@ -15,7 +15,9 @@ class PatientDiagnoseController extends Controller
      */
     public function index()
     {
-        $patientDiagnoses = PatientDiagnose::whereHas('patientRecord', function($q) {
+        $patientDiagnoses = PatientDiagnose::with([
+            'user'
+        ])->whereHas('patientRecord', function($q) {
             $q->where('discharged', 0);
         })->get();
         return $patientDiagnoses;
@@ -107,7 +109,7 @@ class PatientDiagnoseController extends Controller
             'description' => 'required',
             'remarks' => 'required',
         ]);
-        
+
         $patientDiagnose->patient_record_id = $request->patient_record_id;
         $patientDiagnose->diagnose_id = $request->diagnose_id;
         $patientDiagnose->description = $request->description;

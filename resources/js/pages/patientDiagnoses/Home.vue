@@ -3,7 +3,7 @@
         <div class="app-title">
             <div>
                 <h1><i class="fa fa-dashboard"></i> Patient Diagnoses Page</h1>
-                  
+
                 </div>
                 <ul class="app-breadcrumb breadcrumb">
                   <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
@@ -19,12 +19,12 @@
                       <b-row>
                         <b-col md="6" class="my-1">
                           <b-form-group label-cols-sm="3" label="Patient">
-                            <multiselect 
-                              v-model="patientDiagnose.patient_record" 
-                              placeholder="Select Patient" 
-                              label="full_name" 
-                              track-by="id" 
-                              :options="allPatientRecords" 
+                            <multiselect
+                              v-model="patientDiagnose.patient_record"
+                              placeholder="Select Patient"
+                              label="full_name"
+                              track-by="id"
+                              :options="allPatientRecords"
                               @input="onChange"
                             ></multiselect>
                           </b-form-group>
@@ -92,6 +92,10 @@
                             {{ row.item.patient_record ? row.item.patient_record.full_name : null }}
                         </template>
 
+                        <template slot="user" slot-scope="row">
+                            {{ row.item.user ? row.item.user.full_name : null }}
+                        </template>
+
                         <template slot="diagnose" slot-scope="row">
                             {{ row.item.diagnose ? row.item.diagnose.name : null }}
                         </template>
@@ -100,7 +104,7 @@
                             <b-button v-if="hasAccess('view-patientDiagnoses')">
                                 <i class="fa fa-eye" @click="show(row.item)" aria-hidden="true"></i>
                             </b-button>
-                            
+
                             <b-button @click="update(row.item)" v-if="hasAccess('update-patientDiagnoses')">
                                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                             </b-button>
@@ -168,6 +172,7 @@
                 { key: 'patient', label: 'Patient', sortable: true, sortDirection: 'desc' },
                 { key: 'diagnose', label: 'Diagnoses', sortable: true, sortDirection: 'desc' },
                 { key: 'remarks', label: 'Remarks', sortable: true, sortDirection: 'desc' },
+                { key: 'user', label: 'Added/Updated By', sortable: true, sortDirection: 'desc' },
                 { key: 'actions', label: 'Actions', class: 'text-right' }
               ],
               totalRows: 1,
@@ -195,7 +200,7 @@
         computed: {
 
           ...mapGetters([
-            'allPatientDiagnoses', 
+            'allPatientDiagnoses',
             'hasAccess',
             'allPatientRecords',
             'defaultPatientDiagnose'
@@ -225,7 +230,7 @@
         methods: {
 
           ...mapActions([
-            'fetchPatientDiagnoses', 
+            'fetchPatientDiagnoses',
             'deletePatientDiagnose',
             'fetchPatientRecords',
             'fetchPatientDiagnosesByParentId',
@@ -245,7 +250,7 @@
               } else {
 
                 this.fetchPatientDiagnoses();
-                
+
               }
           },
 
@@ -287,7 +292,7 @@
                       if(response.data.message === 'success') {
 
                           toastr.success('Patient diagnoses successfully deleted.', 'Message');
-                          
+
                           this.$router.push({ name: 'patientDiagnoses' });
                       }
                   });

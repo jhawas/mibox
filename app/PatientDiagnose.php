@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\PatientRecord;
 use App\Diagnose;
+use App\User;
 
 class PatientDiagnose extends Model
 {
@@ -33,14 +34,19 @@ class PatientDiagnose extends Model
         return "{$this->diagnose->name}";
     }
 
-    
-    public function patientRecord() 
+
+    public function patientRecord()
     {
     	return $this->belongsTo(PatientRecord::class, 'patient_record_id');
     }
 
-    public function diagnose() 
+    public function diagnose()
     {
     	return $this->belongsTo(Diagnose::class, 'diagnose_id');
+    }
+
+    public function user()
+    {
+    	return $this->belongsTo(User::class);
     }
 }
