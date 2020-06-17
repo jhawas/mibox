@@ -48,12 +48,12 @@
                   <div class="group">
                     <div class="label">Date of Discharge/Time:</div>
                     <!-- <div class="value">{{
-                    allBillingReports.patientRecord.discharged_date ? allBillingReports.patientRecord.discharged_date : '' 
-                    + '/' 
+                    allBillingReports.patientRecord.discharged_date ? allBillingReports.patientRecord.discharged_date : ''
+                    + '/'
                     + allBillingReports.patientRecord.discharged_time ? allBillingReports.patientRecord.discharged_time : null}}</div> -->
                     <div class="value">{{ checkDischargeDatetime(allBillingReports.patientRecord) }}</div>
                   </div>
-                  
+
               </div>
           </div>
       </header><!-- /header -->
@@ -256,11 +256,14 @@
 
           // console.log(this.allBillingReports);
           console.log('current', this.currentTime, this.currentDate);
+          setTimeout(() => {
+            window.print();
+          }, 2000)
       },
 
       computed: {
         ...mapGetters([
-              'allBillingReports', 
+              'allBillingReports',
             ]),
       },
 
@@ -289,7 +292,7 @@
                 return this.currentDate + '/' + this.currentTime;
             }
         },
- 
+
         admissionDatetime(data) {
             return moment(data.admit_and_check_date).format('YYYY-MM-DD') + '/' + data.admission_time;
         }

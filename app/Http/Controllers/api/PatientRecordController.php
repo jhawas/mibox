@@ -4,7 +4,6 @@ namespace App\Http\Controllers\api;
 
 use App\PatientRecord;
 use App\PatientRoom;
-use App\Billing;
 use App\Room;
 use App\TypeOfCharge;
 use Illuminate\Http\Request;
@@ -17,6 +16,7 @@ use App\Notifications\NewPatientRecord;
 use Illuminate\Support\Facades\Notification;
 use App\User;
 use App\Events\NotificationEvent;
+use App\Patient;
 
 class PatientRecordController extends Controller
 {
@@ -53,6 +53,34 @@ class PatientRecordController extends Controller
      */
     public function getPatientRecordByDischarged($discharged = 0)
     {
+        // $patientRecords = Patient::whereDoesntHave(
+        //     'patientRecords', function($query) {
+        //         $query->where('discharged', 1);
+        //     }
+        // )
+        // $patientRecords = Patient::with([
+        //     'patientRecords' => function($query) {
+        //         $query->with([
+        //             'user',
+        //             'patient',
+        //             'disposition',
+        //             'result',
+        //             'philhealthMembership',
+        //             'admitAndCheckBy',
+        //             'dischargedBy',
+        //             'physician',
+        //             'chartCompletedBy',
+        //             'patientRooms',
+        //             'currentRoom',
+        //             'currentDiagnose',
+        //             'rooms',
+        //             'currentVitalSign'
+        //         ])->where('discharged', 1)
+        //         ->first();
+        //     }
+        // ])
+        // ->get();
+
         $patientRecords = PatientRecord::with([
             'user',
             'patient',
@@ -68,7 +96,10 @@ class PatientRecordController extends Controller
             'currentDiagnose',
             'rooms',
             'currentVitalSign'
-        ])->where('discharged', $discharged)->orderBy('id', 'desc')->get();
+        ])->where('discharged', $discharged)
+        ->orderBy('id', 'desc')
+        ->get();
+
         return $patientRecords;
     }
 
@@ -157,7 +188,7 @@ class PatientRecordController extends Controller
             'remarks' => $request->remarks,
             'user_id' => \Auth::user()->id,
         ]);
-        
+
 
         $vitalSign = new VitalSign;
 
@@ -247,7 +278,7 @@ class PatientRecordController extends Controller
      */
     public function edit(PatientRecord $patientRecord)
     {
-        // 
+        //
     }
 
     /**
@@ -271,7 +302,7 @@ class PatientRecordController extends Controller
             'discharged_date' => $request->discharged_by > 0 ? 'required' : '',
             'discharged_time' => $request->discharged_by > 0 ? 'required' : '',
         ]);
-        
+
         $patientRecord->patient_id = $request->patient_id;
         $patientRecord->type_of_record_id = $this->isDataEmpty($request->type_of_record_id);
         $patientRecord->disposition_id = $this->isDataEmpty($request->disposition_id);
@@ -293,7 +324,7 @@ class PatientRecordController extends Controller
         $patientRecord->save();
 
         if($request->discharged_by > 0) {
-            
+
             $diff_in_days = $this->countDaysBetween(
                 $request->admit_and_check_date,
                 $request->discharged_date
@@ -352,7 +383,7 @@ class PatientRecordController extends Controller
         return null;
     }
 
-    public function available() 
+    public function available()
     {
         $patientRecords = PatientRecord::with([
             'user',
@@ -380,5 +411,5 @@ class PatientRecordController extends Controller
 
         return $to->diffInDays($from);
     }
-    
+
 }

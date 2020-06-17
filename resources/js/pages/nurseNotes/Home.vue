@@ -3,7 +3,7 @@
         <div class="app-title">
             <div>
                 <h1><i class="fa fa-dashboard"></i> Nurse Notes Page</h1>
-                  
+
                 </div>
                 <ul class="app-breadcrumb breadcrumb">
                   <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
@@ -19,12 +19,12 @@
                       <b-row>
                         <b-col md="6" class="my-1">
                           <b-form-group label-cols-sm="3" label="Patient">
-                            <multiselect 
-                              v-model="nurseNote.patient_record" 
-                              placeholder="Select Patient" 
-                              label="full_name" 
-                              track-by="id" 
-                              :options="allPatientRecords" 
+                            <multiselect
+                              v-model="nurseNote.patient_record"
+                              placeholder="Select Patient"
+                              label="full_name"
+                              track-by="id"
+                              :options="allPatientRecords"
                               @input="onChange"
                             ></multiselect>
                           </b-form-group>
@@ -97,7 +97,7 @@
                             <b-button v-if="hasAccess('view-nurseNote')">
                                 <i class="fa fa-eye" @click="show(row.item)" aria-hidden="true"></i>
                             </b-button>
-                            
+
                             <b-button @click="update(row.item)" v-if="hasAccess('update-nurseNote')">
                                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                             </b-button>
@@ -113,6 +113,11 @@
                             </ul>
                           </b-card>
                         </template>
+
+                        <template slot="time" slot-scope="row">
+                            {{ row.value ? formatTime(row.value) : null }}
+                        </template>
+
                       </b-table>
 
                       <b-row>
@@ -167,14 +172,15 @@
                 { key: 'date', label: 'Date', sortable: true, sortDirection: 'desc', class: 'text-center'},
                 { key: 'time', label: 'Time', sortable: true, sortDirection: 'desc', class: 'text-center'},
                 { key: 'focus', label: 'Focus', sortable: true, sortDirection: 'desc', class: 'text-center'},
+                { key: 'updated_at', label: 'Date Added/Updated', sortable: true, sortDirection: 'desc', class: 'text-center'},
                 { key: 'actions', label: 'Actions', class: 'text-right' }
               ],
               totalRows: 1,
               currentPage: 1,
               perPage: 5,
               pageOptions: [5, 10, 15],
-              sortBy: null,
-              sortDesc: false,
+              sortBy: 'patient',
+              sortDesc: true,
               sortDirection: 'desc',
               filter: null,
             }
@@ -194,8 +200,8 @@
         computed: {
 
           ...mapGetters([
-              'allNurseNotes', 
-              'hasAccess', 
+              'allNurseNotes',
+              'hasAccess',
               'allPatientRecords',
               'defaultNurseNote'
             ]),
@@ -223,7 +229,7 @@
         methods: {
 
           ...mapActions([
-              'fetchNurseNotes', 
+              'fetchNurseNotes',
               'deleteNurseNote',
               'fetchPatientRecords',
               'fetchNurseNotesByParentId'
@@ -243,8 +249,13 @@
               } else {
 
                 this.fetchNurseNotes();
-                
+
               }
+          },
+
+          formatTime(time) {
+              console.log('time', time);
+              return moment(time, 'HH:mm').format('hh:mm A');
           },
 
           create() {
@@ -285,7 +296,7 @@
                       if(response.data.message === 'success') {
 
                           toastr.success('Nurse note successfully deleted.', 'Message');
-                          
+
                           this.$router.push({ name: 'nurseNotes' });
                       }
                   });

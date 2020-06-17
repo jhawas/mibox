@@ -122,6 +122,15 @@
                             </ul>
                           </b-card>
                         </template>
+
+                        <template slot="admit_and_check_time" slot-scope="row">
+                            {{ row.value ? formatTime(row.value) : null }}
+                        </template>
+
+                         <template slot="updated_at" slot-scope="row">
+                            {{ row.value ? formatTimestamp(row.value) : null }}
+                        </template>
+
                       </b-table>
 
                       <b-row>
@@ -168,17 +177,19 @@
             return {
               // items: [{}],
               fields: [
+                { key: 'id', label: 'No', sortable: true, sortDirection: 'desc' },
                 { key: 'patient', label: 'Patient', sortable: true, sortDirection: 'desc' },
                 { key: 'admit_and_check_date', label: 'Date', sortable: true, sortDirection: 'desc' },
                 { key: 'admit_and_check_time', label: 'Time', sortable: true, sortDirection: 'desc' },
                 { key: 'for_discharge', label: 'For Discharge', class: 'text-center' },
+                { key: 'updated_at', label: 'Date Added/Updated', sortable: true, sortDirection: 'desc' },
                 { key: 'actions', label: 'Actions', class: 'text-right' }
               ],
               totalRows: 1,
               currentPage: 1,
               perPage: 5,
               pageOptions: [5, 10, 15],
-              sortBy: 'admit_and_check_date',
+              sortBy: 'id',
               sortDesc: true,
               sortDirection: 'desc',
               filter: null,
@@ -227,6 +238,14 @@
             // Trigger pagination to update the number of buttons/pages due to filtering
             this.totalRows = filteredItems.length
             this.currentPage = 1
+          },
+
+          formatTime(time) {
+              return moment(time, 'HH:mm').format('hh:mm A');
+          },
+
+          formatTimestamp(timestamp) {
+              return moment(timestamp).format("YYYY-MM-DD hh:mm A");
           },
 
           onDischargeStatusChanged(checked) {

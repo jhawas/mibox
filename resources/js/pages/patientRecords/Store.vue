@@ -3,7 +3,7 @@
         <div class="app-title">
             <div>
                 <h1><i class="fa fa-dashboard"></i> In Patient Page</h1>
-                  
+
                 </div>
                 <ul class="app-breadcrumb breadcrumb">
                   <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
@@ -23,9 +23,9 @@
                       class="ibox-spinner"
                     />
 
-                    <b-alert 
-                      v-model="showAlert" 
-                      variant="danger" 
+                    <b-alert
+                      v-model="showAlert"
+                      variant="danger"
                       dismissible
                     >
                         <div v-for="(error, index) in errors" :key="index">{{ error }}</div>
@@ -34,17 +34,17 @@
                     <b-form @submit="onSubmit" v-if="!loading">
                       <b-row>
                          <b-col col lg="6">
-                            
+
                             <b-form-group
                                 label="Patient:"
                                 label-for="patient"
                             >
-                                <multiselect 
-                                  v-model="form.patient" 
-                                  placeholder="Select Patient" 
-                                  label="full_name" 
-                                  track-by="id" 
-                                  :options="allAvailablePatients" 
+                                <multiselect
+                                  v-model="form.patient"
+                                  placeholder="Select Patient"
+                                  label="full_name"
+                                  track-by="id"
+                                  :options="allAvailablePatients"
                                 ></multiselect>
 
                             </b-form-group>
@@ -53,30 +53,30 @@
                                 label="Room:"
                                 label-for="room"
                             >
-                                <multiselect 
-                                  v-model="form.current_room" 
-                                  placeholder="Select Room" 
-                                  label="room_with_type" 
-                                  track-by="id" 
-                                  :options="allAvailableRooms" 
+                                <multiselect
+                                  v-model="form.current_room"
+                                  placeholder="Select Room"
+                                  label="room_with_type"
+                                  track-by="id"
+                                  :options="allAvailableRooms"
                                   :disabled="this.$route.params.id > 0"
                                 >
                                   <span slot="noResult">Oops! No elements found. Consider changing the search query.</span>
                                 </multiselect>
 
-                                <!-- <multiselect 
-                                    v-model="form.current_room" 
-                                    :options="allFloors" 
-                                    :multiple="false" 
-                                    group-values="rooms" 
-                                    group-label="name" 
-                                    :group-select="false" 
-                                    placeholder="Type to search" 
-                                    track-by="room_id" 
+                                <!-- <multiselect
+                                    v-model="form.current_room"
+                                    :options="allFloors"
+                                    :multiple="false"
+                                    group-values="rooms"
+                                    group-label="name"
+                                    :group-select="false"
+                                    placeholder="Type to search"
+                                    track-by="room_id"
                                     label="room_with_type"
                                     :disabled="this.$route.params.id > 0"
                                 >
-                                
+
                               </multiselect> -->
 
                               <pre class="language-json"><code>{{ form.room  }}</code></pre>
@@ -89,12 +89,12 @@
                                 label="Doctor:"
                                 label-for="doctor"
                             >
-                                <multiselect 
-                                  v-model="form.physician" 
-                                  placeholder="Select Doctor" 
-                                  label="full_name" 
-                                  track-by="id" 
-                                  :options="allUsers" 
+                                <multiselect
+                                  v-model="form.physician"
+                                  placeholder="Select Doctor"
+                                  label="full_name"
+                                  track-by="id"
+                                  :options="allUsers"
                                 ></multiselect>
 
                             </b-form-group>
@@ -105,12 +105,12 @@
                                 label="Diagnoses:"
                                 label-for="diagnoses"
                             >
-                                <multiselect 
-                                  v-model="form.current_diagnose" 
-                                  placeholder="Select Diagnoses" 
-                                  label="diagnose_name" 
-                                  track-by="diagnose_id" 
-                                  :options="allDiagnoses" 
+                                <multiselect
+                                  v-model="form.current_diagnose"
+                                  placeholder="Select Diagnoses"
+                                  label="diagnose_name"
+                                  track-by="diagnose_id"
+                                  :options="allDiagnoses"
                                   @input="onDiagnosesChange"
                                   :disabled="this.$route.params.id > 0"
                                 ></multiselect>
@@ -198,12 +198,12 @@
                                 label="Disposition:"
                                 label-for="disposition"
                             >
-                                <multiselect 
-                                  v-model="form.disposition" 
-                                  placeholder="Select Disposition" 
-                                  label="name" 
-                                  track-by="id" 
-                                  :options="allDispositions" 
+                                <multiselect
+                                  v-model="form.disposition"
+                                  placeholder="Select Disposition"
+                                  label="name"
+                                  track-by="id"
+                                  :options="allDispositions"
                                 ></multiselect>
 
                             </b-form-group>
@@ -212,12 +212,12 @@
                                 label="Result:"
                                 label-for="result"
                             >
-                                <multiselect 
-                                  v-model="form.result" 
-                                  placeholder="Select Result" 
-                                  label="name" 
-                                  track-by="id" 
-                                  :options="allResults" 
+                                <multiselect
+                                  v-model="form.result"
+                                  placeholder="Select Result"
+                                  label="name"
+                                  track-by="id"
+                                  :options="allResults"
                                 ></multiselect>
 
                             </b-form-group>
@@ -226,12 +226,12 @@
                                 label="Philhealth Membership:"
                                 label-for="philhealth_membership"
                             >
-                                <multiselect 
-                                  v-model="form.philhealth_membership" 
-                                  placeholder="Select Philhealth Membership" 
-                                  label="name" 
-                                  track-by="id" 
-                                  :options="allPhilhealthMemberships" 
+                                <multiselect
+                                  v-model="form.philhealth_membership"
+                                  placeholder="Select Philhealth Membership"
+                                  label="name"
+                                  track-by="id"
+                                  :options="allPhilhealthMemberships"
                                 ></multiselect>
 
                             </b-form-group>
@@ -263,19 +263,19 @@
                                 max-rows="6"
                               ></b-form-textarea>
                             </b-form-group>
-  
+
                             <legend>Admission Details</legend>
 
                             <b-form-group
                                 label="Doctor:"
                                 label-for="doctor"
                             >
-                                <multiselect 
-                                  v-model="form.admit_and_check_by" 
-                                  placeholder="Select Doctor" 
-                                  label="full_name" 
-                                  track-by="id" 
-                                  :options="allUsers" 
+                                <multiselect
+                                  v-model="form.admit_and_check_by"
+                                  placeholder="Select Doctor"
+                                  label="full_name"
+                                  track-by="id"
+                                  :options="allUsers"
                                 ></multiselect>
 
                             </b-form-group>
@@ -311,7 +311,8 @@
                                     :value="1"
                                     :unchecked-value="0"
                                     class="form-group"
-                                    :disabled="!hasAccess('update-doctorsOrder')"
+                                    :disabled="!hasAccess('update-doctorsOrder') || !this.$route.params.id > 0"
+                                    @change="onChangeForDischarge($event)"
                                 >
                                   For Discharge
                                 </b-form-checkbox>
@@ -320,12 +321,12 @@
                                     label="Doctor:"
                                     label-for="doctor"
                                 >
-                                    <multiselect 
-                                      v-model="form.discharged_by" 
-                                      placeholder="Select Doctor" 
-                                      label="full_name" 
-                                      track-by="id" 
-                                      :options="allUsers" 
+                                    <multiselect
+                                      v-model="form.discharged_by"
+                                      placeholder="Select Doctor"
+                                      label="full_name"
+                                      track-by="id"
+                                      :options="allUsers"
                                     ></multiselect>
 
                                 </b-form-group>
@@ -359,12 +360,12 @@
                                 label="Completed By:"
                                 label-for="staff"
                             >
-                                <multiselect 
-                                  v-model="form.chart_completed_by" 
-                                  placeholder="Select Staff" 
-                                  label="full_name" 
-                                  track-by="id" 
-                                  :options="allUsers" 
+                                <multiselect
+                                  v-model="form.chart_completed_by"
+                                  placeholder="Select Staff"
+                                  label="full_name"
+                                  track-by="id"
+                                  :options="allUsers"
                                 ></multiselect>
 
                             </b-form-group>
@@ -404,7 +405,7 @@
     import moment from 'moment';
 
     import { mapActions, mapGetters } from 'vuex';
-    
+
     export default {
         components: {
             Layout,
@@ -475,14 +476,14 @@
                       this.loading = false;
                 });
             }
-            
+
         },
 
         computed: {
-            
+
             ...mapGetters([
-                'allPatientRecords', 
-                'allAvailablePatients', 
+                'allPatientRecords',
+                'allAvailablePatients',
                 'allAvailableRooms',
                 'allDispositions',
                 'allResults',
@@ -498,9 +499,9 @@
         methods: {
 
           ...mapActions([
-              'addPatientRecord', 
-              'updatePatientRecord', 
-              'showPatientRecordById', 
+              'addPatientRecord',
+              'updatePatientRecord',
+              'showPatientRecordById',
               'fetchAvailablePatients',
               'fetchRooms',
               'fetchDispositions',
@@ -515,6 +516,16 @@
               this.form.description = value.description;
           },
 
+          onChangeForDischarge(value) {
+              if(value) {
+                  this.form.discharged_date = moment().format('YYYY-MM-DD');
+                  this.form.discharged_time = moment().format('HH:mm');
+              } else {
+                  this.form.discharged_date = null;
+                  this.form.discharged_time = null;
+              }
+          },
+
           onSubmit(event) {
 
             event.preventDefault();
@@ -524,7 +535,7 @@
             let formData = new FormData();
 
             formData.append('patient_id', this.form.patient ? this.form.patient.id : null);
-            
+
             formData.append('disposition_id', this.form.disposition ? this.form.disposition.id : 0);
             formData.append('result_id', this.form.result ? this.form.result.id : 0);
             formData.append('philhealth_membership_id', this.form.philhealth_membership ? this.form.philhealth_membership.id : 0);
@@ -562,7 +573,7 @@
                       this.loadSubmit = false;
 
                       toastr.success('Patient record successfully updated.', 'Message');
-                      
+
                       this.$router.push({ name: 'patientRecords' });
                   }
               }).catch(error => {
@@ -572,7 +583,7 @@
                     this.loadSubmit = false;
 
                     this.errors = Object.values(error.response.data.errors).flat();
-                    
+
               });
 
             } else {
@@ -585,9 +596,9 @@
               formData.append('t', this.form.current_vital_sign.t);
               formData.append('p', this.form.current_vital_sign.p);
               formData.append('r', this.form.current_vital_sign.r);
-             
+
               const response = this.addPatientRecord(formData);
-              
+
               response.then(response => {
 
                   if(response.data.message === 'success') {
@@ -597,7 +608,7 @@
                       this.loadSubmit = false;
 
                       toastr.success('Patient record successfully saved.', 'Message');
-                      
+
                       this.$router.push({ name: 'patientRecords' });
                   }
 
@@ -610,7 +621,7 @@
                   this.errors = Object.values(error.response.data.errors).flat();
 
               });
-              
+
             }
 
           },

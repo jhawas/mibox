@@ -178,7 +178,7 @@
                 { key: 'date', label: 'Date', sortable: true, sortDirection: 'desc', class: 'text-center'},
                 { key: 'time', label: 'Time', sortable: true, sortDirection: 'desc', class: 'text-center'},
                 { key: 'laboratories', label: 'Laboratories', sortable: true, sortDirection: 'desc', class: 'text-center'},
-                { key: 'user', label: 'Added By', class: 'text-right' },
+                { key: 'user', label: 'Added/Updated By', class: 'text-right' },
                 { key: 'actions', label: 'Actions', class: 'text-right' }
               ],
               totalRows: 1,
