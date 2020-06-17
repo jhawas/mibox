@@ -3,7 +3,7 @@
         <div class="app-title">
             <div>
                 <h1><i class="fa fa-dashboard"></i> Diagnoses Page</h1>
-                  
+
                 </div>
                 <ul class="app-breadcrumb breadcrumb">
                   <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
@@ -84,7 +84,7 @@
                             <b-button v-if="hasAccess('view-diagnoses')">
                                 <i class="fa fa-eye" @click="show(row.item)" aria-hidden="true"></i>
                             </b-button>
-                            
+
                             <b-button @click="update(row.item)" v-if="hasAccess('update-diagnoses')">
                                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                             </b-button>
@@ -154,9 +154,9 @@
               currentPage: 1,
               perPage: 5,
               pageOptions: [5, 10, 15],
-              sortBy: null,
-              sortDesc: false,
-              sortDirection: 'asc',
+              sortBy: 'id',
+              sortDesc: true,
+              sortDirection: 'desc',
               filter: null,
             }
         },
@@ -237,7 +237,7 @@
                       if(response.data.message === 'success') {
 
                           toastr.success('Diagnose successfully deleted.', 'Message');
-                          
+
                           this.$router.push({ name: 'diagnoses' });
                       }
                   });

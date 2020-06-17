@@ -124,9 +124,9 @@
               currentPage: 1,
               perPage: 5,
               pageOptions: [5, 10, 15],
-              sortBy: null,
-              sortDesc: false,
-              sortDirection: 'asc',
+              sortBy: 'id',
+              sortDesc: true,
+              sortDirection: 'desc',
               filter: null,
               reportDate: {
                   start: moment().format('YYYY-MM-DD'),

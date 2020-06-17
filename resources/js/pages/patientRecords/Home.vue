@@ -3,7 +3,7 @@
         <div class="app-title">
             <div>
                 <h1><i class="fa fa-dashboard"></i> In Patient Page</h1>
-                  
+
                 </div>
                 <ul class="app-breadcrumb breadcrumb">
                   <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
@@ -106,7 +106,7 @@
                             <b-button>
                                 <i class="fa fa-eye" @click="show(row.item)" aria-hidden="true"></i>
                             </b-button>
-                            
+
                             <b-button @click="update(row.item)">
                                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                             </b-button>
@@ -275,7 +275,7 @@
                       if(response.data.message === 'success') {
 
                           toastr.success('Record successfully deleted.', 'Message');
-                          
+
                           this.$router.push({ name: 'patientRecords' });
                       }
                   });

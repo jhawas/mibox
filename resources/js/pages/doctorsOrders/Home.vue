@@ -3,7 +3,7 @@
         <div class="app-title">
             <div>
                 <h1><i class="fa fa-dashboard"></i> Doctor's Order Page</h1>
-                  
+
                 </div>
                 <ul class="app-breadcrumb breadcrumb">
                   <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
@@ -19,12 +19,12 @@
                       <b-row>
                         <b-col md="6" class="my-1">
                           <b-form-group label-cols-sm="3" label="Patient">
-                            <multiselect 
-                              v-model="doctorsOrder.patient_record" 
-                              placeholder="Select Patient" 
-                              label="full_name" 
-                              track-by="id" 
-                              :options="allPatientRecords" 
+                            <multiselect
+                              v-model="doctorsOrder.patient_record"
+                              placeholder="Select Patient"
+                              label="full_name"
+                              track-by="id"
+                              :options="allPatientRecords"
                               @input="onChange"
                             ></multiselect>
                           </b-form-group>
@@ -104,7 +104,7 @@
                             <b-button v-if="hasAccess('view-doctorsOrder')">
                                 <i class="fa fa-eye" @click="show(row.item)" aria-hidden="true"></i>
                             </b-button>
-                            
+
                             <b-button @click="update(row.item)" v-if="hasAccess('update-doctorsOrder')">
                                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                             </b-button>
@@ -120,6 +120,11 @@
                             </ul>
                           </b-card>
                         </template>
+
+                        <template slot="time" slot-scope="row">
+                            {{ row.value ? formatTime(row.value) : null }}
+                        </template>
+
                       </b-table>
 
                       <b-row>
@@ -151,7 +156,7 @@
     import moment from 'moment';
 
     import { mapGetters, mapActions } from 'vuex';
-    
+
     import Multiselect from 'vue-multiselect';
 
     export default {
@@ -180,8 +185,8 @@
               currentPage: 1,
               perPage: 5,
               pageOptions: [5, 10, 15],
-              sortBy: null,
-              sortDesc: false,
+              sortBy: 'id',
+              sortDesc: true,
               sortDirection: 'desc',
               filter: null,
             }
@@ -201,7 +206,7 @@
         computed: {
 
           ...mapGetters([
-            'allDoctorsOrders', 
+            'allDoctorsOrders',
             'hasAccess',
             'allPatientRecords',
             'defaultDoctorsOrder',
@@ -231,7 +236,7 @@
         methods: {
 
           ...mapActions([
-            'fetchDoctorsOrders', 
+            'fetchDoctorsOrders',
             'deleteDoctorsOrder',
             'fetchPatientRecords',
             'fetchDoctorsOrdersByParentId',
@@ -251,12 +256,17 @@
               } else {
 
                 this.fetchDoctorsOrders();
-                
+
               }
           },
 
           stringToObject(value) {
               return JSON.parse(value);
+          },
+
+          formatTime(time) {
+              console.log('time', time);
+              return moment(time, 'HH:mm').format('hh:mm A');
           },
 
           create() {
@@ -297,7 +307,7 @@
                       if(response.data.message === 'success') {
 
                           toastr.success('Doctor order successfully deleted.', 'Message');
-                          
+
                           this.$router.push({ name: 'doctorsOrders' });
                       }
                   });

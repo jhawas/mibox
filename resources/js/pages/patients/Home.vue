@@ -3,7 +3,7 @@
         <div class="app-title">
             <div>
                 <h1><i class="fa fa-dashboard"></i> Patient Page</h1>
-                  
+
                 </div>
                 <ul class="app-breadcrumb breadcrumb">
                   <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
@@ -179,9 +179,9 @@
               currentPage: 1,
               perPage: 5,
               pageOptions: [5, 10, 15],
-              sortBy: null,
-              sortDesc: false,
-              sortDirection: 'asc',
+              sortBy: 'id',
+              sortDesc: true,
+              sortDirection: 'desc',
               filter: null,
             }
         },

@@ -179,8 +179,8 @@
               currentPage: 1,
               perPage: 5,
               pageOptions: [5, 10, 15],
-              sortBy: null,
-              sortDesc: false,
+              sortBy: 'id',
+              sortDesc: true,
               sortDirection: 'desc',
               filter: null,
             }
