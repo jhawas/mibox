@@ -45,6 +45,7 @@
                                   label="full_name"
                                   track-by="id"
                                   :options="allAvailablePatients"
+                                  :disabled="this.$route.params.id > 0"
                                 ></multiselect>
 
                             </b-form-group>
@@ -95,6 +96,7 @@
                                   label="full_name"
                                   track-by="id"
                                   :options="allUsers"
+                                  :disabled="this.$route.params.id > 0"
                                 ></multiselect>
 
                             </b-form-group>
@@ -204,6 +206,7 @@
                                   label="name"
                                   track-by="id"
                                   :options="allDispositions"
+                                  :disabled="this.$route.params.id > 0"
                                 ></multiselect>
 
                             </b-form-group>
@@ -218,6 +221,7 @@
                                   label="name"
                                   track-by="id"
                                   :options="allResults"
+                                  :disabled="this.$route.params.id > 0"
                                 ></multiselect>
 
                             </b-form-group>
@@ -249,6 +253,7 @@
                                 placeholder="Enter chief complaints..."
                                 rows="3"
                                 max-rows="6"
+                                :disabled="this.$route.params.id > 0"
                               ></b-form-textarea>
                             </b-form-group>
 
@@ -261,6 +266,7 @@
                                 placeholder="Enter brief history..."
                                 rows="3"
                                 max-rows="6"
+                                :disabled="this.$route.params.id > 0"
                               ></b-form-textarea>
                             </b-form-group>
 
@@ -276,6 +282,7 @@
                                   label="full_name"
                                   track-by="id"
                                   :options="allUsers"
+                                  :disabled="this.$route.params.id > 0"
                                 ></multiselect>
 
                             </b-form-group>
@@ -288,6 +295,7 @@
                                 v-model="form.admit_and_check_date"
                                 type="date"
                                 placeholder="Enter Date"
+                                :disabled="this.$route.params.id > 0"
                               />
                             </b-form-group>
 
@@ -299,6 +307,7 @@
                                 v-model="form.admit_and_check_time"
                                 type="time"
                                 placeholder="Enter Time"
+                                :disabled="this.$route.params.id > 0"
                               />
                             </b-form-group>
 
