@@ -3,7 +3,7 @@
         <div class="app-title">
             <div>
                 <h1><i class="fa fa-dashboard"></i> Patient Page</h1>
-                  
+
                 </div>
                 <ul class="app-breadcrumb breadcrumb">
                   <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
@@ -23,7 +23,7 @@
                     />
                     <div v-if="!loading">
                         <b-tabs content-class="mt-3" fill>
-                          <b-tab title="Informtation" active>
+                          <b-tab title="Information" active>
                               <b-row>
                                 <b-col col md="6">
                                     <b-form-group label-cols="4" label-cols-lg="2" label="Case No." label-for="input-default">
@@ -139,7 +139,7 @@
 </template>
 
 <script>
-    
+
     import Layout from '../../components/Layout';
     import { mapActions, mapGetters } from 'vuex';
     import { FulfillingBouncingCircleSpinner } from 'epic-spinners';

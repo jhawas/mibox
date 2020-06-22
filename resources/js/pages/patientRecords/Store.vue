@@ -241,19 +241,19 @@
                          <b-col col lg="6">
 
                             <b-form-group
-                              label="Cheif Complaints:"
+                              label="Chief Complaints:"
                               label-for="cheifComplaints"
                             >
                               <b-form-textarea
                                 v-model="form.chief_complaints"
-                                placeholder="Enter cheif complaints..."
+                                placeholder="Enter chief complaints..."
                                 rows="3"
                                 max-rows="6"
                               ></b-form-textarea>
                             </b-form-group>
 
                             <b-form-group
-                              label="Breif History:"
+                              label="Brief History:"
                               label-for="breifHistory"
                             >
                               <b-form-textarea
